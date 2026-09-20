@@ -102,10 +102,19 @@ img{max-width:100%;height:auto;display:block}
 .author-info .ver{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;color:var(--g600);font-weight:700;margin-top:3px}
 .art-meta{display:flex;flex-wrap:wrap;gap:16px;background:var(--s50);padding:14px 20px;border-radius:10px;margin-bottom:22px;font-weight:600;border-left:4px solid var(--p600);font-size:.82rem;width:100%;box-sizing:border-box}
 .art-meta span{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0;word-break:break-word}
+
+/* ============ APPLY / LINK BOX (MULTI-LINK SUPPORT) ============ */
 .apply-box{background:linear-gradient(135deg,var(--p50),#eff6ff);border:1px solid var(--p200);padding:26px;border-radius:14px;text-align:center;margin-bottom:24px;width:100%;box-sizing:border-box}
-.apply-box h3{margin-bottom:14px;font-size:1.05rem;color:var(--s900);font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.apply-box h3{margin-bottom:16px;font-size:1.05rem;color:var(--s900);font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
 .btn-apply{background:linear-gradient(135deg,var(--g600),var(--g700));color:#fff;padding:14px 34px;font-size:.9rem;font-weight:800;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-transform:uppercase;border:none;box-shadow:0 4px 14px rgba(22,163,74,.3);transition:all .25s;letter-spacing:.04em;max-width:100%;box-sizing:border-box;word-break:break-word}
 .btn-apply:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(22,163,74,.35)}
+
+/* Multi-link grid (for multiple links) */
+.multi-link-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;width:100%;box-sizing:border-box}
+.multi-link-grid .btn-apply{width:100%;padding:14px 20px;justify-content:center;text-align:center;font-size:.84rem;margin:0}
+.multi-link-grid .btn-apply span{display:block;white-space:normal;line-height:1.3}
+
+/* ART CONTENT */
 .art-content{width:100%}
 .art-content h3{font-size:1.05rem;color:var(--s900);margin:28px 0 14px;border-bottom:1px solid var(--s200);padding-bottom:10px;display:flex;align-items:center;gap:10px;font-weight:800;flex-wrap:wrap}
 .art-content h3 i{color:var(--p600)}
@@ -197,7 +206,7 @@ aside{min-width:0;max-width:100%}
 .back-top:hover{background:var(--p700);transform:translateY(-3px)}
 
 /* ============================================
-   RESPONSIVE — TABLET
+   RESPONSIVE
    ============================================ */
 @media(max-width:1024px){
 .container{padding:0 16px!important}
@@ -207,9 +216,6 @@ aside{min-width:0;max-width:100%}
 .foot-grid{grid-template-columns:1fr 1fr;gap:28px}
 }
 
-/* ============================================
-   RESPONSIVE — MOBILE LARGE (768px)
-   ============================================ */
 @media(max-width:768px){
 .container{padding:0 14px!important}
 .topbar{padding:8px 0}
@@ -224,56 +230,39 @@ aside{min-width:0;max-width:100%}
 .logo-text p{font-size:.68rem}
 .navbar .container{padding:0 14px!important}
 .nav-list li a{font-size:.74rem;padding:8px 11px;gap:5px}
-
-/* LAYOUT FIX */
 .layout{display:block!important;padding:0 14px!important;margin:16px auto!important;gap:0}
 .layout main{width:100%!important;display:block}
 .layout aside{width:100%!important;margin-top:18px;display:block}
 .article{padding:16px!important;border-radius:12px!important;margin-bottom:0}
-
-/* TITLE */
 .article-title{font-size:1.25rem!important;line-height:1.32!important;margin-bottom:12px!important}
-
-/* IMAGE FIX MOBILE */
 .article-image{margin-bottom:14px!important;border-radius:10px!important;aspect-ratio:16/9!important}
 .article-image img{width:100%!important;height:100%!important;object-fit:cover!important;max-height:260px!important}
-
-/* AUTHOR BOX MOBILE */
 .author-box{padding:12px!important;gap:10px!important;align-items:flex-start!important}
 .author-av{width:42px!important;height:42px!important;font-size:1rem!important;flex-shrink:0}
 .author-info h4{font-size:.82rem!important}
 .author-info p{font-size:.72rem!important;line-height:1.5!important}
 .author-info .ver{font-size:.62rem!important}
-
-/* META */
 .art-meta{font-size:.72rem!important;padding:10px 12px!important;gap:8px!important;flex-direction:column!important;align-items:flex-start!important;margin-bottom:16px!important}
 .art-meta span{font-size:.72rem!important;display:flex;flex-wrap:wrap;gap:4px;line-height:1.5}
-
-/* BREADCRUMB */
 .breadcrumb{font-size:.72rem!important;line-height:1.5!important;gap:4px!important;margin-bottom:12px!important}
 
-/* APPLY BOX */
+/* APPLY BOX MOBILE */
 .apply-box{padding:18px 14px!important;margin-bottom:18px!important;border-radius:12px!important}
 .apply-box h3{font-size:.9rem!important;margin-bottom:12px!important}
 .btn-apply{padding:12px 20px!important;font-size:.8rem!important;width:100%!important;box-sizing:border-box;display:flex!important;justify-content:center!important;text-align:center}
+.multi-link-grid{grid-template-columns:1fr!important;gap:8px!important}
+.multi-link-grid .btn-apply{padding:12px 16px!important;font-size:.8rem!important}
 
-/* CONTENT */
 .art-content h3{font-size:.95rem!important;margin:20px 0 10px!important;padding-bottom:8px!important;gap:8px!important}
 .art-content li{font-size:.82rem!important;line-height:1.6!important;margin-bottom:7px!important;gap:8px!important}
 .art-content li i{margin-top:5px!important;font-size:.72rem!important}
 .art-content p{font-size:.85rem!important;line-height:1.7!important}
-
-/* FAQ */
 .faq-q{padding:13px 15px!important;font-size:.84rem!important;gap:8px!important}
 .faq-a{font-size:.8rem!important;padding:0 15px!important}
 .faq-item.open .faq-a{padding:0 15px 13px!important}
-
-/* SHARE */
 .share-row{padding:14px 12px!important;gap:6px!important;justify-content:center!important;margin:18px 0!important}
 .share-row h4{font-size:.78rem!important;width:100%!important;text-align:center!important;margin-bottom:6px!important}
 .share-btn{width:40px!important;height:40px!important;font-size:.85rem!important}
-
-/* RELATED */
 .related{margin-top:22px!important;padding-top:16px!important}
 .sec-title{font-size:1rem!important;margin-bottom:14px!important}
 .related-grid{grid-template-columns:1fr!important;gap:12px!important}
@@ -281,8 +270,6 @@ aside{min-width:0;max-width:100%}
 .card-body{padding:14px!important}
 .card-title{font-size:.88rem!important}
 .card-meta{font-size:.72rem!important;padding-top:10px!important}
-
-/* SIDEBAR */
 .side-widget{padding:16px!important;margin-bottom:16px!important;border-radius:12px!important}
 .side-title{font-size:.85rem!important;padding-bottom:9px!important;margin-bottom:12px!important}
 .side-link{font-size:.82rem!important;padding:10px 0!important;gap:10px!important}
@@ -291,11 +278,7 @@ aside{min-width:0;max-width:100%}
 .newsletter i.nl{font-size:1.6rem!important}
 .newsletter h3{font-size:.9rem!important}
 .newsletter p{font-size:.75rem!important;margin-bottom:12px!important}
-
-/* ADS */
 .ad-container{min-height:80px!important;margin:14px 0!important;padding:14px 10px 10px!important;border-radius:10px!important}
-
-/* FOOTER */
 .footer{padding:36px 0 20px!important;margin-top:36px!important}
 .footer .container{padding:0 14px!important}
 .foot-grid{grid-template-columns:1fr!important;gap:22px!important;text-align:center!important;margin-bottom:22px!important}
@@ -309,18 +292,11 @@ aside{min-width:0;max-width:100%}
 .foot-bottom{font-size:.72rem!important;padding-top:16px!important;margin-top:18px!important}
 .foot-bottom .links{gap:10px!important;justify-content:center!important}
 .foot-bottom .links a{font-size:.7rem!important}
-
-/* BACK TOP */
 .back-top{bottom:14px!important;left:14px!important;width:40px!important;height:40px!important;font-size:.9rem!important}
-
-/* TOAST */
 #toastBox{right:12px!important;left:12px!important;bottom:12px!important}
 .toast{min-width:auto!important;width:100%!important;font-size:.8rem!important;padding:12px 16px!important}
 }
 
-/* ============================================
-   MOBILE SMALL (480px)
-   ============================================ */
 @media(max-width:480px){
 .container{padding:0 12px!important}
 .topbar .container,.header .container,.navbar .container,.footer .container{padding:0 12px!important}
@@ -346,11 +322,10 @@ aside{min-width:0;max-width:100%}
 .side-title{font-size:.8rem!important}
 .side-link{font-size:.78rem!important}
 .foot-brand h3{font-size:.95rem!important}
+.btn-apply{padding:11px 16px!important;font-size:.76rem!important}
+.multi-link-grid .btn-apply{padding:11px 14px!important;font-size:.76rem!important}
 }
 
-/* ============================================
-   PRINT
-   ============================================ */
 @media print{
 .topbar,.navbar,.back-top,.ad-container,.share-row,.footer,.newsletter,.side-widget{display:none!important}
 body{background:#fff}
@@ -568,13 +543,35 @@ async function loadPost(){
             return '<ul>'+items.map(l=>`<li><i class="fas fa-check-circle"></i><span>${l.trim()}</span></li>`).join('')+'</ul>';
         };
 
-        let linkHtml='';
-        if(p.link&&p.link.trim()!==''){
-            let finalLink=p.link.trim();
-            if(!finalLink.startsWith('http'))finalLink='https://'+finalLink;
-            linkHtml=`<a href="${finalLink}" target="_blank" rel="noopener" class="btn-apply"><i class="fas fa-external-link-alt"></i> Apply Online / Official Link</a>`;
-        }else{
-            linkHtml=`<button class="btn-apply" style="background:var(--s400);cursor:not-allowed;box-shadow:none" disabled><i class="fas fa-lock"></i> Link Not Available</button>`;
+        // ==========================================
+        // MULTI-LINK BUILDER — Smart Rendering
+        // ==========================================
+        let links = [];
+        if (Array.isArray(p.links) && p.links.length > 0) {
+            // New multi-link format
+            links = p.links.filter(l => l && l.name && l.url);
+        } else if (p.link && p.link.trim()) {
+            // Backward compatibility: single link
+            links = [{ name: 'Apply Online / Official Link', url: p.link.trim() }];
+        }
+
+        let linkHtml = '';
+        if (links.length === 0) {
+            linkHtml = `<button class="btn-apply" style="background:var(--s400);cursor:not-allowed;box-shadow:none" disabled><i class="fas fa-lock"></i> Link Not Available</button>`;
+        } else if (links.length === 1) {
+            // Single link — full-width button
+            let url = links[0].url;
+            if (!url.startsWith('http')) url = 'https://' + url;
+            linkHtml = `<a href="${url}" target="_blank" rel="noopener" class="btn-apply"><i class="fas fa-external-link-alt"></i> ${links[0].name || 'Apply Online'}</a>`;
+        } else {
+            // Multiple links — grid of buttons
+            let buttonsHtml = '';
+            links.forEach(link => {
+                let url = link.url;
+                if (!url.startsWith('http')) url = 'https://' + url;
+                buttonsHtml += `<a href="${url}" target="_blank" rel="noopener" class="btn-apply"><i class="fas fa-external-link-alt"></i> <span>${link.name}</span></a>`;
+            });
+            linkHtml = `<div class="multi-link-grid">${buttonsHtml}</div>`;
         }
 
         const faqs=p.faq&&p.faq.length?p.faq:[
@@ -590,6 +587,9 @@ async function loadPost(){
         });
 
         const imgHtml=p.image?`<div class="article-image"><img src="${p.image}" alt="${p.title}" loading="eager" onerror="this.parentElement.style.display='none'"></div>`:'';
+
+        // Determine heading text based on link count
+        const linkHeading = links.length > 1 ? 'Important Links (Official)' : 'Important Link';
 
         const html=`
             <div class="breadcrumb">
@@ -619,7 +619,7 @@ async function loadPost(){
             </div>
 
             <div class="apply-box">
-                <h3><i class="fas fa-external-link-alt"></i> Important Link</h3>
+                <h3><i class="fas fa-external-link-alt"></i> ${linkHeading}</h3>
                 ${linkHtml}
             </div>
 
