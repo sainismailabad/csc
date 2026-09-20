@@ -8,7 +8,7 @@
 <meta name="description" id="metaDesc" content="Read complete details, eligibility, how to apply and required documents.">
 <meta name="keywords" id="metaKeywords" content="sarkari job, sarkari result, government jobs">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX">
+<meta name="google-adsense-account" content="ca-pub-1336136297225442">
 <link rel="canonical" id="canonicalLink" href="">
 <meta property="og:type" content="article">
 <meta property="og:title" id="ogTitle" content="">
@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous" id="adsenseScript"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1336136297225442" crossorigin="anonymous" id="adsenseScript"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database-compat.js"></script>
 <style>
@@ -392,7 +392,7 @@ body{background:#fff}
 
 <div class="ad-container" id="adSide" style="min-height:250px">
 <span class="ad-label">Advertisement</span>
-<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="3333333333" data-ad-format="auto" data-full-width-responsive="true"></ins>
 </div>
 
 <div class="side-widget">
@@ -548,10 +548,8 @@ async function loadPost(){
         // ==========================================
         let links = [];
         if (Array.isArray(p.links) && p.links.length > 0) {
-            // New multi-link format
             links = p.links.filter(l => l && l.name && l.url);
         } else if (p.link && p.link.trim()) {
-            // Backward compatibility: single link
             links = [{ name: 'Apply Online / Official Link', url: p.link.trim() }];
         }
 
@@ -559,12 +557,10 @@ async function loadPost(){
         if (links.length === 0) {
             linkHtml = `<button class="btn-apply" style="background:var(--s400);cursor:not-allowed;box-shadow:none" disabled><i class="fas fa-lock"></i> Link Not Available</button>`;
         } else if (links.length === 1) {
-            // Single link — full-width button
             let url = links[0].url;
             if (!url.startsWith('http')) url = 'https://' + url;
             linkHtml = `<a href="${url}" target="_blank" rel="noopener" class="btn-apply"><i class="fas fa-external-link-alt"></i> ${links[0].name || 'Apply Online'}</a>`;
         } else {
-            // Multiple links — grid of buttons
             let buttonsHtml = '';
             links.forEach(link => {
                 let url = link.url;
@@ -588,7 +584,6 @@ async function loadPost(){
 
         const imgHtml=p.image?`<div class="article-image"><img src="${p.image}" alt="${p.title}" loading="eager" onerror="this.parentElement.style.display='none'"></div>`:'';
 
-        // Determine heading text based on link count
         const linkHeading = links.length > 1 ? 'Important Links (Official)' : 'Important Link';
 
         const html=`
@@ -615,7 +610,7 @@ async function loadPost(){
 
             <div class="ad-container">
                 <span class="ad-label">Advertisement</span>
-                <ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
             </div>
 
             <div class="apply-box">
@@ -629,7 +624,7 @@ async function loadPost(){
 
                 <div class="ad-container">
                     <span class="ad-label">Advertisement</span>
-                    <ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="2222222222" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="2222222222" data-ad-format="auto" data-full-width-responsive="true"></ins>
                 </div>
 
                 <h3><i class="fas fa-laptop"></i> How to Apply</h3>
@@ -645,7 +640,7 @@ async function loadPost(){
 
                 <div class="ad-container">
                     <span class="ad-label">Advertisement</span>
-                    <ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="4444444444" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="4444444444" data-ad-format="auto" data-full-width-responsive="true"></ins>
                 </div>
 
                 <div class="share-row">
@@ -773,7 +768,7 @@ document.addEventListener('DOMContentLoaded',loadPost);
 <!-- Google AdSense Auto Ads -->
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({
-    google_ad_client: "ca-pub-XXXXXXXXXXXXXXXX",
+    google_ad_client: "ca-pub-1336136297225442",
     enable_page_level_ads: true,
     overlays: {
         bottom: true
