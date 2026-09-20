@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2563eb">
+<title id="pageTitle">IBAD TECH CSC - Sarkari Job, Result, Yojna & Digital Seva 2026</title>
+<meta name="description" id="metaDesc" content="India's trusted portal for latest Sarkari Job notifications, exam results, government schemes, Aadhar, PAN, Voter ID & Digital Seva.">
+<meta name="keywords" id="metaKeywords" content="sarkari job, sarkari result, government jobs, sarkari yojna, pm kisan, aadhar, pan card, voter id">
+<meta name="author" id="metaAuthor" content="IBAD TECH CSC">
+<meta name="robots" id="metaRobots" content="index, follow, max-image-preview:large">
+<meta name="google-adsense-account" id="adsenseAccount" content="ca-pub-XXXXXXXXXXXXXXXX">
+<link rel="canonical" id="canonicalLink" href="https://ibadtechcsc.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" id="ogTitle" content="IBAD TECH CSC">
+<meta property="og:description" id="ogDesc" content="Trusted portal for government jobs & schemes.">
+<meta property="og:url" id="ogUrl" content="https://ibadtechcsc.com/">
+<meta property="og:image" id="ogImage" content="">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" id="twTitle" content="IBAD TECH CSC">
+<meta name="twitter:description" id="twDesc" content="Trusted Sarkari portal">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous" id="adsenseScript"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database-compat.js"></script>
+<style>
+:root{
+--p50:#eff6ff;--p100:#dbeafe;--p200:#bfdbfe;--p400:#60a5fa;--p500:#3b82f6;--p600:#2563eb;--p700:#1d4ed8;--p800:#1e40af;--p900:#1e3a8a;
+--s50:#f8fafc;--s100:#f1f5f9;--s200:#e2e8f0;--s300:#cbd5e1;--s400:#94a3b8;--s500:#64748b;--s600:#475569;--s700:#334155;--s800:#1e293b;--s900:#0f172a;
+--g50:#f0fdf4;--g500:#22c55e;--g600:#16a34a;--g700:#15803d;
+--r50:#fef2f2;--r500:#ef4444;--r600:#dc2626;
+--y50:#fffbeb;--y500:#f59e0b;--y600:#d97706;
+--font:'Inter',sans-serif;--serif:'Merriweather',serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font);background:var(--s100);color:var(--s800);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit;transition:all .2s;cursor:pointer}
+button{font-family:inherit;cursor:pointer;border:none}
+img{max-width:100%;height:auto;display:block}
+.container{max-width:1280px;margin:0 auto;padding:0 20px;width:100%}
+
+#toastBox{position:fixed;bottom:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+.toast{background:#fff;padding:14px 22px;border-radius:10px;box-shadow:0 10px 25px rgba(0,0,0,.15);font-weight:600;font-size:.88rem;display:flex;align-items:center;gap:10px;min-width:280px;pointer-events:auto;animation:toastIn .4s cubic-bezier(.16,1,.3,1);max-width:calc(100vw - 40px)}
+.toast.success{border-left:4px solid var(--g500)}.toast.success i{color:var(--g500)}
+.toast.error{border-left:4px solid var(--r500)}.toast.error i{color:var(--r500)}
+.toast.warning{border-left:4px solid var(--y500)}.toast.warning i{color:var(--y500)}
+.toast.info{border-left:4px solid var(--p500)}.toast.info i{color:var(--p500)}
+@keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* ============ TOPBAR ============ */
+.topbar{background:var(--s900);color:var(--s300);padding:10px 0;font-size:.82rem;font-weight:500}
+.topbar .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.topbar-left{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.topbar-left a,.topbar-left span{display:flex;align-items:center;gap:6px;color:var(--s300)}
+.topbar-left i{color:var(--p400)}
+.topbar-right{display:flex;gap:6px;align-items:center}
+.topbar-right a{padding:6px 12px;border-radius:6px;font-size:.8rem;font-weight:600}
+.topbar-right a:hover{background:rgba(255,255,255,.1)}
+.topbar-right a.help{color:var(--g500)}
+
+/* ============ HEADER ============ */
+.header{background:#fff;padding:20px 0;border-bottom:1px solid var(--s200)}
+.header .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.logo{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.logo-icon{width:54px;height:54px;background:linear-gradient(135deg,var(--p600),var(--p800));border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5rem;box-shadow:0 4px 12px rgba(37,99,235,.3);flex-shrink:0}
+.logo-text h1{font-family:var(--serif);color:var(--p700);font-size:1.6rem;font-weight:900;line-height:1.2}
+.logo-text p{color:var(--s500);font-size:.78rem;margin-top:3px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+
+.search-wrap{position:relative;min-width:340px;flex:1;max-width:480px}
+.search-box{display:flex;align-items:center;background:var(--s100);border-radius:9999px;padding:4px;border:2px solid transparent;transition:all .2s;width:100%}
+.search-box:focus-within{border-color:var(--p500);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.1)}
+.search-box input{flex:1;padding:10px 16px;border:none;background:transparent;outline:none;font-size:.9rem;color:var(--s800);font-family:inherit;min-width:0}
+.search-box button{padding:10px 20px;background:var(--p600);color:#fff;border-radius:9999px;font-weight:700;font-size:.85rem;display:flex;align-items:center;gap:6px;transition:all .2s;flex-shrink:0}
+.search-box button:hover{background:var(--p700)}
+
+.search-suggestions{position:absolute;top:calc(100% + 8px);left:0;right:0;background:#fff;border-radius:14px;box-shadow:0 20px 40px rgba(0,0,0,.12);border:1px solid var(--s200);max-height:420px;overflow-y:auto;z-index:1000;display:none}
+.search-suggestions.show{display:block;animation:fadeIn .2s ease}
+.search-suggestions::-webkit-scrollbar{width:6px}
+.search-suggestions::-webkit-scrollbar-thumb{background:var(--s300);border-radius:3px}
+.suggestion-header{padding:10px 16px 8px;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--s400);font-weight:800;background:var(--s50);border-bottom:1px solid var(--s200);display:flex;align-items:center;gap:6px}
+.suggestion-header i{color:var(--p600)}
+.suggestion-item{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;transition:all .15s;border-bottom:1px solid var(--s100);text-decoration:none;color:inherit}
+.suggestion-item:last-child{border-bottom:none}
+.suggestion-item:hover,.suggestion-item.selected{background:var(--p50)}
+.suggestion-item .icon-box{width:44px;height:44px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;flex-shrink:0;overflow:hidden;padding:0}
+.suggestion-item .icon-box img{width:100%;height:100%;object-fit:cover}
+.suggestion-item .info{flex:1;min-width:0}
+.suggestion-item .info .title{font-size:.88rem;font-weight:700;color:var(--s900);line-height:1.35;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical}
+.suggestion-item .info .title mark{background:#fef3c7;color:var(--s900);padding:0 2px;border-radius:3px;font-weight:900}
+.suggestion-item .info .subtitle{font-size:.74rem;color:var(--s500);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.suggestion-item .type-badge{font-size:.62rem;font-weight:800;padding:3px 8px;border-radius:5px;text-transform:uppercase;letter-spacing:.05em;flex-shrink:0}
+.type-badge.post{background:var(--p50);color:var(--p700)}
+.type-badge.service{background:var(--g50);color:var(--g700)}
+.suggestion-empty{padding:24px 20px;text-align:center;color:var(--s400);font-size:.85rem;font-weight:600}
+.suggestion-empty i{font-size:1.6rem;color:var(--s300);margin-bottom:8px;display:block}
+
+/* ============ NAVBAR ============ */
+.navbar{background:#fff;border-bottom:1px solid var(--s200);position:sticky;top:0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,.04)}
+.nav-list{display:flex;list-style:none;gap:4px;padding:10px 0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.nav-list::-webkit-scrollbar{display:none}
+.nav-list li a{font-size:.82rem;font-weight:700;color:var(--s600);padding:10px 16px;border-radius:6px;text-transform:uppercase;display:flex;align-items:center;gap:7px;white-space:nowrap;letter-spacing:.03em}
+.nav-list li a:hover{color:var(--p700);background:var(--p50)}
+.nav-list li a.active{color:#fff;background:var(--p600);box-shadow:0 2px 8px rgba(37,99,235,.3)}
+
+/* ============ HERO ============ */
+.hero{background:linear-gradient(135deg,var(--p700),var(--p900));color:#fff;padding:56px 0;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(255,255,255,.08),transparent 60%)}
+.hero-content{position:relative;z-index:1}
+.hero h2{font-family:var(--serif);font-size:2.2rem;font-weight:900;margin-bottom:14px;letter-spacing:-.02em;line-height:1.2}
+.hero p{font-size:1.02rem;opacity:.95;max-width:720px;margin:0 auto 26px;line-height:1.7}
+.hero-btns{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.hero-btn{padding:13px 26px;border-radius:10px;font-weight:700;font-size:.88rem;display:inline-flex;align-items:center;gap:10px;transition:all .25s}
+.hero-btn-p{background:#fff;color:var(--p700);box-shadow:0 4px 14px rgba(0,0,0,.15)}
+.hero-btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.hero-btn-o{background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.3);backdrop-filter:blur(8px)}
+.hero-btn-o:hover{background:rgba(255,255,255,.25);transform:translateY(-2px)}
+.hero-trust{display:flex;justify-content:center;gap:24px;margin-top:20px;flex-wrap:wrap;font-size:.78rem;opacity:.85}
+.hero-trust span{display:flex;align-items:center;gap:6px}
+.hero-trust i{color:#fbbf24}
+
+/* ============ SARKARI KAAM ============ */
+.sarkari-section{background:#fff;padding:40px 0;border-bottom:1px solid var(--s200)}
+.sarkari-head{text-align:center;margin-bottom:30px}
+.sarkari-head h2{font-family:var(--serif);font-size:1.6rem;font-weight:900;color:var(--s900);margin-bottom:8px}
+.sarkari-head p{color:var(--s500);font-size:.92rem}
+.sarkari-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.sarkari-card{background:linear-gradient(135deg,var(--s50),#fff);border:2px solid var(--s200);border-radius:14px;padding:20px 14px;text-align:center;transition:all .25s;display:block;text-decoration:none;color:inherit}
+.sarkari-card:hover{transform:translateY(-6px);border-color:var(--p600);box-shadow:0 12px 24px rgba(37,99,235,.15);background:#fff}
+.sarkari-card .icon{width:60px;height:60px;margin:0 auto 12px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15);transition:transform .25s;overflow:hidden;padding:0}
+.sarkari-card .icon img{width:100%;height:100%;object-fit:cover}
+.sarkari-card:hover .icon{transform:scale(1.1) rotate(-5deg)}
+.sarkari-card h3{font-size:.9rem;font-weight:800;color:var(--s900);margin-bottom:5px}
+.sarkari-card p{font-size:.72rem;color:var(--s500);font-weight:600}
+
+.ic-aadhar{background:linear-gradient(135deg,#f59e0b,#d97706)}
+.ic-pan{background:linear-gradient(135deg,#3b82f6,#1d4ed8)}
+.ic-voter{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+.ic-ration{background:linear-gradient(135deg,#22c55e,#15803d)}
+.ic-passport{background:linear-gradient(135deg,#ef4444,#b91c1c)}
+.ic-dl{background:linear-gradient(135deg,#06b6d4,#0e7490)}
+.ic-rc{background:linear-gradient(135deg,#f97316,#c2410c)}
+.ic-birth{background:linear-gradient(135deg,#ec4899,#be185d)}
+.ic-income{background:linear-gradient(135deg,#14b8a6,#0f766e)}
+.ic-caste{background:linear-gradient(135deg,#a855f7,#7e22ce)}
+.ic-domicile{background:linear-gradient(135deg,#0ea5e9,#0369a1)}
+.ic-marriage{background:linear-gradient(135deg,#f43f5e,#be123c)}
+.ic-pension{background:linear-gradient(135deg,#84cc16,#4d7c0f)}
+.ic-eshram{background:linear-gradient(135deg,#eab308,#a16207)}
+.ic-ayushman{background:linear-gradient(135deg,#10b981,#047857)}
+.ic-pmkisan{background:linear-gradient(135deg,#16a34a,#166534)}
+.ic-lic{background:linear-gradient(135deg,#6366f1,#4338ca)}
+.ic-bank{background:linear-gradient(135deg,#0891b2,#155e75)}
+
+/* ============ STATS ============ */
+.stats{background:#fff;padding:24px 0;border-bottom:1px solid var(--s200)}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;text-align:center}
+.stat-item{padding:8px}
+.stat-val{font-size:1.7rem;font-weight:900;color:var(--p700);font-family:var(--serif);line-height:1}
+.stat-lbl{font-size:.76rem;color:var(--s500);font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:.05em}
+
+/* ============ AD CONTAINER ============ */
+.ad-container{background:var(--s50);border:1px dashed var(--s300);border-radius:10px;padding:16px 12px 12px;text-align:center;margin:20px 0;min-height:100px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.ad-label{position:absolute;top:6px;left:12px;font-size:.6rem;text-transform:uppercase;letter-spacing:.15em;color:var(--s400);font-weight:800;background:#fff;padding:2px 8px;border-radius:3px}
+.ad-container.hidden{display:none}
+
+/* ============ LAYOUT ============ */
+.layout{display:grid;grid-template-columns:1fr 340px;gap:32px;margin:32px auto;min-height:50vh}
+.sec-title{font-size:1.25rem;font-weight:800;color:var(--s900);margin-bottom:20px;font-family:var(--serif);display:flex;align-items:center;gap:10px;position:relative;padding-bottom:10px}
+.sec-title::after{content:'';position:absolute;bottom:0;left:0;width:60px;height:3px;background:linear-gradient(90deg,var(--p600),var(--p400));border-radius:9999px}
+.sec-title i{color:var(--p600)}
+
+.featured{background:#fff;border:1px solid var(--s200);border-radius:14px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,.05);margin-bottom:24px;display:grid;grid-template-columns:1fr 1.3fr;transition:all .3s;cursor:pointer;text-decoration:none;color:inherit}
+.featured:hover{transform:translateY(-4px);box-shadow:0 20px 25px rgba(0,0,0,.08)}
+.feat-img{background:linear-gradient(135deg,var(--p600),var(--p800));display:flex;align-items:center;justify-content:center;color:#fff;font-size:4rem;min-height:280px;position:relative;overflow:hidden}
+.feat-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.feat-img::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.15),transparent 70%);z-index:1;pointer-events:none}
+.feat-content{padding:28px;display:flex;flex-direction:column;justify-content:center}
+.feat-badge{display:inline-flex;align-items:center;gap:6px;background:var(--r500);color:#fff;font-size:.68rem;font-weight:800;padding:6px 12px;border-radius:9999px;text-transform:uppercase;letter-spacing:.06em;width:fit-content;margin-bottom:14px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+.cat-badge{background:var(--p50);color:var(--p700);font-size:.68rem;font-weight:800;padding:6px 12px;display:inline-block;text-transform:uppercase;border-radius:6px;width:fit-content;margin-bottom:12px;letter-spacing:.06em}
+.feat-title{font-family:var(--serif);font-size:1.35rem;font-weight:800;color:var(--s900);margin-bottom:10px;line-height:1.35}
+.feat-sum{color:var(--s500);font-size:.9rem;margin-bottom:16px;line-height:1.7}
+.feat-meta{display:flex;align-items:center;gap:14px;font-size:.78rem;color:var(--s500);font-weight:600;margin-bottom:16px;flex-wrap:wrap}
+.feat-meta span{display:flex;align-items:center;gap:5px}
+.feat-meta i{color:var(--p500)}
+.feat-btn{background:var(--p600);color:#fff;padding:11px 22px;border-radius:8px;font-weight:700;font-size:.86rem;display:inline-flex;align-items:center;gap:8px;width:fit-content;transition:all .25s;border:none}
+.feat-btn:hover{background:var(--p700);transform:translateX(4px)}
+
+.cat-filter{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.cat-filter button{padding:8px 16px;border:2px solid var(--s200);background:#fff;border-radius:9999px;font-weight:700;font-size:.76rem;color:var(--s600);transition:all .2s;text-transform:uppercase;letter-spacing:.03em}
+.cat-filter button:hover{border-color:var(--p400);color:var(--p600)}
+.cat-filter button.active{background:var(--p600);color:#fff;border-color:var(--p600);box-shadow:0 4px 12px rgba(37,99,235,.25)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-bottom:24px}
+.card{background:#fff;border:1px solid var(--s200);border-radius:14px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.04);transition:all .25s;display:flex;flex-direction:column;position:relative}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--p600),var(--p400));opacity:0;transition:opacity .25s;z-index:2}
+.card:hover{transform:translateY(-6px);box-shadow:0 20px 25px rgba(0,0,0,.08);border-color:var(--p200)}
+.card:hover::before{opacity:1}
+.card-img{width:100%;height:180px;object-fit:cover;display:block;background:var(--s100)}
+.card-cat{background:var(--p50);color:var(--p700);font-size:.68rem;font-weight:800;padding:7px 14px;display:inline-block;text-transform:uppercase;border-bottom-right-radius:10px;width:fit-content;letter-spacing:.06em}
+.card-body{padding:20px;flex-grow:1;display:flex;flex-direction:column}
+.card-title{font-size:.98rem;font-weight:700;color:var(--s900);margin-bottom:10px;line-height:1.45;font-family:var(--serif);cursor:pointer;display:block}
+.card-title:hover{color:var(--p600)}
+.card-sum{font-size:.84rem;color:var(--s500);margin-bottom:16px;flex-grow:1;line-height:1.65}
+.card-meta{display:flex;justify-content:space-between;align-items:center;font-size:.76rem;border-top:1px solid var(--s200);padding-top:14px;gap:10px}
+.card-meta .date{display:flex;align-items:center;gap:5px;color:var(--s500);font-weight:600}
+.card-meta .date i{color:var(--p500)}
+.btn-view{background:var(--p600);color:#fff;padding:7px 14px;border-radius:6px;font-weight:700;font-size:.74rem;display:flex;align-items:center;gap:5px;transition:all .2s;text-decoration:none}
+.btn-view:hover{background:var(--p700);transform:translateX(2px)}
+
+.service-card{background:#fff;border:1px solid var(--s200);border-radius:14px;padding:20px;text-align:center;transition:all .25s;display:block;text-decoration:none;color:inherit}
+.service-card:hover{transform:translateY(-6px);border-color:var(--p600);box-shadow:0 12px 24px rgba(37,99,235,.15)}
+.service-card .icon{width:60px;height:60px;margin:0 auto 12px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15);overflow:hidden;padding:0}
+.service-card .icon img{width:100%;height:100%;object-fit:cover}
+.service-card h3{font-size:.92rem;font-weight:800;color:var(--s900);margin-bottom:5px}
+.service-card p{font-size:.74rem;color:var(--s500);font-weight:600}
+
+/* ============ SIDEBAR ============ */
+.side-widget{background:#fff;border:1px solid var(--s200);border-radius:14px;padding:22px;margin-bottom:22px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.side-title{font-size:.9rem;font-weight:800;margin-bottom:16px;color:var(--s900);border-bottom:2px solid var(--s200);padding-bottom:10px;text-transform:uppercase;display:flex;align-items:center;gap:10px;letter-spacing:.04em}
+.side-title i{color:var(--p600)}
+.side-link{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px dashed var(--s200);font-size:.86rem;font-weight:600;color:var(--s600);text-decoration:none}
+.side-link:last-child{border-bottom:none}
+.side-link i{color:var(--p600);font-size:1rem;width:20px;text-align:center}
+.side-link:hover{color:var(--p600);padding-left:6px}
+
+.newsletter{background:linear-gradient(135deg,var(--p600),var(--p800));color:#fff;padding:26px 22px;border-radius:14px;text-align:center;margin-bottom:22px}
+.newsletter i.nl{font-size:2rem;margin-bottom:10px;opacity:.9}
+.newsletter h3{font-size:.98rem;font-weight:800;margin-bottom:6px}
+.newsletter p{font-size:.8rem;opacity:.9;margin-bottom:14px;line-height:1.6}
+.newsletter input{width:100%;padding:11px 14px;border:none;border-radius:6px;font-size:.86rem;margin-bottom:8px;outline:none;font-family:inherit}
+.newsletter button{width:100%;padding:11px;background:#fff;color:var(--p700);border-radius:6px;font-weight:800;font-size:.84rem;text-transform:uppercase;letter-spacing:.05em;transition:all .2s}
+.newsletter button:hover{background:var(--s100);transform:translateY(-1px)}
+
+.trust{display:flex;align-items:center;gap:12px;padding:12px;background:var(--g50);border:1px solid rgba(22,163,74,.2);border-radius:10px;margin-bottom:10px}
+.trust i{font-size:1.3rem;color:var(--g600)}
+.trust h4{font-size:.8rem;font-weight:800;color:var(--g700);margin-bottom:2px}
+.trust p{font-size:.7rem;color:var(--g600);font-weight:600}
+
+/* ============ FOOTER ============ */
+.footer{background:var(--s900);color:var(--s400);padding:50px 0 24px;margin-top:50px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:32px}
+.foot-brand h3{color:#fff;margin-bottom:14px;font-size:1.15rem;font-weight:800;font-family:var(--serif);display:flex;align-items:center;gap:10px}
+.foot-brand h3 i{color:var(--p500)}
+.foot-brand p{font-size:.86rem;line-height:1.7;margin-bottom:14px}
+.foot-contact{font-size:.82rem;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.foot-contact i{color:var(--p400);width:16px}
+.foot-contact a:hover{color:var(--p400)}
+.foot-social{display:flex;gap:8px;margin-top:14px}
+.foot-social a{width:36px;height:36px;border-radius:50%;background:var(--s800);color:var(--s400);display:flex;align-items:center;justify-content:center;transition:all .2s}
+.foot-social a:hover{background:var(--p600);color:#fff;transform:translateY(-3px)}
+.foot-social a.hidden{display:none}
+.foot-grid h4{color:#fff;margin-bottom:16px;font-size:.88rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.foot-links a{display:block;margin-bottom:8px;font-size:.84rem;transition:all .2s;text-decoration:none;color:var(--s400)}
+.foot-links a:hover{color:var(--p400);padding-left:4px}
+.foot-disc{background:var(--s800);padding:16px;border-radius:10px;margin-top:20px;font-size:.78rem;line-height:1.7;border-left:4px solid var(--y500);color:var(--s400)}
+.foot-disc strong{color:var(--y500)}
+.foot-bottom{text-align:center;border-top:1px solid var(--s700);margin-top:24px;padding-top:20px;font-size:.8rem;color:var(--s500);line-height:1.8}
+.foot-bottom i{color:var(--r500)}
+.foot-bottom .links{margin-top:8px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.foot-bottom .links a{color:var(--s400);font-size:.78rem}
+.foot-bottom .links a:hover{color:var(--p400)}
+
+/* ============ BACK TO TOP ============ */
+.back-top{position:fixed;bottom:20px;left:20px;width:46px;height:46px;background:var(--p600);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 4px 12px rgba(37,99,235,.4);opacity:0;visibility:hidden;transition:all .3s;z-index:999}
+.back-top.show{opacity:1;visibility:visible}
+.back-top:hover{background:var(--p700);transform:translateY(-3px)}
+
+/* ============ MISC ============ */
+.spinner{width:40px;height:40px;border:3px solid var(--s200);border-top-color:var(--p600);border-radius:50%;animation:spin .8s linear infinite;margin:40px auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.empty{text-align:center;padding:40px 20px;color:var(--s400)}
+.empty i{font-size:2.4rem;margin-bottom:14px;color:var(--s300)}
+.empty p{font-size:.88rem;font-weight:600}
+
+/* ============================================
+   RESPONSIVE — ALL DEVICES
+   ============================================ */
+
+/* Laptop / Small Desktop */
+@media(max-width:1200px){
+.container{padding:0 18px}
+.layout{gap:26px}
+}
+
+/* Tablet Landscape */
+@media(max-width:1024px){
+.container{padding:0 16px}
+.layout{grid-template-columns:1fr;gap:24px}
+.foot-grid{grid-template-columns:1fr 1fr;gap:28px}
+.featured{grid-template-columns:1fr}
+.feat-img{min-height:240px}
+.hero h2{font-size:1.9rem}
+.sarkari-grid{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
+.grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+}
+
+/* Tablet Portrait */
+@media(max-width:768px){
+.container{padding:0 16px}
+.topbar .container{justify-content:center;text-align:center}
+.topbar-left{justify-content:center;gap:10px}
+.header .container{flex-direction:column;text-align:center}
+.logo{justify-content:center}
+.search-wrap{width:100%;min-width:auto;max-width:none}
+.hero{padding:42px 0}
+.hero h2{font-size:1.55rem}
+.hero p{font-size:.92rem;padding:0 4px}
+.hero-btn{padding:11px 20px;font-size:.84rem}
+.hero-trust{font-size:.72rem;gap:14px;padding:0 8px}
+.hero-trust span{justify-content:center}
+.sarkari-section{padding:32px 0}
+.sarkari-head h2{font-size:1.35rem}
+.sarkari-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+.sarkari-card{padding:16px 10px}
+.sarkari-card .icon{width:52px;height:52px;font-size:1.2rem}
+.sarkari-card h3{font-size:.82rem}
+.sarkari-card p{font-size:.68rem}
+.stats{padding:20px 0}
+.stats-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+.stat-val{font-size:1.4rem}
+.stat-lbl{font-size:.7rem}
+.layout{margin:20px auto;gap:20px}
+.sec-title{font-size:1.1rem}
+.featured{grid-template-columns:1fr}
+.feat-img{min-height:220px}
+.feat-content{padding:22px}
+.feat-title{font-size:1.15rem}
+.feat-sum{font-size:.86rem}
+.cat-filter{gap:6px}
+.cat-filter button{padding:7px 13px;font-size:.72rem}
+.grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.card-img{height:160px}
+.card-body{padding:16px}
+.card-title{font-size:.92rem}
+.card-sum{font-size:.8rem}
+.side-widget{padding:18px;margin-bottom:18px}
+.newsletter{padding:22px 18px}
+.foot-grid{grid-template-columns:1fr;gap:24px;text-align:center}
+.foot-brand h3{justify-content:center}
+.foot-contact{justify-content:center}
+.foot-social{justify-content:center}
+.foot-bottom .links{justify-content:center}
+.back-top{bottom:16px;left:16px;width:42px;height:42px}
+}
+
+/* Mobile Large */
+@media(max-width:600px){
+.container{padding:0 14px}
+.topbar{font-size:.76rem;padding:8px 0}
+.topbar-left span,.topbar-left a{font-size:.76rem}
+.topbar-right a span{display:none}
+.topbar-right a{padding:5px 10px}
+.header{padding:16px 0}
+.logo-icon{width:46px;height:46px;font-size:1.3rem}
+.logo-text h1{font-size:1.3rem}
+.logo-text p{font-size:.7rem}
+.search-box input{padding:9px 14px;font-size:.85rem}
+.search-box button{padding:9px 16px;font-size:.8rem}
+.nav-list li a{font-size:.74rem;padding:8px 12px;gap:5px}
+.hero{padding:32px 0}
+.hero h2{font-size:1.35rem;line-height:1.25}
+.hero p{font-size:.86rem;line-height:1.6}
+.hero-btns{gap:8px}
+.hero-btn{padding:10px 18px;font-size:.8rem;gap:7px}
+.hero-trust{font-size:.68rem;gap:10px}
+.sarkari-section{padding:26px 0}
+.sarkari-head h2{font-size:1.2rem}
+.sarkari-head p{font-size:.84rem}
+.sarkari-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+.sarkari-card{padding:14px 8px;border-radius:12px}
+.sarkari-card .icon{width:46px;height:46px;font-size:1.05rem;margin-bottom:9px}
+.sarkari-card h3{font-size:.78rem}
+.sarkari-card p{font-size:.64rem}
+.stats{padding:16px 0}
+.stats-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+.stat-val{font-size:1.25rem}
+.stat-lbl{font-size:.65rem}
+.layout{margin:16px auto;gap:18px}
+.sec-title{font-size:1.05rem;margin-bottom:16px}
+.featured{margin-bottom:20px}
+.feat-img{min-height:190px}
+.feat-content{padding:18px}
+.feat-title{font-size:1.05rem}
+.feat-sum{font-size:.82rem;line-height:1.6}
+.feat-meta{font-size:.72rem;gap:10px}
+.feat-btn{padding:9px 18px;font-size:.8rem}
+.cat-filter{gap:5px;margin-bottom:16px}
+.cat-filter button{padding:6px 11px;font-size:.68rem}
+.grid{grid-template-columns:1fr;gap:14px}
+.card-img{height:180px}
+.card-cat{font-size:.64rem;padding:6px 12px}
+.card-body{padding:16px}
+.card-title{font-size:.92rem}
+.card-sum{font-size:.8rem;line-height:1.55}
+.card-meta{font-size:.72rem}
+.btn-view{padding:6px 12px;font-size:.7rem}
+.side-widget{padding:16px;margin-bottom:16px}
+.side-title{font-size:.85rem;padding-bottom:9px;margin-bottom:14px}
+.side-link{font-size:.82rem;padding:10px 0}
+.newsletter{padding:20px 16px;margin-bottom:16px}
+.newsletter i.nl{font-size:1.7rem}
+.newsletter h3{font-size:.92rem}
+.newsletter p{font-size:.76rem}
+.ad-container{min-height:90px;padding:14px 10px 10px}
+.footer{padding:40px 0 20px;margin-top:40px}
+.foot-brand h3{font-size:1.05rem}
+.foot-grid h4{font-size:.84rem;margin-bottom:12px}
+.foot-links a{font-size:.8rem}
+.foot-disc{font-size:.72rem;padding:14px}
+.foot-bottom{font-size:.75rem}
+.foot-bottom .links{gap:12px}
+.foot-bottom .links a{font-size:.72rem}
+}
+
+/* Mobile Small */
+@media(max-width:400px){
+.container{padding:0 12px}
+.topbar{font-size:.72rem;padding:6px 0}
+.topbar-left{gap:8px}
+.topbar-left span,.topbar-left a{font-size:.7rem;gap:4px}
+.logo-icon{width:42px;height:42px;font-size:1.2rem}
+.logo-text h1{font-size:1.15rem}
+.logo-text p{font-size:.62rem}
+.search-box{padding:3px}
+.search-box input{padding:8px 12px;font-size:.82rem}
+.search-box button{padding:8px 12px;font-size:.74rem}
+.search-box button i{margin:0}
+.nav-list li a{font-size:.68rem;padding:7px 10px;gap:4px}
+.nav-list li a i{font-size:.75rem}
+.hero{padding:26px 0}
+.hero h2{font-size:1.15rem}
+.hero p{font-size:.8rem}
+.hero-btn{padding:9px 14px;font-size:.74rem;gap:5px}
+.hero-trust{font-size:.62rem;gap:8px;margin-top:14px}
+.sarkari-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+.sarkari-card{padding:12px 6px}
+.sarkari-card .icon{width:42px;height:42px;font-size:1rem;margin-bottom:8px}
+.sarkari-card h3{font-size:.72rem;line-height:1.3}
+.sarkari-card p{font-size:.6rem}
+.stats-grid{gap:10px}
+.stat-val{font-size:1.1rem}
+.stat-lbl{font-size:.6rem}
+.featured{border-radius:12px}
+.feat-img{min-height:160px}
+.feat-content{padding:14px}
+.feat-title{font-size:.95rem;line-height:1.35}
+.feat-sum{font-size:.78rem}
+.feat-meta{font-size:.68rem}
+.feat-btn{padding:8px 14px;font-size:.74rem}
+.card-img{height:160px}
+.card-body{padding:14px}
+.card-title{font-size:.88rem}
+.card-sum{font-size:.76rem}
+.foot-grid h4{font-size:.78rem}
+.foot-links a{font-size:.76rem}
+.foot-disc{font-size:.68rem;padding:12px}
+.suggestion-item .icon-box{width:38px;height:38px;font-size:.9rem}
+.suggestion-item .info .title{font-size:.82rem}
+.suggestion-item .info .subtitle{font-size:.68rem}
+.suggestion-item .type-badge{font-size:.56rem;padding:2px 6px}
+}
+
+/* Ultra Small */
+@media(max-width:340px){
+.logo-text h1{font-size:1.05rem}
+.hero h2{font-size:1.05rem}
+.hero-btn{padding:8px 12px;font-size:.7rem}
+.sarkari-card h3{font-size:.68rem}
+.stat-val{font-size:1rem}
+}
+
+/* Print */
+@media print{
+.topbar,.navbar,.back-top,.ad-container,.hero-btns,.newsletter,.back-top{display:none!important}
+body{background:#fff}
+.footer{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+
+<div id="toastBox"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+<div class="container">
+<div class="topbar-left">
+<span><i class="fas fa-map-marker-alt"></i> <span id="topAddr">India</span></span>
+<span><i class="fas fa-envelope"></i> <a id="topEmail" href="mailto:info@ibadtechcsc.com">info@ibadtechcsc.com</a></span>
+</div>
+<div class="topbar-right">
+<a id="waLink" target="_blank" rel="noopener nofollow" class="help"><i class="fab fa-whatsapp"></i> <span>WhatsApp Help</span></a>
+</div>
+</div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+<div class="container">
+<a href="index.html" class="logo">
+<div class="logo-icon"><i class="fas fa-shield-halved"></i></div>
+<div class="logo-text">
+<h1 id="siteTitle">IBAD TECH CSC</h1>
+<p id="siteTagline">Sarkari Kaam & Digital Seva</p>
+</div>
+</a>
+<div class="search-wrap">
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Search jobs, yojna, services..." autocomplete="off" oninput="handleSearchInput()" onkeydown="handleSearchKey(event)" onfocus="handleSearchFocus()">
+<button onclick="searchNow()"><i class="fas fa-search"></i> <span>Search</span></button>
+</div>
+<div class="search-suggestions" id="searchSuggestions"></div>
+</div>
+</div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+<div class="container">
+<ul class="nav-list">
+<li><a class="active" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+<li><a href="#sarkari-kaam"><i class="fas fa-briefcase"></i> Sarkari Kaam</a></li>
+<li><a onclick="filterCat('latest-jobs',event)"><i class="fas fa-newspaper"></i> Latest Jobs</a></li>
+<li><a onclick="filterCat('results',event)"><i class="fas fa-award"></i> Results</a></li>
+<li><a onclick="filterCat('sarkari-yojna',event)"><i class="fas fa-file-contract"></i> Yojna</a></li>
+<li><a onclick="filterCat('admit-card',event)"><i class="fas fa-id-card"></i> Admit Card</a></li>
+<li><a onclick="filterCat('finance',event)"><i class="fas fa-rupee-sign"></i> Finance</a></li>
+</ul>
+</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+<div class="container hero-content">
+<h2 id="heroTitle">🎯 India's Trusted Sarkari Kaam Portal</h2>
+<p id="heroSubtitle">Sarkari Jobs, Yojna, Documents, Aadhar, PAN, Voter ID - Sab Kuch Ek Jagah. Easy Language, Verified Info!</p>
+<div class="hero-btns">
+<a href="#sarkari-kaam" class="hero-btn hero-btn-p"><i class="fas fa-briefcase"></i> Sarkari Kaam</a>
+<a onclick="filterCat('latest-jobs',event)" class="hero-btn hero-btn-o"><i class="fas fa-newspaper"></i> Latest Jobs</a>
+</div>
+<div class="hero-trust">
+<span><i class="fas fa-check-circle"></i> 100% Verified</span>
+<span><i class="fas fa-bolt"></i> Fast Updates</span>
+<span><i class="fas fa-users"></i> 50K+ Readers</span>
+</div>
+</div>
+</div>
+
+<!-- SARKARI KAAM -->
+<div class="sarkari-section" id="sarkari-kaam">
+<div class="container">
+<div class="sarkari-head">
+<h2>🏛️ Sarkari Kaam Services</h2>
+<p>Sabhi Government Documents aur Services ke liye Direct Links — Click karein</p>
+</div>
+<div class="sarkari-grid" id="sarkariGrid"></div>
+</div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+<div class="container">
+<div class="stats-grid">
+<div class="stat-item"><div class="stat-val" id="statPosts">0+</div><div class="stat-lbl">Updates</div></div>
+<div class="stat-item"><div class="stat-val">50K+</div><div class="stat-lbl">Monthly Readers</div></div>
+<div class="stat-item"><div class="stat-val">100%</div><div class="stat-lbl">Verified</div></div>
+<div class="stat-item"><div class="stat-val">24/7</div><div class="stat-lbl">Support</div></div>
+</div>
+</div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="container layout">
+<main>
+<!-- Top Ad -->
+<div class="ad-container" id="adTop">
+<span class="ad-label">Advertisement</span>
+<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+
+<div id="featuredBox"></div>
+
+<div class="sec-title" id="secTitle"><i class="fas fa-newspaper"></i><span id="secTitleText">Latest Sarkari Updates</span></div>
+
+<div class="cat-filter" id="catFilter">
+<button class="active" onclick="filterCat('all',event)">All</button>
+<button onclick="filterCat('latest-jobs',event)">Jobs</button>
+<button onclick="filterCat('results',event)">Results</button>
+<button onclick="filterCat('sarkari-yojna',event)">Yojna</button>
+<button onclick="filterCat('admit-card',event)">Admit Card</button>
+<button onclick="filterCat('finance',event)">Finance</button>
+</div>
+
+<div class="grid" id="postsGrid"></div>
+
+<!-- Mid Ad -->
+<div class="ad-container" id="adMid">
+<span class="ad-label">Advertisement</span>
+<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="2222222222" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+
+<div class="side-widget" style="background:linear-gradient(135deg,#f0fdf4,#ecfdf5);border-color:rgba(22,163,74,.15)">
+<h3 style="color:var(--g700);margin-bottom:10px;font-weight:800;font-size:1rem;display:flex;align-items:center;gap:8px"><i class="fas fa-building"></i> About <span id="aboutTitle">IBAD TECH CSC</span></h3>
+<p id="dynAbout" style="color:var(--g700);font-size:.88rem;line-height:1.7">Loading...</p>
+</div>
+</main>
+
+<aside>
+<div class="newsletter">
+<i class="fas fa-bell nl"></i>
+<h3>Never Miss an Update!</h3>
+<p>Get latest Sarkari Job & Yojna alerts in your inbox.</p>
+<input type="email" id="nlEmail" placeholder="Enter your email">
+<button onclick="subscribeNL()">Subscribe Free</button>
+</div>
+
+<div class="side-widget">
+<h3 class="side-title"><i class="fas fa-fire"></i> Trending</h3>
+<div id="trendBox"></div>
+</div>
+
+<div class="side-widget">
+<h3 class="side-title"><i class="fas fa-link"></i> Important Portals</h3>
+<a href="https://digitalseva.csc.gov.in" target="_blank" rel="noopener nofollow" class="side-link"><i class="fas fa-laptop-house"></i> CSC Digital Seva</a>
+<a href="https://pmkisan.gov.in" target="_blank" rel="noopener nofollow" class="side-link"><i class="fas fa-tractor"></i> PM Kisan Yojana</a>
+<a href="https://parivahan.gov.in" target="_blank" rel="noopener nofollow" class="side-link"><i class="fas fa-car"></i> Parivahan Sewa</a>
+<a href="https://uidai.gov.in" target="_blank" rel="noopener nofollow" class="side-link"><i class="fas fa-id-card"></i> Aadhar Portal</a>
+<a href="https://www.india.gov.in" target="_blank" rel="noopener nofollow" class="side-link"><i class="fas fa-landmark"></i> National Portal</a>
+</div>
+
+<div class="side-widget">
+<h3 class="side-title"><i class="fas fa-shield-alt"></i> Why Trust Us?</h3>
+<div class="trust"><i class="fas fa-check-circle"></i><div><h4>Verified Info</h4><p>Official sources confirmed</p></div></div>
+<div class="trust"><i class="fas fa-user-check"></i><div><h4>Expert Team</h4><p>5+ years experience</p></div></div>
+<div class="trust"><i class="fas fa-clock"></i><div><h4>Fast Updates</h4><p>Within 24 hours</p></div></div>
+</div>
+
+<!-- Side Ad -->
+<div class="ad-container" id="adSide" style="min-height:250px">
+<span class="ad-label">Advertisement</span>
+<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+
+<div class="side-widget">
+<h3 class="side-title"><i class="fas fa-headset"></i> Need Help?</h3>
+<p style="font-size:.86rem;color:var(--s500);margin-bottom:14px;line-height:1.7">Our team is available 24/7 for assistance.</p>
+<a id="waSide" target="_blank" rel="noopener nofollow" class="btn-view" style="width:100%;justify-content:center;background:var(--g600);padding:11px"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+</div>
+</aside>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+<div class="container">
+<div class="foot-grid">
+<div class="foot-brand">
+<h3><i class="fas fa-shield-halved"></i> <span id="footTitle">IBAD TECH CSC</span></h3>
+<p id="footAbout">Your trusted Digital Seva Kendra for government jobs, schemes, documents and financial guidance.</p>
+<div class="foot-contact"><i class="fas fa-envelope"></i> <a id="emailFoot" href="mailto:info@ibadtechcsc.com">info@ibadtechcsc.com</a></div>
+<div class="foot-contact"><i class="fas fa-map-marker-alt"></i> <span id="addrFoot">India</span></div>
+<div class="foot-social" id="footSocial">
+<a href="#" id="socFacebook" class="hidden" aria-label="Facebook" target="_blank" rel="noopener nofollow"><i class="fab fa-facebook-f"></i></a>
+<a href="#" id="socTwitter" class="hidden" aria-label="Twitter" target="_blank" rel="noopener nofollow"><i class="fab fa-twitter"></i></a>
+<a href="#" id="socInstagram" class="hidden" aria-label="Instagram" target="_blank" rel="noopener nofollow"><i class="fab fa-instagram"></i></a>
+<a href="#" id="socYoutube" class="hidden" aria-label="YouTube" target="_blank" rel="noopener nofollow"><i class="fab fa-youtube"></i></a>
+<a href="#" id="socTelegram" class="hidden" aria-label="Telegram" target="_blank" rel="noopener nofollow"><i class="fab fa-telegram-plane"></i></a>
+</div>
+</div>
+<div>
+<h4>Quick Links</h4>
+<div class="foot-links">
+<a href="index.html">Home</a>
+<a href="#sarkari-kaam">Sarkari Kaam</a>
+<a onclick="filterCat('latest-jobs',event)">Latest Jobs</a>
+<a onclick="filterCat('results',event)">Exam Results</a>
+<a onclick="filterCat('sarkari-yojna',event)">Sarkari Yojna</a>
+</div>
+</div>
+<div>
+<h4>Information</h4>
+<div class="foot-links">
+<a href="about.html">About Us</a>
+<a href="contact.html">Contact Us</a>
+<a href="privacy.html">Privacy Policy</a>
+<a href="disclaimer.html">Disclaimer</a>
+<a href="terms.html">Terms & Conditions</a>
+</div>
+</div>
+<div>
+<h4>Support</h4>
+<div class="foot-links">
+<a id="waFoot" target="_blank" rel="noopener nofollow">WhatsApp Help</a>
+<a href="contact.html">Contact Form</a>
+</div>
+</div>
+</div>
+<div class="foot-disc" id="footDisc"><strong>⚠️ Disclaimer:</strong> This website is not an official government website. All information is provided for informational purposes only. Please always verify details from official government websites before applying.</div>
+<div class="foot-bottom" id="footBottom">
+<div>&copy; 2026 IBAD TECH CSC. All Rights Reserved. Made with <i class="fas fa-heart"></i> for Digital India.</div>
+<div class="links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a><a href="contact.html">Contact</a></div>
+</div>
+</div>
+</footer>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+const firebaseConfig={apiKey:"AIzaSyDLnDVmkVcXxOFDxxfmXmqU1HflB2EpalQ",authDomain:"ibad-csc.firebaseapp.com",databaseURL:"https://ibad-csc-default-rtdb.firebaseio.com",projectId:"ibad-csc",storageBucket:"ibad-csc.firebasestorage.app",messagingSenderId:"106244842489",appId:"1:106244842489:web:ac67a8cdf714b4231d1328"};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.database();
+
+let allPosts=[],allCats={},allServices={};
+let currentFilter='all';
+let searchTimeout=null;
+let selectedSuggestionIndex=-1;
+
+const DEFAULT_SERVICES={
+    aadhar:{name:'Aadhar Card',sub:'Update & Download',icon:'fa-id-card',color:'ic-aadhar'},
+    pan:{name:'PAN Card',sub:'Apply & Correction',icon:'fa-credit-card',color:'ic-pan'},
+    voter:{name:'Voter ID',sub:'New & Correction',icon:'fa-vote-yea',color:'ic-voter'},
+    ration:{name:'Ration Card',sub:'New & Update',icon:'fa-shopping-basket',color:'ic-ration'},
+    passport:{name:'Passport',sub:'Apply & Renew',icon:'fa-passport',color:'ic-passport'},
+    dl:{name:'Driving License',sub:'Learner & DL',icon:'fa-id-card-alt',color:'ic-dl'},
+    rc:{name:'RC Transfer',sub:'Vehicle Registration',icon:'fa-car',color:'ic-rc'},
+    birth:{name:'Birth Certificate',sub:'New & Correction',icon:'fa-baby',color:'ic-birth'},
+    income:{name:'Income Certificate',sub:'Apply Online',icon:'fa-file-invoice-dollar',color:'ic-income'},
+    caste:{name:'Caste Certificate',sub:'SC/ST/OBC',icon:'fa-users',color:'ic-caste'},
+    domicile:{name:'Domicile',sub:'Residence Proof',icon:'fa-home',color:'ic-domicile'},
+    marriage:{name:'Marriage Reg.',sub:'Certificate',icon:'fa-heart',color:'ic-marriage'},
+    pension:{name:'Pension Schemes',sub:'Old Age & Widow',icon:'fa-hand-holding-usd',color:'ic-pension'},
+    eshram:{name:'E-Shram Card',sub:'Worker Registration',icon:'fa-hard-hat',color:'ic-eshram'},
+    ayushman:{name:'Ayushman Card',sub:'Health Insurance',icon:'fa-heartbeat',color:'ic-ayushman'},
+    pmkisan:{name:'PM Kisan',sub:'Farmer Scheme',icon:'fa-tractor',color:'ic-pmkisan'},
+    lic:{name:'LIC Insurance',sub:'Policy & Premium',icon:'fa-shield-alt',color:'ic-lic'},
+    bank:{name:'Bank Account',sub:'Jan Dhan Yojana',icon:'fa-university',color:'ic-bank'}
+};
+
+const DEFAULT_CATEGORIES={
+    'latest-jobs':{name:'Latest Jobs',slug:'latest-jobs'},
+    'results':{name:'Exam Results',slug:'results'},
+    'sarkari-yojna':{name:'Sarkari Yojna',slug:'sarkari-yojna'},
+    'admit-card':{name:'Admit Card',slug:'admit-card'},
+    'finance':{name:'Finance',slug:'finance'}
+};
+
+function toast(msg,type='success'){
+    const box=document.getElementById('toastBox');
+    const icons={success:'fa-check-circle',error:'fa-times-circle',warning:'fa-exclamation-triangle',info:'fa-info-circle'};
+    const t=document.createElement('div');
+    t.className=`toast ${type}`;
+    t.innerHTML=`<i class="fas ${icons[type]}"></i><span>${msg}</span>`;
+    box.appendChild(t);
+    setTimeout(()=>t.remove(),3200);
+}
+
+async function applySEOSettings(){
+    try{
+        const snap=await db.ref('settings/seo').once('value');
+        if(!snap.exists())return;
+        const s=snap.val();
+        if(s.homeTitle){document.title=s.homeTitle;document.getElementById('pageTitle').innerText=s.homeTitle;}
+        if(s.homeDesc)document.getElementById('metaDesc').setAttribute('content',s.homeDesc);
+        if(s.keywords)document.getElementById('metaKeywords').setAttribute('content',s.keywords);
+        if(s.author)document.getElementById('metaAuthor').setAttribute('content',s.author);
+        if(s.robots)document.getElementById('metaRobots').setAttribute('content',s.robots);
+        if(s.siteUrl){document.getElementById('canonicalLink').setAttribute('href',s.siteUrl);document.getElementById('ogUrl').setAttribute('content',s.siteUrl);}
+        if(s.ogTitle){document.getElementById('ogTitle').setAttribute('content',s.ogTitle);document.getElementById('twTitle').setAttribute('content',s.ogTitle);}
+        else if(s.homeTitle){document.getElementById('ogTitle').setAttribute('content',s.homeTitle);document.getElementById('twTitle').setAttribute('content',s.homeTitle);}
+        if(s.ogDesc){document.getElementById('ogDesc').setAttribute('content',s.ogDesc);document.getElementById('twDesc').setAttribute('content',s.ogDesc);}
+        else if(s.homeDesc){document.getElementById('ogDesc').setAttribute('content',s.homeDesc);document.getElementById('twDesc').setAttribute('content',s.homeDesc);}
+        if(s.ogImage)document.getElementById('ogImage').setAttribute('content',s.ogImage);
+        if(s.lang)document.documentElement.lang=s.lang;
+        if(s.gsc){const m=document.createElement('meta');m.name='google-site-verification';m.content=s.gsc;document.head.appendChild(m);}
+        if(s.bing){const m=document.createElement('meta');m.name='msvalidate.01';m.content=s.bing;document.head.appendChild(m);}
+    }catch(e){console.warn(e);}
+}
+
+async function applyAdsenseSettings(){
+    try{
+        const snap=await db.ref('settings/adsense').once('value');
+        if(!snap.exists())return;
+        const a=snap.val();
+        if(a.client){
+            document.getElementById('adsenseAccount').setAttribute('content',a.client);
+            const script=document.getElementById('adsenseScript');
+            if(script)script.src=`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${a.client}`;
+            document.querySelectorAll('.adsbygoogle').forEach(el=>el.setAttribute('data-ad-client',a.client));
+        }
+        const slotMap={'1111111111':a.slotTop,'2222222222':a.slotMid,'3333333333':a.slotSide};
+        Object.entries(slotMap).forEach(([oldSlot,newSlot])=>{
+            if(newSlot)document.querySelectorAll(`[data-ad-slot="${oldSlot}"]`).forEach(el=>el.setAttribute('data-ad-slot',newSlot));
+        });
+        if(a.toggleTop===false)document.getElementById('adTop')?.classList.add('hidden');
+        if(a.toggleMid===false)document.getElementById('adMid')?.classList.add('hidden');
+        if(a.toggleSide===false)document.getElementById('adSide')?.classList.add('hidden');
+        setTimeout(()=>{try{document.querySelectorAll('.adsbygoogle').forEach(()=>{(adsbygoogle=window.adsbygoogle||[]).push({});});}catch(e){}},200);
+    }catch(e){console.warn(e);}
+}
+
+async function applyAnalyticsSettings(){
+    try{
+        const snap=await db.ref('settings/analytics').once('value');
+        if(!snap.exists())return;
+        const a=snap.val();
+        if(a.ga4){
+            const s1=document.createElement('script');s1.async=true;s1.src=`https://www.googletagmanager.com/gtag/js?id=${a.ga4}`;document.head.appendChild(s1);
+            const s2=document.createElement('script');s2.innerHTML=`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${a.ga4}');`;document.head.appendChild(s2);
+        }
+        if(a.gtm){const s=document.createElement('script');s.innerHTML=`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${a.gtm}');`;document.head.appendChild(s);}
+        if(a.fb){const s=document.createElement('script');s.innerHTML=`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${a.fb}');fbq('track','PageView');`;document.head.appendChild(s);}
+        if(a.clarity){const s=document.createElement('script');s.innerHTML=`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${a.clarity}");`;document.head.appendChild(s);}
+    }catch(e){console.warn(e);}
+}
+
+async function applySocialSettings(){
+    try{
+        const snap=await db.ref('settings/social').once('value');
+        if(!snap.exists())return;
+        const s=snap.val();
+        const map=[{el:'socFacebook',url:s.facebook},{el:'socTwitter',url:s.twitter},{el:'socInstagram',url:s.instagram},{el:'socYoutube',url:s.youtube},{el:'socTelegram',url:s.telegram}];
+        map.forEach(({el,url})=>{
+            const e=document.getElementById(el);
+            if(e&&url&&url.trim()){e.href=url;e.classList.remove('hidden');}
+        });
+    }catch(e){console.warn(e);}
+}
+
+async function applyCustomCode(){
+    try{
+        const snap=await db.ref('settings/customCode').once('value');
+        if(!snap.exists())return;
+        const c=snap.val();
+        if(c.head&&c.head.trim())document.head.insertAdjacentHTML('beforeend',c.head);
+        if(c.body&&c.body.trim())document.body.insertAdjacentHTML('beforeend',c.body);
+    }catch(e){console.warn(e);}
+}
+
+async function loadData(){
+    try{
+        await Promise.all([applySEOSettings(),applyAdsenseSettings(),applyAnalyticsSettings(),applySocialSettings(),applyCustomCode()]);
+
+        const ss=await db.ref('settings/general').once('value');
+        if(ss.exists()){
+            const s=ss.val();
+            const title=s.title||'IBAD TECH CSC';
+            document.getElementById('siteTitle').innerText=title;
+            document.getElementById('aboutTitle').innerText=title;
+            document.getElementById('siteTagline').innerText=s.tagline||'Sarkari Kaam & Digital Seva';
+            document.getElementById('topAddr').innerText=s.address||'India';
+            document.getElementById('addrFoot').innerText=s.address||'India';
+            document.getElementById('dynAbout').innerText=s.about||'Welcome to our Digital Seva Kendra. We provide verified information about government jobs, schemes, and digital services.';
+            document.getElementById('footTitle').innerText=title;
+            document.getElementById('footAbout').innerText=s.about||'Your trusted Digital Seva Kendra.';
+            document.getElementById('heroTitle').innerText=s.heroTitle||"🎯 India's Trusted Sarkari Kaam Portal";
+            document.getElementById('heroSubtitle').innerText=s.heroSubtitle||"Sarkari Jobs, Yojna, Documents, Aadhar, PAN, Voter ID - Sab Kuch Ek Jagah!";
+            const waUrl=`https://wa.me/${s.whatsapp||'917056836166'}`;
+            ['waLink','waSide','waFoot'].forEach(id=>{const el=document.getElementById(id);if(el)el.href=waUrl;});
+            if(s.email){
+                const el=document.getElementById('emailFoot');if(el){el.href=`mailto:${s.email}`;el.innerText=s.email;}
+                const el2=document.getElementById('topEmail');if(el2){el2.href=`mailto:${s.email}`;el2.innerText=s.email;}
+            }
+            if(s.disclaimer)document.getElementById('footDisc').innerHTML=`<strong>⚠️ Disclaimer:</strong> ${s.disclaimer}`;
+            if(s.copyright)document.getElementById('footBottom').innerHTML=`<div>${s.copyright} Made with <i class="fas fa-heart"></i> for Digital India.</div><div class="links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a><a href="contact.html">Contact</a></div>`;
+        }
+
+        const cs=await db.ref('categories').once('value');
+        allCats=cs.exists()?cs.val():{};
+        if(Object.keys(allCats).length===0){
+            try{await db.ref('categories').set(DEFAULT_CATEGORIES);allCats=DEFAULT_CATEGORIES;}catch(err){console.warn(err);}
+        }
+
+        const ps=await db.ref('posts').once('value');
+        allPosts=ps.exists()?Object.keys(ps.val()).map(k=>({id:k,...ps.val()[k]})):[];
+        allPosts.sort((a,b)=>new Date(b.timestamp||0)-new Date(a.timestamp||0));
+        document.getElementById('statPosts').innerText=allPosts.length+'+';
+
+        const svs=await db.ref('services').once('value');
+        allServices=svs.exists()?svs.val():{};
+
+        console.log('📊 Posts:',allPosts.length,'Cats:',Object.keys(allCats).length);
+
+        renderSarkariGrid();
+        renderFeatured();
+        renderGrid();
+        renderTrending();
+    }catch(e){
+        console.error(e);
+        allCats=DEFAULT_CATEGORIES;
+        renderSarkariGrid();
+        renderGrid();
+    }
+}
+
+function getServices(){return Object.keys(allServices).length>0?allServices:DEFAULT_SERVICES;}
+
+function renderSarkariGrid(){
+    const grid=document.getElementById('sarkariGrid');
+    const services=getServices();
+    let html='';
+    Object.entries(services).forEach(([key,s])=>{
+        const visualHtml=s.image
+            ? `<div class="icon"><img src="${s.image}" alt="${s.name}" loading="lazy" onerror="this.parentElement.innerHTML='<i class=\\'fas ${s.icon||'fa-id-card'}\\'></i>';this.parentElement.classList.add('${s.color||'ic-aadhar'}')"></div>`
+            : `<div class="icon ${s.color||'ic-aadhar'}"><i class="fas ${s.icon||'fa-id-card'}"></i></div>`;
+        html+=`<a href="service.html?service=${key}" class="sarkari-card">${visualHtml}<h3>${s.name||'Service'}</h3><p>${s.sub||''}</p></a>`;
+    });
+    grid.innerHTML=html||'<p style="grid-column:1/-1;text-align:center;color:var(--s400)">No services</p>';
+}
+
+function renderFeatured(){
+    const box=document.getElementById('featuredBox');
+    if(allPosts.length===0){box.innerHTML='';return;}
+    const p=allPosts[0];
+    const catName=p.categoryName||allCats[p.category]?.name||'Sarkari Update';
+    const sum=p.summary||'Click to view complete details.';
+    const imgHtml=p.image?`<img src="${p.image}" alt="${p.title}" loading="eager" onerror="this.style.display='none';this.parentElement.innerHTML='<i class=\\'fas fa-star\\'></i>'">`:`<i class="fas fa-star"></i>`;
+    box.innerHTML=`<a href="post.html?id=${p.id}" class="featured"><div class="feat-img">${imgHtml}</div><div class="feat-content"><div class="feat-badge"><i class="fas fa-fire"></i> Featured</div><div class="cat-badge">${catName}</div><h2 class="feat-title">${p.title}</h2><p class="feat-sum">${sum.length>180?sum.substring(0,180)+'...':sum}</p><div class="feat-meta"><span><i class="fas fa-calendar"></i> ${fmtDate(p.timestamp)}</span><span><i class="fas fa-clock"></i> Last: ${p.lastDate||'N/A'}</span></div><button class="feat-btn">Read Full Guide <i class="fas fa-arrow-right"></i></button></div></a>`;
+}
+
+function matchCategory(post,filterSlug){
+    if(!post)return false;
+    const postCat=post.category||post.categorySlug;
+    if(!postCat)return false;
+    if(postCat===filterSlug)return true;
+    if(post.categorySlug===filterSlug)return true;
+    const cat=allCats[postCat];
+    if(cat){if(cat.slug===filterSlug)return true;if((cat.name||'').toLowerCase().replace(/\s+/g,'-')===filterSlug)return true;}
+    for(const [key,c] of Object.entries(allCats)){
+        if(key===postCat&&(c.slug===filterSlug||key===filterSlug))return true;
+        if(c.slug===postCat&&c.slug===filterSlug)return true;
+    }
+    return false;
+}
+
+function renderGrid(){
+    const grid=document.getElementById('postsGrid');
+    if(allPosts.length===0){
+        grid.innerHTML=`<div class="empty" style="grid-column:1/-1"><i class="fas fa-inbox"></i><p><b>No posts available yet.</b></p><p style="font-size:.82rem;margin-top:8px;color:var(--s500)">Check back soon.</p></div>`;
+        return;
+    }
+    let posts;
+    if(currentFilter==='all')posts=allPosts;
+    else posts=allPosts.filter(p=>matchCategory(p,currentFilter));
+    if(posts.length===0){
+        grid.innerHTML=`<div class="empty" style="grid-column:1/-1"><i class="fas fa-filter"></i><p>No posts in this category yet.</p><button onclick="filterCat('all',event)" style="margin-top:14px;background:var(--p600);color:#fff;padding:10px 22px;border-radius:8px;font-weight:700;font-size:.85rem;cursor:pointer"><i class="fas fa-list"></i> View All</button></div>`;
+        return;
+    }
+    let html='';
+    posts.forEach(p=>{
+        const catName=p.categoryName||allCats[p.category]?.name||p.categorySlug||'Update';
+        const sum=p.summary?(p.summary.length>100?p.summary.substring(0,100)+'...':p.summary):'Click to view full details.';
+        const imgHtml=p.image?`<img src="${p.image}" alt="${p.title}" loading="lazy" class="card-img" onerror="this.style.display='none'">`:'';
+        html+=`<div class="card">${imgHtml}<div class="card-cat">${catName}</div><div class="card-body"><a href="post.html?id=${p.id}" class="card-title">${p.title}</a><p class="card-sum">${sum}</p><div class="card-meta"><span class="date"><i class="fas fa-clock"></i> ${p.lastDate||'Check Notice'}</span><a href="post.html?id=${p.id}" class="btn-view">View <i class="fas fa-arrow-right"></i></a></div></div></div>`;
+    });
+    grid.innerHTML=html;
+}
+
+function renderTrending(){
+    const box=document.getElementById('trendBox');
+    const tr=allPosts.slice(0,5);
+    if(tr.length===0){box.innerHTML='<p style="font-size:.85rem;color:var(--s400)">No posts yet.</p>';return;}
+    let html='';
+    tr.forEach((p,i)=>{
+        html+=`<a href="post.html?id=${p.id}" style="display:flex;gap:10px;padding:10px 0;border-bottom:1px dashed var(--s200);text-decoration:none"><div style="width:26px;height:26px;background:var(--p600);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.75rem;flex-shrink:0">${i+1}</div><div style="font-size:.83rem;font-weight:600;color:var(--s700);line-height:1.4">${p.title.length>60?p.title.substring(0,60)+'...':p.title}</div></a>`;
+    });
+    box.innerHTML=html;
+}
+
+function highlightMatch(text,query){
+    if(!query||!text)return text;
+    const regex=new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`,'gi');
+    return text.replace(regex,'<mark>$1</mark>');
+}
+
+function handleSearchInput(){
+    const input=document.getElementById('searchInput');
+    const query=input.value.trim().toLowerCase();
+    clearTimeout(searchTimeout);
+    if(!query){hideSuggestions();return;}
+    searchTimeout=setTimeout(()=>showSuggestions(query),150);
+}
+
+function showSuggestions(query){
+    const box=document.getElementById('searchSuggestions');
+    const services=getServices();
+    let matches=[];
+    Object.entries(services).forEach(([key,s])=>{
+        const name=(s.name||'').toLowerCase();
+        const sub=(s.sub||'').toLowerCase();
+        if(name.includes(query)||sub.includes(query)){matches.push({type:'service',key,title:s.name,subtitle:s.sub||'Government Service',icon:s.icon||'fa-id-card',color:s.color||'ic-aadhar',image:s.image||'',url:`service.html?service=${key}`});}
+    });
+    allPosts.forEach(p=>{
+        const title=(p.title||'').toLowerCase();
+        const summary=(p.summary||'').toLowerCase();
+        if(title.includes(query)||summary.includes(query)){matches.push({type:'post',key:p.id,title:p.title,subtitle:`${p.categoryName||allCats[p.category]?.name||'Update'} • ${p.lastDate||'Check Notice'}`,icon:'fa-newspaper',color:'ic-pan',image:p.image||'',url:`post.html?id=${p.id}`});}
+    });
+    matches.sort((a,b)=>a.type===b.type?0:a.type==='service'?-1:1);
+    matches=matches.slice(0,8);
+    if(matches.length===0){box.innerHTML=`<div class="suggestion-empty"><i class="fas fa-search"></i><p>No results for "${query}"</p></div>`;box.classList.add('show');return;}
+    let html='';let currentType='';
+    matches.forEach((m,i)=>{
+        if(m.type!==currentType){
+            if(m.type==='service')html+=`<div class="suggestion-header"><i class="fas fa-briefcase"></i> Sarkari Kaam Services</div>`;
+            if(m.type==='post')html+=`<div class="suggestion-header"><i class="fas fa-newspaper"></i> Latest Updates</div>`;
+            currentType=m.type;
+        }
+        const iconHtml=m.image?`<div class="icon-box"><img src="${m.image}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<i class=\\'fas ${m.icon}\\'></i>';this.parentElement.classList.add('${m.color}')"></div>`:`<div class="icon-box ${m.color}"><i class="fas ${m.icon}"></i></div>`;
+        html+=`<a href="${m.url}" class="suggestion-item" data-index="${i}">${iconHtml}<div class="info"><div class="title">${highlightMatch(m.title,query)}</div><div class="subtitle">${m.subtitle}</div></div><span class="type-badge ${m.type}">${m.type}</span></a>`;
+    });
+    box.innerHTML=html;box.classList.add('show');selectedSuggestionIndex=-1;
+}
+
+function hideSuggestions(){const box=document.getElementById('searchSuggestions');box.classList.remove('show');box.innerHTML='';selectedSuggestionIndex=-1;}
+function handleSearchFocus(){const q=document.getElementById('searchInput').value.trim().toLowerCase();if(q)showSuggestions(q);}
+function handleSearchKey(e){
+    const box=document.getElementById('searchSuggestions');const items=box.querySelectorAll('.suggestion-item');
+    if(e.key==='Enter'){e.preventDefault();if(selectedSuggestionIndex>=0&&items[selectedSuggestionIndex]){items[selectedSuggestionIndex].click();return;}searchNow();hideSuggestions();return;}
+    if(e.key==='Escape'){hideSuggestions();return;}
+    if(!items.length)return;
+    if(e.key==='ArrowDown'){e.preventDefault();selectedSuggestionIndex=(selectedSuggestionIndex+1)%items.length;updateSelectedSuggestion(items);}
+    if(e.key==='ArrowUp'){e.preventDefault();selectedSuggestionIndex=(selectedSuggestionIndex-1+items.length)%items.length;updateSelectedSuggestion(items);}
+}
+function updateSelectedSuggestion(items){items.forEach((el,i)=>{if(i===selectedSuggestionIndex){el.classList.add('selected');el.scrollIntoView({block:'nearest',behavior:'smooth'});}else{el.classList.remove('selected');}});}
+document.addEventListener('click',(e)=>{const wrap=document.querySelector('.search-wrap');if(wrap&&!wrap.contains(e.target))hideSuggestions();});
+
+window.searchNow=function(){
+    const q=document.getElementById('searchInput').value.trim().toLowerCase();
+    hideSuggestions();
+    if(!q){renderGrid();document.getElementById('secTitleText').innerText='Latest Sarkari Updates';return;}
+    const services=getServices();
+    const grid=document.getElementById('postsGrid');
+    const serviceMatches=Object.entries(services).filter(([key,s])=>{const name=(s.name||'').toLowerCase();const sub=(s.sub||'').toLowerCase();return name.includes(q)||sub.includes(q);}).map(([key,s])=>({type:'service',key,...s}));
+    const postMatches=allPosts.filter(p=>(p.title||'').toLowerCase().includes(q)||(p.summary&&p.summary.toLowerCase().includes(q)));
+    if(serviceMatches.length===0&&postMatches.length===0){grid.innerHTML=`<div class="empty" style="grid-column:1/-1"><i class="fas fa-search"></i><p>No results for "${q}"</p></div>`;document.getElementById('secTitleText').innerText=`Search: "${q}"`;return;}
+    let html='';
+    if(serviceMatches.length>0){serviceMatches.forEach(s=>{const visualHtml=s.image?`<div class="icon"><img src="${s.image}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<i class=\\'fas ${s.icon||'fa-id-card'}\\'></i>';this.parentElement.classList.add('${s.color||'ic-aadhar'}')"></div>`:`<div class="icon ${s.color||'ic-aadhar'}"><i class="fas ${s.icon||'fa-id-card'}"></i></div>`;html+=`<a href="service.html?service=${s.key}" class="service-card">${visualHtml}<h3>${highlightMatch(s.name,q)}</h3><p>${s.sub||''}</p></a>`;});}
+    if(postMatches.length>0){postMatches.forEach(p=>{const imgHtml=p.image?`<img src="${p.image}" alt="${p.title}" loading="lazy" class="card-img" onerror="this.style.display='none'">`:'';html+=`<div class="card">${imgHtml}<div class="card-cat">${p.categoryName||allCats[p.category]?.name||'Update'}</div><div class="card-body"><a href="post.html?id=${p.id}" class="card-title">${highlightMatch(p.title,q)}</a><p class="card-sum">${p.summary||''}</p><div class="card-meta"><span class="date"><i class="fas fa-clock"></i> ${p.lastDate||'N/A'}</span><a href="post.html?id=${p.id}" class="btn-view">View</a></div></div></div>`;});}
+    grid.innerHTML=html;
+    const total=serviceMatches.length+postMatches.length;
+    document.getElementById('secTitleText').innerText=`Search: "${q}" — ${total} result${total!==1?'s':''} found`;
+    window.scrollTo({top:document.getElementById('secTitle').offsetTop-100,behavior:'smooth'});
+};
+
+window.filterCat=function(cat,e){
+    if(e)e.preventDefault();
+    currentFilter=cat;
+    document.querySelectorAll('.cat-filter button').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.nav-list a').forEach(a=>a.classList.remove('active'));
+    if(cat==='all'){document.querySelector('.cat-filter button')?.classList.add('active');document.getElementById('secTitleText').innerText='Latest Sarkari Updates';}
+    else{
+        document.querySelectorAll('.cat-filter button').forEach(b=>{if(b.getAttribute('onclick')?.includes(cat))b.classList.add('active');});
+        let catName=cat.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+        Object.values(allCats).forEach(c=>{if(c.slug===cat||(c.name||'').toLowerCase().replace(/\s+/g,'-')===cat)catName=c.name;});
+        document.getElementById('secTitleText').innerText=catName;
+    }
+    renderGrid();
+    window.scrollTo({top:document.getElementById('secTitle').offsetTop-100,behavior:'smooth'});
+};
+
+window.subscribeNL=async function(){
+    const email=document.getElementById('nlEmail').value.trim();
+    if(!email||!email.includes('@'))return toast('Enter valid email','warning');
+    try{await db.ref('subscribers').push({email,timestamp:new Date().toISOString()});toast('Subscribed! 🎉','success');document.getElementById('nlEmail').value='';}catch(e){toast('Error','error');}
+};
+
+function fmtDate(iso){if(!iso)return 'N/A';const d=new Date(iso);const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return `${d.getDate()} ${m[d.getMonth()]} ${d.getFullYear()}`;}
+
+window.addEventListener('scroll',()=>{const b=document.getElementById('backTop');if(window.scrollY>400)b.classList.add('show');else b.classList.remove('show');});
+document.addEventListener('DOMContentLoaded',loadData);
+</script>
+</body>
+</html>

@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel | IBAD TECH CSC</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database-compat.js"></script>
+<style>
+:root{
+--p50:#eff6ff;--p100:#dbeafe;--p200:#bfdbfe;--p400:#60a5fa;--p500:#3b82f6;--p600:#2563eb;--p700:#1d4ed8;--p800:#1e40af;
+--s50:#f8fafc;--s100:#f1f5f9;--s200:#e2e8f0;--s300:#cbd5e1;--s400:#94a3b8;--s500:#64748b;--s600:#475569;--s700:#334155;--s800:#1e293b;--s900:#0f172a;
+--g50:#f0fdf4;--g500:#22c55e;--g600:#16a34a;--g700:#15803d;
+--r50:#fef2f2;--r500:#ef4444;--r600:#dc2626;
+--y50:#fffbeb;--y500:#f59e0b;--y600:#d97706;
+--font:'Inter',sans-serif;--serif:'Merriweather',serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--s100);color:var(--s800);line-height:1.6}
+button{font-family:inherit;cursor:pointer;border:none}
+input,textarea,select{font-family:inherit}
+a{text-decoration:none;color:inherit}
+
+/* TOAST */
+#toastBox{position:fixed;bottom:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:10px}
+.toast{background:#fff;padding:14px 22px;border-radius:10px;box-shadow:0 10px 25px rgba(0,0,0,.15);font-weight:600;font-size:.88rem;display:flex;align-items:center;gap:10px;min-width:280px;animation:toastIn .4s cubic-bezier(.16,1,.3,1)}
+.toast.success{border-left:4px solid var(--g500)}.toast.success i{color:var(--g500)}
+.toast.error{border-left:4px solid var(--r500)}.toast.error i{color:var(--r500)}
+.toast.warning{border-left:4px solid var(--y500)}.toast.warning i{color:var(--y500)}
+.toast.info{border-left:4px solid var(--p500)}.toast.info i{color:var(--p500)}
+@keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+
+.view{display:none}
+.view.active{display:block}
+.view-flex.active{display:flex}
+
+/* LOGIN */
+#loginView{min-height:100vh;background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#1e40af 100%);display:none;align-items:center;justify-content:center;padding:20px;position:relative;overflow:hidden}
+#loginView.active{display:flex}
+#loginView::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(59,130,246,.3),transparent 70%);top:-200px;right:-200px;border-radius:50%}
+#loginView::after{content:'';position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(37,99,235,.2),transparent 70%);bottom:-150px;left:-150px;border-radius:50%}
+.login-box{background:#fff;padding:44px 40px;border-radius:20px;width:100%;max-width:440px;box-shadow:0 30px 60px rgba(0,0,0,.3);position:relative;z-index:1;animation:loginSlide .5s cubic-bezier(.16,1,.3,1)}
+@keyframes loginSlide{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.login-logo{width:70px;height:70px;background:linear-gradient(135deg,var(--p600),var(--p800));border-radius:16px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.8rem;margin:0 auto 20px;box-shadow:0 8px 24px rgba(37,99,235,.35)}
+.login-box h1{font-family:var(--serif);font-size:1.5rem;font-weight:900;text-align:center;margin-bottom:6px;color:var(--s900)}
+.login-box .subtitle{text-align:center;color:var(--s500);font-size:.88rem;margin-bottom:28px}
+.login-box label{display:block;font-weight:700;font-size:.84rem;color:var(--s700);margin-bottom:7px}
+.login-box input{width:100%;padding:14px 16px;border:2px solid var(--s200);border-radius:10px;font-size:.94rem;margin-bottom:16px;background:var(--s50);transition:all .2s;color:var(--s800)}
+.login-box input:focus{outline:none;border-color:var(--p500);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.1)}
+.login-btn{width:100%;padding:15px;background:linear-gradient(135deg,var(--p600),var(--p700));color:#fff;border-radius:10px;font-weight:800;font-size:.95rem;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .25s;box-shadow:0 6px 18px rgba(37,99,235,.35);margin-bottom:18px}
+.login-btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(37,99,235,.4)}
+.login-btn:disabled{opacity:.7;cursor:not-allowed;transform:none}
+.back-site{text-align:center;font-size:.85rem;color:var(--s500);font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px;transition:color .2s}
+.back-site:hover{color:var(--p600)}
+
+/* DASHBOARD */
+#dashView{min-height:100vh;background:var(--s100)}
+.sidebar{width:270px;background:linear-gradient(180deg,#0f172a 0%,#1e293b 100%);height:100vh;position:fixed;padding:22px 0;display:flex;flex-direction:column;color:#fff;z-index:100;overflow-y:auto;border-right:1px solid #1e293b}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--s700);border-radius:4px}
+.sidebar-brand{padding:0 24px 22px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:18px}
+.sidebar-brand h2{font-family:var(--serif);font-size:1.25rem;font-weight:900;display:flex;align-items:center;gap:10px;color:#fff}
+.sidebar-brand h2 i{color:var(--p400)}
+.sidebar-brand p{font-size:.72rem;color:var(--s400);font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-top:5px;padding-left:33px}
+.nav-group{padding:8px 24px 4px;font-size:.68rem;font-weight:800;color:var(--s500);text-transform:uppercase;letter-spacing:.12em;margin-top:12px}
+.nav-item{padding:13px 24px;color:var(--s400);cursor:pointer;display:flex;align-items:center;gap:14px;font-weight:600;font-size:.88rem;border-left:4px solid transparent;transition:all .2s;white-space:nowrap;position:relative}
+.nav-item i{width:22px;text-align:center;font-size:1rem}
+.nav-item:hover{color:#fff;background:rgba(255,255,255,.06)}
+.nav-item.active{background:linear-gradient(90deg,rgba(37,99,235,.25),rgba(37,99,235,.05));color:#fff;border-left-color:var(--p500)}
+.nav-item.active i{color:var(--p400)}
+.sidebar-spacer{flex-grow:1}
+
+.main-content{margin-left:270px;padding:28px;width:calc(100% - 270px);min-height:100vh}
+
+.top-bar{background:#fff;padding:20px 26px;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);margin-bottom:26px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--s200);flex-wrap:wrap;gap:14px}
+.top-bar h2{font-family:var(--serif);font-size:1.35rem;font-weight:900;display:flex;align-items:center;gap:12px;color:var(--s900)}
+.top-bar h2 i{color:var(--p600)}
+.user-info{display:flex;align-items:center;gap:12px}
+.user-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--p600),var(--p800));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.92rem;box-shadow:0 4px 12px rgba(37,99,235,.3)}
+.user-details{text-align:right}
+.user-details .name{font-weight:800;font-size:.88rem;color:var(--s900)}
+.user-details .role{font-size:.72rem;color:var(--s500);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+
+.section{display:none;animation:fade .3s ease}
+.section.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.card{background:#fff;padding:26px;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);margin-bottom:24px;border:1px solid var(--s200)}
+.card-head{font-size:1.08rem;font-weight:800;margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--s100);padding-bottom:16px;flex-wrap:wrap;gap:12px}
+.card-head span{display:flex;align-items:center;gap:10px}
+.card-head span i{color:var(--p600)}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:26px}
+.stat-card{background:#fff;padding:22px;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid var(--s200);display:flex;align-items:center;gap:16px;transition:all .25s}
+.stat-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.08)}
+.stat-icon{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;flex-shrink:0}
+.stat-icon.blue{background:linear-gradient(135deg,#3b82f6,#1d4ed8)}
+.stat-icon.green{background:linear-gradient(135deg,#22c55e,#15803d)}
+.stat-icon.orange{background:linear-gradient(135deg,#f59e0b,#d97706)}
+.stat-icon.purple{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+.stat-icon.red{background:linear-gradient(135deg,#ef4444,#b91c1c)}
+.stat-icon.cyan{background:linear-gradient(135deg,#06b6d4,#0e7490)}
+.stat-info h3{font-size:1.6rem;font-weight:900;color:var(--s900);font-family:var(--serif);line-height:1}
+.stat-info p{font-size:.78rem;color:var(--s500);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-top:5px}
+
+/* TABLE */
+.table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--s200)}
+table{width:100%;border-collapse:collapse;min-width:640px}
+th{text-align:left;padding:14px 16px;background:var(--s50);color:var(--s500);font-weight:800;text-transform:uppercase;font-size:.72rem;letter-spacing:.06em;border-bottom:1px solid var(--s200)}
+td{padding:16px;border-bottom:1px solid var(--s200);font-size:.88rem;color:var(--s700);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--s50)}
+
+.thumb{width:50px;height:50px;border-radius:10px;object-fit:cover;border:2px solid var(--s200);background:var(--s100)}
+.thumb-icon{width:50px;height:50px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;background:linear-gradient(135deg,var(--p600),var(--p800))}
+
+/* BUTTONS */
+.btn{padding:11px 20px;border-radius:9px;font-weight:700;display:inline-flex;align-items:center;gap:8px;color:#fff;font-size:.85rem;transition:all .15s;cursor:pointer;border:none}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.btn-sm{padding:8px 12px;font-size:.78rem}
+.btn-p{background:linear-gradient(135deg,var(--p600),var(--p700))}
+.btn-p:hover{background:linear-gradient(135deg,var(--p700),var(--p800))}
+.btn-g{background:linear-gradient(135deg,var(--g600),var(--g700))}
+.btn-r{background:linear-gradient(135deg,var(--r600),var(--r500))}
+.btn-y{background:linear-gradient(135deg,var(--y500),var(--y600))}
+.btn-ghost{background:var(--s200);color:var(--s700)}
+.btn-ghost:hover{background:var(--s300);color:var(--s800)}
+
+/* FORMS */
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-weight:700;margin-bottom:8px;color:var(--s800);font-size:.84rem}
+.form-group label .req{color:var(--r500)}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:13px 15px;border:2px solid var(--s200);border-radius:10px;background:var(--s50);font-size:.9rem;transition:all .2s;color:var(--s800)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--p500);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.08)}
+.form-group textarea{min-height:100px;resize:vertical;line-height:1.6}
+.form-group .hint{font-size:.75rem;color:var(--s400);margin-top:6px;display:block;font-weight:500;line-height:1.5}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+
+/* IMAGE PREVIEW */
+.image-preview{display:none;margin-bottom:18px;position:relative;border-radius:12px;overflow:hidden;border:2px solid var(--s200);background:var(--s50)}
+.image-preview img{width:100%;max-height:220px;object-fit:cover;display:block}
+.image-preview .remove-img{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;background:rgba(220,38,38,.95);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;border:none}
+.image-preview .remove-img:hover{background:var(--r600)}
+
+/* SWITCH TOGGLE */
+.toggle-row{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--s50);border-radius:10px;margin-bottom:12px;border:1px solid var(--s200)}
+.toggle-row .label{display:flex;align-items:center;gap:12px;font-weight:700;font-size:.88rem;color:var(--s800)}
+.toggle-row .label i{width:24px;text-align:center;color:var(--p600);font-size:1rem}
+.toggle-row .label .desc{display:block;font-size:.74rem;color:var(--s500);font-weight:500;margin-top:2px}
+.switch{position:relative;width:52px;height:28px;background:var(--s300);border-radius:9999px;cursor:pointer;transition:all .25s;flex-shrink:0}
+.switch.on{background:var(--g500)}
+.switch::after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%;transition:all .25s;box-shadow:0 2px 4px rgba(0,0,0,.15)}
+.switch.on::after{left:27px}
+
+/* INFO BOX */
+.info-box{background:var(--p50);border-left:4px solid var(--p600);padding:14px 18px;border-radius:10px;margin-bottom:20px;font-size:.85rem;color:var(--p800);line-height:1.7}
+.info-box strong{display:block;margin-bottom:4px;color:var(--p900);font-size:.88rem}
+.info-box code{background:var(--p100);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:.78rem}
+
+.warn-box{background:var(--y50);border-left:4px solid var(--y500);padding:14px 18px;border-radius:10px;margin-bottom:20px;font-size:.85rem;color:#92400e;line-height:1.7}
+.warn-box strong{display:block;margin-bottom:4px;color:#78350f}
+
+.success-box{background:var(--g50);border-left:4px solid var(--g500);padding:14px 18px;border-radius:10px;margin-bottom:20px;font-size:.85rem;color:var(--g700);line-height:1.7}
+
+/* EMPTY */
+.empty{text-align:center;padding:48px 20px;color:var(--s400)}
+.empty i{font-size:2.6rem;margin-bottom:14px;color:var(--s300);display:block}
+.empty h4{font-size:1rem;font-weight:800;color:var(--s600);margin-bottom:6px}
+.empty p{font-size:.85rem;font-weight:500}
+
+/* SPINNER */
+.spinner{width:44px;height:44px;border:4px solid var(--s200);border-top-color:var(--p600);border-radius:50%;animation:spin .8s linear infinite;margin:40px auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* MODAL */
+.modal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.75);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(6px);padding:20px;overflow-y:auto}
+.modal.show{display:flex}
+.modal-box{background:#fff;padding:30px;border-radius:18px;width:100%;max-width:780px;max-height:92vh;overflow-y:auto;box-shadow:0 30px 60px rgba(0,0,0,.3);animation:modalSlide .3s cubic-bezier(.16,1,.3,1)}
+@keyframes modalSlide{from{transform:translateY(30px) scale(.97);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;padding-bottom:16px;border-bottom:2px solid var(--s200)}
+.modal-head h2{font-family:var(--serif);font-size:1.2rem;font-weight:900;color:var(--s900);display:flex;align-items:center;gap:10px}
+.modal-head h2 i{color:var(--p600)}
+.modal-close{width:38px;height:38px;border-radius:10px;background:var(--s100);color:var(--s500);display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:1rem}
+.modal-close:hover{background:var(--r50);color:var(--r600);transform:rotate(90deg)}
+.modal-foot{display:flex;justify-content:flex-end;gap:12px;margin-top:26px;padding-top:20px;border-top:1px solid var(--s200)}
+
+/* ADSENSE GUIDE */
+.guide-step{display:flex;gap:14px;padding:16px;background:var(--s50);border-radius:10px;margin-bottom:12px;border:1px solid var(--s200)}
+.guide-num{width:32px;height:32px;background:linear-gradient(135deg,var(--p600),var(--p800));color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;flex-shrink:0}
+.guide-content{flex:1}
+.guide-content h4{font-size:.9rem;font-weight:800;color:var(--s900);margin-bottom:4px}
+.guide-content p{font-size:.82rem;color:var(--s600);line-height:1.6}
+.guide-content code{background:var(--s200);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:.78rem;color:var(--p700)}
+
+/* AD SLOT PREVIEW */
+.ad-slot-preview{background:var(--s50);border:1px dashed var(--s300);border-radius:10px;padding:14px;margin-bottom:12px;position:relative}
+.ad-slot-preview .slot-label{position:absolute;top:6px;left:10px;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--s400);font-weight:800}
+.ad-slot-preview .slot-content{font-size:.85rem;color:var(--s700);font-weight:600;margin-top:6px}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+.sidebar{width:64px;padding:16px 0}
+.sidebar-brand h2{font-size:0;justify-content:center}
+.sidebar-brand h2 i{font-size:1.4rem}
+.sidebar-brand p{display:none}
+.nav-group{display:none}
+.nav-item{justify-content:center;padding:14px 8px;border-left-width:3px}
+.nav-item span{display:none}
+.nav-item i{width:auto;font-size:1.15rem}
+.main-content{margin-left:64px;width:calc(100% - 64px);padding:16px}
+.form-row,.form-row-3{grid-template-columns:1fr}
+.top-bar{flex-direction:column;align-items:flex-start;padding:16px}
+.top-bar h2{font-size:1.15rem}
+.modal-box{padding:20px}
+.stats-grid{grid-template-columns:1fr}
+.login-box{padding:32px 24px}
+.toggle-row{flex-direction:column;align-items:flex-start;gap:12px}
+}
+</style>
+</head>
+<body>
+
+<div id="toastBox"></div>
+
+<!-- ==========================================
+     VIEW 1: LOGIN
+     ========================================== -->
+<div id="loginView" class="view-flex active">
+<div class="login-box">
+<div class="login-logo"><i class="fas fa-shield-halved"></i></div>
+<h1>Admin Panel</h1>
+<p class="subtitle">IBAD TECH CSC Management System</p>
+
+<form onsubmit="event.preventDefault();doLogin()" autocomplete="on">
+<label>Email Address</label>
+<input type="email" id="lEmail" placeholder="admin@example.com" required autocomplete="email">
+<label>Password</label>
+<input type="password" id="lPass" placeholder="Enter your password" required autocomplete="current-password">
+<button type="submit" class="login-btn" id="loginBtn">
+<i class="fas fa-sign-in-alt"></i> Secure Login
+</button>
+</form>
+
+<a href="index.html" class="back-site">
+<i class="fas fa-arrow-left"></i> Back to Website
+</a>
+</div>
+</div>
+
+<!-- ==========================================
+     VIEW 2: DASHBOARD
+     ========================================== -->
+<div id="dashView" class="view">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+<div class="sidebar-brand">
+<h2><i class="fas fa-shield-halved"></i> IBAD TECH</h2>
+<p>Control Panel</p>
+</div>
+
+<div class="nav-item active" onclick="showSec('secDashboard',this)">
+<i class="fas fa-chart-line"></i><span>Dashboard</span>
+</div>
+
+<div class="nav-group">Content</div>
+<div class="nav-item" onclick="showSec('secPosts',this)">
+<i class="fas fa-file-alt"></i><span>Manage Posts</span>
+</div>
+<div class="nav-item" onclick="showSec('secServices',this)">
+<i class="fas fa-briefcase"></i><span>Sarkari Kaam</span>
+</div>
+<div class="nav-item" onclick="showSec('secCats',this)">
+<i class="fas fa-tags"></i><span>Categories</span>
+</div>
+
+<div class="nav-group">Monetization</div>
+<div class="nav-item" onclick="showSec('secAdsense',this)">
+<i class="fab fa-google"></i><span>Google AdSense</span>
+</div>
+
+<div class="nav-group">SEO & Analytics</div>
+<div class="nav-item" onclick="showSec('secSEO',this)">
+<i class="fas fa-search"></i><span>SEO Settings</span>
+</div>
+<div class="nav-item" onclick="showSec('secAnalytics',this)">
+<i class="fas fa-chart-bar"></i><span>Analytics</span>
+</div>
+
+<div class="nav-group">Configuration</div>
+<div class="nav-item" onclick="showSec('secSettings',this)">
+<i class="fas fa-cog"></i><span>Site Settings</span>
+</div>
+<div class="nav-item" onclick="showSec('secSocial',this)">
+<i class="fas fa-share-alt"></i><span>Social Links</span>
+</div>
+<div class="nav-item" onclick="showSec('secCustom',this)">
+<i class="fas fa-code"></i><span>Custom Code</span>
+</div>
+
+<div class="sidebar-spacer"></div>
+
+<a href="index.html" target="_blank" class="nav-item" style="border-top:1px solid rgba(255,255,255,.08);color:#fff">
+<i class="fas fa-globe"></i><span>View Website</span>
+</a>
+<div class="nav-item" onclick="doLogout()" style="color:#fca5a5">
+<i class="fas fa-power-off"></i><span>Logout</span>
+</div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+<div class="top-bar">
+<h2 id="pageTitle"><i class="fas fa-chart-line"></i> Dashboard</h2>
+<div class="user-info">
+<div class="user-avatar" id="userAvatar">A</div>
+<div class="user-details">
+<div class="name" id="uName">Admin</div>
+<div class="role">Administrator</div>
+</div>
+</div>
+</div>
+
+<!-- ==========================================
+     DASHBOARD SECTION
+     ========================================== -->
+<div id="secDashboard" class="section active">
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-icon blue"><i class="fas fa-file-alt"></i></div>
+<div class="stat-info"><h3 id="dashPosts">0</h3><p>Total Posts</p></div>
+</div>
+<div class="stat-card">
+<div class="stat-icon green"><i class="fas fa-briefcase"></i></div>
+<div class="stat-info"><h3 id="dashServices">0</h3><p>Sarkari Services</p></div>
+</div>
+<div class="stat-card">
+<div class="stat-icon orange"><i class="fas fa-tags"></i></div>
+<div class="stat-info"><h3 id="dashCats">0</h3><p>Categories</p></div>
+</div>
+<div class="stat-card">
+<div class="stat-icon purple"><i class="fas fa-envelope"></i></div>
+<div class="stat-info"><h3 id="dashSubs">0</h3><p>Subscribers</p></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-heartbeat"></i> System Status</span>
+</div>
+<div class="stats-grid" style="margin-bottom:0">
+<div class="stat-card" style="padding:16px">
+<div class="stat-icon cyan" style="width:44px;height:44px;font-size:1.1rem"><i class="fab fa-google"></i></div>
+<div class="stat-info"><h3 id="statusAdsense" style="font-size:1rem">Not Configured</h3><p>AdSense</p></div>
+</div>
+<div class="stat-card" style="padding:16px">
+<div class="stat-icon blue" style="width:44px;height:44px;font-size:1.1rem"><i class="fas fa-search"></i></div>
+<div class="stat-info"><h3 id="statusSEO" style="font-size:1rem">Not Configured</h3><p>SEO</p></div>
+</div>
+<div class="stat-card" style="padding:16px">
+<div class="stat-icon green" style="width:44px;height:44px;font-size:1.1rem"><i class="fas fa-chart-bar"></i></div>
+<div class="stat-info"><h3 id="statusAnalytics" style="font-size:1rem">Not Configured</h3><p>Analytics</p></div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-bolt"></i> Quick Actions</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px">
+<button class="btn btn-p" onclick="openPostModal()" style="justify-content:center;padding:16px">
+<i class="fas fa-plus-circle"></i> Create Post
+</button>
+<button class="btn btn-g" onclick="openServiceModal()" style="justify-content:center;padding:16px">
+<i class="fas fa-plus-circle"></i> Add Service
+</button>
+<button class="btn btn-y" onclick="showSec('secAdsense',document.querySelector('[onclick*=secAdsense]'))" style="justify-content:center;padding:16px">
+<i class="fab fa-google"></i> AdSense Setup
+</button>
+<button class="btn btn-p" onclick="showSec('secSEO',document.querySelector('[onclick*=secSEO]'))" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#8b5cf6,#6d28d9)">
+<i class="fas fa-search"></i> SEO Setup
+</button>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-clock"></i> Recent Posts</span>
+<button class="btn btn-p btn-sm" onclick="showSec('secPosts',document.querySelector('[onclick*=secPosts]'))">View All</button>
+</div>
+<div id="recentPosts"><div class="spinner"></div></div>
+</div>
+</div>
+
+<!-- ==========================================
+     POSTS SECTION
+     ========================================== -->
+<div id="secPosts" class="section">
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-file-alt"></i> Manage Posts</span>
+<button class="btn btn-p" onclick="openPostModal()"><i class="fas fa-plus"></i> Create New Post</button>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th style="width:70px">Image</th><th>Title</th><th>Category</th><th>Last Date</th><th style="width:180px">Actions</th></tr>
+</thead>
+<tbody id="postsTable"><tr><td colspan="5"><div class="spinner"></div></td></tr></tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- ==========================================
+     SERVICES SECTION
+     ========================================== -->
+<div id="secServices" class="section">
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-briefcase"></i> Sarkari Kaam Services</span>
+<button class="btn btn-g" onclick="openServiceModal()"><i class="fas fa-plus"></i> Add New Service</button>
+</div>
+<p style="font-size:.86rem;color:var(--s500);margin-bottom:18px;line-height:1.7">
+Yahan se aap website ke <b>Sarkari Kaam section</b> ke sabhi services add/edit/delete kar sakte hain.
+Har service mein multiple official links, steps, aur documents add kar sakte hain.
+</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th style="width:70px">Image</th><th>Service Name</th><th>Subtitle</th><th>Links</th><th style="width:180px">Actions</th></tr>
+</thead>
+<tbody id="servicesTable"><tr><td colspan="5"><div class="spinner"></div></td></tr></tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- ==========================================
+     CATEGORIES SECTION
+     ========================================== -->
+<div id="secCats" class="section">
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-tags"></i> Categories</span>
+<button class="btn btn-y" onclick="addCat()"><i class="fas fa-plus"></i> Add Category</button>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Name</th><th>Slug</th><th style="width:120px">Actions</th></tr>
+</thead>
+<tbody id="catsTable"><tr><td colspan="3"><div class="spinner"></div></td></tr></tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- ==========================================
+     GOOGLE ADSENSE SECTION
+     ========================================== -->
+<div id="secAdsense" class="section">
+<div class="card">
+<div class="card-head">
+<span><i class="fab fa-google" style="color:#ea4335"></i> Google AdSense Configuration</span>
+</div>
+
+<div class="info-box">
+<strong><i class="fas fa-info-circle"></i> AdSense Setup Guide</strong>
+Apna Publisher ID aur Ad Slot IDs yahan enter karein. Ye automatically website par apply ho jayenge.
+AdSense account ke liye <a href="https://adsense.google.com" target="_blank" style="color:var(--p600);font-weight:700">adsense.google.com</a> par jayein.
+</div>
+
+<div class="form-group">
+<label>AdSense Publisher ID <span class="req">*</span></label>
+<input type="text" id="ads_client" placeholder="ca-pub-1234567890123456">
+<span class="hint">Format: ca-pub-XXXXXXXXXXXXXXXX (AdSense Dashboard → Account → Account Information)</span>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Auto Ads Enabled?</label>
+<select id="ads_auto">
+<option value="no">No</option>
+<option value="yes">Yes (Recommended)</option>
+</select>
+</div>
+<div class="form-group">
+<label>Ad Frequency</label>
+<select id="ads_freq">
+<option value="low">Low (Less ads, better UX)</option>
+<option value="medium" selected>Medium (Balanced)</option>
+<option value="high">High (Max revenue)</option>
+</select>
+</div>
+</div>
+
+<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
+<i class="fas fa-th" style="color:var(--p600)"></i> Ad Slot IDs
+</h3>
+
+<div class="form-row">
+<div class="form-group">
+<label>Top Banner Ad Slot</label>
+<input type="text" id="ads_slot_top" placeholder="1234567890">
+<span class="hint">Homepage top par dikhega (728x90)</span>
+</div>
+<div class="form-group">
+<label>Mid Content Ad Slot</label>
+<input type="text" id="ads_slot_mid" placeholder="1234567890">
+<span class="hint">Posts grid ke beech</span>
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Sidebar Ad Slot</label>
+<input type="text" id="ads_slot_side" placeholder="1234567890">
+<span class="hint">Right sidebar (300x250)</span>
+</div>
+<div class="form-group">
+<label>Bottom Ad Slot</label>
+<input type="text" id="ads_slot_bottom" placeholder="1234567890">
+<span class="hint">Content ke neeche</span>
+</div>
+</div>
+
+<div class="form-group">
+<label>In-Article Ad Slot (Post pages)</label>
+<input type="text" id="ads_slot_article" placeholder="1234567890">
+<span class="hint">Post ke andar 2-3 ads ke liye</span>
+</div>
+
+<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
+<i class="fas fa-toggle-on" style="color:var(--p600)"></i> Ad Position Toggles
+</h3>
+
+<div class="toggle-row">
+<div class="label"><i class="fas fa-arrow-up"></i><div>Top Banner<span class="desc">Homepage top par</span></div></div>
+<div class="switch on" onclick="toggleSwitch(this)" data-key="ad_top"></div>
+</div>
+
+<div class="toggle-row">
+<div class="label"><i class="fas fa-align-center"></i><div>Mid Content<span class="desc">Posts grid ke beech</span></div></div>
+<div class="switch on" onclick="toggleSwitch(this)" data-key="ad_mid"></div>
+</div>
+
+<div class="toggle-row">
+<div class="label"><i class="fas fa-columns"></i><div>Sidebar Ads<span class="desc">Right sidebar</span></div></div>
+<div class="switch on" onclick="toggleSwitch(this)" data-key="ad_side"></div>
+</div>
+
+<div class="toggle-row">
+<div class="label"><i class="fas fa-arrow-down"></i><div>Bottom Ad<span class="desc">Content ke neeche</span></div></div>
+<div class="switch on" onclick="toggleSwitch(this)" data-key="ad_bottom"></div>
+</div>
+
+<div class="toggle-row">
+<div class="label"><i class="fas fa-file-alt"></i><div>In-Article Ads<span class="desc">Post pages ke andar</span></div></div>
+<div class="switch on" onclick="toggleSwitch(this)" data-key="ad_article"></div>
+</div>
+
+<div class="info-box" style="margin-top:20px">
+<strong><i class="fas fa-lightbulb"></i> High CPC Tip</strong>
+Finance, Insurance, Loan, Credit Card, Jobs related content mein high CPC ads aate hain.
+Isliye aise keywords wale posts zyada publish karein.
+</div>
+
+<button class="btn btn-g" onclick="saveAdsense()" style="padding:14px 28px">
+<i class="fas fa-save"></i> Save AdSense Configuration
+</button>
+</div>
+
+<!-- Guide Card -->
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-book"></i> AdSense Approval Guide</span>
+</div>
+
+<div class="guide-step">
+<div class="guide-num">1</div>
+<div class="guide-content">
+<h4>Required Pages Banayein</h4>
+<p>About Us, Contact Us, Privacy Policy, Disclaimer, Terms & Conditions — ye 5 pages zaroor honi chahiye.</p>
+</div>
+</div>
+
+<div class="guide-step">
+<div class="guide-num">2</div>
+<div class="guide-content">
+<h4>20+ Quality Posts Publish Karein</h4>
+<p>Har post minimum <b>800+ words</b> ka ho. Original content likhein — copy-paste bilkul na karein.</p>
+</div>
+</div>
+
+<div class="guide-step">
+<div class="guide-num">3</div>
+<div class="guide-content">
+<h4>Traffic Generate Karein</h4>
+<p>Google Search Console mein site submit karein. WhatsApp, Facebook, Telegram par content share karein.</p>
+</div>
+</div>
+
+<div class="guide-step">
+<div class="guide-num">4</div>
+<div class="guide-content">
+<h4>AdSense Apply Karein</h4>
+<p><a href="https://adsense.google.com" target="_blank" style="color:var(--p600);font-weight:700">adsense.google.com</a> par jayein → Sign up → Site URL add karein → Wait for approval (1-2 weeks).</p>
+</div>
+</div>
+
+<div class="guide-step">
+<div class="guide-num">5</div>
+<div class="guide-content">
+<h4>Publisher ID Copy Karein</h4>
+<p>Approval ke baad AdSense Dashboard → Account → Account Information mein <code>ca-pub-XXXXXXXX</code> milega. Ye upar wale field mein paste karein.</p>
+</div>
+</div>
+
+<div class="guide-step">
+<div class="guide-num">6</div>
+<div class="guide-content">
+<h4>Ad Units Create Karein</h4>
+<p>AdSense Dashboard → Ads → By ad unit → Create new ad unit → Display ads → Copy the <code>data-ad-slot</code> number.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ==========================================
+     SEO SECTION
+     ========================================== -->
+<div id="secSEO" class="section">
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-search"></i> SEO Settings</span>
+</div>
+
+<div class="info-box">
+<strong><i class="fas fa-info-circle"></i> SEO Configuration</strong>
+Ye settings Google Search mein aapki website ko rank karne mein help karti hain.
+Har page ke liye proper meta tags auto-apply honge.
+</div>
+
+<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:8px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
+<i class="fas fa-home" style="color:var(--p600)"></i> Homepage Meta
+</h3>
+
+<div class="form-group">
+<label>Meta Title <span class="req">*</span></label>
+<input type="text" id="seo_home_title" placeholder="IBAD TECH CSC - Sarkari Job, Result, Yojna 2026">
+<span class="hint">50-60 characters recommended</span>
+</div>
+
+<div class="form-group">
+<label>Meta Description <span class="req">*</span></label>
+<textarea id="seo_home_desc" style="min-height:80px" placeholder="India's trusted portal for latest Sarkari Job notifications, exam results..."></textarea>
+<span class="hint">150-160 characters recommended</span>
+</div>
+
+<div class="form-group">
+<label>Meta Keywords</label>
+<textarea id="seo_home_keywords" style="min-height:60px" placeholder="sarkari job, sarkari result, government jobs, sarkari yojna..."></textarea>
+<span class="hint">Comma se separate karein</span>
+</div>
+
+<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
+<i class="fas fa-globe" style="color:var(--p600)"></i> Site Information
+</h3>
+
+<div class="form-row">
+<div class="form-group">
+<label>Site URL</label>
+<input type="text" id="seo_site_url" placeholder="https://ibadtechcsc.com">
+<span class="hint">Full URL with https://</span>
+</div>
+<div class="form-group">
+<label>Site Language</label>
+<select id="seo_lang">
+<option value="en">English</option>
+<option value="hi">Hindi</option>
+<option value="en-IN" selected>English (India)</option>
+</select>
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Author Name</label>
+<input type="text" id="seo_author" placeholder="IBAD TECH CSC">
+</div>
+<div class="form-group">
+<label>Robots</label>
+<select id="seo_robots">
+<option value="index, follow" selected>Index, Follow (Recommended)</option>
+<option value="noindex, nofollow">No Index, No Follow</option>
+<option value="index, nofollow">Index, No Follow</option>
+</select>
+</div>
+</div>
+
+<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
+<i class="fab fa-facebook" style="color:var(--p600)"></i> Open Graph (Facebook/WhatsApp)
+</h3>
+
+<div class="form-group">
+<label>OG Title</label>
+<input type="text" id="seo_og_title" placeholder="Leave empty to use Meta Title">
+</div>
+
+<div class="form-group">
+<label>OG Description</label>
+<textarea id="seo_og_desc" style="min-height:70px" placeholder="Leave empty to use Meta Description"></textarea>
+</div>
+
+<div class="form-group">
+<label>OG Image URL</label>
+<input type="text" id="seo_og_image" placeholder="https://example.com/image.jpg">
+<span class="hint">1200x630 px recommended</span>
+</div>
+
+<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
+<i class="fas fa-check-double" style="color:var(--p600)"></i> Verification
+</h3>
+
+<div class="form-group">
+<label>Google Search Console Verification Code</label>
+<input type="text" id="seo_gsc" placeholder="abc123xyz...">
+<span class="hint">Search Console → Settings → Verification → HTML tag → content value</span>
+</div>
+
+<div class="form-group">
+<label>Bing Webmaster Verification</label>
+<input type="text" id="seo_bing" placeholder="Verification code">
+</div>
+
+<button class="btn btn-g" onclick="saveSEO()" style="padding:14px 28px">
+<i class="fas fa-save"></i> Save SEO Settings
+</button>
+</div>
+</div>
+
+<!-- ==========================================
+     ANALYTICS SECTION
+     ========================================== -->
+<div id="secAnalytics" class="section">
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-chart-bar"></i> Analytics & Tracking</span>
+</div>
+
+<div class="info-box">
+<strong><i class="fas fa-info-circle"></i> Analytics Setup</strong>
+Google Analytics aur other tracking IDs yahan add karein. Ye automatically website par inject ho jayenge.
+</div>
+
+<div class="form-group">
+<label>Google Analytics ID (GA4)</label>
+<input type="text" id="an_ga4" placeholder="G-XXXXXXXXXX">
+<span class="hint">analytics.google.com → Admin → Data Streams → Measurement ID</span>
+</div>
+
+<div class="form-group">
+<label>Google Tag Manager ID</label>
+<input type="text" id="an_gtm" placeholder="GTM-XXXXXXX">
+<span class="hint">tagmanager.google.com → Container ID</span>
+</div>
+
+<div class="form-group">
+<label>Facebook Pixel ID</label>
+<input type="text" id="an_fb" placeholder="1234567890">
+<span class="hint">business.facebook.com → Events Manager → Pixel ID</span>
+</div>
+
+<div class="form-group">
+<label>Microsoft Clarity ID</label>
+<input type="text" id="an_clarity" placeholder="abcdefghij">
+<span class="hint">clarity.microsoft.com → Project ID</span>
+</div>
+
+<button class="btn btn-g" onclick="saveAnalytics()" style="padding:14px 28px">
+<i class="fas fa-save"></i> Save Analytics
+</button>
+</div>
+</div>
+
+<!-- ==========================================
+     SITE SETTINGS SECTION
+     ========================================== -->
+<div id="secSettings" class="section">
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-cog"></i> Site Settings</span>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Portal Title</label>
+<input type="text" id="set_title" placeholder="IBAD TECH CSC">
+</div>
+<div class="form-group">
+<label>Tagline</label>
+<input type="text" id="set_tagline" placeholder="Sarkari Kaam & Digital Seva">
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>WhatsApp Number</label>
+<input type="text" id="set_wa" placeholder="917056836166">
+<span class="hint">Country code ke saath, no spaces or + sign</span>
+</div>
+<div class="form-group">
+<label>Email Address</label>
+<input type="text" id="set_email" placeholder="info@ibadtechcsc.com">
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Address</label>
+<input type="text" id="set_address" placeholder="City, State, India">
+</div>
+<div class="form-group">
+<label>Copyright Text</label>
+<input type="text" id="set_copyright" placeholder="&copy; 2026 IBAD TECH CSC">
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Hero Title</label>
+<input type="text" id="set_hero_title" placeholder="🎯 India's Trusted Sarkari Portal">
+</div>
+<div class="form-group">
+<label>Hero Subtitle</label>
+<input type="text" id="set_hero_sub" placeholder="Description below hero title">
+</div>
+</div>
+
+<div class="form-group">
+<label>About Us</label>
+<textarea id="set_about" placeholder="Describe your center and mission..."></textarea>
+</div>
+
+<div class="form-group">
+<label>Footer Disclaimer</label>
+<textarea id="set_disclaimer" placeholder="This website is not an official government website..."></textarea>
+</div>
+
+<button class="btn btn-g" onclick="saveSettings()" style="padding:14px 28px">
+<i class="fas fa-save"></i> Save Site Settings
+</button>
+</div>
+</div>
+
+<!-- ==========================================
+     SOCIAL LINKS SECTION
+     ========================================== -->
+<div id="secSocial" class="section">
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-share-alt"></i> Social Media Links</span>
+</div>
+
+<p style="font-size:.86rem;color:var(--s500);margin-bottom:18px;line-height:1.7">
+Apne social media profiles ke URLs yahan add karein. Ye footer mein automatically show honge.
+</p>
+
+<div class="form-row">
+<div class="form-group">
+<label><i class="fab fa-facebook" style="color:#1877F2"></i> Facebook Page URL</label>
+<input type="text" id="soc_facebook" placeholder="https://facebook.com/yourpage">
+</div>
+<div class="form-group">
+<label><i class="fab fa-twitter" style="color:#1DA1F2"></i> Twitter / X URL</label>
+<input type="text" id="soc_twitter" placeholder="https://twitter.com/yourhandle">
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label><i class="fab fa-instagram" style="color:#E4405F"></i> Instagram URL</label>
+<input type="text" id="soc_instagram" placeholder="https://instagram.com/yourhandle">
+</div>
+<div class="form-group">
+<label><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube Channel URL</label>
+<input type="text" id="soc_youtube" placeholder="https://youtube.com/@yourchannel">
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label><i class="fab fa-telegram-plane" style="color:#0088cc"></i> Telegram Channel URL</label>
+<input type="text" id="soc_telegram" placeholder="https://t.me/yourchannel">
+</div>
+<div class="form-group">
+<label><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp Channel URL</label>
+<input type="text" id="soc_whatsapp_ch" placeholder="https://whatsapp.com/channel/...">
+</div>
+</div>
+
+<button class="btn btn-g" onclick="saveSocial()" style="padding:14px 28px">
+<i class="fas fa-save"></i> Save Social Links
+</button>
+</div>
+</div>
+
+<!-- ==========================================
+     CUSTOM CODE SECTION
+     ========================================== -->
+<div id="secCustom" class="section">
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-code"></i> Custom Code Injection</span>
+</div>
+
+<div class="warn-box">
+<strong><i class="fas fa-exclamation-triangle"></i> Warning!</strong>
+Ye advanced feature hai. Sirf tab use karein jab aapko HTML/CSS/JS ka knowledge ho.
+Galat code website break kar sakta hai.
+</div>
+
+<div class="form-group">
+<label>Custom Code in &lt;head&gt; Section</label>
+<textarea id="custom_head" placeholder="<!-- Custom meta tags, CSS, or scripts -->" style="min-height:140px;font-family:monospace;font-size:.82rem"></textarea>
+<span class="hint">Example: Verification meta tags, custom CSS, head scripts</span>
+</div>
+
+<div class="form-group">
+<label>Custom Code Before &lt;/body&gt;</label>
+<textarea id="custom_body" placeholder="<!-- Custom scripts before body close -->" style="min-height:140px;font-family:monospace;font-size:.82rem"></textarea>
+<span class="hint">Example: Chat widgets, tracking scripts, custom JS</span>
+</div>
+
+<button class="btn btn-g" onclick="saveCustom()" style="padding:14px 28px">
+<i class="fas fa-save"></i> Save Custom Code
+</button>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- ==========================================
+     POST MODAL
+     ========================================== -->
+<div id="postModal" class="modal">
+<div class="modal-box">
+<div class="modal-head">
+<h2><i class="fas fa-edit"></i> Content Editor</h2>
+<button class="modal-close" onclick="closeModal('postModal')"><i class="fas fa-times"></i></button>
+</div>
+
+<input type="hidden" id="ep_id">
+
+<div class="form-group">
+<label>Post Title <span class="req">*</span></label>
+<input type="text" id="ep_title" placeholder="Enter clear, descriptive title...">
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Category</label>
+<select id="ep_cat"></select>
+</div>
+<div class="form-group">
+<label>Last Date</label>
+<input type="text" id="ep_date" placeholder="e.g. 25 Nov 2026 or N/A">
+</div>
+</div>
+
+<!-- ✅ IMAGE URL FIELD -->
+<div class="form-group">
+<label>📷 Featured Image URL</label>
+<input type="url" id="ep_image" placeholder="https://example.com/image.jpg">
+<span class="hint">Post ki featured image ka URL (1200x630 recommended). Image instantly preview hogi neeche.</span>
+</div>
+<div class="image-preview" id="ep_imagePreview">
+<button type="button" class="remove-img" onclick="removePostImage()"><i class="fas fa-times"></i></button>
+<img id="ep_imagePreviewImg" alt="Preview">
+</div>
+
+<div class="form-group">
+<label>Short Summary</label>
+<textarea id="ep_sum" style="min-height:70px" placeholder="Brief description shown on card..."></textarea>
+</div>
+
+<div class="form-group">
+<label>Official Link</label>
+<input type="text" id="ep_link" placeholder="www.example.com (https:// auto-added)">
+<span class="hint">Leave empty if no application link is available</span>
+</div>
+
+<div class="form-group">
+<label>Eligibility Details</label>
+<textarea id="ep_edu" placeholder="One requirement per line:&#10;Graduate from recognized university&#10;Age: 18-35 years"></textarea>
+</div>
+
+<div class="form-group">
+<label>How to Apply</label>
+<textarea id="ep_steps" placeholder="One step per line:&#10;Visit official website&#10;Click on Apply Online&#10;Fill the application form"></textarea>
+</div>
+
+<div class="form-group">
+<label>Required Documents</label>
+<textarea id="ep_docs" placeholder="One document per line:&#10;Aadhar Card&#10;10th Marksheet&#10;Passport size photo"></textarea>
+</div>
+
+<div class="form-group">
+<label>FAQ (Optional)</label>
+<textarea id="ep_faq" placeholder="Format: Question|Answer (one per line)&#10;What is last date?|25 Nov 2026&#10;What is the fee?|₹500 for General"></textarea>
+<span class="hint">Format: Question|Answer — har line mein ek FAQ</span>
+</div>
+
+<div class="modal-foot">
+<button class="btn btn-ghost" onclick="closeModal('postModal')">Cancel</button>
+<button class="btn btn-p" onclick="savePost()"><i class="fas fa-paper-plane"></i> Publish Post</button>
+</div>
+</div>
+</div>
+
+<!-- ==========================================
+     SERVICE MODAL
+     ========================================== -->
+<div id="serviceModal" class="modal">
+<div class="modal-box">
+<div class="modal-head">
+<h2><i class="fas fa-briefcase"></i> Service Editor</h2>
+<button class="modal-close" onclick="closeModal('serviceModal')"><i class="fas fa-times"></i></button>
+</div>
+
+<input type="hidden" id="es_id">
+
+<div class="form-row">
+<div class="form-group">
+<label>Service Name <span class="req">*</span></label>
+<input type="text" id="es_name" placeholder="e.g. Aadhar Card">
+</div>
+<div class="form-group">
+<label>Subtitle</label>
+<input type="text" id="es_sub" placeholder="e.g. Update & Download">
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Font Awesome Icon</label>
+<input type="text" id="es_icon" placeholder="fa-id-card" value="fa-id-card">
+<span class="hint">Example: fa-id-card, fa-credit-card, fa-car</span>
+</div>
+<div class="form-group">
+<label>Icon Color</label>
+<select id="es_color">
+<option value="ic-aadhar">Orange (Aadhar)</option>
+<option value="ic-pan">Blue (PAN)</option>
+<option value="ic-voter">Purple (Voter)</option>
+<option value="ic-ration">Green (Ration)</option>
+<option value="ic-passport">Red (Passport)</option>
+<option value="ic-dl">Cyan (DL)</option>
+<option value="ic-rc">Orange-Red (RC)</option>
+<option value="ic-birth">Pink (Birth)</option>
+<option value="ic-income">Teal (Income)</option>
+<option value="ic-caste">Purple (Caste)</option>
+<option value="ic-domicile">Sky (Domicile)</option>
+<option value="ic-marriage">Rose (Marriage)</option>
+<option value="ic-pension">Lime (Pension)</option>
+<option value="ic-eshram">Yellow (E-Shram)</option>
+<option value="ic-ayushman">Green (Ayushman)</option>
+<option value="ic-pmkisan">Green (PM Kisan)</option>
+<option value="ic-lic">Indigo (LIC)</option>
+<option value="ic-bank">Cyan (Bank)</option>
+</select>
+</div>
+</div>
+
+<!-- ✅ SERVICE IMAGE URL FIELD -->
+<div class="form-group">
+<label>📷 Service Image URL</label>
+<input type="url" id="es_image" placeholder="https://example.com/service-image.jpg">
+<span class="hint">Service ki image ka URL (optional). Agar nahi diya to icon dikhega.</span>
+</div>
+<div class="image-preview" id="es_imagePreview">
+<button type="button" class="remove-img" onclick="removeServiceImage()"><i class="fas fa-times"></i></button>
+<img id="es_imagePreviewImg" alt="Preview">
+</div>
+
+<div class="form-group">
+<label>Description / About</label>
+<textarea id="es_about" placeholder="Short description of this service..." style="min-height:70px"></textarea>
+</div>
+
+<div class="form-group">
+<label>How to Apply (Steps)</label>
+<textarea id="es_steps" placeholder="One step per line:&#10;Visit official website&#10;Register with mobile number"></textarea>
+</div>
+
+<div class="form-group">
+<label>Required Documents</label>
+<textarea id="es_docs" placeholder="One document per line:&#10;Aadhar Card&#10;Photo&#10;Address Proof"></textarea>
+</div>
+
+<div class="form-group">
+<label>Official Links <span class="req">*</span></label>
+<textarea id="es_links" placeholder="Format: Link Name|URL (one per line)&#10;Apply Online|https://example.com/apply&#10;Check Status|https://example.com/status" style="min-height:140px"></textarea>
+<span class="hint">Format: <b>Link Name|URL</b> — Full URL ke saath https:// zaroor likhein</span>
+</div>
+
+<div class="modal-foot">
+<button class="btn btn-ghost" onclick="closeModal('serviceModal')">Cancel</button>
+<button class="btn btn-g" onclick="saveService()"><i class="fas fa-paper-plane"></i> Save Service</button>
+</div>
+</div>
+</div>
+
+<script>
+// ==========================================
+// FIREBASE
+// ==========================================
+const firebaseConfig = {
+    apiKey: "AIzaSyDLnDVmkVcXxOFDxxfmXmqU1HflB2EpalQ",
+    authDomain: "ibad-csc.firebaseapp.com",
+    databaseURL: "https://ibad-csc-default-rtdb.firebaseio.com",
+    projectId: "ibad-csc",
+    storageBucket: "ibad-csc.firebasestorage.app",
+    messagingSenderId: "106244842489",
+    appId: "1:106244842489:web:ac67a8cdf714b4231d1328"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+
+let allPosts = [];
+let allCats = {};
+let allServices = {};
+let adToggles = {
+    ad_top: true,
+    ad_mid: true,
+    ad_side: true,
+    ad_bottom: true,
+    ad_article: true
+};
+
+// ==========================================
+// TOAST
+// ==========================================
+function toast(msg, type = 'success') {
+    const box = document.getElementById('toastBox');
+    const icons = {success:'fa-check-circle',error:'fa-times-circle',warning:'fa-exclamation-triangle',info:'fa-info-circle'};
+    const t = document.createElement('div');
+    t.className = `toast ${type}`;
+    t.innerHTML = `<i class="fas ${icons[type]}"></i><span>${msg}</span>`;
+    box.appendChild(t);
+    setTimeout(() => t.remove(), 3200);
+}
+
+// ==========================================
+// VIEW MANAGEMENT
+// ==========================================
+function showView(viewId) {
+    document.querySelectorAll('.view, .view-flex').forEach(v => v.classList.remove('active'));
+    const el = document.getElementById(viewId);
+    if (el) el.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ==========================================
+// LOGIN
+// ==========================================
+window.doLogin = async function() {
+    const email = document.getElementById('lEmail').value.trim();
+    const pass = document.getElementById('lPass').value;
+    const btn = document.getElementById('loginBtn');
+
+    if (!email || !pass) return toast('Please enter email & password', 'warning');
+
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+
+    try {
+        const cred = await auth.signInWithEmailAndPassword(email, pass);
+        const userRef = db.ref(`users/${cred.user.uid}`);
+        const snap = await userRef.once('value');
+
+        if (!snap.exists()) {
+            await userRef.set({
+                email: cred.user.email,
+                role: 'admin',
+                createdAt: new Date().toISOString()
+            });
+            toast('Admin account activated!', 'success');
+        } else if (snap.val().role !== 'admin') {
+            await auth.signOut();
+            toast('Access denied. Not an admin user.', 'error');
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Secure Login';
+            return;
+        }
+
+        updateUserUI(cred.user);
+        showView('dashView');
+        toast('Welcome back, ' + cred.user.email.split('@')[0] + '!', 'success');
+        await loadAllData();
+        await loadDashboard();
+    } catch (e) {
+        console.error('Login error:', e);
+        const msgs = {
+            'auth/user-not-found':'No account found with this email.',
+            'auth/wrong-password':'Incorrect password. Please try again.',
+            'auth/invalid-email':'Invalid email format.',
+            'auth/invalid-credential':'Invalid email or password.',
+            'auth/too-many-requests':'Too many attempts. Try again later.',
+            'auth/network-request-failed':'Network error. Check your connection.',
+            'auth/user-disabled':'This account has been disabled.'
+        };
+        toast(msgs[e.code] || 'Login failed: ' + e.message, 'error');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Secure Login';
+    }
+};
+
+auth.onAuthStateChanged(async (user) => {
+    if (user) {
+        try {
+            const snap = await db.ref(`users/${user.uid}`).once('value');
+            if (snap.exists() && snap.val().role === 'admin') {
+                updateUserUI(user);
+                showView('dashView');
+                loadAllData();
+                loadDashboard();
+            }
+        } catch (e) { console.error('Auth state error:', e); }
+    } else {
+        if (!document.getElementById('loginView').classList.contains('active')) {
+            showView('loginView');
+        }
+    }
+});
+
+function updateUserUI(user) {
+    const name = user.email.split('@')[0];
+    document.getElementById('uName').innerText = name;
+    document.getElementById('userAvatar').innerText = name.charAt(0).toUpperCase();
+}
+
+// ==========================================
+// LOGOUT
+// ==========================================
+window.doLogout = async function() {
+    if (!confirm('Are you sure you want to logout?')) return;
+    try {
+        await auth.signOut();
+        toast('Logged out successfully', 'info');
+        document.getElementById('lEmail').value = '';
+        document.getElementById('lPass').value = '';
+        showView('loginView');
+    } catch (e) { toast('Error logging out', 'error'); }
+};
+
+// ==========================================
+// SECTION NAVIGATION
+// ==========================================
+window.showSec = function(sectionId, el) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+    const sec = document.getElementById(sectionId);
+    if (sec) sec.classList.add('active');
+    if (el && el.classList.contains('nav-item')) el.classList.add('active');
+
+    const titles = {
+        secDashboard: { title:'Dashboard', icon:'fa-chart-line' },
+        secPosts: { title:'Manage Posts', icon:'fa-file-alt' },
+        secServices: { title:'Sarkari Kaam Services', icon:'fa-briefcase' },
+        secCats: { title:'Categories', icon:'fa-tags' },
+        secAdsense: { title:'Google AdSense', icon:'fa-google' },
+        secSEO: { title:'SEO Settings', icon:'fa-search' },
+        secAnalytics: { title:'Analytics', icon:'fa-chart-bar' },
+        secSettings: { title:'Site Settings', icon:'fa-cog' },
+        secSocial: { title:'Social Links', icon:'fa-share-alt' },
+        secCustom: { title:'Custom Code', icon:'fa-code' }
+    };
+
+    if (titles[sectionId]) {
+        document.getElementById('pageTitle').innerHTML = `<i class="fas ${titles[sectionId].icon}"></i> ${titles[sectionId].title}`;
+    }
+};
+
+// ==========================================
+// MODAL MANAGEMENT
+// ==========================================
+window.closeModal = function(id) {
+    const modal = document.getElementById(id);
+    if (modal) modal.classList.remove('show');
+    document.body.style.overflow = '';
+};
+
+document.querySelectorAll('.modal').forEach(m => {
+    m.addEventListener('click', e => { if (e.target === m) closeModal(m.id); });
+});
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.querySelectorAll('.modal.show').forEach(m => closeModal(m.id));
+});
+
+// ==========================================
+// TOGGLE SWITCH
+// ==========================================
+window.toggleSwitch = function(el) {
+    el.classList.toggle('on');
+    const key = el.dataset.key;
+    if (key) adToggles[key] = el.classList.contains('on');
+};
+
+// ==========================================
+// IMAGE PREVIEW HANDLERS
+// ==========================================
+function setupImagePreview(inputId, previewId, imgId){
+    const input = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+    const img = document.getElementById(imgId);
+    if(!input || !preview || !img) return;
+    input.addEventListener('input', function(){
+        const url = input.value.trim();
+        if(url && (url.startsWith('http://') || url.startsWith('https://'))){
+            img.src = url;
+            img.onerror = () => { preview.style.display = 'none'; };
+            img.onload = () => { preview.style.display = 'block'; };
+        } else {
+            preview.style.display = 'none';
+        }
+    });
+}
+
+window.removePostImage = function(){
+    document.getElementById('ep_image').value = '';
+    document.getElementById('ep_imagePreview').style.display = 'none';
+};
+
+window.removeServiceImage = function(){
+    document.getElementById('es_image').value = '';
+    document.getElementById('es_imagePreview').style.display = 'none';
+};
+
+// ==========================================
+// LOAD ALL DATA
+// ==========================================
+async function loadAllData() {
+    try {
+        // Site Settings
+        const ss = await db.ref('settings/general').once('value');
+        if (ss.exists()) {
+            const s = ss.val();
+            document.getElementById('set_title').value = s.title || '';
+            document.getElementById('set_tagline').value = s.tagline || '';
+            document.getElementById('set_wa').value = s.whatsapp || '';
+            document.getElementById('set_email').value = s.email || '';
+            document.getElementById('set_address').value = s.address || '';
+            document.getElementById('set_copyright').value = s.copyright || '';
+            document.getElementById('set_about').value = s.about || '';
+            document.getElementById('set_disclaimer').value = s.disclaimer || '';
+            document.getElementById('set_hero_title').value = s.heroTitle || '';
+            document.getElementById('set_hero_sub').value = s.heroSubtitle || '';
+        }
+
+        // AdSense
+        const ads = await db.ref('settings/adsense').once('value');
+        if (ads.exists()) {
+            const a = ads.val();
+            document.getElementById('ads_client').value = a.client || '';
+            document.getElementById('ads_auto').value = a.autoAds || 'no';
+            document.getElementById('ads_freq').value = a.frequency || 'medium';
+            document.getElementById('ads_slot_top').value = a.slotTop || '';
+            document.getElementById('ads_slot_mid').value = a.slotMid || '';
+            document.getElementById('ads_slot_side').value = a.slotSide || '';
+            document.getElementById('ads_slot_bottom').value = a.slotBottom || '';
+            document.getElementById('ads_slot_article').value = a.slotArticle || '';
+            
+            adToggles = {
+                ad_top: a.toggleTop !== false,
+                ad_mid: a.toggleMid !== false,
+                ad_side: a.toggleSide !== false,
+                ad_bottom: a.toggleBottom !== false,
+                ad_article: a.toggleArticle !== false
+            };
+            document.querySelectorAll('.switch[data-key]').forEach(el => {
+                const key = el.dataset.key;
+                if (adToggles[key]) el.classList.add('on');
+                else el.classList.remove('on');
+            });
+            document.getElementById('statusAdsense').innerText = a.client ? 'Configured ✓' : 'Not Configured';
+            document.getElementById('statusAdsense').style.color = a.client ? 'var(--g600)' : 'var(--r500)';
+        }
+
+        // SEO
+        const seo = await db.ref('settings/seo').once('value');
+        if (seo.exists()) {
+            const s = seo.val();
+            document.getElementById('seo_home_title').value = s.homeTitle || '';
+            document.getElementById('seo_home_desc').value = s.homeDesc || '';
+            document.getElementById('seo_home_keywords').value = s.keywords || '';
+            document.getElementById('seo_site_url').value = s.siteUrl || '';
+            document.getElementById('seo_lang').value = s.lang || 'en-IN';
+            document.getElementById('seo_author').value = s.author || '';
+            document.getElementById('seo_robots').value = s.robots || 'index, follow';
+            document.getElementById('seo_og_title').value = s.ogTitle || '';
+            document.getElementById('seo_og_desc').value = s.ogDesc || '';
+            document.getElementById('seo_og_image').value = s.ogImage || '';
+            document.getElementById('seo_gsc').value = s.gsc || '';
+            document.getElementById('seo_bing').value = s.bing || '';
+            document.getElementById('statusSEO').innerText = s.homeTitle ? 'Configured ✓' : 'Not Configured';
+            document.getElementById('statusSEO').style.color = s.homeTitle ? 'var(--g600)' : 'var(--r500)';
+        }
+
+        // Analytics
+        const an = await db.ref('settings/analytics').once('value');
+        if (an.exists()) {
+            const a = an.val();
+            document.getElementById('an_ga4').value = a.ga4 || '';
+            document.getElementById('an_gtm').value = a.gtm || '';
+            document.getElementById('an_fb').value = a.fb || '';
+            document.getElementById('an_clarity').value = a.clarity || '';
+            document.getElementById('statusAnalytics').innerText = a.ga4 ? 'Configured ✓' : 'Not Configured';
+            document.getElementById('statusAnalytics').style.color = a.ga4 ? 'var(--g600)' : 'var(--r500)';
+        }
+
+        // Social
+        const soc = await db.ref('settings/social').once('value');
+        if (soc.exists()) {
+            const s = soc.val();
+            document.getElementById('soc_facebook').value = s.facebook || '';
+            document.getElementById('soc_twitter').value = s.twitter || '';
+            document.getElementById('soc_instagram').value = s.instagram || '';
+            document.getElementById('soc_youtube').value = s.youtube || '';
+            document.getElementById('soc_telegram').value = s.telegram || '';
+            document.getElementById('soc_whatsapp_ch').value = s.whatsappChannel || '';
+        }
+
+        // Custom Code
+        const cc = await db.ref('settings/customCode').once('value');
+        if (cc.exists()) {
+            const c = cc.val();
+            document.getElementById('custom_head').value = c.head || '';
+            document.getElementById('custom_body').value = c.body || '';
+        }
+
+        // Categories
+        const cs = await db.ref('categories').once('value');
+        allCats = cs.exists() ? cs.val() : {};
+        renderCats();
+
+        // Posts
+        const ps = await db.ref('posts').once('value');
+        allPosts = ps.exists() ? Object.keys(ps.val()).map(k => ({id:k,...ps.val()[k]})) : [];
+        allPosts.sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
+        renderPosts();
+
+        // Services
+        const svs = await db.ref('services').once('value');
+        allServices = svs.exists() ? svs.val() : {};
+        renderServices();
+
+    } catch (e) {
+        console.error('Load data error:', e);
+        toast('Error loading data: ' + e.message, 'error');
+    }
+}
+
+// ==========================================
+// DASHBOARD
+// ==========================================
+async function loadDashboard() {
+    try {
+        document.getElementById('dashPosts').innerText = allPosts.length;
+        document.getElementById('dashServices').innerText = Object.keys(allServices).length || 18;
+        document.getElementById('dashCats').innerText = Object.keys(allCats).length;
+
+        const subs = await db.ref('subscribers').once('value');
+        document.getElementById('dashSubs').innerText = subs.exists() ? Object.keys(subs.val()).length : 0;
+
+        const recentBox = document.getElementById('recentPosts');
+        const recent = allPosts.slice(0, 5);
+        if (recent.length === 0) {
+            recentBox.innerHTML = `<div class="empty"><i class="fas fa-inbox"></i><h4>No posts yet</h4><p>Create your first post to get started</p></div>`;
+        } else {
+            let html = '<div class="table-wrap"><table><thead><tr><th>Title</th><th>Category</th><th>Date</th></tr></thead><tbody>';
+            recent.forEach(p => {
+                html += `<tr>
+                    <td style="font-weight:700;color:var(--p600)">${p.title.length > 50 ? p.title.substring(0,50)+'...' : p.title}</td>
+                    <td><span style="background:var(--p50);color:var(--p700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${allCats[p.category]?.name || 'Unknown'}</span></td>
+                    <td>${formatDate(p.timestamp)}</td>
+                </tr>`;
+            });
+            html += '</tbody></table></div>';
+            recentBox.innerHTML = html;
+        }
+    } catch (e) { console.error('Dashboard error:', e); }
+}
+
+// ==========================================
+// RENDER CATEGORIES
+// ==========================================
+function renderCats() {
+    const ct = document.getElementById('catsTable');
+    const pc = document.getElementById('ep_cat');
+    ct.innerHTML = '';
+    pc.innerHTML = '<option value="">Select Category</option>';
+
+    const catArr = Object.entries(allCats);
+    if (catArr.length === 0) {
+        ct.innerHTML = `<tr><td colspan="3" class="empty"><i class="fas fa-tags"></i><h4>No categories</h4><p>Click "Add Category" to create one</p></td></tr>`;
+    } else {
+        catArr.forEach(([k, v]) => {
+            ct.innerHTML += `<tr>
+                <td style="font-weight:700">${v.name}</td>
+                <td><code style="background:var(--s100);padding:4px 10px;border-radius:6px;font-size:.82rem">${v.slug}</code></td>
+                <td><button class="btn btn-r btn-sm" onclick="delItem('categories','${k}')"><i class="fas fa-trash"></i> Delete</button></td>
+            </tr>`;
+            pc.innerHTML += `<option value="${k}">${v.name}</option>`;
+        });
+    }
+}
+
+// ==========================================
+// RENDER POSTS
+// ==========================================
+function renderPosts() {
+    const pt = document.getElementById('postsTable');
+    pt.innerHTML = '';
+    if (allPosts.length === 0) {
+        pt.innerHTML = `<tr><td colspan="5" class="empty"><i class="fas fa-inbox"></i><h4>No posts yet</h4><p>Click "Create New Post"</p></td></tr>`;
+        return;
+    }
+    allPosts.forEach(p => {
+        const title = p.title.length > 50 ? p.title.substring(0, 50) + '...' : p.title;
+        const thumbHtml = p.image
+            ? `<img src="${p.image}" class="thumb" alt="" onerror="this.outerHTML='<div class=\\'thumb-icon\\'><i class=\\'fas fa-file-alt\\'></i></div>'">`
+            : `<div class="thumb-icon"><i class="fas fa-file-alt"></i></div>`;
+        pt.innerHTML += `<tr>
+            <td>${thumbHtml}</td>
+            <td style="font-weight:700;color:var(--p600)">${title}</td>
+            <td><span style="background:var(--p50);color:var(--p700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${allCats[p.category]?.name || 'Unknown'}</span></td>
+            <td>${p.lastDate || 'N/A'}</td>
+            <td>
+                <button class="btn btn-p btn-sm" onclick="editPost('${p.id}')" style="margin-right:6px"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn btn-r btn-sm" onclick="delItem('posts','${p.id}')"><i class="fas fa-trash"></i> Delete</button>
+            </td>
+        </tr>`;
+    });
+}
+
+// ==========================================
+// RENDER SERVICES
+// ==========================================
+function renderServices() {
+    const st = document.getElementById('servicesTable');
+    st.innerHTML = '';
+    const entries = Object.entries(allServices);
+    if (entries.length === 0) {
+        st.innerHTML = `<tr><td colspan="5" class="empty"><i class="fas fa-briefcase"></i><h4>No custom services</h4><p>Default 18 services showing on website. Click "Add New Service" to customize!</p></td></tr>`;
+        return;
+    }
+    entries.forEach(([k, s]) => {
+        const thumbHtml = s.image
+            ? `<img src="${s.image}" class="thumb" alt="" onerror="this.outerHTML='<div class=\\'thumb-icon\\'><i class=\\'fas ${s.icon||'fa-id-card'}\\'></i></div>'">`
+            : `<div class="thumb-icon"><i class="fas ${s.icon || 'fa-id-card'}"></i></div>`;
+        st.innerHTML += `<tr>
+            <td>${thumbHtml}</td>
+            <td style="font-weight:700">${s.name}</td>
+            <td style="color:var(--s500)">${s.sub || '-'}</td>
+            <td><span style="background:var(--g50);color:var(--g700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${(s.links || []).length} links</span></td>
+            <td>
+                <button class="btn btn-p btn-sm" onclick="editService('${k}')" style="margin-right:6px"><i class="fas fa-edit"></i> Edit</button>
+                <button class="btn btn-r btn-sm" onclick="delItem('services','${k}')"><i class="fas fa-trash"></i> Delete</button>
+            </td>
+        </tr>`;
+    });
+}
+
+// ==========================================
+// SAVE SETTINGS (Site)
+// ==========================================
+window.saveSettings = async function() {
+    try {
+        await db.ref('settings/general').update({
+            title: document.getElementById('set_title').value.trim(),
+            tagline: document.getElementById('set_tagline').value.trim(),
+            whatsapp: document.getElementById('set_wa').value.trim(),
+            email: document.getElementById('set_email').value.trim(),
+            address: document.getElementById('set_address').value.trim(),
+            copyright: document.getElementById('set_copyright').value.trim(),
+            about: document.getElementById('set_about').value.trim(),
+            disclaimer: document.getElementById('set_disclaimer').value.trim(),
+            heroTitle: document.getElementById('set_hero_title').value.trim(),
+            heroSubtitle: document.getElementById('set_hero_sub').value.trim()
+        });
+        toast('Site settings saved!', 'success');
+    } catch (e) { toast('Error saving settings', 'error'); }
+};
+
+// ==========================================
+// SAVE ADSENSE
+// ==========================================
+window.saveAdsense = async function() {
+    try {
+        await db.ref('settings/adsense').set({
+            client: document.getElementById('ads_client').value.trim(),
+            autoAds: document.getElementById('ads_auto').value,
+            frequency: document.getElementById('ads_freq').value,
+            slotTop: document.getElementById('ads_slot_top').value.trim(),
+            slotMid: document.getElementById('ads_slot_mid').value.trim(),
+            slotSide: document.getElementById('ads_slot_side').value.trim(),
+            slotBottom: document.getElementById('ads_slot_bottom').value.trim(),
+            slotArticle: document.getElementById('ads_slot_article').value.trim(),
+            toggleTop: adToggles.ad_top,
+            toggleMid: adToggles.ad_mid,
+            toggleSide: adToggles.ad_side,
+            toggleBottom: adToggles.ad_bottom,
+            toggleArticle: adToggles.ad_article,
+            updatedAt: new Date().toISOString()
+        });
+        document.getElementById('statusAdsense').innerText = 'Configured ✓';
+        document.getElementById('statusAdsense').style.color = 'var(--g600)';
+        toast('AdSense configuration saved!', 'success');
+    } catch (e) { toast('Error saving AdSense config', 'error'); }
+};
+
+// ==========================================
+// SAVE SEO
+// ==========================================
+window.saveSEO = async function() {
+    try {
+        await db.ref('settings/seo').set({
+            homeTitle: document.getElementById('seo_home_title').value.trim(),
+            homeDesc: document.getElementById('seo_home_desc').value.trim(),
+            keywords: document.getElementById('seo_home_keywords').value.trim(),
+            siteUrl: document.getElementById('seo_site_url').value.trim(),
+            lang: document.getElementById('seo_lang').value,
+            author: document.getElementById('seo_author').value.trim(),
+            robots: document.getElementById('seo_robots').value,
+            ogTitle: document.getElementById('seo_og_title').value.trim(),
+            ogDesc: document.getElementById('seo_og_desc').value.trim(),
+            ogImage: document.getElementById('seo_og_image').value.trim(),
+            gsc: document.getElementById('seo_gsc').value.trim(),
+            bing: document.getElementById('seo_bing').value.trim(),
+            updatedAt: new Date().toISOString()
+        });
+        document.getElementById('statusSEO').innerText = 'Configured ✓';
+        document.getElementById('statusSEO').style.color = 'var(--g600)';
+        toast('SEO settings saved!', 'success');
+    } catch (e) { toast('Error saving SEO', 'error'); }
+};
+
+// ==========================================
+// SAVE ANALYTICS
+// ==========================================
+window.saveAnalytics = async function() {
+    try {
+        await db.ref('settings/analytics').set({
+            ga4: document.getElementById('an_ga4').value.trim(),
+            gtm: document.getElementById('an_gtm').value.trim(),
+            fb: document.getElementById('an_fb').value.trim(),
+            clarity: document.getElementById('an_clarity').value.trim(),
+            updatedAt: new Date().toISOString()
+        });
+        document.getElementById('statusAnalytics').innerText = 'Configured ✓';
+        document.getElementById('statusAnalytics').style.color = 'var(--g600)';
+        toast('Analytics saved!', 'success');
+    } catch (e) { toast('Error saving analytics', 'error'); }
+};
+
+// ==========================================
+// SAVE SOCIAL
+// ==========================================
+window.saveSocial = async function() {
+    try {
+        await db.ref('settings/social').set({
+            facebook: document.getElementById('soc_facebook').value.trim(),
+            twitter: document.getElementById('soc_twitter').value.trim(),
+            instagram: document.getElementById('soc_instagram').value.trim(),
+            youtube: document.getElementById('soc_youtube').value.trim(),
+            telegram: document.getElementById('soc_telegram').value.trim(),
+            whatsappChannel: document.getElementById('soc_whatsapp_ch').value.trim(),
+            updatedAt: new Date().toISOString()
+        });
+        toast('Social links saved!', 'success');
+    } catch (e) { toast('Error saving social', 'error'); }
+};
+
+// ==========================================
+// SAVE CUSTOM CODE
+// ==========================================
+window.saveCustom = async function() {
+    try {
+        await db.ref('settings/customCode').set({
+            head: document.getElementById('custom_head').value,
+            body: document.getElementById('custom_body').value,
+            updatedAt: new Date().toISOString()
+        });
+        toast('Custom code saved!', 'success');
+    } catch (e) { toast('Error saving custom code', 'error'); }
+};
+
+// ==========================================
+// CATEGORIES
+// ==========================================
+window.addCat = async function() {
+    const name = prompt('Enter Category Name:\n(e.g., Latest Jobs, Results, Sarkari Yojna)');
+    if (!name || !name.trim()) return;
+    try {
+        await db.ref('categories').push({
+            name: name.trim(),
+            slug: name.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+        });
+        toast('Category added!', 'success');
+        await loadAllData();
+        await loadDashboard();
+    } catch (e) { toast('Error adding category', 'error'); }
+};
+
+// ==========================================
+// POST MANAGEMENT
+// ==========================================
+window.openPostModal = function() {
+    document.getElementById('ep_id').value = '';
+    ['ep_title', 'ep_sum', 'ep_link', 'ep_date', 'ep_edu', 'ep_steps', 'ep_docs', 'ep_faq', 'ep_image'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+    document.getElementById('ep_imagePreview').style.display = 'none';
+    document.getElementById('postModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('ep_title').focus(), 100);
+};
+
+window.editPost = function(id) {
+    const p = allPosts.find(x => x.id === id);
+    if (!p) return toast('Post not found', 'error');
+    document.getElementById('ep_id').value = id;
+    document.getElementById('ep_title').value = p.title || '';
+    document.getElementById('ep_cat').value = p.category || '';
+    document.getElementById('ep_sum').value = p.summary || '';
+    document.getElementById('ep_link').value = p.link || '';
+    document.getElementById('ep_date').value = p.lastDate || '';
+    document.getElementById('ep_edu').value = p.education || '';
+    document.getElementById('ep_steps').value = p.steps || '';
+    document.getElementById('ep_docs').value = p.documents || '';
+    document.getElementById('ep_image').value = p.image || '';
+    const preview = document.getElementById('ep_imagePreview');
+    const img = document.getElementById('ep_imagePreviewImg');
+    if (p.image) { img.src = p.image; preview.style.display = 'block'; }
+    else { preview.style.display = 'none'; }
+    let faqTxt = '';
+    if (p.faq && Array.isArray(p.faq)) faqTxt = p.faq.map(f => `${f.q}|${f.a}`).join('\n');
+    document.getElementById('ep_faq').value = faqTxt;
+    document.getElementById('postModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('ep_title').focus(), 100);
+};
+
+window.savePost = async function() {
+    const id = document.getElementById('ep_id').value;
+    const title = document.getElementById('ep_title').value.trim();
+    if (!title) { toast('Title is required', 'warning'); return; }
+    let link = document.getElementById('ep_link').value.trim();
+    if (link && !link.startsWith('http')) link = 'https://' + link;
+    let image = document.getElementById('ep_image').value.trim();
+    if (image && !image.startsWith('http')) image = 'https://' + image;
+    const faqRaw = document.getElementById('ep_faq').value.trim();
+    const faq = [];
+    if (faqRaw) {
+        faqRaw.split('\n').forEach(line => {
+            const parts = line.split('|');
+            if (parts.length >= 2) faq.push({ q: parts[0].trim(), a: parts.slice(1).join('|').trim() });
+        });
+    }
+    const data = {
+        title,
+        category: document.getElementById('ep_cat').value,
+        summary: document.getElementById('ep_sum').value.trim(),
+        image: image,
+        link,
+        lastDate: document.getElementById('ep_date').value.trim(),
+        education: document.getElementById('ep_edu').value.trim(),
+        steps: document.getElementById('ep_steps').value.trim(),
+        documents: document.getElementById('ep_docs').value.trim(),
+        faq,
+        timestamp: new Date().toISOString()
+    };
+    try {
+        if (id) {
+            await db.ref(`posts/${id}`).update(data);
+            toast('Post updated!', 'success');
+        } else {
+            await db.ref('posts').push(data);
+            toast('Post published!', 'success');
+        }
+        closeModal('postModal');
+        await loadAllData();
+        await loadDashboard();
+    } catch (e) { toast('Error saving post', 'error'); }
+};
+
+// ==========================================
+// SERVICE MANAGEMENT
+// ==========================================
+window.openServiceModal = function() {
+    document.getElementById('es_id').value = '';
+    ['es_name', 'es_sub', 'es_about', 'es_steps', 'es_docs', 'es_links', 'es_image'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+    document.getElementById('es_icon').value = 'fa-id-card';
+    document.getElementById('es_color').value = 'ic-aadhar';
+    document.getElementById('es_imagePreview').style.display = 'none';
+    document.getElementById('serviceModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('es_name').focus(), 100);
+};
+
+window.editService = function(key) {
+    const s = allServices[key];
+    if (!s) return toast('Service not found', 'error');
+    document.getElementById('es_id').value = key;
+    document.getElementById('es_name').value = s.name || '';
+    document.getElementById('es_sub').value = s.sub || '';
+    document.getElementById('es_icon').value = s.icon || 'fa-id-card';
+    document.getElementById('es_color').value = s.color || 'ic-aadhar';
+    document.getElementById('es_about').value = s.about || '';
+    document.getElementById('es_steps').value = (s.steps || []).join('\n');
+    document.getElementById('es_docs').value = (s.docs || []).join('\n');
+    document.getElementById('es_links').value = (s.links || []).map(l => `${l.name}|${l.url}`).join('\n');
+    document.getElementById('es_image').value = s.image || '';
+    const preview = document.getElementById('es_imagePreview');
+    const img = document.getElementById('es_imagePreviewImg');
+    if (s.image) { img.src = s.image; preview.style.display = 'block'; }
+    else { preview.style.display = 'none'; }
+    document.getElementById('serviceModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('es_name').focus(), 100);
+};
+
+window.saveService = async function() {
+    const id = document.getElementById('es_id').value;
+    const name = document.getElementById('es_name').value.trim();
+    if (!name) { toast('Service name is required', 'warning'); return; }
+    const steps = document.getElementById('es_steps').value.split('\n').filter(l => l.trim());
+    const docs = document.getElementById('es_docs').value.split('\n').filter(l => l.trim());
+    const linksRaw = document.getElementById('es_links').value.trim();
+    const links = [];
+    if (linksRaw) {
+        linksRaw.split('\n').forEach(line => {
+            const parts = line.split('|');
+            if (parts.length >= 2) {
+                let url = parts[1].trim();
+                if (url && !url.startsWith('http')) url = 'https://' + url;
+                links.push({ name: parts[0].trim(), url });
+            }
+        });
+    }
+    if (links.length === 0) { toast('At least one official link is required', 'warning'); return; }
+    let image = document.getElementById('es_image').value.trim();
+    if (image && !image.startsWith('http')) image = 'https://' + image;
+    const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    const data = {
+        name,
+        sub: document.getElementById('es_sub').value.trim(),
+        icon: document.getElementById('es_icon').value.trim() || 'fa-id-card',
+        color: document.getElementById('es_color').value,
+        image: image,
+        about: document.getElementById('es_about').value.trim(),
+        steps,
+        docs,
+        links,
+        timestamp: new Date().toISOString()
+    };
+    try {
+        if (id) {
+            await db.ref(`services/${id}`).update(data);
+            toast('Service updated!', 'success');
+        } else {
+            await db.ref(`services/${slug}`).set(data);
+            toast('Service added!', 'success');
+        }
+        closeModal('serviceModal');
+        await loadAllData();
+        await loadDashboard();
+    } catch (e) { toast('Error saving service', 'error'); }
+};
+
+// ==========================================
+// DELETE
+// ==========================================
+window.delItem = async function(col, key) {
+    if (!confirm('Are you sure you want to delete this? This action cannot be undone.')) return;
+    try {
+        await db.ref(`${col}/${key}`).remove();
+        toast('Deleted successfully', 'info');
+        await loadAllData();
+        await loadDashboard();
+    } catch (e) { toast('Error deleting item', 'error'); }
+};
+
+// ==========================================
+// HELPERS
+// ==========================================
+function formatDate(iso) {
+    if (!iso) return 'N/A';
+    const d = new Date(iso);
+    const m = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${d.getDate()} ${m[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+// ==========================================
+// INIT
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    setupImagePreview('ep_image','ep_imagePreview','ep_imagePreviewImg');
+    setupImagePreview('es_image','es_imagePreview','es_imagePreviewImg');
+    console.log('🚀 Admin panel initialized');
+});
+</script>
+</body>
+</html>

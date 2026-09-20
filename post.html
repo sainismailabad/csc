@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#2563eb">
+<title id="pageTitle">Loading... | IBAD TECH CSC</title>
+<meta name="description" id="metaDesc" content="Read complete details, eligibility, how to apply and required documents.">
+<meta name="keywords" id="metaKeywords" content="sarkari job, sarkari result, government jobs">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX">
+<link rel="canonical" id="canonicalLink" href="">
+<meta property="og:type" content="article">
+<meta property="og:title" id="ogTitle" content="">
+<meta property="og:description" id="ogDesc" content="">
+<meta property="og:image" id="ogImage" content="">
+<meta property="og:url" id="ogUrl" content="">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" id="twTitle" content="">
+<meta name="twitter:description" id="twDesc" content="">
+<meta name="twitter:image" id="twImage" content="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous" id="adsenseScript"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database-compat.js"></script>
+<style>
+:root{--p50:#eff6ff;--p100:#dbeafe;--p200:#bfdbfe;--p400:#60a5fa;--p500:#3b82f6;--p600:#2563eb;--p700:#1d4ed8;--p800:#1e40af;--p900:#1e3a8a;--s50:#f8fafc;--s100:#f1f5f9;--s200:#e2e8f0;--s300:#cbd5e1;--s400:#94a3b8;--s500:#64748b;--s600:#475569;--s700:#334155;--s800:#1e293b;--s900:#0f172a;--g50:#f0fdf4;--g500:#22c55e;--g600:#16a34a;--g700:#15803d;--r50:#fef2f2;--r500:#ef4444;--r600:#dc2626;--y50:#fffbeb;--y500:#f59e0b;--y600:#d97706;--font:'Inter',sans-serif;--serif:'Merriweather',serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html,body{max-width:100%;overflow-x:hidden;position:relative}
+body{font-family:var(--font);background:var(--s100);color:var(--s800);line-height:1.6;-webkit-font-smoothing:antialiased;width:100%}
+a{text-decoration:none;color:inherit;transition:all .2s;cursor:pointer}
+button{font-family:inherit;cursor:pointer;border:none}
+img{max-width:100%;height:auto;display:block}
+.container{max-width:1280px;margin:0 auto;padding:0 20px;width:100%;box-sizing:border-box}
+
+/* TOAST */
+#toastBox{position:fixed;bottom:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+.toast{background:#fff;padding:14px 22px;border-radius:10px;box-shadow:0 10px 25px rgba(0,0,0,.15);font-weight:600;font-size:.88rem;display:flex;align-items:center;gap:10px;min-width:280px;max-width:calc(100vw - 40px);pointer-events:auto;animation:toastIn .4s}
+.toast.success{border-left:4px solid var(--g500)}.toast.success i{color:var(--g500)}
+.toast.error{border-left:4px solid var(--r500)}.toast.error i{color:var(--r500)}
+.toast.warning{border-left:4px solid var(--y500)}.toast.warning i{color:var(--y500)}
+.toast.info{border-left:4px solid var(--p500)}.toast.info i{color:var(--p500)}
+@keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* TOPBAR */
+.topbar{background:var(--s900);color:var(--s300);padding:10px 0;font-size:.82rem;font-weight:500;width:100%}
+.topbar .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding:0 20px}
+.topbar-left{display:flex;align-items:center;gap:8px;min-width:0}
+.topbar-left i{color:var(--p400)}
+.topbar-right{display:flex;gap:6px;align-items:center}
+.topbar-right a{padding:6px 12px;border-radius:6px;font-size:.8rem;font-weight:600;color:var(--s300)}
+.topbar-right a.help{color:var(--g500)}
+.topbar-right a:hover{background:rgba(255,255,255,.1);color:#fff}
+
+/* HEADER */
+.header{background:#fff;padding:18px 0;border-bottom:1px solid var(--s200);width:100%}
+.header .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;padding:0 20px}
+.logo{display:flex;align-items:center;gap:12px;min-width:0;max-width:100%}
+.logo-icon{width:48px;height:48px;background:linear-gradient(135deg,var(--p600),var(--p800));border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;flex-shrink:0}
+.logo-text{min-width:0}
+.logo-text h1{font-family:var(--serif);color:var(--p700);font-size:1.4rem;font-weight:900;line-height:1.2;word-break:break-word}
+.logo-text p{color:var(--s500);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+
+/* NAVBAR */
+.navbar{background:#fff;border-bottom:1px solid var(--s200);position:sticky;top:0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,.04);width:100%}
+.navbar .container{padding:0 20px}
+.nav-list{display:flex;list-style:none;gap:4px;padding:10px 0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.nav-list::-webkit-scrollbar{display:none}
+.nav-list li{flex-shrink:0}
+.nav-list li a{font-size:.8rem;font-weight:700;color:var(--s600);padding:9px 14px;border-radius:6px;text-transform:uppercase;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.nav-list li a:hover{color:var(--p700);background:var(--p50)}
+
+/* AD */
+.ad-container{background:var(--s50);border:1px dashed var(--s300);border-radius:10px;padding:16px 12px 12px;text-align:center;margin:20px 0;min-height:100px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;width:100%}
+.ad-label{position:absolute;top:6px;left:12px;font-size:.6rem;text-transform:uppercase;letter-spacing:.15em;color:var(--s400);font-weight:800;background:#fff;padding:2px 8px;border-radius:3px}
+.ad-container.hidden{display:none}
+.ad-container ins,.ad-container .adsbygoogle{max-width:100%!important;width:100%!important;display:block}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;margin:28px auto;min-height:50vh;max-width:1280px;padding:0 20px;width:100%;box-sizing:border-box}
+.layout>*{min-width:0;max-width:100%}
+.article{background:#fff;border-radius:14px;padding:36px;border:1px solid var(--s200);box-shadow:0 1px 3px rgba(0,0,0,.06);width:100%;box-sizing:border-box;overflow:hidden}
+.breadcrumb{font-size:.78rem;color:var(--s500);margin-bottom:18px;font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.breadcrumb a{color:var(--p600)}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb .sep{color:var(--s300)}
+.article-title{font-family:var(--serif);font-size:1.85rem;color:var(--s900);margin-bottom:16px;font-weight:900;line-height:1.3;letter-spacing:-.02em;word-wrap:break-word;overflow-wrap:break-word}
+
+/* IMAGE FIX */
+.article-image{margin-bottom:22px;border-radius:12px;overflow:hidden;border:1px solid var(--s200);background:var(--s50);position:relative;width:100%;aspect-ratio:16/9}
+.article-image img{width:100%;height:100%;object-fit:cover;display:block;max-height:520px}
+
+.author-box{display:flex;align-items:center;gap:14px;padding:16px;background:var(--s50);border-radius:10px;margin-bottom:20px;border:1px solid var(--s200);width:100%;box-sizing:border-box}
+.author-av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--p600),var(--p800));display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;flex-shrink:0}
+.author-info{min-width:0;flex:1}
+.author-info h4{font-size:.9rem;font-weight:800;color:var(--s900);margin-bottom:3px;word-break:break-word}
+.author-info p{font-size:.78rem;color:var(--s500);line-height:1.5;word-break:break-word}
+.author-info .ver{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;color:var(--g600);font-weight:700;margin-top:3px}
+.art-meta{display:flex;flex-wrap:wrap;gap:16px;background:var(--s50);padding:14px 20px;border-radius:10px;margin-bottom:22px;font-weight:600;border-left:4px solid var(--p600);font-size:.82rem;width:100%;box-sizing:border-box}
+.art-meta span{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0;word-break:break-word}
+.apply-box{background:linear-gradient(135deg,var(--p50),#eff6ff);border:1px solid var(--p200);padding:26px;border-radius:14px;text-align:center;margin-bottom:24px;width:100%;box-sizing:border-box}
+.apply-box h3{margin-bottom:14px;font-size:1.05rem;color:var(--s900);font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.btn-apply{background:linear-gradient(135deg,var(--g600),var(--g700));color:#fff;padding:14px 34px;font-size:.9rem;font-weight:800;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-transform:uppercase;border:none;box-shadow:0 4px 14px rgba(22,163,74,.3);transition:all .25s;letter-spacing:.04em;max-width:100%;box-sizing:border-box;word-break:break-word}
+.btn-apply:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(22,163,74,.35)}
+.art-content{width:100%}
+.art-content h3{font-size:1.05rem;color:var(--s900);margin:28px 0 14px;border-bottom:1px solid var(--s200);padding-bottom:10px;display:flex;align-items:center;gap:10px;font-weight:800;flex-wrap:wrap}
+.art-content h3 i{color:var(--p600)}
+.art-content ul{margin-left:8px;list-style:none}
+.art-content li{color:var(--s600);font-size:.9rem;line-height:1.8;margin-bottom:8px;display:flex;align-items:flex-start;gap:10px;word-break:break-word}
+.art-content li i{color:var(--p500);font-size:.75rem;margin-top:7px;flex-shrink:0}
+.art-content li span{min-width:0;word-break:break-word}
+.art-content p{color:var(--s600);font-size:.92rem;line-height:1.8;margin-bottom:12px;word-break:break-word}
+.faq-item{background:#fff;border:1px solid var(--s200);border-radius:10px;margin-bottom:10px;overflow:hidden;transition:all .25s;cursor:pointer;width:100%;box-sizing:border-box}
+.faq-item:hover{border-color:var(--p200)}
+.faq-q{padding:16px 20px;font-weight:700;color:var(--s800);font-size:.9rem;display:flex;justify-content:space-between;align-items:center;gap:10px;word-break:break-word}
+.faq-q span{min-width:0;word-break:break-word}
+.faq-q i{color:var(--p600);transition:transform .25s;flex-shrink:0}
+.faq-item.open .faq-q i{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s;padding:0 20px;color:var(--s600);font-size:.86rem;line-height:1.7;word-break:break-word}
+.faq-item.open .faq-a{max-height:800px;padding:0 20px 16px}
+.share-row{display:flex;align-items:center;gap:8px;margin:24px 0;padding:16px;background:var(--s50);border-radius:10px;flex-wrap:wrap;width:100%;box-sizing:border-box}
+.share-row h4{font-size:.84rem;font-weight:800;color:var(--s800);margin-right:6px}
+.share-btn{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.9rem;transition:all .2s;border:none;cursor:pointer;flex-shrink:0}
+.share-btn:hover{transform:translateY(-3px);box-shadow:0 6px 12px rgba(0,0,0,.15)}
+.sh-wa{background:#25D366}.sh-fb{background:#1877F2}.sh-tw{background:#1DA1F2}.sh-tg{background:#0088cc}.sh-cp{background:var(--s600)}
+.related{margin-top:32px;padding-top:24px;border-top:2px solid var(--s200);width:100%}
+.sec-title{font-size:1.15rem;font-weight:800;color:var(--s900);margin-bottom:18px;font-family:var(--serif);display:flex;align-items:center;gap:10px;position:relative;padding-bottom:10px}
+.sec-title::after{content:'';position:absolute;bottom:0;left:0;width:50px;height:3px;background:linear-gradient(90deg,var(--p600),var(--p400));border-radius:9999px}
+.sec-title i{color:var(--p600)}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;width:100%;box-sizing:border-box}
+.related-grid>*{min-width:0}
+
+/* SIDEBAR */
+aside{min-width:0;max-width:100%}
+.side-widget{background:#fff;border:1px solid var(--s200);border-radius:14px;padding:20px;margin-bottom:22px;width:100%;box-sizing:border-box}
+.side-title{font-size:.88rem;font-weight:800;margin-bottom:14px;color:var(--s900);border-bottom:2px solid var(--s200);padding-bottom:10px;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.side-title i{color:var(--p600)}
+.side-link{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px dashed var(--s200);font-size:.85rem;font-weight:600;color:var(--s600);text-decoration:none;word-break:break-word}
+.side-link:last-child{border-bottom:none}
+.side-link i{color:var(--p600);width:20px;text-align:center;flex-shrink:0}
+.side-link:hover{color:var(--p600);padding-left:6px}
+.side-link span{min-width:0;word-break:break-word}
+.newsletter{background:linear-gradient(135deg,var(--p600),var(--p800));color:#fff;padding:24px 20px;border-radius:14px;text-align:center;margin-bottom:22px;width:100%;box-sizing:border-box}
+.newsletter i.nl{font-size:1.9rem;margin-bottom:10px;opacity:.9}
+.newsletter h3{font-size:.95rem;font-weight:800;margin-bottom:6px}
+.newsletter p{font-size:.78rem;opacity:.9;margin-bottom:14px;line-height:1.6}
+.newsletter input{width:100%;padding:11px 14px;border:none;border-radius:6px;font-size:.85rem;margin-bottom:8px;outline:none;font-family:inherit;box-sizing:border-box}
+.newsletter button{width:100%;padding:11px;background:#fff;color:var(--p700);border-radius:6px;font-weight:800;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;transition:all .2s;box-sizing:border-box}
+.newsletter button:hover{background:var(--s100)}
+
+/* CARD */
+.card{background:#fff;border:1px solid var(--s200);border-radius:12px;overflow:hidden;transition:all .25s;display:flex;flex-direction:column;width:100%;box-sizing:border-box}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 24px rgba(0,0,0,.08);border-color:var(--p200)}
+.card-img{width:100%;height:150px;object-fit:cover;display:block;background:var(--s100)}
+.card-cat{background:var(--p50);color:var(--p700);font-size:.66rem;font-weight:800;padding:6px 12px;display:inline-block;text-transform:uppercase;border-bottom-right-radius:8px;width:fit-content;letter-spacing:.06em}
+.card-body{padding:18px;flex-grow:1;display:flex;flex-direction:column;min-width:0}
+.card-title{font-size:.95rem;font-weight:700;color:var(--s900);margin-bottom:10px;line-height:1.4;font-family:var(--serif);display:block;word-break:break-word}
+.card-title:hover{color:var(--p600)}
+.card-meta{display:flex;justify-content:space-between;align-items:center;font-size:.74rem;border-top:1px solid var(--s200);padding-top:12px;gap:10px;flex-wrap:wrap}
+.card-meta .date{display:flex;align-items:center;gap:5px;color:var(--s500);font-weight:600}
+.card-meta .date i{color:var(--p500)}
+.btn-view{background:var(--p600);color:#fff;padding:6px 12px;border-radius:6px;font-weight:700;font-size:.72rem;display:inline-flex;align-items:center;gap:5px}
+.btn-view:hover{background:var(--p700)}
+
+/* FOOTER */
+.footer{background:var(--s900);color:var(--s400);padding:50px 0 24px;margin-top:50px;width:100%}
+.footer .container{padding:0 20px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:32px;width:100%;box-sizing:border-box}
+.foot-grid>*{min-width:0;max-width:100%}
+.foot-brand h3{color:#fff;margin-bottom:14px;font-size:1.15rem;font-weight:800;font-family:var(--serif);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.foot-brand h3 i{color:var(--p500)}
+.foot-brand p{font-size:.86rem;line-height:1.7;margin-bottom:14px;word-break:break-word}
+.foot-social{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.foot-social a{width:36px;height:36px;border-radius:50%;background:var(--s800);color:var(--s400);display:flex;align-items:center;justify-content:center;transition:all .2s}
+.foot-social a:hover{background:var(--p600);color:#fff;transform:translateY(-3px)}
+.foot-grid h4{color:#fff;margin-bottom:16px;font-size:.88rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.foot-links a{display:block;margin-bottom:8px;font-size:.84rem;transition:all .2s;color:var(--s400);word-break:break-word}
+.foot-links a:hover{color:var(--p400);padding-left:4px}
+.foot-disc{background:var(--s800);padding:14px;border-radius:10px;margin-top:20px;font-size:.76rem;line-height:1.6;border-left:3px solid var(--y500);color:var(--s400);word-break:break-word}
+.foot-bottom{text-align:center;border-top:1px solid var(--s700);margin-top:24px;padding-top:20px;font-size:.8rem;color:var(--s500);line-height:1.8}
+.foot-bottom i{color:var(--r500)}
+.foot-bottom .links{margin-top:8px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.foot-bottom .links a{color:var(--s400);font-size:.78rem}
+.foot-bottom .links a:hover{color:var(--p400)}
+
+/* SPINNER */
+.spinner{width:44px;height:44px;border:3px solid var(--s200);border-top-color:var(--p600);border-radius:50%;animation:spin .8s linear infinite;margin:40px auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* BACK TOP */
+.back-top{position:fixed;bottom:20px;left:20px;width:46px;height:46px;background:var(--p600);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 4px 12px rgba(37,99,235,.4);opacity:0;visibility:hidden;transition:all .3s;z-index:999}
+.back-top.show{opacity:1;visibility:visible}
+.back-top:hover{background:var(--p700);transform:translateY(-3px)}
+
+/* ============================================
+   RESPONSIVE — TABLET
+   ============================================ */
+@media(max-width:1024px){
+.container{padding:0 16px!important}
+.layout{grid-template-columns:1fr;gap:24px;padding:0 16px!important;margin:24px auto}
+.article{padding:26px}
+.article-title{font-size:1.55rem}
+.foot-grid{grid-template-columns:1fr 1fr;gap:28px}
+}
+
+/* ============================================
+   RESPONSIVE — MOBILE LARGE (768px)
+   ============================================ */
+@media(max-width:768px){
+.container{padding:0 14px!important}
+.topbar{padding:8px 0}
+.topbar .container{padding:0 14px!important;justify-content:center;text-align:center}
+.topbar-left{justify-content:center;gap:8px}
+.topbar-right{justify-content:center}
+.header{padding:14px 0}
+.header .container{padding:0 14px!important;flex-direction:column;text-align:center;gap:10px}
+.logo{justify-content:center}
+.logo-icon{width:44px;height:44px;font-size:1.15rem}
+.logo-text h1{font-size:1.25rem}
+.logo-text p{font-size:.68rem}
+.navbar .container{padding:0 14px!important}
+.nav-list li a{font-size:.74rem;padding:8px 11px;gap:5px}
+
+/* LAYOUT FIX */
+.layout{display:block!important;padding:0 14px!important;margin:16px auto!important;gap:0}
+.layout main{width:100%!important;display:block}
+.layout aside{width:100%!important;margin-top:18px;display:block}
+.article{padding:16px!important;border-radius:12px!important;margin-bottom:0}
+
+/* TITLE */
+.article-title{font-size:1.25rem!important;line-height:1.32!important;margin-bottom:12px!important}
+
+/* IMAGE FIX MOBILE */
+.article-image{margin-bottom:14px!important;border-radius:10px!important;aspect-ratio:16/9!important}
+.article-image img{width:100%!important;height:100%!important;object-fit:cover!important;max-height:260px!important}
+
+/* AUTHOR BOX MOBILE */
+.author-box{padding:12px!important;gap:10px!important;align-items:flex-start!important}
+.author-av{width:42px!important;height:42px!important;font-size:1rem!important;flex-shrink:0}
+.author-info h4{font-size:.82rem!important}
+.author-info p{font-size:.72rem!important;line-height:1.5!important}
+.author-info .ver{font-size:.62rem!important}
+
+/* META */
+.art-meta{font-size:.72rem!important;padding:10px 12px!important;gap:8px!important;flex-direction:column!important;align-items:flex-start!important;margin-bottom:16px!important}
+.art-meta span{font-size:.72rem!important;display:flex;flex-wrap:wrap;gap:4px;line-height:1.5}
+
+/* BREADCRUMB */
+.breadcrumb{font-size:.72rem!important;line-height:1.5!important;gap:4px!important;margin-bottom:12px!important}
+
+/* APPLY BOX */
+.apply-box{padding:18px 14px!important;margin-bottom:18px!important;border-radius:12px!important}
+.apply-box h3{font-size:.9rem!important;margin-bottom:12px!important}
+.btn-apply{padding:12px 20px!important;font-size:.8rem!important;width:100%!important;box-sizing:border-box;display:flex!important;justify-content:center!important;text-align:center}
+
+/* CONTENT */
+.art-content h3{font-size:.95rem!important;margin:20px 0 10px!important;padding-bottom:8px!important;gap:8px!important}
+.art-content li{font-size:.82rem!important;line-height:1.6!important;margin-bottom:7px!important;gap:8px!important}
+.art-content li i{margin-top:5px!important;font-size:.72rem!important}
+.art-content p{font-size:.85rem!important;line-height:1.7!important}
+
+/* FAQ */
+.faq-q{padding:13px 15px!important;font-size:.84rem!important;gap:8px!important}
+.faq-a{font-size:.8rem!important;padding:0 15px!important}
+.faq-item.open .faq-a{padding:0 15px 13px!important}
+
+/* SHARE */
+.share-row{padding:14px 12px!important;gap:6px!important;justify-content:center!important;margin:18px 0!important}
+.share-row h4{font-size:.78rem!important;width:100%!important;text-align:center!important;margin-bottom:6px!important}
+.share-btn{width:40px!important;height:40px!important;font-size:.85rem!important}
+
+/* RELATED */
+.related{margin-top:22px!important;padding-top:16px!important}
+.sec-title{font-size:1rem!important;margin-bottom:14px!important}
+.related-grid{grid-template-columns:1fr!important;gap:12px!important}
+.card-img{height:180px!important}
+.card-body{padding:14px!important}
+.card-title{font-size:.88rem!important}
+.card-meta{font-size:.72rem!important;padding-top:10px!important}
+
+/* SIDEBAR */
+.side-widget{padding:16px!important;margin-bottom:16px!important;border-radius:12px!important}
+.side-title{font-size:.85rem!important;padding-bottom:9px!important;margin-bottom:12px!important}
+.side-link{font-size:.82rem!important;padding:10px 0!important;gap:10px!important}
+.side-link i{font-size:.85rem}
+.newsletter{padding:20px 16px!important;margin-bottom:16px!important;border-radius:12px!important}
+.newsletter i.nl{font-size:1.6rem!important}
+.newsletter h3{font-size:.9rem!important}
+.newsletter p{font-size:.75rem!important;margin-bottom:12px!important}
+
+/* ADS */
+.ad-container{min-height:80px!important;margin:14px 0!important;padding:14px 10px 10px!important;border-radius:10px!important}
+
+/* FOOTER */
+.footer{padding:36px 0 20px!important;margin-top:36px!important}
+.footer .container{padding:0 14px!important}
+.foot-grid{grid-template-columns:1fr!important;gap:22px!important;text-align:center!important;margin-bottom:22px!important}
+.foot-brand h3{font-size:1rem!important;justify-content:center!important}
+.foot-brand p{font-size:.8rem!important}
+.foot-social{justify-content:center!important}
+.foot-social a{width:34px!important;height:34px!important;font-size:.85rem!important}
+.foot-grid h4{font-size:.82rem!important;margin-bottom:12px!important}
+.foot-links a{font-size:.78rem!important;margin-bottom:6px!important}
+.foot-disc{font-size:.7rem!important;padding:12px!important;margin-top:14px!important}
+.foot-bottom{font-size:.72rem!important;padding-top:16px!important;margin-top:18px!important}
+.foot-bottom .links{gap:10px!important;justify-content:center!important}
+.foot-bottom .links a{font-size:.7rem!important}
+
+/* BACK TOP */
+.back-top{bottom:14px!important;left:14px!important;width:40px!important;height:40px!important;font-size:.9rem!important}
+
+/* TOAST */
+#toastBox{right:12px!important;left:12px!important;bottom:12px!important}
+.toast{min-width:auto!important;width:100%!important;font-size:.8rem!important;padding:12px 16px!important}
+}
+
+/* ============================================
+   MOBILE SMALL (480px)
+   ============================================ */
+@media(max-width:480px){
+.container{padding:0 12px!important}
+.topbar .container,.header .container,.navbar .container,.footer .container{padding:0 12px!important}
+.layout{padding:0 12px!important}
+.article{padding:14px!important}
+.article-title{font-size:1.1rem!important}
+.article-image img{max-height:200px!important}
+.logo-icon{width:40px!important;height:40px!important;font-size:1.05rem!important}
+.logo-text h1{font-size:1.1rem!important}
+.logo-text p{font-size:.6rem!important}
+.nav-list li a{font-size:.68rem!important;padding:7px 10px!important;gap:4px!important}
+.author-av{width:38px!important;height:38px!important;font-size:.9rem!important}
+.author-info h4{font-size:.78rem!important}
+.author-info p{font-size:.68rem!important}
+.art-content h3{font-size:.88rem!important}
+.art-content li{font-size:.78rem!important}
+.art-content p{font-size:.82rem!important}
+.faq-q{padding:12px 13px!important;font-size:.8rem!important}
+.faq-a{font-size:.76rem!important}
+.share-btn{width:36px!important;height:36px!important;font-size:.8rem!important}
+.card-img{height:160px!important}
+.side-widget{padding:14px!important}
+.side-title{font-size:.8rem!important}
+.side-link{font-size:.78rem!important}
+.foot-brand h3{font-size:.95rem!important}
+}
+
+/* ============================================
+   PRINT
+   ============================================ */
+@media print{
+.topbar,.navbar,.back-top,.ad-container,.share-row,.footer,.newsletter,.side-widget{display:none!important}
+body{background:#fff}
+.article{box-shadow:none;border:none;padding:0}
+}
+</style>
+</head>
+<body>
+
+<div id="toastBox"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+<div class="container">
+<div class="topbar-left"><i class="fas fa-map-marker-alt"></i><span id="topAddr">India</span></div>
+<div class="topbar-right">
+<a id="waLink" target="_blank" rel="noopener nofollow" class="help"><i class="fab fa-whatsapp"></i><span> Help</span></a>
+</div>
+</div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+<div class="container">
+<a href="index.html" class="logo">
+<div class="logo-icon"><i class="fas fa-shield-halved"></i></div>
+<div class="logo-text">
+<h1 id="siteTitle">IBAD TECH CSC</h1>
+<p id="siteTagline">Sarkari Kaam & Digital Seva</p>
+</div>
+</a>
+</div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+<div class="container">
+<ul class="nav-list">
+<li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+<li><a href="index.html#sarkari-kaam"><i class="fas fa-briefcase"></i> Sarkari Kaam</a></li>
+<li><a href="index.html"><i class="fas fa-newspaper"></i> Latest Jobs</a></li>
+<li><a href="index.html"><i class="fas fa-award"></i> Results</a></li>
+<li><a href="index.html"><i class="fas fa-file-contract"></i> Yojna</a></li>
+</ul>
+</div>
+</nav>
+
+<!-- LAYOUT -->
+<div class="layout">
+<main>
+<div class="article" id="articleBox">
+<div class="spinner"></div>
+</div>
+</main>
+
+<aside>
+<div class="newsletter">
+<i class="fas fa-bell nl"></i>
+<h3>Never Miss an Update!</h3>
+<p>Get latest Sarkari alerts in your inbox.</p>
+<input type="email" id="nlEmail" placeholder="Enter your email">
+<button onclick="subscribeNL()">Subscribe Free</button>
+</div>
+
+<div class="ad-container" id="adSide" style="min-height:250px">
+<span class="ad-label">Advertisement</span>
+<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="3333333333" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+
+<div class="side-widget">
+<h3 class="side-title"><i class="fas fa-link"></i> Important Portals</h3>
+<a href="https://digitalseva.csc.gov.in" target="_blank" rel="noopener nofollow" class="side-link"><i class="fas fa-laptop-house"></i> <span>CSC Digital Seva</span></a>
+<a href="https://pmkisan.gov.in" target="_blank" rel="noopener nofollow" class="side-link"><i class="fas fa-tractor"></i> <span>PM Kisan Yojana</span></a>
+<a href="https://parivahan.gov.in" target="_blank" rel="noopener nofollow" class="side-link"><i class="fas fa-car"></i> <span>Parivahan Sewa</span></a>
+<a href="https://uidai.gov.in" target="_blank" rel="noopener nofollow" class="side-link"><i class="fas fa-id-card"></i> <span>Aadhar Portal</span></a>
+</div>
+
+<div class="side-widget">
+<h3 class="side-title"><i class="fas fa-fire"></i> Trending Now</h3>
+<div id="trendBox"><div class="spinner"></div></div>
+</div>
+</aside>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+<div class="container">
+<div class="foot-grid">
+<div class="foot-brand">
+<h3><i class="fas fa-shield-halved"></i> <span id="footTitle">IBAD TECH CSC</span></h3>
+<p id="footAbout">Your trusted Digital Seva Kendra.</p>
+<div class="foot-social">
+<a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+<a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+<a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+<a href="#" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+</div>
+</div>
+<div>
+<h4>Quick Links</h4>
+<div class="foot-links">
+<a href="index.html">Home</a>
+<a href="index.html#sarkari-kaam">Sarkari Kaam</a>
+<a href="about.html">About Us</a>
+<a href="contact.html">Contact</a>
+</div>
+</div>
+<div>
+<h4>Information</h4>
+<div class="foot-links">
+<a href="privacy.html">Privacy Policy</a>
+<a href="disclaimer.html">Disclaimer</a>
+<a href="terms.html">Terms & Conditions</a>
+</div>
+</div>
+<div>
+<h4>Support</h4>
+<div class="foot-links">
+<a id="waFoot" target="_blank" rel="noopener nofollow">WhatsApp Help</a>
+<a href="mailto:info@ibadtechcsc.com">Email Support</a>
+</div>
+</div>
+</div>
+<div class="foot-disc"><strong>Disclaimer:</strong> This website is not an official government website. All information is provided for informational purposes only.</div>
+<div class="foot-bottom">
+<div>&copy; 2026 IBAD TECH CSC. All Rights Reserved. Made with <i class="fas fa-heart"></i> for Digital India.</div>
+<div class="links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a><a href="contact.html">Contact</a></div>
+</div>
+</div>
+</footer>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+const firebaseConfig={apiKey:"AIzaSyDLnDVmkVcXxOFDxxfmXmqU1HflB2EpalQ",authDomain:"ibad-csc.firebaseapp.com",databaseURL:"https://ibad-csc-default-rtdb.firebaseio.com",projectId:"ibad-csc",storageBucket:"ibad-csc.firebasestorage.app",messagingSenderId:"106244842489",appId:"1:106244842489:web:ac67a8cdf714b4231d1328"};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.database();
+let currentPost=null;
+
+function toast(msg,type='success'){
+    const box=document.getElementById('toastBox');
+    const icons={success:'fa-check-circle',error:'fa-times-circle',warning:'fa-exclamation-triangle',info:'fa-info-circle'};
+    const t=document.createElement('div');
+    t.className=`toast ${type}`;
+    t.innerHTML=`<i class="fas ${icons[type]}"></i><span>${msg}</span>`;
+    box.appendChild(t);
+    setTimeout(()=>t.remove(),3200);
+}
+
+async function applyAdsenseSettings(){
+    try{
+        const snap=await db.ref('settings/adsense').once('value');
+        if(!snap.exists())return;
+        const a=snap.val();
+        if(a.client){
+            document.querySelector('meta[name="google-adsense-account"]').setAttribute('content',a.client);
+            const script=document.getElementById('adsenseScript');
+            if(script)script.src=`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${a.client}`;
+            document.querySelectorAll('.adsbygoogle').forEach(el=>el.setAttribute('data-ad-client',a.client));
+        }
+        const slotMap={'1111111111':a.slotTop||a.slotArticle,'2222222222':a.slotMid||a.slotArticle,'3333333333':a.slotSide,'4444444444':a.slotBottom||a.slotArticle};
+        Object.entries(slotMap).forEach(([oldSlot,newSlot])=>{
+            if(newSlot)document.querySelectorAll(`[data-ad-slot="${oldSlot}"]`).forEach(el=>el.setAttribute('data-ad-slot',newSlot));
+        });
+        if(a.toggleSide===false)document.getElementById('adSide')?.classList.add('hidden');
+        setTimeout(()=>{try{document.querySelectorAll('.adsbygoogle').forEach(()=>{(adsbygoogle=window.adsbygoogle||[]).push({});});}catch(e){}},300);
+    }catch(e){console.warn(e);}
+}
+
+async function loadPost(){
+    const params=new URLSearchParams(window.location.search);
+    const id=params.get('id');
+    if(!id){showError('No post ID');return;}
+
+    try{
+        const ss=await db.ref('settings/general').once('value');
+        if(ss.exists()){
+            const s=ss.val();
+            document.getElementById('siteTitle').innerText=s.title||'IBAD TECH CSC';
+            document.getElementById('siteTagline').innerText=s.tagline||'Sarkari Kaam & Digital Seva';
+            document.getElementById('topAddr').innerText=s.address||'India';
+            document.getElementById('footTitle').innerText=s.title||'IBAD TECH CSC';
+            document.getElementById('footAbout').innerText=s.about||'Your trusted Digital Seva Kendra.';
+            const waUrl=`https://wa.me/${s.whatsapp||'917056836166'}`;
+            ['waLink','waFoot'].forEach(x=>{const el=document.getElementById(x);if(el)el.href=waUrl;});
+        }
+
+        await applyAdsenseSettings();
+
+        const ps=await db.ref(`posts/${id}`).once('value');
+        if(!ps.exists()){showError('Post not found');return;}
+        const p=ps.val();
+        currentPost={id,...p};
+
+        const cs=await db.ref('categories').once('value');
+        const cats=cs.exists()?cs.val():{};
+        const catName=p.categoryName||cats[p.category]?.name||'Sarkari Update';
+
+        document.title=`${p.title} | IBAD TECH CSC`;
+        const metaDesc=document.querySelector('meta[name="description"]');
+        if(metaDesc)metaDesc.setAttribute('content',p.summary||p.title);
+        const ogT=document.getElementById('ogTitle');if(ogT)ogT.setAttribute('content',p.title);
+        const ogD=document.getElementById('ogDesc');if(ogD)ogD.setAttribute('content',p.summary||'');
+        const ogI=document.getElementById('ogImage');if(ogI&&p.image)ogI.setAttribute('content',p.image);
+        const ogU=document.getElementById('ogUrl');if(ogU)ogU.setAttribute('content',window.location.href);
+        const twT=document.getElementById('twTitle');if(twT)twT.setAttribute('content',p.title);
+        const twD=document.getElementById('twDesc');if(twD)twD.setAttribute('content',p.summary||'');
+        const twI=document.getElementById('twImage');if(twI&&p.image)twI.setAttribute('content',p.image);
+        const cl=document.getElementById('canonicalLink');if(cl)cl.setAttribute('href',window.location.href);
+
+        const fmtList=(txt,em)=>{
+            if(!txt||!txt.trim())return `<p style="color:var(--s400);font-style:italic">${em}</p>`;
+            const items=txt.split('\n').filter(l=>l.trim());
+            if(!items.length)return `<p style="color:var(--s400);font-style:italic">${em}</p>`;
+            return '<ul>'+items.map(l=>`<li><i class="fas fa-check-circle"></i><span>${l.trim()}</span></li>`).join('')+'</ul>';
+        };
+
+        let linkHtml='';
+        if(p.link&&p.link.trim()!==''){
+            let finalLink=p.link.trim();
+            if(!finalLink.startsWith('http'))finalLink='https://'+finalLink;
+            linkHtml=`<a href="${finalLink}" target="_blank" rel="noopener" class="btn-apply"><i class="fas fa-external-link-alt"></i> Apply Online / Official Link</a>`;
+        }else{
+            linkHtml=`<button class="btn-apply" style="background:var(--s400);cursor:not-allowed;box-shadow:none" disabled><i class="fas fa-lock"></i> Link Not Available</button>`;
+        }
+
+        const faqs=p.faq&&p.faq.length?p.faq:[
+            {q:'Is this information verified?',a:'Yes, all information is verified from official government sources.'},
+            {q:'What is the last date?',a:`Last date is ${p.lastDate||'mentioned in official notification'}.`},
+            {q:'What documents are required?',a:p.documents?'Documents listed in "Required Documents" section.':'Generally Aadhar Card and educational certificates required.'},
+            {q:'Is there an application fee?',a:'Fee varies by category. Check official notification.'},
+            {q:'How can I get help?',a:'Contact us via WhatsApp for assistance.'}
+        ];
+        let faqHtml='';
+        faqs.forEach(f=>{
+            faqHtml+=`<div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q"><span>${f.q}</span><i class="fas fa-chevron-down"></i></div><div class="faq-a">${f.a}</div></div>`;
+        });
+
+        const imgHtml=p.image?`<div class="article-image"><img src="${p.image}" alt="${p.title}" loading="eager" onerror="this.parentElement.style.display='none'"></div>`:'';
+
+        const html=`
+            <div class="breadcrumb">
+                <a href="index.html">Home</a><span class="sep">/</span>
+                <a href="index.html">${catName}</a><span class="sep">/</span>
+                <span>${p.title.substring(0,50)}${p.title.length>50?'...':''}</span>
+            </div>
+            <h1 class="article-title">${p.title}</h1>
+            ${imgHtml}
+            <div class="author-box">
+                <div class="author-av"><i class="fas fa-user-tie"></i></div>
+                <div class="author-info">
+                    <h4>IBAD TECH CSC Editorial Team</h4>
+                    <p>Government services expert with 5+ years experience in CSC operations & Sarkari Kaam guidance.</p>
+                    <div class="ver"><i class="fas fa-check-circle"></i> Verified Author</div>
+                </div>
+            </div>
+            <div class="art-meta">
+                <span><i class="fas fa-calendar" style="color:var(--p600)"></i> Published: <strong>${fmtDate(p.timestamp)}</strong></span>
+                <span><i class="fas fa-clock" style="color:var(--p600)"></i> Last Date: <strong>${p.lastDate||'N/A'}</strong></span>
+                <span><i class="fas fa-check-circle" style="color:var(--g600)"></i> Verified</span>
+            </div>
+
+            <div class="ad-container">
+                <span class="ad-label">Advertisement</span>
+                <ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            </div>
+
+            <div class="apply-box">
+                <h3><i class="fas fa-external-link-alt"></i> Important Link</h3>
+                ${linkHtml}
+            </div>
+
+            <div class="art-content">
+                <h3><i class="fas fa-info-circle"></i> Eligibility / Details</h3>
+                ${fmtList(p.education,'No eligibility details provided.')}
+
+                <div class="ad-container">
+                    <span class="ad-label">Advertisement</span>
+                    <ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="2222222222" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                </div>
+
+                <h3><i class="fas fa-laptop"></i> How to Apply</h3>
+                ${fmtList(p.steps,'Application process not specified.')}
+
+                <h3><i class="fas fa-file-upload"></i> Required Documents</h3>
+                ${fmtList(p.documents,'No documents listed.')}
+
+                <div style="margin-top:28px">
+                    <h3><i class="fas fa-question-circle"></i> FAQ</h3>
+                    ${faqHtml}
+                </div>
+
+                <div class="ad-container">
+                    <span class="ad-label">Advertisement</span>
+                    <ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="4444444444" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                </div>
+
+                <div class="share-row">
+                    <h4><i class="fas fa-share-alt"></i> Share:</h4>
+                    <button class="share-btn sh-wa" onclick="shareIt('whatsapp')" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></button>
+                    <button class="share-btn sh-fb" onclick="shareIt('facebook')" aria-label="Facebook"><i class="fab fa-facebook-f"></i></button>
+                    <button class="share-btn sh-tw" onclick="shareIt('twitter')" aria-label="Twitter"><i class="fab fa-twitter"></i></button>
+                    <button class="share-btn sh-tg" onclick="shareIt('telegram')" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></button>
+                    <button class="share-btn sh-cp" onclick="shareIt('copy')" aria-label="Copy"><i class="fas fa-link"></i></button>
+                </div>
+
+                <div class="related">
+                    <div class="sec-title"><i class="fas fa-list"></i> Related Posts</div>
+                    <div class="related-grid" id="relatedBox"></div>
+                </div>
+            </div>
+        `;
+
+        document.getElementById('articleBox').innerHTML=html;
+
+        await loadRelated(p.category,p.id);
+        renderTrending();
+
+        try{document.querySelectorAll('.adsbygoogle').forEach(()=>{(adsbygoogle=window.adsbygoogle||[]).push({});});}catch(e){}
+
+    }catch(e){
+        console.error(e);
+        showError('Failed to load post');
+    }
+}
+
+async function loadRelated(cat,currentId){
+    try{
+        const ps=await db.ref('posts').once('value');
+        if(!ps.exists()){document.getElementById('relatedBox').innerHTML='<p style="color:var(--s400)">No related posts.</p>';return;}
+        const cs=await db.ref('categories').once('value');
+        const cats=cs.exists()?cs.val():{};
+        const all=Object.keys(ps.val()).map(k=>({id:k,...ps.val()[k]}));
+        let rel=all.filter(p=>p.category===cat&&p.id!==currentId).slice(0,3);
+        if(rel.length===0)rel=all.filter(p=>p.id!==currentId).slice(0,3);
+        if(rel.length===0){document.getElementById('relatedBox').innerHTML='<p style="color:var(--s400)">No related posts.</p>';return;}
+        let html='';
+        rel.forEach(p=>{
+            const imgHtml=p.image?`<img src="${p.image}" alt="${p.title}" loading="lazy" class="card-img" onerror="this.style.display='none'">`:'';
+            html+=`<div class="card">${imgHtml}<div class="card-cat">${p.categoryName||cats[p.category]?.name||'Update'}</div><div class="card-body"><a href="post.html?id=${p.id}" class="card-title">${p.title}</a><div class="card-meta"><span class="date"><i class="fas fa-clock"></i> ${p.lastDate||'N/A'}</span><a href="post.html?id=${p.id}" class="btn-view">View</a></div></div></div>`;
+        });
+        document.getElementById('relatedBox').innerHTML=html;
+    }catch(e){console.error(e);}
+}
+
+async function renderTrending(){
+    try{
+        const box=document.getElementById('trendBox');
+        const ps=await db.ref('posts').once('value');
+        if(!ps.exists()){box.innerHTML='<p style="color:var(--s400);font-size:.85rem">No posts yet.</p>';return;}
+        const all=Object.keys(ps.val()).map(k=>({id:k,...ps.val()[k]})).sort((a,b)=>new Date(b.timestamp||0)-new Date(a.timestamp||0));
+        const currentId=new URLSearchParams(window.location.search).get('id');
+        const tr=all.filter(p=>p.id!==currentId).slice(0,5);
+        if(tr.length===0){box.innerHTML='<p style="color:var(--s400);font-size:.85rem">No posts yet.</p>';return;}
+        let html='';
+        tr.forEach((p,i)=>{
+            html+=`<a href="post.html?id=${p.id}" style="display:flex;gap:10px;padding:10px 0;border-bottom:1px dashed var(--s200);text-decoration:none"><div style="width:24px;height:24px;background:var(--p600);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.72rem;flex-shrink:0">${i+1}</div><div style="font-size:.82rem;font-weight:600;color:var(--s700);line-height:1.4;min-width:0;word-break:break-word">${p.title.length>60?p.title.substring(0,60)+'...':p.title}</div></a>`;
+        });
+        box.innerHTML=html;
+    }catch(e){console.error(e);}
+}
+
+function showError(msg){
+    document.getElementById('articleBox').innerHTML=`
+        <div style="text-align:center;padding:60px 20px">
+            <i class="fas fa-exclamation-triangle" style="font-size:3rem;color:var(--y500);margin-bottom:20px"></i>
+            <h2 style="font-family:var(--serif);color:var(--s900);margin-bottom:10px;font-size:1.3rem">${msg}</h2>
+            <p style="color:var(--s500);margin-bottom:20px;font-size:.9rem">The post you're looking for doesn't exist or has been removed.</p>
+            <a href="index.html" class="btn-apply"><i class="fas fa-home"></i> Back to Home</a>
+        </div>
+    `;
+}
+
+window.shareIt=function(platform){
+    const url=window.location.href;
+    const title=currentPost?currentPost.title:document.title;
+    if(platform==='copy'){
+        if(navigator.clipboard&&navigator.clipboard.writeText){
+            navigator.clipboard.writeText(url).then(()=>toast('Link copied!','success')).catch(()=>toast('Copy failed','error'));
+        }else{
+            const ta=document.createElement('textarea');ta.value=url;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Link copied!','success');}catch(e){toast('Copy failed','error');}document.body.removeChild(ta);
+        }
+        return;
+    }
+    const links={
+        whatsapp:`https://wa.me/?text=${encodeURIComponent(title+' - '+url)}`,
+        facebook:`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+        twitter:`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
+        telegram:`https://t.me/share/url?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`
+    };
+    window.open(links[platform],'_blank','width=600,height=500,noopener');
+};
+
+window.subscribeNL=async function(){
+    const email=document.getElementById('nlEmail').value.trim();
+    if(!email||!email.includes('@'))return toast('Enter valid email','warning');
+    try{
+        await db.ref('subscribers').push({email,timestamp:new Date().toISOString()});
+        toast('Subscribed! 🎉','success');
+        document.getElementById('nlEmail').value='';
+    }catch(e){toast('Error. Try again.','error');}
+};
+
+function fmtDate(iso){
+    if(!iso)return 'N/A';
+    const d=new Date(iso);
+    const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${d.getDate()} ${m[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+window.addEventListener('scroll',()=>{
+    const b=document.getElementById('backTop');
+    if(window.scrollY>400)b.classList.add('show');
+    else b.classList.remove('show');
+});
+
+document.addEventListener('DOMContentLoaded',loadPost);
+</script>
+
+<!-- Google AdSense Auto Ads -->
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-XXXXXXXXXXXXXXXX",
+    enable_page_level_ads: true,
+    overlays: {
+        bottom: true
+    }
+});
+</script>
+</body>
+</html>
