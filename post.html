@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#2563eb">
-<title id="pageTitle">Loading... | IBAD TECH CSC</title>
+<title id="pageTitle">Loading... | esewahub.in</title>
 <meta name="description" id="metaDesc" content="Read complete details, eligibility, how to apply and required documents.">
 <meta name="keywords" id="metaKeywords" content="sarkari job, sarkari result, government jobs">
 <meta name="robots" content="index, follow, max-image-preview:large">
@@ -378,7 +378,7 @@ body{background:#fff}
 <a href="index.html" class="logo">
 <div class="logo-icon"><i class="fas fa-shield-halved"></i></div>
 <div class="logo-text">
-<h1 id="siteTitle">IBAD TECH CSC</h1>
+<h1 id="siteTitle">esewahub.in</h1>
 <p id="siteTagline">Sarkari Kaam & Digital Seva</p>
 </div>
 </a>
@@ -440,7 +440,7 @@ body{background:#fff}
 <div class="container">
 <div class="foot-grid">
 <div class="foot-brand">
-<h3><i class="fas fa-shield-halved"></i> <span id="footTitle">IBAD TECH CSC</span></h3>
+<h3><i class="fas fa-shield-halved"></i> <span id="footTitle">esewahub.in</span></h3>
 <p id="footAbout">Your trusted Digital Seva Kendra.</p>
 <div class="foot-social">
 <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -470,13 +470,13 @@ body{background:#fff}
 <h4>Support</h4>
 <div class="foot-links">
 <a id="waFoot" target="_blank" rel="noopener nofollow">WhatsApp Help</a>
-<a href="mailto:info@ibadtechcsc.com">Email Support</a>
+<a href="mailto:info@esewahub.in">Email Support</a>
 </div>
 </div>
 </div>
 <div class="foot-disc"><strong>Disclaimer:</strong> This website is not an official government website. All information is provided for informational purposes only.</div>
 <div class="foot-bottom">
-<div>&copy; 2026 IBAD TECH CSC. All Rights Reserved. Made with <i class="fas fa-heart"></i> for Digital India.</div>
+<div>&copy; 2026 esewahub.in. All Rights Reserved. Made with <i class="fas fa-heart"></i> for Digital India.</div>
 <div class="links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a><a href="contact.html">Contact</a></div>
 </div>
 </div>
@@ -529,10 +529,10 @@ async function loadPost(){
         const ss=await db.ref('settings/general').once('value');
         if(ss.exists()){
             const s=ss.val();
-            document.getElementById('siteTitle').innerText=s.title||'IBAD TECH CSC';
+            document.getElementById('siteTitle').innerText=s.title||'esewahub.in';
             document.getElementById('siteTagline').innerText=s.tagline||'Sarkari Kaam & Digital Seva';
             document.getElementById('topAddr').innerText=s.address||'India';
-            document.getElementById('footTitle').innerText=s.title||'IBAD TECH CSC';
+            document.getElementById('footTitle').innerText=s.title||'esewahub.in';
             document.getElementById('footAbout').innerText=s.about||'Your trusted Digital Seva Kendra.';
             const waUrl=`https://wa.me/${s.whatsapp||'917056836166'}`;
             ['waLink','waFoot'].forEach(x=>{const el=document.getElementById(x);if(el)el.href=waUrl;});
@@ -549,7 +549,7 @@ async function loadPost(){
         const cats=cs.exists()?cs.val():{};
         const catName=p.categoryName||cats[p.category]?.name||'Sarkari Update';
 
-        document.title=`${p.title} | IBAD TECH CSC`;
+        document.title=`${p.title} | esewahub.in`;
         const metaDesc=document.querySelector('meta[name="description"]');
         if(metaDesc)metaDesc.setAttribute('content',p.summary||p.title);
         const ogT=document.getElementById('ogTitle');if(ogT)ogT.setAttribute('content',p.title);
@@ -602,7 +602,7 @@ async function loadPost(){
             <div class="author-box">
                 <div class="author-av"><i class="fas fa-user-tie"></i></div>
                 <div class="author-info">
-                    <h4>IBAD TECH CSC Editorial Team</h4>
+                    <h4>esewahub.in Editorial Team</h4>
                     <p>Government services expert with 5+ years experience in CSC operations & Sarkari Kaam guidance.</p>
                     <div class="ver"><i class="fas fa-check-circle"></i> Verified Author</div>
                 </div>
