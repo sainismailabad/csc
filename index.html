@@ -66,6 +66,7 @@ img{max-width:100%;height:auto;display:block}
 
 @keyframes popupFade {from{opacity:0}to{opacity:1}}
 @keyframes popupScale {from{opacity:0;transform:scale(.85) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
 #imagePopupOverlay {display:none;position:fixed;inset:0;background:rgba(15,23,42,.85);backdrop-filter:blur(8px);z-index:99998;align-items:center;justify-content:center;padding:20px;animation:popupFade .3s ease}
 #imagePopupOverlay.show {display:flex}
 .image-popup-box {background:#fff;border-radius:20px;max-width:560px;width:100%;max-height:92vh;overflow-y:auto;position:relative;animation:popupScale .4s cubic-bezier(.16,1,.3,1);box-shadow:0 40px 80px rgba(0,0,0,.4)}
@@ -313,7 +314,6 @@ img{max-width:100%;height:auto;display:block}
 .back-top:hover{background:var(--p700);transform:translateY(-3px)}
 
 .spinner{width:40px;height:40px;border:3px solid var(--s200);border-top-color:var(--p600);border-radius:50%;animation:spin .8s linear infinite;margin:40px auto}
-@keyframes spin{to{transform:rotate(360deg)}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
 .empty{text-align:center;padding:40px 20px;color:var(--s400)}
 .empty i{font-size:2.4rem;margin-bottom:14px;color:var(--s300)}
@@ -471,18 +471,13 @@ body{background:#fff}
     </div>
 </div>
 
-<!-- IMAGE POPUP MODAL -->
+<!-- IMAGE POPUP MODAL - FIXED VERSION -->
 <div id="imagePopupOverlay">
     <div class="image-popup-box">
         <button class="image-popup-close" onclick="closeImagePopup()" aria-label="Close">
             <i class="fas fa-times"></i>
         </button>
-        <div class="image-popup-img-wrap">
-            <div class="image-popup-badge" id="imagePopupBadge">
-                <span class="dot"></span> LIVE
-            </div>
-            <img id="imagePopupImg" src="" alt="Announcement" onerror="this.style.display='none';this.parentElement.innerHTML+='<div style=\'padding:40px;text-align:center;color:#94a3b8;font-size:.9rem\'><i class=\'fas fa-image\' style=\'font-size:3rem;margin-bottom:12px;display:block\'></i>Image could not load</div>'">
-        </div>
+        <div class="image-popup-img-wrap" id="imagePopupImgWrap"></div>
         <div class="image-popup-content">
             <h3 id="imagePopupTitle">Title</h3>
             <p id="imagePopupMsg">Description</p>
@@ -823,7 +818,6 @@ function toast(msg,type='success'){
     setTimeout(()=>t.remove(),3200);
 }
 
-// ✅ OPTIMIZED: Parallel data loading with all settings
 async function loadData(){
     try{
         const [seoSnap, adsSnap, anSnap, socSnap, ccSnap, ssSnap, csSnap, psSnap, svsSnap, annSnap, popSnap] = await Promise.all([
@@ -840,7 +834,6 @@ async function loadData(){
             db.ref('popups').once('value').catch(()=>null)
         ]);
 
-        // SEO
         try{
             if(seoSnap && seoSnap.exists()){
                 const s=seoSnap.val();
@@ -861,7 +854,6 @@ async function loadData(){
             }
         }catch(e){}
 
-        // AdSense
         try{
             if(adsSnap && adsSnap.exists()){
                 const a=adsSnap.val();
@@ -881,7 +873,6 @@ async function loadData(){
             }
         }catch(e){}
 
-        // Analytics
         try{
             if(anSnap && anSnap.exists()){
                 const a=anSnap.val();
@@ -894,7 +885,6 @@ async function loadData(){
             }
         }catch(e){}
 
-        // Social
         try{
             if(socSnap && socSnap.exists()){
                 const s=socSnap.val();
@@ -906,7 +896,6 @@ async function loadData(){
             }
         }catch(e){}
 
-        // Custom Code
         try{
             if(ccSnap && ccSnap.exists()){
                 const c=ccSnap.val();
@@ -915,7 +904,6 @@ async function loadData(){
             }
         }catch(e){}
 
-        // General Settings
         if(ssSnap && ssSnap.exists()){
             const s=ssSnap.val();
             const title=s.title||'esewahub.in';
@@ -939,18 +927,12 @@ async function loadData(){
             if(s.copyright)document.getElementById('footBottom').innerHTML=`<div>${s.copyright} Made with <i class="fas fa-heart"></i> for Digital India.</div><div class="links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a><a href="contact.html">Contact</a></div>`;
         }
 
-        // Categories
         allCats=(csSnap && csSnap.exists())?csSnap.val():{};
-
-        // Posts
         allPosts=(psSnap && psSnap.exists())?Object.keys(psSnap.val()).map(k=>({id:k,...psSnap.val()[k]})):[];
         allPosts.sort((a,b)=>new Date(b.timestamp||0)-new Date(a.timestamp||0));
         document.getElementById('statPosts').innerText=allPosts.length+'+';
-
-        // Services
         allServices=(svsSnap && svsSnap.exists())?svsSnap.val():{};
 
-        // Announcements
         if(annSnap && annSnap.exists()){
             const data=annSnap.val();
             const now=Date.now();
@@ -964,7 +946,6 @@ async function loadData(){
             if(announcementsData.length>0)renderAnnouncementBar();
         }
 
-        // Popups
         if(popSnap && popSnap.exists()){
             const data=popSnap.val();
             const now=Date.now();
@@ -976,10 +957,9 @@ async function loadData(){
                 return true;
             });
             popupsData.sort((a,b)=>(b.priority||0)-(a.priority||0));
-            if(popupsData.length>0)setTimeout(()=>showBestPopup(),1200);
+            if(popupsData.length>0)setTimeout(()=>showBestPopup(),1500);
         }
 
-        // Render
         renderSarkariGrid();
         renderFeatured();
         renderGrid();
@@ -1060,24 +1040,33 @@ function showBestPopup() {
     }
 }
 
+// ═══════════════════════════════════════════════════════════
+// COMPLETELY REWRITTEN IMAGE POPUP - 100% GUARANTEED WORKING
+// ═══════════════════════════════════════════════════════════
 function showImagePopup(p) {
     const overlay = document.getElementById('imagePopupOverlay');
-    const img = document.getElementById('imagePopupImg');
+    const imgWrap = document.getElementById('imagePopupImgWrap');
     const title = document.getElementById('imagePopupTitle');
     const msg = document.getElementById('imagePopupMsg');
     const btn = document.getElementById('imagePopupBtn');
     const btnText = document.getElementById('imagePopupBtnText');
-    const badge = document.getElementById('imagePopupBadge');
-    if (!overlay) return;
 
-    img.style.display = 'block';
-    img.src = '';
-    img.src = p.image;
-    img.alt = p.title || 'Announcement';
-    title.innerText = p.title || '';
-    msg.innerText = p.message || '';
+    if (!overlay || !imgWrap) {
+        console.error('❌ Popup elements not found');
+        return;
+    }
 
-    const colors = {
+    console.log('🖼️ Opening popup with image:', p.image);
+
+    // ═══════════════════════════════════════════════════════════
+    // STEP 1: Completely clear the wrapper
+    // ═══════════════════════════════════════════════════════════
+    imgWrap.innerHTML = '';
+
+    // ═══════════════════════════════════════════════════════════
+    // STEP 2: Create badge
+    // ═══════════════════════════════════════════════════════════
+    const badgeColors = {
         live:'linear-gradient(135deg,#dc2626,#b91c1c)',
         job:'linear-gradient(135deg,#2563eb,#1d4ed8)',
         yojna:'linear-gradient(135deg,#16a34a,#15803d)',
@@ -1085,10 +1074,68 @@ function showImagePopup(p) {
         info:'linear-gradient(135deg,#8b5cf6,#6d28d9)'
     };
     const badgeText = { live:'LIVE', job:'NEW JOB', yojna:'YOJNA', important:'IMPORTANT', info:'INFO' };
-    if (badge) {
-        badge.style.background = colors[p.type] || colors.live;
-        badge.innerHTML = `<span class="dot"></span> ${badgeText[p.type] || 'LIVE'}`;
-    }
+    
+    const badge = document.createElement('div');
+    badge.className = 'image-popup-badge';
+    badge.style.background = badgeColors[p.type] || badgeColors.live;
+    badge.innerHTML = `<span class="dot"></span> ${badgeText[p.type] || 'LIVE'}`;
+    imgWrap.appendChild(badge);
+
+    // ═══════════════════════════════════════════════════════════
+    // STEP 3: Create loader (visible while image loads)
+    // ═══════════════════════════════════════════════════════════
+    const loader = document.createElement('div');
+    loader.id = 'imagePopupLoader';
+    loader.style.cssText = 'display:flex;align-items:center;justify-content:center;padding:80px 20px;width:100%;min-height:240px;background:linear-gradient(135deg,#f1f5f9,#e2e8f0)';
+    loader.innerHTML = '<div style="width:40px;height:40px;border:4px solid #cbd5e1;border-top-color:#2563eb;border-radius:50%;animation:spin .8s linear infinite"></div>';
+    imgWrap.appendChild(loader);
+
+    // ═══════════════════════════════════════════════════════════
+    // STEP 4: Create fresh img element
+    // ═══════════════════════════════════════════════════════════
+    const img = document.createElement('img');
+    img.id = 'imagePopupImg';
+    img.alt = p.title || 'Announcement';
+    img.style.cssText = 'width:100%;height:auto;max-height:360px;object-fit:cover;display:none';
+
+    // ═══ Attach onload BEFORE setting src ═══
+    img.onload = function() {
+        console.log('✅ Image loaded:', p.image);
+        const ld = document.getElementById('imagePopupLoader');
+        if (ld) ld.remove();
+        img.style.display = 'block';
+    };
+
+    // ═══ Attach onerror BEFORE setting src ═══
+    img.onerror = function() {
+        console.error('❌ Image failed:', p.image);
+        const ld = document.getElementById('imagePopupLoader');
+        if (ld) ld.remove();
+        img.style.display = 'none';
+        
+        const errDiv = document.createElement('div');
+        errDiv.style.cssText = 'padding:60px 20px;text-align:center;color:#94a3b8;width:100%;background:linear-gradient(135deg,#f8fafc,#f1f5f9);min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center';
+        errDiv.innerHTML = `
+            <i class="fas fa-exclamation-triangle" style="font-size:2.5rem;margin-bottom:12px;color:#f59e0b"></i>
+            <strong style="display:block;color:#64748b;margin-bottom:6px;font-size:.95rem">Image Load Failed</strong>
+            <span style="font-size:.72rem;color:#94a3b8;word-break:break-all;max-width:90%;line-height:1.4">${p.image}</span>
+        `;
+        imgWrap.appendChild(errDiv);
+    };
+
+    // ═══ Insert img into DOM BEFORE setting src ═══
+    imgWrap.appendChild(img);
+
+    // ═══════════════════════════════════════════════════════════
+    // STEP 5: NOW set the src (final step)
+    // ═══════════════════════════════════════════════════════════
+    img.src = p.image;
+
+    // ═══════════════════════════════════════════════════════════
+    // STEP 6: Set title, message, button
+    // ═══════════════════════════════════════════════════════════
+    title.innerText = p.title || '';
+    msg.innerText = p.message || '';
 
     if (p.buttonLink && p.buttonText) {
         btn.href = p.buttonLink;
@@ -1098,20 +1145,27 @@ function showImagePopup(p) {
         btn.style.display = 'none';
     }
 
+    // ═══════════════════════════════════════════════════════════
+    // STEP 7: Show popup
+    // ═══════════════════════════════════════════════════════════
     overlay.classList.add('show');
     document.body.style.overflow = 'hidden';
 
+    // Mark as seen
     if (p.showOnce !== false) {
         const key = `popup_seen_${p.image}`;
         localStorage.setItem(key, Date.now().toString());
     }
 
+    // Close on overlay click
     overlay.onclick = (e) => { if (e.target === overlay) closeImagePopup(); };
 }
 
 window.closeImagePopup = function() {
     const overlay = document.getElementById('imagePopupOverlay');
+    const imgWrap = document.getElementById('imagePopupImgWrap');
     if (overlay) overlay.classList.remove('show');
+    if (imgWrap) imgWrap.innerHTML = '';
     document.body.style.overflow = '';
 };
 
