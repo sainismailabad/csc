@@ -9,6 +9,8 @@
 <meta name="keywords" id="metaKeywords" content="sarkari kaam, government services, aadhar, pan, voter id">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="google-adsense-account" content="ca-pub-1336136297225442">
+<link rel="icon" id="faviconLink" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<link rel="apple-touch-icon" id="appleIconLink" href="">
 <link rel="canonical" id="canonicalLink" href="">
 <meta property="og:type" content="article">
 <meta property="og:title" id="ogTitle" content="">
@@ -60,7 +62,8 @@ img{max-width:100%;height:auto;display:block}
 .header{background:#fff;padding:18px 0;border-bottom:1px solid var(--s200);width:100%}
 .header .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
 .logo{display:flex;align-items:center;gap:12px;min-width:0;max-width:100%}
-.logo-icon{width:48px;height:48px;background:linear-gradient(135deg,var(--p600),var(--p800));border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;flex-shrink:0}
+.logo-icon{width:48px;height:48px;background:linear-gradient(135deg,var(--p600),var(--p800));border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;flex-shrink:0;overflow:hidden;padding:0}
+.logo-icon img{width:100%;height:100%;object-fit:cover;border-radius:11px}
 .logo-text{min-width:0}
 .logo-text h1{font-family:var(--serif);color:var(--p700);font-size:1.4rem;font-weight:900;line-height:1.2;word-break:break-word}
 .logo-text p{color:var(--s500);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
@@ -192,10 +195,9 @@ aside{min-width:0;max-width:100%}
 .ic-pmkisan{background:linear-gradient(135deg,#16a34a,#166534)}
 .ic-lic{background:linear-gradient(135deg,#6366f1,#4338ca)}
 .ic-bank{background:linear-gradient(135deg,#0891b2,#155e75)}
+.ic-custom{background:linear-gradient(135deg,#64748b,#475569)}
 
-/* ============================================
-   RESPONSIVE — TABLET
-   ============================================ */
+/* RESPONSIVE — TABLET */
 @media(max-width:1024px){
 .container{padding:0 16px!important}
 .layout{grid-template-columns:1fr;gap:24px;padding:0 16px!important;margin:24px auto}
@@ -204,9 +206,7 @@ aside{min-width:0;max-width:100%}
 .foot-grid{grid-template-columns:1fr 1fr;gap:28px}
 }
 
-/* ============================================
-   RESPONSIVE — MOBILE (768px)
-   ============================================ */
+/* RESPONSIVE — MOBILE */
 @media(max-width:768px){
 .container{padding:0 14px!important}
 .topbar{padding:8px 0}
@@ -287,9 +287,7 @@ aside{min-width:0;max-width:100%}
 .toast{min-width:auto!important;width:100%!important;font-size:.8rem!important;padding:12px 16px!important}
 }
 
-/* ============================================
-   MOBILE SMALL (480px)
-   ============================================ */
+/* MOBILE SMALL */
 @media(max-width:480px){
 .container{padding:0 12px!important}
 .topbar .container,.header .container,.navbar .container,.footer .container{padding:0 12px!important}
@@ -316,9 +314,7 @@ aside{min-width:0;max-width:100%}
 .foot-brand h3{font-size:.95rem!important}
 }
 
-/* ============================================
-   PRINT
-   ============================================ */
+/* PRINT */
 @media print{
 .topbar,.navbar,.back-top,.ad-container,.footer,.newsletter,.side-widget{display:none!important}
 body{background:#fff}
@@ -347,7 +343,7 @@ body{background:#fff}
 <div class="header">
 <div class="container">
 <a href="index.html" class="logo">
-<div class="logo-icon"><i class="fas fa-shield-halved"></i></div>
+<div class="logo-icon" id="logoIcon"><i class="fas fa-shield-halved"></i></div>
 <div class="logo-text">
 <h1 id="siteTitle">esewahub.in</h1>
 <p id="siteTagline">Sarkari Kaam & Digital Seva</p>
@@ -480,6 +476,23 @@ function toast(msg,type='success'){
     setTimeout(()=>t.remove(),3200);
 }
 
+// ✅ LOGO + FAVICON SETUP
+function applyLogo(logoUrl, title){
+    if(!logoUrl || !logoUrl.trim()) return;
+    
+    let favicon = document.getElementById('faviconLink');
+    if(favicon) favicon.href = logoUrl;
+    
+    let appleIcon = document.getElementById('appleIconLink');
+    if(appleIcon) appleIcon.href = logoUrl;
+    
+    const logoIcon = document.getElementById('logoIcon');
+    if(logoIcon){
+        logoIcon.innerHTML = `<img src="${logoUrl}" alt="${title||'esewahub.in'}" style="width:100%;height:100%;object-fit:cover;border-radius:11px" onerror="this.parentElement.innerHTML='<i class=\\'fas fa-shield-halved\\'></i>'">`;
+        logoIcon.style.background = 'transparent';
+    }
+}
+
 async function applyAdsenseSettings(){
     try{
         const snap=await db.ref('settings/adsense').once('value');
@@ -509,11 +522,16 @@ async function loadService(){
         const ss=await db.ref('settings/general').once('value');
         if(ss.exists()){
             const s=ss.val();
-            document.getElementById('siteTitle').innerText=s.title||'esewahub.in';
+            const title = s.title || 'esewahub.in';
+            document.getElementById('siteTitle').innerText=title;
             document.getElementById('siteTagline').innerText=s.tagline||'Sarkari Kaam & Digital Seva';
             document.getElementById('topAddr').innerText=s.address||'India';
-            document.getElementById('footTitle').innerText=s.title||'esewahub.in';
+            document.getElementById('footTitle').innerText=title;
             document.getElementById('footAbout').innerText=s.about||'Your trusted Digital Seva Kendra.';
+            
+            // ✅ APPLY LOGO
+            if(s.logo && s.logo.trim()) applyLogo(s.logo, title);
+            
             const waUrl=`https://wa.me/${s.whatsapp||'917056836166'}`;
             ['waLink','waSide','waFoot'].forEach(x=>{const el=document.getElementById(x);if(el)el.href=waUrl;});
         }
