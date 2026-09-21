@@ -4,8 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Panel | esewahub.in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://www.gstatic.com">
+<link rel="preconnect" href="https://firebaseapp.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database-compat.js"></script>
@@ -112,8 +117,8 @@ td{padding:16px;border-bottom:1px solid var(--s200);font-size:.88rem;color:var(-
 tr:last-child td{border-bottom:none}
 tr:hover td{background:var(--s50)}
 
-.thumb{width:50px;height:50px;border-radius:10px;object-fit:cover;border:2px solid var(--s200);background:var(--s100)}
-.thumb-icon{width:50px;height:50px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;background:linear-gradient(135deg,var(--p600),var(--p800))}
+.thumb{width:70px;height:55px;border-radius:10px;object-fit:cover;border:2px solid var(--s200);background:var(--s100);loading:lazy}
+.thumb-icon{width:60px;height:50px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;background:linear-gradient(135deg,var(--p600),var(--p800))}
 
 .btn{padding:11px 20px;border-radius:9px;font-weight:700;display:inline-flex;align-items:center;gap:8px;color:#fff;font-size:.85rem;transition:all .15s;cursor:pointer;border:none}
 .btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.12)}
@@ -137,7 +142,7 @@ tr:hover td{background:var(--s50)}
 .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
 
 .image-preview{display:none;margin-bottom:18px;position:relative;border-radius:12px;overflow:hidden;border:2px solid var(--s200);background:var(--s50)}
-.image-preview img{width:100%;max-height:220px;object-fit:cover;display:block}
+.image-preview img{width:100%;max-height:240px;object-fit:cover;display:block}
 .image-preview .remove-img{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;background:rgba(220,38,38,.95);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;border:none}
 .image-preview .remove-img:hover{background:var(--r600)}
 
@@ -156,8 +161,6 @@ tr:hover td{background:var(--s50)}
 
 .warn-box{background:var(--y50);border-left:4px solid var(--y500);padding:14px 18px;border-radius:10px;margin-bottom:20px;font-size:.85rem;color:#92400e;line-height:1.7}
 .warn-box strong{display:block;margin-bottom:4px;color:#78350f}
-
-.success-box{background:var(--g50);border-left:4px solid var(--g500);padding:14px 18px;border-radius:10px;margin-bottom:20px;font-size:.85rem;color:var(--g700);line-height:1.7}
 
 .empty{text-align:center;padding:48px 20px;color:var(--s400)}
 .empty i{font-size:2.6rem;margin-bottom:14px;color:var(--s300);display:block}
@@ -185,11 +188,6 @@ tr:hover td{background:var(--s50)}
 .guide-content p{font-size:.82rem;color:var(--s600);line-height:1.6}
 .guide-content code{background:var(--s200);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:.78rem;color:var(--p700)}
 
-.ad-slot-preview{background:var(--s50);border:1px dashed var(--s300);border-radius:10px;padding:14px;margin-bottom:12px;position:relative}
-.ad-slot-preview .slot-label{position:absolute;top:6px;left:10px;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--s400);font-weight:800}
-.ad-slot-preview .slot-content{font-size:.85rem;color:var(--s700);font-weight:600;margin-top:6px}
-
-/* ====== MULTI-LINK BUILDER ====== */
 .link-builder{margin-bottom:16px}
 .link-builder-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .link-builder-head label{font-weight:700;color:var(--s800);font-size:.84rem;margin:0}
@@ -198,22 +196,26 @@ tr:hover td{background:var(--s50)}
 @keyframes fadeInRow{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 .link-row input{padding:10px 12px;border:2px solid var(--s200);border-radius:8px;background:#fff;font-size:.85rem;width:100%}
 .link-row input:focus{outline:none;border-color:var(--p500);box-shadow:0 0 0 3px rgba(37,99,235,.08)}
-.link-row input.link-name{font-weight:600}
 .link-row .remove-link-btn{width:42px;height:42px;border-radius:8px;background:var(--r50);color:var(--r500);display:flex;align-items:center;justify-content:center;font-size:.9rem;border:none;cursor:pointer;transition:all .2s;flex-shrink:0}
 .link-row .remove-link-btn:hover{background:var(--r500);color:#fff;transform:scale(1.05)}
 .link-row .remove-link-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
-.link-row .remove-link-btn:disabled:hover{background:var(--r50);color:var(--r500)}
 .add-link-btn{width:100%;padding:11px;background:var(--p50);color:var(--p700);border:2px dashed #93c5fd;border-radius:10px;font-weight:700;font-size:.84rem;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all .2s;margin-top:4px}
 .add-link-btn:hover{background:var(--p100);border-color:var(--p500);border-style:solid}
-.add-link-btn i{font-size:.9rem}
-.link-empty-msg{text-align:center;padding:14px;color:var(--s400);font-size:.82rem;font-style:italic;background:var(--s50);border-radius:8px;border:1px dashed var(--s300)}
 
-/* ====== USER MANAGEMENT STYLES ====== */
-.role-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:9999px;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
-.role-badge.admin{background:linear-gradient(135deg,#fee2e2,#fecaca);color:#991b1b}
-.role-badge.editor{background:linear-gradient(135deg,#dbeafe,#bfdbfe);color:#1e40af}
-.role-badge.viewer{background:linear-gradient(135deg,#f1f5f9,#e2e8f0);color:#475569}
-.role-badge i{font-size:.65rem}
+.multiline-builder{margin-bottom:16px}
+.multiline-builder-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.multiline-builder-head label{font-weight:700;color:var(--s800);font-size:.84rem;margin:0}
+.multiline-builder-head .line-counter{font-size:.72rem;color:var(--s500);font-weight:600;background:var(--s100);padding:3px 10px;border-radius:9999px}
+.line-row{display:grid;grid-template-columns:44px 1fr 44px;gap:8px;margin-bottom:8px;align-items:center;background:var(--s50);padding:10px;border-radius:10px;border:1px solid var(--s200);animation:fadeInRow .25s ease}
+.line-row .line-num{width:32px;height:32px;background:linear-gradient(135deg,var(--p600),var(--p800));color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;flex-shrink:0}
+.line-row input{padding:10px 12px;border:2px solid var(--s200);border-radius:8px;background:#fff;font-size:.85rem;width:100%}
+.line-row input:focus{outline:none;border-color:var(--p500);box-shadow:0 0 0 3px rgba(37,99,235,.08)}
+.line-row .remove-line-btn{width:38px;height:38px;border-radius:8px;background:var(--r50);color:var(--r500);display:flex;align-items:center;justify-content:center;font-size:.85rem;border:none;cursor:pointer;transition:all .2s;flex-shrink:0}
+.line-row .remove-line-btn:hover{background:var(--r500);color:#fff;transform:scale(1.05)}
+.line-row .remove-line-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.add-line-btn{width:100%;padding:11px;background:var(--g50);color:var(--g700);border:2px dashed #86efac;border-radius:10px;font-weight:700;font-size:.84rem;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all .2s;margin-top:4px}
+.add-line-btn:hover{background:var(--g50);border-color:var(--g500);border-style:solid}
+
 .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;flex-shrink:0}
 .status-dot.active{background:var(--g500);box-shadow:0 0 0 3px rgba(34,197,94,.2)}
 .status-dot.inactive{background:var(--s400)}
@@ -229,9 +231,8 @@ tr:hover td{background:var(--s50)}
 .role-select:focus{outline:none;border-color:var(--p500);background:#fff}
 .perm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:12px}
 .perm-item{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--s50);border:2px solid var(--s200);border-radius:10px;cursor:pointer;transition:all .2s;font-size:.85rem;font-weight:600;color:var(--s700)}
-.perm-item:hover{border-color:var(--p300,#93c5fd);background:#fff}
 .perm-item.checked{border-color:var(--p500);background:var(--p50);color:var(--p800)}
-.perm-item input{width:auto;margin:0;cursor:pointer;accent-color:var(--p600);width:18px;height:18px}
+.perm-item input{width:18px;height:18px;cursor:pointer;accent-color:var(--p600)}
 .perm-item span{flex:1}
 .role-preview{margin-top:16px;padding:14px 18px;background:linear-gradient(135deg,#f0fdf4,#ecfdf5);border:1px solid #bbf7d0;border-radius:10px;font-size:.84rem;color:var(--g700);line-height:1.6}
 .role-preview strong{display:block;margin-bottom:6px;color:var(--g700)}
@@ -243,7 +244,6 @@ tr:hover td{background:var(--s50)}
 .stat-mini .num{font-size:1.5rem;font-weight:900;color:var(--p700);font-family:var(--serif);line-height:1}
 .stat-mini .lbl{font-size:.7rem;color:var(--s500);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-top:6px}
 
-/* ====== ANNOUNCEMENT STYLES (NEW) ====== */
 @keyframes blinkDot {
     0%, 100% { opacity: 1; transform: scale(1); }
     50% { opacity: 0.4; transform: scale(0.85); }
@@ -285,9 +285,8 @@ tr:hover td{background:var(--s50)}
 .login-box{padding:32px 24px}
 .toggle-row{flex-direction:column;align-items:flex-start;gap:12px}
 .link-row{grid-template-columns:1fr 1fr 42px;gap:6px}
-.link-row input{padding:9px 10px;font-size:.8rem}
-.link-row .remove-link-btn{width:38px;height:38px;font-size:.85rem}
 .perm-grid{grid-template-columns:1fr}
+.line-row{grid-template-columns:44px 1fr 38px;gap:6px}
 }
 @media(max-width:480px){
 .link-row{grid-template-columns:1fr 42px;grid-template-areas:"name remove" "url url";gap:6px}
@@ -345,6 +344,10 @@ tr:hover td{background:var(--s50)}
 <div class="nav-item" onclick="showSec('secAnnouncements',this)">
 <i class="fas fa-bullhorn"></i><span>Announcements</span>
 <span class="nav-badge" id="annCountBadge" style="background:#f59e0b">0</span>
+</div>
+<div class="nav-item" onclick="showSec('secPopups',this)">
+<i class="fas fa-image"></i><span>Image Popups</span>
+<span class="nav-badge" id="popupCountBadge" style="background:#8b5cf6">0</span>
 </div>
 <div class="nav-item" onclick="showSec('secServices',this)">
 <i class="fas fa-briefcase"></i><span>Sarkari Kaam</span>
@@ -419,8 +422,8 @@ tr:hover td{background:var(--s50)}
 <div class="stat-info"><h3 id="dashAnnouncements">0</h3><p>Announcements</p></div>
 </div>
 <div class="stat-card">
-<div class="stat-icon green"><i class="fas fa-briefcase"></i></div>
-<div class="stat-info"><h3 id="dashServices">0</h3><p>Sarkari Services</p></div>
+<div class="stat-icon purple"><i class="fas fa-image"></i></div>
+<div class="stat-info"><h3 id="dashPopups">0</h3><p>Image Popups</p></div>
 </div>
 <div class="stat-card">
 <div class="stat-icon pink"><i class="fas fa-users"></i></div>
@@ -459,11 +462,11 @@ tr:hover td{background:var(--s50)}
 <button class="btn" onclick="openAnnModal()" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#f59e0b,#d97706)">
 <i class="fas fa-bullhorn"></i> New Announcement
 </button>
+<button class="btn" onclick="openPopupModal()" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#8b5cf6,#6d28d9)">
+<i class="fas fa-image"></i> New Image Popup
+</button>
 <button class="btn btn-g" onclick="openServiceModal()" style="justify-content:center;padding:16px">
 <i class="fas fa-plus-circle"></i> Add Service
-</button>
-<button class="btn" onclick="openUserModal()" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#8b5cf6,#6d28d9)">
-<i class="fas fa-user-plus"></i> Add User
 </button>
 </div>
 </div>
@@ -487,7 +490,7 @@ tr:hover td{background:var(--s50)}
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th style="width:70px">Image</th><th>Title</th><th>Category</th><th>Last Date</th><th style="width:180px">Actions</th></tr>
+<tr><th style="width:80px">Image</th><th>Title</th><th>Category</th><th>Last Date</th><th style="width:180px">Actions</th></tr>
 </thead>
 <tbody id="postsTable"><tr><td colspan="5"><div class="spinner"></div></td></tr></tbody>
 </table>
@@ -495,9 +498,7 @@ tr:hover td{background:var(--s50)}
 </div>
 </div>
 
-<!-- ==========================================
-     ANNOUNCEMENTS SECTION (NEW)
-     ========================================== -->
+<!-- ANNOUNCEMENTS SECTION -->
 <div id="secAnnouncements" class="section">
 <div class="card">
 <div class="card-head">
@@ -506,9 +507,8 @@ tr:hover td{background:var(--s50)}
 </div>
 
 <div class="info-box">
-<strong><i class="fas fa-info-circle"></i> Live Announcement Bar</strong>
-Yahan se aap website ke top par ek scrolling announcement bar show kar sakte hain — jaise "Result Live!", "New Job Apply Start", "Admit Card Released" etc.
-Aap multiple announcements add kar sakte hain, wo auto-rotate honge.
+<strong><i class="fas fa-info-circle"></i> Live Announcement Bar (Multi-line)</strong>
+Yahan se aap website ke top par scrolling announcement bar show kar sakte hain. Ek announcement mein <b>multiple lines</b> add kar sakte hain.
 </div>
 
 <div class="table-wrap">
@@ -517,18 +517,18 @@ Aap multiple announcements add kar sakte hain, wo auto-rotate honge.
 <tr>
 <th style="width:60px">Active</th>
 <th>Title</th>
+<th>Lines</th>
 <th>Type</th>
 <th>Priority</th>
 <th>Schedule</th>
-<th style="width:200px">Actions</th>
+<th style="width:180px">Actions</th>
 </tr>
 </thead>
-<tbody id="annTable"><tr><td colspan="6"><div class="spinner"></div></td></tr></tbody>
+<tbody id="annTable"><tr><td colspan="7"><div class="spinner"></div></td></tr></tbody>
 </table>
 </div>
 </div>
 
-<!-- Announcement Preview -->
 <div class="card">
 <div class="card-head">
 <span><i class="fas fa-eye"></i> Live Preview</span>
@@ -543,6 +543,50 @@ Aap multiple announcements add kar sakte hain, wo auto-rotate honge.
 </div>
 </div>
 
+<!-- IMAGE POPUPS SECTION -->
+<div id="secPopups" class="section">
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-image"></i> Image Popup Manager</span>
+<button class="btn" onclick="openPopupModal()" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)"><i class="fas fa-plus"></i> New Popup</button>
+</div>
+
+<div class="info-box">
+<strong><i class="fas fa-info-circle"></i> Image Popup / Banner</strong>
+Yeh feature website load hone par ek <b>full-image popup modal</b> show karta hai — jaise koi result link, advertisement, ya special notice.
+User <b>ek baar close karega to 24 ghante tak nahi dikhega</b> (per-user memory).
+</div>
+
+<div class="warn-box">
+<strong><i class="fas fa-lightbulb"></i> Important Tips</strong>
+<ul style="margin:6px 0 0 20px;color:#92400e">
+<li><b>Image URL:</b> Full URL with <code>https://</code> (example: <code>https://i.imgur.com/abc.jpg</code>)</li>
+<li><b>Test:</b> Browser mein URL paste karke pehle check karein ki image khul rahi hai ya nahi</li>
+<li><b>Recommended size:</b> 800x600 or 1200x900 pixels</li>
+<li><b>Format:</b> JPG, PNG, WEBP — sab chalega</li>
+<li><b>Ek baar mein sirf 1 popup active rakhein</b> — multiple active mein top priority wala show hoga</li>
+</ul>
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th style="width:100px">Preview</th>
+<th>Title</th>
+<th>Type</th>
+<th>Priority</th>
+<th>Schedule</th>
+<th>Show Once</th>
+<th style="width:200px">Actions</th>
+</tr>
+</thead>
+<tbody id="popupTable"><tr><td colspan="7"><div class="spinner"></div></td></tr></tbody>
+</table>
+</div>
+</div>
+</div>
+
 <!-- SERVICES SECTION -->
 <div id="secServices" class="section">
 <div class="card">
@@ -552,7 +596,6 @@ Aap multiple announcements add kar sakte hain, wo auto-rotate honge.
 </div>
 <p style="font-size:.86rem;color:var(--s500);margin-bottom:18px;line-height:1.7">
 Yahan se aap website ke <b>Sarkari Kaam section</b> ke sabhi services add/edit/delete kar sakte hain.
-Har service mein multiple official links, steps, aur documents add kar sakte hain.
 </p>
 <div class="table-wrap">
 <table>
@@ -583,9 +626,7 @@ Har service mein multiple official links, steps, aur documents add kar sakte hai
 </div>
 </div>
 
-<!-- ==========================================
-     USER MANAGEMENT SECTION
-     ========================================== -->
+<!-- USER MANAGEMENT SECTION -->
 <div id="secUsers" class="section">
 <div class="card">
 <div class="card-head">
@@ -595,44 +636,24 @@ Har service mein multiple official links, steps, aur documents add kar sakte hai
 
 <div class="info-box">
 <strong><i class="fas fa-info-circle"></i> User Roles & Permissions</strong>
-Yahan se aap apni team ke members add kar sakte hain aur unke roles assign kar sakte hain.
 <ul style="margin:8px 0 0 20px;color:var(--p700)">
 <li><b>Admin:</b> Full access — sab kuch manage kar sakta hai</li>
-<li><b>Editor:</b> Posts, Services, Categories manage kar sakta hai (Settings/Users nahi)</li>
-<li><b>Viewer:</b> Sirf view kar sakta hai, kuch change nahi kar sakta</li>
+<li><b>Editor:</b> Posts, Services, Categories manage kar sakta hai</li>
+<li><b>Viewer:</b> Sirf view kar sakta hai</li>
 </ul>
 </div>
 
 <div class="stat-mini-grid">
-<div class="stat-mini">
-<div class="num" id="userStatTotal">0</div>
-<div class="lbl">Total Users</div>
-</div>
-<div class="stat-mini">
-<div class="num" id="userStatAdmins" style="color:#dc2626">0</div>
-<div class="lbl">Admins</div>
-</div>
-<div class="stat-mini">
-<div class="num" id="userStatEditors" style="color:#2563eb">0</div>
-<div class="lbl">Editors</div>
-</div>
-<div class="stat-mini">
-<div class="num" id="userStatViewers" style="color:#64748b">0</div>
-<div class="lbl">Viewers</div>
-</div>
+<div class="stat-mini"><div class="num" id="userStatTotal">0</div><div class="lbl">Total Users</div></div>
+<div class="stat-mini"><div class="num" id="userStatAdmins" style="color:#dc2626">0</div><div class="lbl">Admins</div></div>
+<div class="stat-mini"><div class="num" id="userStatEditors" style="color:#2563eb">0</div><div class="lbl">Editors</div></div>
+<div class="stat-mini"><div class="num" id="userStatViewers" style="color:#64748b">0</div><div class="lbl">Viewers</div></div>
 </div>
 
 <div class="table-wrap">
 <table>
 <thead>
-<tr>
-<th style="width:220px">User</th>
-<th>Email</th>
-<th>Role</th>
-<th>Status</th>
-<th>Created</th>
-<th style="width:200px">Actions</th>
-</tr>
+<tr><th style="width:220px">User</th><th>Email</th><th>Role</th><th>Status</th><th>Created</th><th style="width:200px">Actions</th></tr>
 </thead>
 <tbody id="usersTable"><tr><td colspan="6"><div class="spinner"></div></td></tr></tbody>
 </table>
@@ -650,29 +671,25 @@ Yahan se aap apni team ke members add kar sakte hain aur unke roles assign kar s
 <div class="info-box">
 <strong><i class="fas fa-info-circle"></i> AdSense Setup Guide</strong>
 Apna Publisher ID aur Ad Slot IDs yahan enter karein. Ye automatically website par apply ho jayenge.
-AdSense account ke liye <a href="https://adsense.google.com" target="_blank" style="color:var(--p600);font-weight:700">adsense.google.com</a> par jayein.
 </div>
 
 <div class="form-group">
 <label>AdSense Publisher ID <span class="req">*</span></label>
 <input type="text" id="ads_client" placeholder="ca-pub-1234567890123456">
-<span class="hint">Format: ca-pub-XXXXXXXXXXXXXXXX (AdSense Dashboard → Account → Account Information)</span>
+<span class="hint">Format: ca-pub-XXXXXXXXXXXXXXXX</span>
 </div>
 
 <div class="form-row">
 <div class="form-group">
 <label>Auto Ads Enabled?</label>
-<select id="ads_auto">
-<option value="no">No</option>
-<option value="yes">Yes (Recommended)</option>
-</select>
+<select id="ads_auto"><option value="no">No</option><option value="yes">Yes (Recommended)</option></select>
 </div>
 <div class="form-group">
 <label>Ad Frequency</label>
 <select id="ads_freq">
-<option value="low">Low (Less ads, better UX)</option>
-<option value="medium" selected>Medium (Balanced)</option>
-<option value="high">High (Max revenue)</option>
+<option value="low">Low</option>
+<option value="medium" selected>Medium</option>
+<option value="high">High</option>
 </select>
 </div>
 </div>
@@ -682,65 +699,27 @@ AdSense account ke liye <a href="https://adsense.google.com" target="_blank" sty
 </h3>
 
 <div class="form-row">
-<div class="form-group">
-<label>Top Banner Ad Slot</label>
-<input type="text" id="ads_slot_top" placeholder="1234567890">
-<span class="hint">Homepage top par dikhega (728x90)</span>
+<div class="form-group"><label>Top Banner Ad Slot</label><input type="text" id="ads_slot_top" placeholder="1234567890"></div>
+<div class="form-group"><label>Mid Content Ad Slot</label><input type="text" id="ads_slot_mid" placeholder="1234567890"></div>
 </div>
-<div class="form-group">
-<label>Mid Content Ad Slot</label>
-<input type="text" id="ads_slot_mid" placeholder="1234567890">
-<span class="hint">Posts grid ke beech</span>
-</div>
-</div>
-
 <div class="form-row">
-<div class="form-group">
-<label>Sidebar Ad Slot</label>
-<input type="text" id="ads_slot_side" placeholder="1234567890">
-<span class="hint">Right sidebar (300x250)</span>
+<div class="form-group"><label>Sidebar Ad Slot</label><input type="text" id="ads_slot_side" placeholder="1234567890"></div>
+<div class="form-group"><label>Bottom Ad Slot</label><input type="text" id="ads_slot_bottom" placeholder="1234567890"></div>
 </div>
-<div class="form-group">
-<label>Bottom Ad Slot</label>
-<input type="text" id="ads_slot_bottom" placeholder="1234567890">
-<span class="hint">Content ke neeche</span>
-</div>
-</div>
-
 <div class="form-group">
 <label>In-Article Ad Slot (Post pages)</label>
 <input type="text" id="ads_slot_article" placeholder="1234567890">
-<span class="hint">Post ke andar 2-3 ads ke liye</span>
 </div>
 
 <h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
 <i class="fas fa-toggle-on" style="color:var(--p600)"></i> Ad Position Toggles
 </h3>
 
-<div class="toggle-row">
-<div class="label"><i class="fas fa-arrow-up"></i><div>Top Banner<span class="desc">Homepage top par</span></div></div>
-<div class="switch on" onclick="toggleSwitch(this)" data-key="ad_top"></div>
-</div>
-
-<div class="toggle-row">
-<div class="label"><i class="fas fa-align-center"></i><div>Mid Content<span class="desc">Posts grid ke beech</span></div></div>
-<div class="switch on" onclick="toggleSwitch(this)" data-key="ad_mid"></div>
-</div>
-
-<div class="toggle-row">
-<div class="label"><i class="fas fa-columns"></i><div>Sidebar Ads<span class="desc">Right sidebar</span></div></div>
-<div class="switch on" onclick="toggleSwitch(this)" data-key="ad_side"></div>
-</div>
-
-<div class="toggle-row">
-<div class="label"><i class="fas fa-arrow-down"></i><div>Bottom Ad<span class="desc">Content ke neeche</span></div></div>
-<div class="switch on" onclick="toggleSwitch(this)" data-key="ad_bottom"></div>
-</div>
-
-<div class="toggle-row">
-<div class="label"><i class="fas fa-file-alt"></i><div>In-Article Ads<span class="desc">Post pages ke andar</span></div></div>
-<div class="switch on" onclick="toggleSwitch(this)" data-key="ad_article"></div>
-</div>
+<div class="toggle-row"><div class="label"><i class="fas fa-arrow-up"></i><div>Top Banner<span class="desc">Homepage top par</span></div></div><div class="switch on" onclick="toggleSwitch(this)" data-key="ad_top"></div></div>
+<div class="toggle-row"><div class="label"><i class="fas fa-align-center"></i><div>Mid Content<span class="desc">Posts grid ke beech</span></div></div><div class="switch on" onclick="toggleSwitch(this)" data-key="ad_mid"></div></div>
+<div class="toggle-row"><div class="label"><i class="fas fa-columns"></i><div>Sidebar Ads<span class="desc">Right sidebar</span></div></div><div class="switch on" onclick="toggleSwitch(this)" data-key="ad_side"></div></div>
+<div class="toggle-row"><div class="label"><i class="fas fa-arrow-down"></i><div>Bottom Ad<span class="desc">Content ke neeche</span></div></div><div class="switch on" onclick="toggleSwitch(this)" data-key="ad_bottom"></div></div>
+<div class="toggle-row"><div class="label"><i class="fas fa-file-alt"></i><div>In-Article Ads<span class="desc">Post pages ke andar</span></div></div><div class="switch on" onclick="toggleSwitch(this)" data-key="ad_article"></div></div>
 
 <button class="btn btn-g" onclick="saveAdsense()" style="padding:14px 28px;margin-top:14px">
 <i class="fas fa-save"></i> Save AdSense Configuration
@@ -749,56 +728,15 @@ AdSense account ke liye <a href="https://adsense.google.com" target="_blank" sty
 
 <div class="card">
 <div class="card-head">
-<span><i class="fas fa-book"></i> AdSense Approval Guide</span>
+<span><i class="fas fa-book"></i> AdSense Approval Checklist</span>
 </div>
 
-<div class="guide-step">
-<div class="guide-num">1</div>
-<div class="guide-content">
-<h4>Required Pages Banayein</h4>
-<p>About Us, Contact Us, Privacy Policy, Disclaimer, Terms & Conditions — ye 5 pages zaroor honi chahiye.</p>
-</div>
-</div>
-
-<div class="guide-step">
-<div class="guide-num">2</div>
-<div class="guide-content">
-<h4>20+ Quality Posts Publish Karein</h4>
-<p>Har post minimum <b>800+ words</b> ka ho. Original content likhein — copy-paste bilkul na karein.</p>
-</div>
-</div>
-
-<div class="guide-step">
-<div class="guide-num">3</div>
-<div class="guide-content">
-<h4>Traffic Generate Karein</h4>
-<p>Google Search Console mein site submit karein. WhatsApp, Facebook, Telegram par content share karein.</p>
-</div>
-</div>
-
-<div class="guide-step">
-<div class="guide-num">4</div>
-<div class="guide-content">
-<h4>AdSense Apply Karein</h4>
-<p><a href="https://adsense.google.com" target="_blank" style="color:var(--p600);font-weight:700">adsense.google.com</a> par jayein → Sign up → Site URL add karein → Wait for approval (1-2 weeks).</p>
-</div>
-</div>
-
-<div class="guide-step">
-<div class="guide-num">5</div>
-<div class="guide-content">
-<h4>Publisher ID Copy Karein</h4>
-<p>Approval ke baad AdSense Dashboard → Account → Account Information mein <code>ca-pub-XXXXXXXX</code> milega. Ye upar wale field mein paste karein.</p>
-</div>
-</div>
-
-<div class="guide-step">
-<div class="guide-num">6</div>
-<div class="guide-content">
-<h4>Ad Units Create Karein</h4>
-<p>AdSense Dashboard → Ads → By ad unit → Create new ad unit → Display ads → Copy the <code>data-ad-slot</code> number.</p>
-</div>
-</div>
+<div class="guide-step"><div class="guide-num">1</div><div class="guide-content"><h4>Required Pages</h4><p>About Us, Contact Us, Privacy Policy, Disclaimer, Terms & Conditions — ye 5 pages zaroor honi chahiye.</p></div></div>
+<div class="guide-step"><div class="guide-num">2</div><div class="guide-content"><h4>20+ Quality Posts</h4><p>Har post minimum <b>800+ words</b>. Original content — copy-paste bilkul na karein.</p></div></div>
+<div class="guide-step"><div class="guide-num">3</div><div class="guide-content"><h4>Traffic Generate Karein</h4><p>Google Search Console, Facebook, WhatsApp, Telegram par content share karein.</p></div></div>
+<div class="guide-step"><div class="guide-num">4</div><div class="guide-content"><h4>AdSense Apply Karein</h4><p><a href="https://adsense.google.com" target="_blank" style="color:var(--p600);font-weight:700">adsense.google.com</a> → Sign up → Site URL add → Wait 1-2 weeks.</p></div></div>
+<div class="guide-step"><div class="guide-num">5</div><div class="guide-content"><h4>Publisher ID Copy</h4><p>AdSense Dashboard → Account → Account Information → <code>ca-pub-XXXXXXXX</code></p></div></div>
+<div class="guide-step"><div class="guide-num">6</div><div class="guide-content"><h4>Ad Units Create</h4><p>AdSense Dashboard → Ads → By ad unit → Create new → Display ads → Copy <code>data-ad-slot</code>.</p></div></div>
 </div>
 </div>
 
@@ -812,104 +750,38 @@ AdSense account ke liye <a href="https://adsense.google.com" target="_blank" sty
 <div class="info-box">
 <strong><i class="fas fa-info-circle"></i> SEO Configuration</strong>
 Ye settings Google Search mein aapki website ko rank karne mein help karti hain.
-Har page ke liye proper meta tags auto-apply honge.
 </div>
 
-<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:8px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
-<i class="fas fa-home" style="color:var(--p600)"></i> Homepage Meta
-</h3>
+<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:8px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)"><i class="fas fa-home" style="color:var(--p600)"></i> Homepage Meta</h3>
 
-<div class="form-group">
-<label>Meta Title <span class="req">*</span></label>
-<input type="text" id="seo_home_title" placeholder="esewahub.in - Sarkari Job, Result, Yojna 2026">
-<span class="hint">50-60 characters recommended</span>
-</div>
+<div class="form-group"><label>Meta Title <span class="req">*</span></label><input type="text" id="seo_home_title" placeholder="esewahub.in - Sarkari Job, Result, Yojna 2026"><span class="hint">50-60 characters</span></div>
+<div class="form-group"><label>Meta Description <span class="req">*</span></label><textarea id="seo_home_desc" style="min-height:80px" placeholder="India's trusted portal for latest Sarkari Job notifications..."></textarea><span class="hint">150-160 characters</span></div>
+<div class="form-group"><label>Meta Keywords</label><textarea id="seo_home_keywords" style="min-height:60px" placeholder="sarkari job, sarkari result, government jobs..."></textarea><span class="hint">Comma se separate karein</span></div>
 
-<div class="form-group">
-<label>Meta Description <span class="req">*</span></label>
-<textarea id="seo_home_desc" style="min-height:80px" placeholder="India's trusted portal for latest Sarkari Job notifications..."></textarea>
-<span class="hint">150-160 characters recommended</span>
-</div>
-
-<div class="form-group">
-<label>Meta Keywords</label>
-<textarea id="seo_home_keywords" style="min-height:60px" placeholder="sarkari job, sarkari result, government jobs..."></textarea>
-<span class="hint">Comma se separate karein</span>
-</div>
-
-<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
-<i class="fas fa-globe" style="color:var(--p600)"></i> Site Information
-</h3>
+<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)"><i class="fas fa-globe" style="color:var(--p600)"></i> Site Information</h3>
 
 <div class="form-row">
-<div class="form-group">
-<label>Site URL</label>
-<input type="text" id="seo_site_url" placeholder="https://esewahub.in">
-<span class="hint">Full URL with https://</span>
-</div>
-<div class="form-group">
-<label>Site Language</label>
-<select id="seo_lang">
-<option value="en">English</option>
-<option value="hi">Hindi</option>
-<option value="en-IN" selected>English (India)</option>
-</select>
-</div>
+<div class="form-group"><label>Site URL</label><input type="text" id="seo_site_url" placeholder="https://esewahub.in"></div>
+<div class="form-group"><label>Site Language</label><select id="seo_lang"><option value="en">English</option><option value="hi">Hindi</option><option value="en-IN" selected>English (India)</option></select></div>
 </div>
 
 <div class="form-row">
-<div class="form-group">
-<label>Author Name</label>
-<input type="text" id="seo_author" placeholder="esewahub.in">
-</div>
-<div class="form-group">
-<label>Robots</label>
-<select id="seo_robots">
-<option value="index, follow" selected>Index, Follow (Recommended)</option>
-<option value="noindex, nofollow">No Index, No Follow</option>
-<option value="index, nofollow">Index, No Follow</option>
-</select>
-</div>
+<div class="form-group"><label>Author Name</label><input type="text" id="seo_author" placeholder="esewahub.in"></div>
+<div class="form-group"><label>Robots</label><select id="seo_robots"><option value="index, follow" selected>Index, Follow</option><option value="noindex, nofollow">No Index, No Follow</option><option value="index, nofollow">Index, No Follow</option></select></div>
 </div>
 
-<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
-<i class="fab fa-facebook" style="color:var(--p600)"></i> Open Graph (Facebook/WhatsApp)
-</h3>
+<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)"><i class="fab fa-facebook" style="color:var(--p600)"></i> Open Graph</h3>
 
-<div class="form-group">
-<label>OG Title</label>
-<input type="text" id="seo_og_title" placeholder="Leave empty to use Meta Title">
-</div>
+<div class="form-group"><label>OG Title</label><input type="text" id="seo_og_title" placeholder="Leave empty to use Meta Title"></div>
+<div class="form-group"><label>OG Description</label><textarea id="seo_og_desc" style="min-height:70px" placeholder="Leave empty to use Meta Description"></textarea></div>
+<div class="form-group"><label>OG Image URL</label><input type="text" id="seo_og_image" placeholder="https://example.com/image.jpg"><span class="hint">1200x630 px</span></div>
 
-<div class="form-group">
-<label>OG Description</label>
-<textarea id="seo_og_desc" style="min-height:70px" placeholder="Leave empty to use Meta Description"></textarea>
-</div>
+<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)"><i class="fas fa-check-double" style="color:var(--p600)"></i> Verification</h3>
 
-<div class="form-group">
-<label>OG Image URL</label>
-<input type="text" id="seo_og_image" placeholder="https://example.com/image.jpg">
-<span class="hint">1200x630 px recommended</span>
-</div>
+<div class="form-group"><label>Google Search Console Verification Code</label><input type="text" id="seo_gsc" placeholder="abc123xyz..."></div>
+<div class="form-group"><label>Bing Webmaster Verification</label><input type="text" id="seo_bing" placeholder="Verification code"></div>
 
-<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
-<i class="fas fa-check-double" style="color:var(--p600)"></i> Verification
-</h3>
-
-<div class="form-group">
-<label>Google Search Console Verification Code</label>
-<input type="text" id="seo_gsc" placeholder="abc123xyz...">
-<span class="hint">Search Console → Settings → Verification → HTML tag → content value</span>
-</div>
-
-<div class="form-group">
-<label>Bing Webmaster Verification</label>
-<input type="text" id="seo_bing" placeholder="Verification code">
-</div>
-
-<button class="btn btn-g" onclick="saveSEO()" style="padding:14px 28px">
-<i class="fas fa-save"></i> Save SEO Settings
-</button>
+<button class="btn btn-g" onclick="saveSEO()" style="padding:14px 28px"><i class="fas fa-save"></i> Save SEO Settings</button>
 </div>
 </div>
 
@@ -922,36 +794,15 @@ Har page ke liye proper meta tags auto-apply honge.
 
 <div class="info-box">
 <strong><i class="fas fa-info-circle"></i> Analytics Setup</strong>
-Google Analytics aur other tracking IDs yahan add karein. Ye automatically website par inject ho jayenge.
+Google Analytics aur other tracking IDs yahan add karein.
 </div>
 
-<div class="form-group">
-<label>Google Analytics ID (GA4)</label>
-<input type="text" id="an_ga4" placeholder="G-XXXXXXXXXX">
-<span class="hint">analytics.google.com → Admin → Data Streams → Measurement ID</span>
-</div>
+<div class="form-group"><label>Google Analytics ID (GA4)</label><input type="text" id="an_ga4" placeholder="G-XXXXXXXXXX"></div>
+<div class="form-group"><label>Google Tag Manager ID</label><input type="text" id="an_gtm" placeholder="GTM-XXXXXXX"></div>
+<div class="form-group"><label>Facebook Pixel ID</label><input type="text" id="an_fb" placeholder="1234567890"></div>
+<div class="form-group"><label>Microsoft Clarity ID</label><input type="text" id="an_clarity" placeholder="abcdefghij"></div>
 
-<div class="form-group">
-<label>Google Tag Manager ID</label>
-<input type="text" id="an_gtm" placeholder="GTM-XXXXXXX">
-<span class="hint">tagmanager.google.com → Container ID</span>
-</div>
-
-<div class="form-group">
-<label>Facebook Pixel ID</label>
-<input type="text" id="an_fb" placeholder="1234567890">
-<span class="hint">business.facebook.com → Events Manager → Pixel ID</span>
-</div>
-
-<div class="form-group">
-<label>Microsoft Clarity ID</label>
-<input type="text" id="an_clarity" placeholder="abcdefghij">
-<span class="hint">clarity.microsoft.com → Project ID</span>
-</div>
-
-<button class="btn btn-g" onclick="saveAnalytics()" style="padding:14px 28px">
-<i class="fas fa-save"></i> Save Analytics
-</button>
+<button class="btn btn-g" onclick="saveAnalytics()" style="padding:14px 28px"><i class="fas fa-save"></i> Save Analytics</button>
 </div>
 </div>
 
@@ -963,63 +814,29 @@ Google Analytics aur other tracking IDs yahan add karein. Ye automatically websi
 </div>
 
 <div class="form-row">
-<div class="form-group">
-<label>Portal Title</label>
-<input type="text" id="set_title" placeholder="esewahub.in">
-</div>
-<div class="form-group">
-<label>Tagline</label>
-<input type="text" id="set_tagline" placeholder="Sarkari Kaam & Digital Seva">
-</div>
+<div class="form-group"><label>Portal Title</label><input type="text" id="set_title" placeholder="esewahub.in"></div>
+<div class="form-group"><label>Tagline</label><input type="text" id="set_tagline" placeholder="Sarkari Kaam & Digital Seva"></div>
 </div>
 
 <div class="form-row">
-<div class="form-group">
-<label>WhatsApp Number</label>
-<input type="text" id="set_wa" placeholder="917056836166">
-<span class="hint">Country code ke saath, no spaces or + sign</span>
-</div>
-<div class="form-group">
-<label>Email Address</label>
-<input type="text" id="set_email" placeholder="info@esewahub.in">
-</div>
+<div class="form-group"><label>WhatsApp Number</label><input type="text" id="set_wa" placeholder="917056836166"></div>
+<div class="form-group"><label>Email Address</label><input type="text" id="set_email" placeholder="info@esewahub.in"></div>
 </div>
 
 <div class="form-row">
-<div class="form-group">
-<label>Address</label>
-<input type="text" id="set_address" placeholder="City, State, India">
-</div>
-<div class="form-group">
-<label>Copyright Text</label>
-<input type="text" id="set_copyright" placeholder="&copy; 2026 esewahub.in">
-</div>
+<div class="form-group"><label>Address</label><input type="text" id="set_address" placeholder="City, State, India"></div>
+<div class="form-group"><label>Copyright Text</label><input type="text" id="set_copyright" placeholder="&copy; 2026 esewahub.in"></div>
 </div>
 
 <div class="form-row">
-<div class="form-group">
-<label>Hero Title</label>
-<input type="text" id="set_hero_title" placeholder="🎯 India's Trusted Sarkari Portal">
-</div>
-<div class="form-group">
-<label>Hero Subtitle</label>
-<input type="text" id="set_hero_sub" placeholder="Description below hero title">
-</div>
+<div class="form-group"><label>Hero Title</label><input type="text" id="set_hero_title" placeholder="🎯 India's Trusted Sarkari Portal"></div>
+<div class="form-group"><label>Hero Subtitle</label><input type="text" id="set_hero_sub" placeholder="Description below hero title"></div>
 </div>
 
-<div class="form-group">
-<label>About Us</label>
-<textarea id="set_about" placeholder="Describe your center and mission..."></textarea>
-</div>
+<div class="form-group"><label>About Us</label><textarea id="set_about" placeholder="Describe your center and mission..."></textarea></div>
+<div class="form-group"><label>Footer Disclaimer</label><textarea id="set_disclaimer" placeholder="This website is not an official government website..."></textarea></div>
 
-<div class="form-group">
-<label>Footer Disclaimer</label>
-<textarea id="set_disclaimer" placeholder="This website is not an official government website..."></textarea>
-</div>
-
-<button class="btn btn-g" onclick="saveSettings()" style="padding:14px 28px">
-<i class="fas fa-save"></i> Save Site Settings
-</button>
+<button class="btn btn-g" onclick="saveSettings()" style="padding:14px 28px"><i class="fas fa-save"></i> Save Site Settings</button>
 </div>
 </div>
 
@@ -1030,46 +847,20 @@ Google Analytics aur other tracking IDs yahan add karein. Ye automatically websi
 <span><i class="fas fa-share-alt"></i> Social Media Links</span>
 </div>
 
-<p style="font-size:.86rem;color:var(--s500);margin-bottom:18px;line-height:1.7">
-Apne social media profiles ke URLs yahan add karein. Ye footer mein automatically show honge.
-</p>
-
 <div class="form-row">
-<div class="form-group">
-<label><i class="fab fa-facebook" style="color:#1877F2"></i> Facebook Page URL</label>
-<input type="text" id="soc_facebook" placeholder="https://facebook.com/yourpage">
+<div class="form-group"><label><i class="fab fa-facebook" style="color:#1877F2"></i> Facebook Page URL</label><input type="text" id="soc_facebook" placeholder="https://facebook.com/yourpage"></div>
+<div class="form-group"><label><i class="fab fa-twitter" style="color:#1DA1F2"></i> Twitter / X URL</label><input type="text" id="soc_twitter" placeholder="https://twitter.com/yourhandle"></div>
 </div>
-<div class="form-group">
-<label><i class="fab fa-twitter" style="color:#1DA1F2"></i> Twitter / X URL</label>
-<input type="text" id="soc_twitter" placeholder="https://twitter.com/yourhandle">
-</div>
-</div>
-
 <div class="form-row">
-<div class="form-group">
-<label><i class="fab fa-instagram" style="color:#E4405F"></i> Instagram URL</label>
-<input type="text" id="soc_instagram" placeholder="https://instagram.com/yourhandle">
+<div class="form-group"><label><i class="fab fa-instagram" style="color:#E4405F"></i> Instagram URL</label><input type="text" id="soc_instagram" placeholder="https://instagram.com/yourhandle"></div>
+<div class="form-group"><label><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube Channel URL</label><input type="text" id="soc_youtube" placeholder="https://youtube.com/@yourchannel"></div>
 </div>
-<div class="form-group">
-<label><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube Channel URL</label>
-<input type="text" id="soc_youtube" placeholder="https://youtube.com/@yourchannel">
-</div>
-</div>
-
 <div class="form-row">
-<div class="form-group">
-<label><i class="fab fa-telegram-plane" style="color:#0088cc"></i> Telegram Channel URL</label>
-<input type="text" id="soc_telegram" placeholder="https://t.me/yourchannel">
-</div>
-<div class="form-group">
-<label><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp Channel URL</label>
-<input type="text" id="soc_whatsapp_ch" placeholder="https://whatsapp.com/channel/...">
-</div>
+<div class="form-group"><label><i class="fab fa-telegram-plane" style="color:#0088cc"></i> Telegram Channel URL</label><input type="text" id="soc_telegram" placeholder="https://t.me/yourchannel"></div>
+<div class="form-group"><label><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp Channel URL</label><input type="text" id="soc_whatsapp_ch" placeholder="https://whatsapp.com/channel/..."></div>
 </div>
 
-<button class="btn btn-g" onclick="saveSocial()" style="padding:14px 28px">
-<i class="fas fa-save"></i> Save Social Links
-</button>
+<button class="btn btn-g" onclick="saveSocial()" style="padding:14px 28px"><i class="fas fa-save"></i> Save Social Links</button>
 </div>
 </div>
 
@@ -1082,36 +873,22 @@ Apne social media profiles ke URLs yahan add karein. Ye footer mein automaticall
 
 <div class="warn-box">
 <strong><i class="fas fa-exclamation-triangle"></i> Warning!</strong>
-Ye advanced feature hai. Sirf tab use karein jab aapko HTML/CSS/JS ka knowledge ho.
-Galat code website break kar sakta hai.
+Sirf tab use karein jab aapko HTML/CSS/JS ka knowledge ho.
 </div>
 
-<div class="form-group">
-<label>Custom Code in &lt;head&gt; Section</label>
-<textarea id="custom_head" placeholder="<!-- Custom meta tags, CSS, or scripts -->" style="min-height:140px;font-family:monospace;font-size:.82rem"></textarea>
-<span class="hint">Example: Verification meta tags, custom CSS, head scripts</span>
-</div>
+<div class="form-group"><label>Custom Code in &lt;head&gt; Section</label><textarea id="custom_head" style="min-height:140px;font-family:monospace;font-size:.82rem"></textarea></div>
+<div class="form-group"><label>Custom Code Before &lt;/body&gt;</label><textarea id="custom_body" style="min-height:140px;font-family:monospace;font-size:.82rem"></textarea></div>
 
-<div class="form-group">
-<label>Custom Code Before &lt;/body&gt;</label>
-<textarea id="custom_body" placeholder="<!-- Custom scripts before body close -->" style="min-height:140px;font-family:monospace;font-size:.82rem"></textarea>
-<span class="hint">Example: Chat widgets, tracking scripts, custom JS</span>
-</div>
-
-<button class="btn btn-g" onclick="saveCustom()" style="padding:14px 28px">
-<i class="fas fa-save"></i> Save Custom Code
-</button>
+<button class="btn btn-g" onclick="saveCustom()" style="padding:14px 28px"><i class="fas fa-save"></i> Save Custom Code</button>
 </div>
 </div>
 
 </div>
 </div>
 
-<!-- ==========================================
-     ANNOUNCEMENT MODAL (NEW)
-     ========================================== -->
+<!-- ANNOUNCEMENT MODAL -->
 <div id="annModal" class="modal">
-<div class="modal-box" style="max-width:640px">
+<div class="modal-box" style="max-width:720px">
 <div class="modal-head">
 <h2><i class="fas fa-bullhorn"></i> <span id="annModalTitle">New Announcement</span></h2>
 <button class="modal-close" onclick="closeModal('annModal')"><i class="fas fa-times"></i></button>
@@ -1125,19 +902,27 @@ Galat code website break kar sakta hai.
 <span class="hint">Short, attention-grabbing title — emoji use kar sakte hain</span>
 </div>
 
-<div class="form-group">
-<label>Full Message <span class="req">*</span></label>
-<textarea id="an_msg" placeholder="e.g. SSC CGL Tier 1 Result ab live hai. Apna scorecard abhi check karein!" style="min-height:70px"></textarea>
-<span class="hint">Ye text announcement bar mein scroll hoga</span>
+<div class="multiline-builder">
+<div class="multiline-builder-head">
+<label><i class="fas fa-list" style="color:var(--p600)"></i> Announcement Lines (Multi-line)</label>
+<span class="line-counter" id="an_lineCounter">1 line</span>
+</div>
+<div id="an_linesContainer"></div>
+<button type="button" class="add-line-btn" onclick="addAnnLineRow()">
+<i class="fas fa-plus-circle"></i> Add Another Line
+</button>
+<span class="hint" style="margin-top:8px;display:block">
+Har line alag-alag scroll hogi.
+</span>
 </div>
 
 <div class="form-row">
 <div class="form-group">
 <label>Type / Category <span class="req">*</span></label>
 <select id="an_type" onchange="updateAnnPreview()">
-<option value="live">🔴 LIVE (Red) — Results/Exams</option>
-<option value="job">💼 Job (Blue) — New Job Openings</option>
-<option value="yojna">🌾 Yojna (Green) — Schemes</option>
+<option value="live">🔴 LIVE (Red)</option>
+<option value="job">💼 Job (Blue)</option>
+<option value="yojna">🌾 Yojna (Green)</option>
 <option value="admit">🎫 Admit Card (Purple)</option>
 <option value="important">⚠️ Important (Orange)</option>
 <option value="info">ℹ️ Info (Gray)</option>
@@ -1155,22 +940,13 @@ Galat code website break kar sakta hai.
 </div>
 
 <div class="form-group">
-<label>🔗 Link URL (Optional)</label>
+<label>🔗 Main Link URL (Optional)</label>
 <input type="url" id="an_link" placeholder="https://example.com/result-page">
-<span class="hint">Agar diya, to user click karke direct is page par ja sakta hai</span>
 </div>
 
 <div class="form-row">
-<div class="form-group">
-<label>Start Date (Optional)</label>
-<input type="datetime-local" id="an_start">
-<span class="hint">Khaali chhodein = abhi se</span>
-</div>
-<div class="form-group">
-<label>End Date (Optional)</label>
-<input type="datetime-local" id="an_end">
-<span class="hint">Khaali chhodein = manually band karne tak</span>
-</div>
+<div class="form-group"><label>Start Date (Optional)</label><input type="datetime-local" id="an_start"></div>
+<div class="form-group"><label>End Date (Optional)</label><input type="datetime-local" id="an_end"></div>
 </div>
 
 <div class="toggle-row">
@@ -1185,9 +961,92 @@ Galat code website break kar sakta hai.
 </div>
 </div>
 
-<!-- ==========================================
-     POST MODAL (WITH MULTI-LINK BUILDER)
-     ========================================== -->
+<!-- IMAGE POPUP MODAL -->
+<div id="popupModal" class="modal">
+<div class="modal-box" style="max-width:720px">
+<div class="modal-head">
+<h2><i class="fas fa-image"></i> <span id="popupModalTitle">New Image Popup</span></h2>
+<button class="modal-close" onclick="closeModal('popupModal')"><i class="fas fa-times"></i></button>
+</div>
+
+<input type="hidden" id="pop_id">
+
+<div class="form-group">
+<label>Popup Title <span class="req">*</span></label>
+<input type="text" id="pop_title" placeholder="e.g. 🎉 New Result Released!">
+</div>
+
+<div class="form-group">
+<label>Popup Message</label>
+<textarea id="pop_msg" placeholder="Short description shown below title..." style="min-height:70px"></textarea>
+</div>
+
+<div class="form-group">
+<label>🖼️ Image URL <span class="req">*</span></label>
+<input type="url" id="pop_image" placeholder="https://i.imgur.com/yourimage.jpg">
+<span class="hint">Full URL with https:// — Recommended: 800x600 or 1200x900 px</span>
+</div>
+<div class="image-preview" id="pop_imagePreview">
+<button type="button" class="remove-img" onclick="removePopupImage()"><i class="fas fa-times"></i></button>
+<img id="pop_imagePreviewImg" alt="Preview" onerror="this.style.display='none'">
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Button Text</label>
+<input type="text" id="pop_btnText" placeholder="e.g. View Result" value="View More">
+</div>
+<div class="form-group">
+<label>Button Link</label>
+<input type="url" id="pop_btnLink" placeholder="https://example.com/result">
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Type / Theme</label>
+<select id="pop_type">
+<option value="live">🔴 LIVE (Red)</option>
+<option value="job">💼 Job (Blue)</option>
+<option value="yojna">🌾 Yojna (Green)</option>
+<option value="important">⚠️ Important (Orange)</option>
+<option value="info">ℹ️ Info (Purple)</option>
+</select>
+</div>
+<div class="form-group">
+<label>Priority</label>
+<select id="pop_priority">
+<option value="1">1 — Low</option>
+<option value="2">2 — Normal</option>
+<option value="3" selected>3 — High</option>
+<option value="4">4 — Urgent (Top)</option>
+</select>
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group"><label>Start Date (Optional)</label><input type="datetime-local" id="pop_start"></div>
+<div class="form-group"><label>End Date (Optional)</label><input type="datetime-local" id="pop_end"></div>
+</div>
+
+<div class="toggle-row">
+<div class="label"><i class="fas fa-eye-slash"></i><div>Show Once Per User<span class="desc">ON = user ek baar close kare to 24 hrs tak nahi dikhega</span></div></div>
+<div class="switch on" onclick="toggleSwitch(this)" id="pop_showOnce"></div>
+</div>
+
+<div class="toggle-row">
+<div class="label"><i class="fas fa-power-off"></i><div>Active Status<span class="desc">ON = website par dikhega</span></div></div>
+<div class="switch on" onclick="togglePopupActive(this)" id="pop_activeSwitch"></div>
+</div>
+
+<div class="modal-foot">
+<button class="btn btn-ghost" onclick="closeModal('popupModal')">Cancel</button>
+<button class="btn" onclick="savePopup()" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)"><i class="fas fa-paper-plane"></i> Save Popup</button>
+</div>
+</div>
+</div>
+
+<!-- POST MODAL -->
 <div id="postModal" class="modal">
 <div class="modal-box">
 <div class="modal-head">
@@ -1203,32 +1062,21 @@ Galat code website break kar sakta hai.
 </div>
 
 <div class="form-row">
-<div class="form-group">
-<label>Category</label>
-<select id="ep_cat"></select>
-</div>
-<div class="form-group">
-<label>Last Date</label>
-<input type="text" id="ep_date" placeholder="e.g. 25 Nov 2026 or N/A">
-</div>
+<div class="form-group"><label>Category</label><select id="ep_cat"></select></div>
+<div class="form-group"><label>Last Date</label><input type="text" id="ep_date" placeholder="e.g. 25 Nov 2026 or N/A"></div>
 </div>
 
 <div class="form-group">
 <label>📷 Featured Image URL</label>
 <input type="url" id="ep_image" placeholder="https://example.com/image.jpg">
-<span class="hint">Post ki featured image ka URL (1200x630 recommended). Image instantly preview hogi neeche.</span>
 </div>
 <div class="image-preview" id="ep_imagePreview">
 <button type="button" class="remove-img" onclick="removePostImage()"><i class="fas fa-times"></i></button>
 <img id="ep_imagePreviewImg" alt="Preview">
 </div>
 
-<div class="form-group">
-<label>Short Summary</label>
-<textarea id="ep_sum" style="min-height:70px" placeholder="Brief description shown on card..."></textarea>
-</div>
+<div class="form-group"><label>Short Summary</label><textarea id="ep_sum" style="min-height:70px" placeholder="Brief description shown on card..."></textarea></div>
 
-<!-- MULTI-LINK BUILDER -->
 <div class="link-builder">
 <div class="link-builder-head">
 <label><i class="fas fa-link" style="color:var(--p600)"></i> Official Links (Multiple)</label>
@@ -1238,30 +1086,15 @@ Galat code website break kar sakta hai.
 <button type="button" class="add-link-btn" onclick="addPostLinkRow()">
 <i class="fas fa-plus-circle"></i> Add Another Link
 </button>
-<span class="hint" style="margin-top:8px;display:block">
-Har link ke liye <b>Link Name</b> aur <b>URL</b> dono bharein. Example: "Apply Online" | "https://example.com/apply"
-</span>
 </div>
 
-<div class="form-group">
-<label>Eligibility Details</label>
-<textarea id="ep_edu" placeholder="One requirement per line:&#10;Graduate from recognized university&#10;Age: 18-35 years"></textarea>
-</div>
-
-<div class="form-group">
-<label>How to Apply</label>
-<textarea id="ep_steps" placeholder="One step per line:&#10;Visit official website&#10;Click on Apply Online&#10;Fill the application form"></textarea>
-</div>
-
-<div class="form-group">
-<label>Required Documents</label>
-<textarea id="ep_docs" placeholder="One document per line:&#10;Aadhar Card&#10;10th Marksheet&#10;Passport size photo"></textarea>
-</div>
+<div class="form-group"><label>Eligibility Details</label><textarea id="ep_edu" placeholder="One requirement per line..."></textarea></div>
+<div class="form-group"><label>How to Apply</label><textarea id="ep_steps" placeholder="One step per line..."></textarea></div>
+<div class="form-group"><label>Required Documents</label><textarea id="ep_docs" placeholder="One document per line..."></textarea></div>
 
 <div class="form-group">
 <label>FAQ (Optional)</label>
-<textarea id="ep_faq" placeholder="Format: Question|Answer (one per line)&#10;What is last date?|25 Nov 2026&#10;What is the fee?|₹500 for General"></textarea>
-<span class="hint">Format: Question|Answer — har line mein ek FAQ</span>
+<textarea id="ep_faq" placeholder="Format: Question|Answer (one per line)"></textarea>
 </div>
 
 <div class="modal-foot">
@@ -1271,9 +1104,7 @@ Har link ke liye <b>Link Name</b> aur <b>URL</b> dono bharein. Example: "Apply O
 </div>
 </div>
 
-<!-- ==========================================
-     SERVICE MODAL
-     ========================================== -->
+<!-- SERVICE MODAL -->
 <div id="serviceModal" class="modal">
 <div class="modal-box">
 <div class="modal-head">
@@ -1284,22 +1115,12 @@ Har link ke liye <b>Link Name</b> aur <b>URL</b> dono bharein. Example: "Apply O
 <input type="hidden" id="es_id">
 
 <div class="form-row">
-<div class="form-group">
-<label>Service Name <span class="req">*</span></label>
-<input type="text" id="es_name" placeholder="e.g. Aadhar Card">
-</div>
-<div class="form-group">
-<label>Subtitle</label>
-<input type="text" id="es_sub" placeholder="e.g. Update & Download">
-</div>
+<div class="form-group"><label>Service Name <span class="req">*</span></label><input type="text" id="es_name" placeholder="e.g. Aadhar Card"></div>
+<div class="form-group"><label>Subtitle</label><input type="text" id="es_sub" placeholder="e.g. Update & Download"></div>
 </div>
 
 <div class="form-row">
-<div class="form-group">
-<label>Font Awesome Icon</label>
-<input type="text" id="es_icon" placeholder="fa-id-card" value="fa-id-card">
-<span class="hint">Example: fa-id-card, fa-credit-card, fa-car</span>
-</div>
+<div class="form-group"><label>Font Awesome Icon</label><input type="text" id="es_icon" placeholder="fa-id-card" value="fa-id-card"></div>
 <div class="form-group">
 <label>Icon Color</label>
 <select id="es_color">
@@ -1328,32 +1149,19 @@ Har link ke liye <b>Link Name</b> aur <b>URL</b> dono bharein. Example: "Apply O
 <div class="form-group">
 <label>📷 Service Image URL</label>
 <input type="url" id="es_image" placeholder="https://example.com/service-image.jpg">
-<span class="hint">Service ki image ka URL (optional). Agar nahi diya to icon dikhega.</span>
 </div>
 <div class="image-preview" id="es_imagePreview">
 <button type="button" class="remove-img" onclick="removeServiceImage()"><i class="fas fa-times"></i></button>
 <img id="es_imagePreviewImg" alt="Preview">
 </div>
 
-<div class="form-group">
-<label>Description / About</label>
-<textarea id="es_about" placeholder="Short description of this service..." style="min-height:70px"></textarea>
-</div>
-
-<div class="form-group">
-<label>How to Apply (Steps)</label>
-<textarea id="es_steps" placeholder="One step per line:&#10;Visit official website&#10;Register with mobile number"></textarea>
-</div>
-
-<div class="form-group">
-<label>Required Documents</label>
-<textarea id="es_docs" placeholder="One document per line:&#10;Aadhar Card&#10;Photo&#10;Address Proof"></textarea>
-</div>
+<div class="form-group"><label>Description / About</label><textarea id="es_about" style="min-height:70px" placeholder="Short description..."></textarea></div>
+<div class="form-group"><label>How to Apply (Steps)</label><textarea id="es_steps" placeholder="One step per line..."></textarea></div>
+<div class="form-group"><label>Required Documents</label><textarea id="es_docs" placeholder="One document per line..."></textarea></div>
 
 <div class="form-group">
 <label>Official Links <span class="req">*</span></label>
-<textarea id="es_links" placeholder="Format: Link Name|URL (one per line)&#10;Apply Online|https://example.com/apply&#10;Check Status|https://example.com/status" style="min-height:140px"></textarea>
-<span class="hint">Format: <b>Link Name|URL</b> — Full URL ke saath https:// zaroor likhein</span>
+<textarea id="es_links" placeholder="Format: Link Name|URL" style="min-height:140px"></textarea>
 </div>
 
 <div class="modal-foot">
@@ -1363,9 +1171,7 @@ Har link ke liye <b>Link Name</b> aur <b>URL</b> dono bharein. Example: "Apply O
 </div>
 </div>
 
-<!-- ==========================================
-     USER MODAL
-     ========================================== -->
+<!-- USER MODAL -->
 <div id="userModal" class="modal">
 <div class="modal-box" style="max-width:620px">
 <div class="modal-head">
@@ -1376,35 +1182,19 @@ Har link ke liye <b>Link Name</b> aur <b>URL</b> dono bharein. Example: "Apply O
 <input type="hidden" id="eu_id">
 
 <div class="form-row">
-<div class="form-group">
-<label>Full Name <span class="req">*</span></label>
-<input type="text" id="eu_name" placeholder="e.g. Rahul Sharma">
-</div>
-<div class="form-group">
-<label>Email Address <span class="req">*</span></label>
-<input type="email" id="eu_email" placeholder="user@example.com">
-<span class="hint" id="eu_emailHint">User is email se login karega</span>
-</div>
+<div class="form-group"><label>Full Name <span class="req">*</span></label><input type="text" id="eu_name" placeholder="e.g. Rahul Sharma"></div>
+<div class="form-group"><label>Email Address <span class="req">*</span></label><input type="email" id="eu_email" placeholder="user@example.com"><span class="hint" id="eu_emailHint">User is email se login karega</span></div>
 </div>
 
 <div class="form-row">
-<div class="form-group">
-<label>Phone (Optional)</label>
-<input type="text" id="eu_phone" placeholder="+91 XXXXXXXXXX">
-</div>
-<div class="form-group">
-<label>Status</label>
-<select id="eu_status">
-<option value="active" selected>Active</option>
-<option value="inactive">Inactive</option>
-</select>
-</div>
+<div class="form-group"><label>Phone (Optional)</label><input type="text" id="eu_phone" placeholder="+91 XXXXXXXXXX"></div>
+<div class="form-group"><label>Status</label><select id="eu_status"><option value="active" selected>Active</option><option value="inactive">Inactive</option></select></div>
 </div>
 
 <div class="form-group" id="eu_passwordGroup">
 <label>Password <span class="req">*</span></label>
 <input type="text" id="eu_password" placeholder="Min 6 characters">
-<span class="hint" id="eu_passwordHint">User is password se login karega. Strong password recommend karein.</span>
+<span class="hint" id="eu_passwordHint">User is password se login karega</span>
 </div>
 
 <div class="form-group">
@@ -1417,37 +1207,17 @@ Har link ke liye <b>Link Name</b> aur <b>URL</b> dono bharein. Example: "Apply O
 </div>
 
 <div class="perm-grid" id="eu_perms">
-<div class="perm-item checked" data-perm="posts">
-<input type="checkbox" checked disabled>
-<span>Manage Posts</span>
-</div>
-<div class="perm-item checked" data-perm="services">
-<input type="checkbox" checked disabled>
-<span>Manage Services</span>
-</div>
-<div class="perm-item checked" data-perm="cats">
-<input type="checkbox" checked disabled>
-<span>Manage Categories</span>
-</div>
-<div class="perm-item" data-perm="users">
-<input type="checkbox" disabled>
-<span>Manage Users</span>
-</div>
-<div class="perm-item" data-perm="settings">
-<input type="checkbox" disabled>
-<span>Site Settings</span>
-</div>
-<div class="perm-item" data-perm="adsense">
-<input type="checkbox" disabled>
-<span>AdSense Config</span>
-</div>
+<div class="perm-item checked" data-perm="posts"><input type="checkbox" checked disabled><span>Manage Posts</span></div>
+<div class="perm-item checked" data-perm="services"><input type="checkbox" checked disabled><span>Manage Services</span></div>
+<div class="perm-item checked" data-perm="cats"><input type="checkbox" checked disabled><span>Manage Categories</span></div>
+<div class="perm-item" data-perm="users"><input type="checkbox" disabled><span>Manage Users</span></div>
+<div class="perm-item" data-perm="settings"><input type="checkbox" disabled><span>Site Settings</span></div>
+<div class="perm-item" data-perm="adsense"><input type="checkbox" disabled><span>AdSense Config</span></div>
 </div>
 
 <div class="role-preview" id="rolePreview">
 <strong><i class="fas fa-shield-alt"></i> Role Permissions:</strong>
-<ul id="rolePreviewList">
-<li>Content view only</li>
-</ul>
+<ul id="rolePreviewList"><li>Content view only</li></ul>
 </div>
 
 <div class="modal-foot">
@@ -1458,9 +1228,6 @@ Har link ke liye <b>Link Name</b> aur <b>URL</b> dono bharein. Example: "Apply O
 </div>
 
 <script>
-// ==========================================
-// FIREBASE
-// ==========================================
 const firebaseConfig = {
     apiKey: "AIzaSyDLnDVmkVcXxOFDxxfmXmqU1HflB2EpalQ",
     authDomain: "ibad-csc.firebaseapp.com",
@@ -1479,45 +1246,18 @@ let allCats = {};
 let allServices = {};
 let allUsers = {};
 let allAnnouncements = {};
+let allPopups = {};
 let annActiveToggle = true;
-let adToggles = {
-    ad_top: true,
-    ad_mid: true,
-    ad_side: true,
-    ad_bottom: true,
-    ad_article: true
-};
-
-const ANN_TYPE_COLORS = {
-    live: 'linear-gradient(135deg,#dc2626,#b91c1c)',
-    job: 'linear-gradient(135deg,#2563eb,#1d4ed8)',
-    yojna: 'linear-gradient(135deg,#16a34a,#15803d)',
-    admit: 'linear-gradient(135deg,#8b5cf6,#6d28d9)',
-    important: 'linear-gradient(135deg,#f59e0b,#d97706)',
-    info: 'linear-gradient(135deg,#475569,#334155)'
-};
+let popupActiveToggle = true;
+let popupShowOnceToggle = true;
+let adToggles = { ad_top:true, ad_mid:true, ad_side:true, ad_bottom:true, ad_article:true };
 
 const ROLE_PERMS = {
-    admin: {
-        label: 'Admin',
-        desc: 'Full access to everything',
-        perms: ['posts', 'services', 'cats', 'users', 'settings', 'adsense']
-    },
-    editor: {
-        label: 'Editor',
-        desc: 'Content management only',
-        perms: ['posts', 'services', 'cats']
-    },
-    viewer: {
-        label: 'Viewer',
-        desc: 'Read-only access',
-        perms: []
-    }
+    admin: { label:'Admin', perms:['posts','services','cats','users','settings','adsense'] },
+    editor: { label:'Editor', perms:['posts','services','cats'] },
+    viewer: { label:'Viewer', perms:[] }
 };
 
-// ==========================================
-// TOAST
-// ==========================================
 function toast(msg, type = 'success') {
     const box = document.getElementById('toastBox');
     const icons = {success:'fa-check-circle',error:'fa-times-circle',warning:'fa-exclamation-triangle',info:'fa-info-circle'};
@@ -1528,9 +1268,6 @@ function toast(msg, type = 'success') {
     setTimeout(() => t.remove(), 3200);
 }
 
-// ==========================================
-// VIEW MANAGEMENT
-// ==========================================
 function showView(viewId) {
     document.querySelectorAll('.view, .view-flex').forEach(v => v.classList.remove('active'));
     const el = document.getElementById(viewId);
@@ -1538,24 +1275,17 @@ function showView(viewId) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ==========================================
-// LOGIN
-// ==========================================
 window.doLogin = async function() {
     const email = document.getElementById('lEmail').value.trim();
     const pass = document.getElementById('lPass').value;
     const btn = document.getElementById('loginBtn');
-
     if (!email || !pass) return toast('Please enter email & password', 'warning');
-
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
-
     try {
         const cred = await auth.signInWithEmailAndPassword(email, pass);
         const userRef = db.ref(`users/${cred.user.uid}`);
         const snap = await userRef.once('value');
-
         if (!snap.exists()) {
             await userRef.set({
                 email: cred.user.email,
@@ -1572,22 +1302,20 @@ window.doLogin = async function() {
             btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Secure Login';
             return;
         }
-
         updateUserUI(cred.user, snap.val());
         showView('dashView');
         toast('Welcome back, ' + (snap.val()?.name || cred.user.email.split('@')[0]) + '!', 'success');
         await loadAllData();
         await loadDashboard();
     } catch (e) {
-        console.error('Login error:', e);
         const msgs = {
             'auth/user-not-found':'No account found with this email.',
-            'auth/wrong-password':'Incorrect password. Please try again.',
+            'auth/wrong-password':'Incorrect password.',
             'auth/invalid-email':'Invalid email format.',
             'auth/invalid-credential':'Invalid email or password.',
-            'auth/too-many-requests':'Too many attempts. Try again later.',
-            'auth/network-request-failed':'Network error. Check your connection.',
-            'auth/user-disabled':'This account has been disabled.'
+            'auth/too-many-requests':'Too many attempts. Try later.',
+            'auth/network-request-failed':'Network error.',
+            'auth/user-disabled':'Account disabled.'
         };
         toast(msgs[e.code] || 'Login failed: ' + e.message, 'error');
         btn.disabled = false;
@@ -1601,21 +1329,15 @@ auth.onAuthStateChanged(async (user) => {
             const snap = await db.ref(`users/${user.uid}`).once('value');
             if (snap.exists()) {
                 const data = snap.val();
-                if (data.status === 'inactive') {
-                    await auth.signOut();
-                    showView('loginView');
-                    return;
-                }
+                if (data.status === 'inactive') { await auth.signOut(); showView('loginView'); return; }
                 updateUserUI(user, data);
                 showView('dashView');
                 loadAllData();
                 loadDashboard();
             }
-        } catch (e) { console.error('Auth state error:', e); }
+        } catch (e) { console.error(e); }
     } else {
-        if (!document.getElementById('loginView').classList.contains('active')) {
-            showView('loginView');
-        }
+        if (!document.getElementById('loginView').classList.contains('active')) showView('loginView');
     }
 });
 
@@ -1627,9 +1349,6 @@ function updateUserUI(user, data) {
     document.getElementById('userAvatar').innerText = name.charAt(0).toUpperCase();
 }
 
-// ==========================================
-// LOGOUT
-// ==========================================
 window.doLogout = async function() {
     if (!confirm('Are you sure you want to logout?')) return;
     try {
@@ -1641,21 +1360,17 @@ window.doLogout = async function() {
     } catch (e) { toast('Error logging out', 'error'); }
 };
 
-// ==========================================
-// SECTION NAVIGATION
-// ==========================================
 window.showSec = function(sectionId, el) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-
     const sec = document.getElementById(sectionId);
     if (sec) sec.classList.add('active');
     if (el && el.classList.contains('nav-item')) el.classList.add('active');
-
     const titles = {
         secDashboard: { title:'Dashboard', icon:'fa-chart-line' },
         secPosts: { title:'Manage Posts', icon:'fa-file-alt' },
         secAnnouncements: { title:'Announcements', icon:'fa-bullhorn' },
+        secPopups: { title:'Image Popups', icon:'fa-image' },
         secServices: { title:'Sarkari Kaam Services', icon:'fa-briefcase' },
         secCats: { title:'Categories', icon:'fa-tags' },
         secUsers: { title:'User Management', icon:'fa-users-cog' },
@@ -1666,15 +1381,11 @@ window.showSec = function(sectionId, el) {
         secSocial: { title:'Social Links', icon:'fa-share-alt' },
         secCustom: { title:'Custom Code', icon:'fa-code' }
     };
-
     if (titles[sectionId]) {
         document.getElementById('pageTitle').innerHTML = `<i class="fas ${titles[sectionId].icon}"></i> ${titles[sectionId].title}`;
     }
 };
 
-// ==========================================
-// MODAL MANAGEMENT
-// ==========================================
 window.closeModal = function(id) {
     const modal = document.getElementById(id);
     if (modal) modal.classList.remove('show');
@@ -1688,18 +1399,12 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Escape') document.querySelectorAll('.modal.show').forEach(m => closeModal(m.id));
 });
 
-// ==========================================
-// TOGGLE SWITCH
-// ==========================================
 window.toggleSwitch = function(el) {
     el.classList.toggle('on');
     const key = el.dataset.key;
     if (key) adToggles[key] = el.classList.contains('on');
 };
 
-// ==========================================
-// IMAGE PREVIEW HANDLERS
-// ==========================================
 function setupImagePreview(inputId, previewId, imgId){
     const input = document.getElementById(inputId);
     const preview = document.getElementById(previewId);
@@ -1709,6 +1414,7 @@ function setupImagePreview(inputId, previewId, imgId){
         const url = input.value.trim();
         if(url && (url.startsWith('http://') || url.startsWith('https://'))){
             img.src = url;
+            img.style.display = 'block';
             img.onerror = () => { preview.style.display = 'none'; };
             img.onload = () => { preview.style.display = 'block'; };
         } else {
@@ -1717,58 +1423,40 @@ function setupImagePreview(inputId, previewId, imgId){
     });
 }
 
-window.removePostImage = function(){
-    document.getElementById('ep_image').value = '';
-    document.getElementById('ep_imagePreview').style.display = 'none';
-};
-
-window.removeServiceImage = function(){
-    document.getElementById('es_image').value = '';
-    document.getElementById('es_imagePreview').style.display = 'none';
-};
-
-// ==========================================
-// MULTI-LINK BUILDER (Post)
-// ==========================================
-function createLinkRow(name = '', url = '', showRemove = true) {
-    const row = document.createElement('div');
-    row.className = 'link-row';
-    row.innerHTML = `
-        <input type="text" class="link-name" placeholder="Link Name (e.g. Apply Online)" value="${escapeAttr(name)}">
-        <input type="url" class="link-url" placeholder="https://example.com/apply" value="${escapeAttr(url)}">
-        <button type="button" class="remove-link-btn" title="Remove Link" ${showRemove ? '' : 'disabled'}>
-            <i class="fas fa-trash-alt"></i>
-        </button>
-    `;
-    const removeBtn = row.querySelector('.remove-link-btn');
-    removeBtn.addEventListener('click', () => {
-        const container = document.getElementById('ep_linksContainer');
-        if (container.children.length > 1) {
-            row.remove();
-            updateLinkCounter();
-        } else {
-            toast('At least one link row is required', 'warning');
-        }
-    });
-    return row;
-}
+window.removePostImage = function(){ document.getElementById('ep_image').value=''; document.getElementById('ep_imagePreview').style.display='none'; };
+window.removeServiceImage = function(){ document.getElementById('es_image').value=''; document.getElementById('es_imagePreview').style.display='none'; };
+window.removePopupImage = function(){ document.getElementById('pop_image').value=''; document.getElementById('pop_imagePreview').style.display='none'; };
 
 function escapeAttr(str) {
     if (!str) return '';
     return String(str).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
+function createLinkRow(name = '', url = '', showRemove = true) {
+    const row = document.createElement('div');
+    row.className = 'link-row';
+    row.innerHTML = `
+        <input type="text" class="link-name" placeholder="Link Name" value="${escapeAttr(name)}">
+        <input type="url" class="link-url" placeholder="https://example.com" value="${escapeAttr(url)}">
+        <button type="button" class="remove-link-btn" ${showRemove ? '' : 'disabled'}><i class="fas fa-trash-alt"></i></button>
+    `;
+    row.querySelector('.remove-link-btn').addEventListener('click', () => {
+        const container = document.getElementById('ep_linksContainer');
+        if (container.children.length > 1) { row.remove(); updateLinkCounter(); }
+        else toast('At least one link row is required', 'warning');
+    });
+    return row;
+}
+
 function updateLinkCounter() {
-    const container = document.getElementById('ep_linksContainer');
-    const count = container ? container.querySelectorAll('.link-row').length : 0;
+    const c = document.getElementById('ep_linksContainer');
+    const count = c ? c.querySelectorAll('.link-row').length : 0;
     const counter = document.getElementById('ep_linkCounter');
     if (counter) counter.textContent = count + ' link' + (count !== 1 ? 's' : '');
 }
 
 window.addPostLinkRow = function(name = '', url = '') {
-    const container = document.getElementById('ep_linksContainer');
-    const row = createLinkRow(name, url, true);
-    container.appendChild(row);
+    document.getElementById('ep_linksContainer').appendChild(createLinkRow(name, url, true));
     updateLinkCounter();
 };
 
@@ -1776,10 +1464,7 @@ function resetPostLinks(links = []) {
     const container = document.getElementById('ep_linksContainer');
     container.innerHTML = '';
     if (links && links.length > 0) {
-        links.forEach(l => {
-            const row = createLinkRow(l.name || '', l.url || '', links.length > 1);
-            container.appendChild(row);
-        });
+        links.forEach(l => container.appendChild(createLinkRow(l.name || '', l.url || '', links.length > 1)));
     } else {
         container.appendChild(createLinkRow('', '', false));
     }
@@ -1787,37 +1472,96 @@ function resetPostLinks(links = []) {
 }
 
 function collectPostLinks() {
-    const container = document.getElementById('ep_linksContainer');
-    const rows = container.querySelectorAll('.link-row');
     const links = [];
-    rows.forEach(row => {
+    document.querySelectorAll('#ep_linksContainer .link-row').forEach(row => {
         const name = row.querySelector('.link-name').value.trim();
-        const url = row.querySelector('.link-url').value.trim();
+        let url = row.querySelector('.link-url').value.trim();
         if (name && url) {
-            let finalUrl = url;
-            if (!finalUrl.startsWith('http://') && !finalUrl.startsWith('https://')) {
-                finalUrl = 'https://' + finalUrl;
-            }
-            links.push({ name, url: finalUrl });
+            if (!url.startsWith('http')) url = 'https://' + url;
+            links.push({ name, url });
         }
     });
     return links;
 }
 
-// ==========================================
-// ANNOUNCEMENTS MANAGEMENT (NEW)
-// ==========================================
+// ANNOUNCEMENT MULTI-LINE
+function createAnnLineRow(text = '', showRemove = true) {
+    const row = document.createElement('div');
+    row.className = 'line-row';
+    const idx = document.getElementById('an_linesContainer').children.length + 1;
+    row.innerHTML = `
+        <div class="line-num">${idx}</div>
+        <input type="text" class="line-text" placeholder="e.g. 🔥 Result Live!" value="${escapeAttr(text)}">
+        <button type="button" class="remove-line-btn" ${showRemove ? '' : 'disabled'}><i class="fas fa-times"></i></button>
+    `;
+    row.querySelector('.remove-line-btn').addEventListener('click', () => {
+        const container = document.getElementById('an_linesContainer');
+        if (container.children.length > 1) {
+            row.remove();
+            renumberAnnLines();
+            updateAnnLineCounter();
+        } else {
+            toast('At least one line is required', 'warning');
+        }
+    });
+    row.querySelector('.line-text').addEventListener('input', updateAnnPreview);
+    return row;
+}
+
+function renumberAnnLines() {
+    document.querySelectorAll('#an_linesContainer .line-row').forEach((row, i) => {
+        row.querySelector('.line-num').textContent = i + 1;
+    });
+}
+
+function updateAnnLineCounter() {
+    const c = document.getElementById('an_linesContainer');
+    const count = c ? c.querySelectorAll('.line-row').length : 0;
+    const counter = document.getElementById('an_lineCounter');
+    if (counter) counter.textContent = count + ' line' + (count !== 1 ? 's' : '');
+}
+
+window.addAnnLineRow = function(text = '') {
+    document.getElementById('an_linesContainer').appendChild(createAnnLineRow(text, true));
+    renumberAnnLines();
+    updateAnnLineCounter();
+    updateAnnPreview();
+};
+
+function resetAnnLines(lines = []) {
+    const container = document.getElementById('an_linesContainer');
+    container.innerHTML = '';
+    if (lines && lines.length > 0) {
+        lines.forEach(l => container.appendChild(createAnnLineRow(l, lines.length > 1)));
+    } else {
+        container.appendChild(createAnnLineRow('', false));
+    }
+    renumberAnnLines();
+    updateAnnLineCounter();
+}
+
+function collectAnnLines() {
+    const lines = [];
+    document.querySelectorAll('#an_linesContainer .line-row').forEach(row => {
+        const txt = row.querySelector('.line-text').value.trim();
+        if (txt) lines.push(txt);
+    });
+    return lines;
+}
+
+// ANNOUNCEMENTS
 window.openAnnModal = function() {
     document.getElementById('annModalTitle').innerText = 'New Announcement';
     document.getElementById('an_id').value = '';
-    ['an_title', 'an_msg', 'an_link', 'an_start', 'an_end'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.value = '';
-    });
+    document.getElementById('an_title').value = '';
+    document.getElementById('an_link').value = '';
+    document.getElementById('an_start').value = '';
+    document.getElementById('an_end').value = '';
     document.getElementById('an_type').value = 'live';
     document.getElementById('an_priority').value = '3';
     document.getElementById('an_activeSwitch').classList.add('on');
     annActiveToggle = true;
+    resetAnnLines([]);
     updateAnnPreview();
     document.getElementById('annModal').classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -1832,20 +1576,26 @@ window.toggleAnnActive = function(el) {
 window.updateAnnPreview = function() {
     const type = document.getElementById('an_type')?.value || 'live';
     const title = document.getElementById('an_title')?.value || '';
-    const msg = document.getElementById('an_msg')?.value || '';
+    const lines = collectAnnLines();
+    const colors = {
+        live:'linear-gradient(135deg,#dc2626,#b91c1c)',
+        job:'linear-gradient(135deg,#2563eb,#1d4ed8)',
+        yojna:'linear-gradient(135deg,#16a34a,#15803d)',
+        admit:'linear-gradient(135deg,#8b5cf6,#6d28d9)',
+        important:'linear-gradient(135deg,#f59e0b,#d97706)',
+        info:'linear-gradient(135deg,#475569,#334155)'
+    };
     const box = document.getElementById('annPreviewBox');
     const txt = document.getElementById('annPreviewText');
-    if (box) box.style.background = ANN_TYPE_COLORS[type] || ANN_TYPE_COLORS.live;
+    if (box) box.style.background = colors[type] || colors.live;
     if (txt) {
-        const preview = (title ? title + ' — ' : '') + (msg || 'Aapki announcement yahan dikhegi...');
+        const preview = (title ? title + ' — ' : '') + (lines.length > 0 ? lines.join(' • ') : 'Aapki announcement yahan dikhegi...');
         txt.innerText = preview;
     }
 };
 
 document.addEventListener('input', function(e) {
-    if (e.target && (e.target.id === 'an_title' || e.target.id === 'an_msg')) {
-        updateAnnPreview();
-    }
+    if (e.target && e.target.id === 'an_title') updateAnnPreview();
 });
 
 window.editAnnouncement = function(id) {
@@ -1854,7 +1604,6 @@ window.editAnnouncement = function(id) {
     document.getElementById('annModalTitle').innerText = 'Edit Announcement';
     document.getElementById('an_id').value = id;
     document.getElementById('an_title').value = a.title || '';
-    document.getElementById('an_msg').value = a.message || '';
     document.getElementById('an_type').value = a.type || 'live';
     document.getElementById('an_priority').value = a.priority || '3';
     document.getElementById('an_link').value = a.link || '';
@@ -1863,26 +1612,22 @@ window.editAnnouncement = function(id) {
     const sw = document.getElementById('an_activeSwitch');
     if (a.active !== false) { sw.classList.add('on'); annActiveToggle = true; }
     else { sw.classList.remove('on'); annActiveToggle = false; }
+    resetAnnLines(Array.isArray(a.lines) ? a.lines : []);
     updateAnnPreview();
     document.getElementById('annModal').classList.add('show');
     document.body.style.overflow = 'hidden';
-    setTimeout(() => document.getElementById('an_title').focus(), 100);
 };
 
 window.saveAnnouncement = async function() {
     const id = document.getElementById('an_id').value;
     const title = document.getElementById('an_title').value.trim();
-    const message = document.getElementById('an_msg').value.trim();
-
+    const lines = collectAnnLines();
     if (!title) { toast('Title is required', 'warning'); return; }
-    if (!message) { toast('Message is required', 'warning'); return; }
-
+    if (lines.length === 0) { toast('At least one line required', 'warning'); return; }
     let link = document.getElementById('an_link').value.trim();
     if (link && !link.startsWith('http')) link = 'https://' + link;
-
     const data = {
-        title,
-        message,
+        title, lines,
         type: document.getElementById('an_type').value,
         priority: parseInt(document.getElementById('an_priority').value) || 3,
         link,
@@ -1891,7 +1636,6 @@ window.saveAnnouncement = async function() {
         active: annActiveToggle,
         updatedAt: new Date().toISOString()
     };
-
     try {
         if (id) {
             await db.ref(`announcements/${id}`).update(data);
@@ -1903,9 +1647,7 @@ window.saveAnnouncement = async function() {
         }
         closeModal('annModal');
         await loadAnnouncements();
-    } catch (e) {
-        toast('Error saving announcement', 'error');
-    }
+    } catch (e) { toast('Error: ' + e.message, 'error'); }
 };
 
 window.toggleAnnStatus = async function(id) {
@@ -1916,16 +1658,16 @@ window.toggleAnnStatus = async function(id) {
         await db.ref(`announcements/${id}`).update({ active: newStatus });
         toast(`Announcement ${newStatus ? 'activated' : 'deactivated'}`, 'info');
         await loadAnnouncements();
-    } catch (e) { toast('Error updating status', 'error'); }
+    } catch (e) { toast('Error', 'error'); }
 };
 
 window.deleteAnnouncement = async function(id) {
-    if (!confirm('Are you sure you want to delete this announcement?')) return;
+    if (!confirm('Delete this announcement?')) return;
     try {
         await db.ref(`announcements/${id}`).remove();
-        toast('Announcement deleted', 'info');
+        toast('Deleted', 'info');
         await loadAnnouncements();
-    } catch (e) { toast('Error deleting announcement', 'error'); }
+    } catch (e) { toast('Error', 'error'); }
 };
 
 async function loadAnnouncements() {
@@ -1933,9 +1675,7 @@ async function loadAnnouncements() {
         const snap = await db.ref('announcements').once('value');
         allAnnouncements = snap.exists() ? snap.val() : {};
         renderAnnouncements();
-    } catch (e) {
-        console.error('Load announcements error:', e);
-    }
+    } catch (e) { console.error(e); }
 }
 
 function renderAnnouncements() {
@@ -1943,41 +1683,27 @@ function renderAnnouncements() {
     if (!at) return;
     at.innerHTML = '';
     const arr = Object.entries(allAnnouncements);
-
     const badge = document.getElementById('annCountBadge');
     if (badge) badge.innerText = arr.length;
-
     const dashAnn = document.getElementById('dashAnnouncements');
     if (dashAnn) dashAnn.innerText = arr.length;
-
     if (arr.length === 0) {
-        at.innerHTML = `<tr><td colspan="6" class="empty"><i class="fas fa-bullhorn"></i><h4>No announcements yet</h4><p>Click "New Announcement" to create your first one</p></td></tr>`;
+        at.innerHTML = `<tr><td colspan="7" class="empty"><i class="fas fa-bullhorn"></i><h4>No announcements yet</h4><p>Click "New Announcement" to create</p></td></tr>`;
         return;
     }
-
     arr.sort((a, b) => (b[1].priority || 0) - (a[1].priority || 0));
-
-    const typeLabels = {
-        live: '🔴 LIVE',
-        job: '💼 Job',
-        yojna: '🌾 Yojna',
-        admit: '🎫 Admit Card',
-        important: '⚠️ Important',
-        info: 'ℹ️ Info'
-    };
-
+    const typeLabels = { live:'🔴 LIVE', job:'💼 Job', yojna:'🌾 Yojna', admit:'🎫 Admit', important:'⚠️ Important', info:'ℹ️ Info' };
     arr.forEach(([id, a]) => {
-        const title = (a.title || '').length > 40 ? a.title.substring(0, 40) + '...' : (a.title || '');
+        const title = (a.title || '').length > 35 ? a.title.substring(0, 35) + '...' : (a.title || '');
         const type = a.type || 'live';
         const active = a.active !== false;
+        const lineCount = Array.isArray(a.lines) ? a.lines.length : 0;
         const startStr = a.startDate ? formatDate(a.startDate) : 'Now';
         const endStr = a.endDate ? formatDate(a.endDate) : '∞';
-
         at.innerHTML += `<tr>
-            <td>
-                <div class="switch ${active ? 'on' : ''}" onclick="toggleAnnStatus('${id}')" style="cursor:pointer" title="Toggle Active"></div>
-            </td>
+            <td><div class="switch ${active ? 'on' : ''}" onclick="toggleAnnStatus('${id}')" style="cursor:pointer"></div></td>
             <td style="font-weight:700;color:var(--s900)">${title}</td>
+            <td><span style="background:var(--p50);color:var(--p700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${lineCount} lines</span></td>
             <td><span class="ann-type-badge ann-type-${type}">${typeLabels[type] || type}</span></td>
             <td><span style="font-weight:800;color:${a.priority >= 4 ? 'var(--r600)' : a.priority === 3 ? 'var(--y600)' : 'var(--s500)'}">P${a.priority || 3}</span></td>
             <td style="font-size:.78rem;color:var(--s500)">${startStr} → ${endStr}</td>
@@ -1989,61 +1715,196 @@ function renderAnnouncements() {
     });
 }
 
-// ==========================================
+// IMAGE POPUPS
+window.openPopupModal = function() {
+    document.getElementById('popupModalTitle').innerText = 'New Image Popup';
+    document.getElementById('pop_id').value = '';
+    ['pop_title', 'pop_msg', 'pop_image', 'pop_btnLink', 'pop_start', 'pop_end'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+    document.getElementById('pop_btnText').value = 'View More';
+    document.getElementById('pop_type').value = 'live';
+    document.getElementById('pop_priority').value = '3';
+    document.getElementById('pop_showOnce').classList.add('on');
+    document.getElementById('pop_activeSwitch').classList.add('on');
+    popupShowOnceToggle = true;
+    popupActiveToggle = true;
+    document.getElementById('pop_imagePreview').style.display = 'none';
+    document.getElementById('popupModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('pop_title').focus(), 100);
+};
+
+window.togglePopupActive = function(el) {
+    el.classList.toggle('on');
+    popupActiveToggle = el.classList.contains('on');
+};
+
+window.editPopup = function(id) {
+    const p = allPopups[id];
+    if (!p) return toast('Popup not found', 'error');
+    document.getElementById('popupModalTitle').innerText = 'Edit Image Popup';
+    document.getElementById('pop_id').value = id;
+    document.getElementById('pop_title').value = p.title || '';
+    document.getElementById('pop_msg').value = p.message || '';
+    document.getElementById('pop_image').value = p.image || '';
+    document.getElementById('pop_btnText').value = p.buttonText || 'View More';
+    document.getElementById('pop_btnLink').value = p.buttonLink || '';
+    document.getElementById('pop_type').value = p.type || 'live';
+    document.getElementById('pop_priority').value = p.priority || '3';
+    document.getElementById('pop_start').value = p.startDate || '';
+    document.getElementById('pop_end').value = p.endDate || '';
+    const preview = document.getElementById('pop_imagePreview');
+    const img = document.getElementById('pop_imagePreviewImg');
+    if (p.image) {
+        img.src = p.image;
+        img.style.display = 'block';
+        img.onload = () => { preview.style.display = 'block'; };
+        img.onerror = () => { preview.style.display = 'none'; };
+    } else preview.style.display = 'none';
+    const showOnceSw = document.getElementById('pop_showOnce');
+    if (p.showOnce !== false) { showOnceSw.classList.add('on'); popupShowOnceToggle = true; }
+    else { showOnceSw.classList.remove('on'); popupShowOnceToggle = false; }
+    const activeSw = document.getElementById('pop_activeSwitch');
+    if (p.active !== false) { activeSw.classList.add('on'); popupActiveToggle = true; }
+    else { activeSw.classList.remove('on'); popupActiveToggle = false; }
+    document.getElementById('popupModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+};
+
+window.savePopup = async function() {
+    const id = document.getElementById('pop_id').value;
+    const title = document.getElementById('pop_title').value.trim();
+    let image = document.getElementById('pop_image').value.trim();
+    if (!title) { toast('Title is required', 'warning'); return; }
+    if (!image) { toast('Image URL is required', 'warning'); return; }
+    if (image && !image.startsWith('http')) image = 'https://' + image;
+    let btnLink = document.getElementById('pop_btnLink').value.trim();
+    if (btnLink && !btnLink.startsWith('http')) btnLink = 'https://' + btnLink;
+    const data = {
+        title,
+        message: document.getElementById('pop_msg').value.trim(),
+        image,
+        buttonText: document.getElementById('pop_btnText').value.trim() || 'View More',
+        buttonLink: btnLink,
+        type: document.getElementById('pop_type').value,
+        priority: parseInt(document.getElementById('pop_priority').value) || 3,
+        startDate: document.getElementById('pop_start').value || '',
+        endDate: document.getElementById('pop_end').value || '',
+        showOnce: popupShowOnceToggle,
+        active: popupActiveToggle,
+        updatedAt: new Date().toISOString()
+    };
+    try {
+        if (id) {
+            await db.ref(`popups/${id}`).update(data);
+            toast('Popup updated!', 'success');
+        } else {
+            data.createdAt = new Date().toISOString();
+            await db.ref('popups').push(data);
+            toast('Popup published! 🎉', 'success');
+        }
+        closeModal('popupModal');
+        await loadPopups();
+    } catch (e) { toast('Error: ' + e.message, 'error'); }
+};
+
+window.togglePopupStatus = async function(id) {
+    const p = allPopups[id];
+    if (!p) return;
+    const newStatus = p.active === false ? true : false;
+    try {
+        await db.ref(`popups/${id}`).update({ active: newStatus });
+        toast(`Popup ${newStatus ? 'activated' : 'deactivated'}`, 'info');
+        await loadPopups();
+    } catch (e) { toast('Error', 'error'); }
+};
+
+window.deletePopup = async function(id) {
+    if (!confirm('Delete this popup?')) return;
+    try {
+        await db.ref(`popups/${id}`).remove();
+        toast('Deleted', 'info');
+        await loadPopups();
+    } catch (e) { toast('Error', 'error'); }
+};
+
+async function loadPopups() {
+    try {
+        const snap = await db.ref('popups').once('value');
+        allPopups = snap.exists() ? snap.val() : {};
+        renderPopups();
+    } catch (e) { console.error(e); }
+}
+
+function renderPopups() {
+    const pt = document.getElementById('popupTable');
+    if (!pt) return;
+    pt.innerHTML = '';
+    const arr = Object.entries(allPopups);
+    const badge = document.getElementById('popupCountBadge');
+    if (badge) badge.innerText = arr.length;
+    const dashPop = document.getElementById('dashPopups');
+    if (dashPop) dashPop.innerText = arr.length;
+    if (arr.length === 0) {
+        pt.innerHTML = `<tr><td colspan="7" class="empty"><i class="fas fa-image"></i><h4>No popups yet</h4><p>Click "New Popup" to create</p></td></tr>`;
+        return;
+    }
+    arr.sort((a, b) => (b[1].priority || 0) - (a[1].priority || 0));
+    const typeLabels = { live:'🔴 LIVE', job:'💼 Job', yojna:'🌾 Yojna', important:'⚠️ Important', info:'ℹ️ Info' };
+    arr.forEach(([id, p]) => {
+        const title = (p.title || '').length > 30 ? p.title.substring(0, 30) + '...' : (p.title || '');
+        const type = p.type || 'live';
+        const active = p.active !== false;
+        const startStr = p.startDate ? formatDate(p.startDate) : 'Now';
+        const endStr = p.endDate ? formatDate(p.endDate) : '∞';
+        const thumbHtml = p.image
+            ? `<img src="${p.image}" class="thumb" alt="" style="width:80px;height:60px" loading="lazy" onerror="this.outerHTML='<div class=\\'thumb-icon\\'><i class=\\'fas fa-image\\'></i></div>'">`
+            : `<div class="thumb-icon"><i class="fas fa-image"></i></div>`;
+        pt.innerHTML += `<tr>
+            <td>${thumbHtml}</td>
+            <td style="font-weight:700;color:var(--s900)">${title}</td>
+            <td><span class="ann-type-badge ann-type-${type}">${typeLabels[type] || type}</span></td>
+            <td><span style="font-weight:800;color:${p.priority >= 4 ? 'var(--r600)' : p.priority === 3 ? 'var(--y600)' : 'var(--s500)'}">P${p.priority || 3}</span></td>
+            <td style="font-size:.78rem;color:var(--s500)">${startStr} → ${endStr}</td>
+            <td><span style="display:flex;align-items:center;font-size:.8rem;font-weight:700;color:${p.showOnce !== false ? 'var(--g600)' : 'var(--s500)'}">
+                <span class="status-dot ${p.showOnce !== false ? 'active' : 'inactive'}"></span>
+                ${p.showOnce !== false ? 'Once' : 'Always'}
+            </span></td>
+            <td>
+                <div class="switch ${active ? 'on' : ''}" onclick="togglePopupStatus('${id}')" style="cursor:pointer;display:inline-block;margin-right:6px"></div>
+                <button class="btn btn-p btn-sm" onclick="editPopup('${id}')" style="margin-right:4px"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-r btn-sm" onclick="deletePopup('${id}')"><i class="fas fa-trash"></i></button>
+            </td>
+        </tr>`;
+    });
+}
+
 // USER MANAGEMENT
-// ==========================================
 function updateRolePreview() {
     const role = document.getElementById('eu_role').value;
     const roleInfo = ROLE_PERMS[role] || ROLE_PERMS.viewer;
-    const permItems = document.querySelectorAll('#eu_perms .perm-item');
-
-    permItems.forEach(item => {
+    document.querySelectorAll('#eu_perms .perm-item').forEach(item => {
         const perm = item.dataset.perm;
         const checked = roleInfo.perms.includes(perm);
-        const checkbox = item.querySelector('input');
-        checkbox.checked = checked;
-        if (checked) item.classList.add('checked');
-        else item.classList.remove('checked');
+        item.querySelector('input').checked = checked;
+        if (checked) item.classList.add('checked'); else item.classList.remove('checked');
     });
-
     const previewList = document.getElementById('rolePreviewList');
     const previewTitle = document.querySelector('#rolePreview strong');
     if (role === 'admin') {
         previewTitle.innerHTML = '<i class="fas fa-crown"></i> Admin Permissions:';
-        previewList.innerHTML = `
-            <li>✓ Full access to everything</li>
-            <li>✓ Manage posts, services, categories</li>
-            <li>✓ Manage users and their roles</li>
-            <li>✓ Configure site settings & AdSense</li>
-            <li>✓ Access SEO, Analytics & Custom Code</li>
-        `;
+        previewList.innerHTML = `<li>✓ Full access to everything</li><li>✓ Manage posts, services, categories</li><li>✓ Manage users</li><li>✓ Site settings & AdSense</li><li>✓ SEO, Analytics & Custom Code</li>`;
     } else if (role === 'editor') {
         previewTitle.innerHTML = '<i class="fas fa-edit"></i> Editor Permissions:';
-        previewList.innerHTML = `
-            <li>✓ Create and manage posts</li>
-            <li>✓ Add and edit Sarkari services</li>
-            <li>✓ Manage categories</li>
-            <li>✗ Cannot manage users</li>
-            <li>✗ Cannot change site settings</li>
-        `;
+        previewList.innerHTML = `<li>✓ Create and manage posts</li><li>✓ Add/edit services</li><li>✓ Manage categories</li><li>✗ Cannot manage users</li><li>✗ Cannot change settings</li>`;
     } else {
         previewTitle.innerHTML = '<i class="fas fa-eye"></i> Viewer Permissions:';
-        previewList.innerHTML = `
-            <li>✓ Can view dashboard</li>
-            <li>✓ Can view posts and services</li>
-            <li>✗ Cannot create or edit content</li>
-            <li>✗ Cannot manage users or settings</li>
-        `;
+        previewList.innerHTML = `<li>✓ View dashboard</li><li>✓ View posts and services</li><li>✗ Cannot edit content</li><li>✗ Cannot manage settings</li>`;
     }
 }
 window.updateRolePreview = updateRolePreview;
-
-document.addEventListener('click', function(e) {
-    const permItem = e.target.closest('#eu_perms .perm-item');
-    if (permItem) {
-        // Permission controlled by role dropdown
-    }
-});
 
 window.openUserModal = function() {
     document.getElementById('userModalTitle').innerText = 'Add New User';
@@ -2058,7 +1919,7 @@ window.openUserModal = function() {
     document.getElementById('eu_password').disabled = false;
     document.getElementById('eu_passwordGroup').style.display = 'block';
     document.getElementById('eu_emailHint').innerText = 'User is email se login karega';
-    document.getElementById('eu_passwordHint').innerText = 'User is password se login karega. Strong password recommend karein.';
+    document.getElementById('eu_passwordHint').innerText = 'User is password se login karega.';
     updateRolePreview();
     document.getElementById('userModal').classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -2075,15 +1936,13 @@ window.editUser = function(uid) {
     document.getElementById('eu_phone').value = u.phone || '';
     document.getElementById('eu_role').value = u.role || 'viewer';
     document.getElementById('eu_status').value = u.status || 'active';
-
     document.getElementById('eu_email').disabled = true;
     document.getElementById('eu_password').disabled = true;
     document.getElementById('eu_passwordGroup').style.display = 'none';
-    document.getElementById('eu_emailHint').innerText = 'Email cannot be changed after creation';
+    document.getElementById('eu_emailHint').innerText = 'Email cannot be changed';
     updateRolePreview();
     document.getElementById('userModal').classList.add('show');
     document.body.style.overflow = 'hidden';
-    setTimeout(() => document.getElementById('eu_name').focus(), 100);
 };
 
 window.saveUser = async function() {
@@ -2093,58 +1952,36 @@ window.saveUser = async function() {
     const phone = document.getElementById('eu_phone').value.trim();
     const role = document.getElementById('eu_role').value;
     const status = document.getElementById('eu_status').value;
-
     if (!name) { toast('Name is required', 'warning'); return; }
     if (!id && !email) { toast('Email is required', 'warning'); return; }
-    if (!id && !email.includes('@')) { toast('Invalid email format', 'warning'); return; }
-
+    if (!id && !email.includes('@')) { toast('Invalid email', 'warning'); return; }
     try {
         if (id) {
-            await db.ref(`users/${id}`).update({
-                name,
-                phone,
-                role,
-                status,
-                updatedAt: new Date().toISOString()
-            });
+            await db.ref(`users/${id}`).update({ name, phone, role, status, updatedAt: new Date().toISOString() });
             toast('User updated!', 'success');
         } else {
             const password = document.getElementById('eu_password').value;
-            if (!password || password.length < 6) {
-                toast('Password must be at least 6 characters', 'warning');
-                return;
-            }
-
+            if (!password || password.length < 6) { toast('Password must be 6+ chars', 'warning'); return; }
             const secondaryApp = firebase.apps.find(a => a.name === 'Secondary') || firebase.initializeApp(firebaseConfig, 'Secondary');
             const secondaryAuth = secondaryApp.auth();
-
             const newUser = await secondaryAuth.createUserWithEmailAndPassword(email, password);
             const uid = newUser.user.uid;
-
             await db.ref(`users/${uid}`).set({
-                name,
-                email,
-                phone,
-                role,
-                status,
+                name, email, phone, role, status,
                 createdAt: new Date().toISOString(),
                 createdBy: auth.currentUser?.uid || 'system'
             });
-
             await secondaryAuth.signOut();
-
-            toast('User created successfully! 🎉', 'success');
+            toast('User created! 🎉', 'success');
         }
         closeModal('userModal');
         await loadAllData();
         await loadDashboard();
     } catch (e) {
-        console.error('Save user error:', e);
         const msgs = {
-            'auth/email-already-in-use': 'This email is already registered',
-            'auth/weak-password': 'Password is too weak (min 6 chars)',
-            'auth/invalid-email': 'Invalid email format',
-            'auth/network-request-failed': 'Network error'
+            'auth/email-already-in-use': 'Email already registered',
+            'auth/weak-password': 'Password too weak',
+            'auth/invalid-email': 'Invalid email format'
         };
         toast(msgs[e.code] || 'Error: ' + e.message, 'error');
     }
@@ -2158,16 +1995,51 @@ window.toggleUserStatus = async function(uid) {
         await db.ref(`users/${uid}`).update({ status: newStatus });
         toast(`User ${newStatus === 'active' ? 'activated' : 'deactivated'}`, 'info');
         await loadAllData();
-    } catch (e) { toast('Error updating status', 'error'); }
+    } catch (e) { toast('Error', 'error'); }
 };
 
-// ==========================================
-// LOAD ALL DATA
-// ==========================================
+window.changeUserRole = async function(uid, newRole) {
+    if (auth.currentUser?.uid === uid) {
+        if (!confirm('You are changing your own role. Continue?')) { renderUsers(); return; }
+    }
+    try {
+        await db.ref(`users/${uid}`).update({ role: newRole, updatedAt: new Date().toISOString() });
+        toast(`Role updated to ${newRole}`, 'success');
+        await loadAllData();
+    } catch (e) { toast('Error', 'error'); }
+};
+
+window.deleteUser = async function(uid) {
+    const u = allUsers[uid];
+    if (!u) return;
+    if (!confirm(`Delete user "${u.name || u.email}"?`)) return;
+    try {
+        await db.ref(`users/${uid}`).remove();
+        toast('User removed', 'info');
+        await loadAllData();
+        await loadDashboard();
+    } catch (e) { toast('Error', 'error'); }
+};
+
+// ✅ OPTIMIZED: Parallel data loading
 async function loadAllData() {
     try {
-        const ss = await db.ref('settings/general').once('value');
-        if (ss.exists()) {
+        const [ss, ads, seo, an, soc, cc, cs, ps, svs, us, ann, pop] = await Promise.all([
+            db.ref('settings/general').once('value').catch(()=>null),
+            db.ref('settings/adsense').once('value').catch(()=>null),
+            db.ref('settings/seo').once('value').catch(()=>null),
+            db.ref('settings/analytics').once('value').catch(()=>null),
+            db.ref('settings/social').once('value').catch(()=>null),
+            db.ref('settings/customCode').once('value').catch(()=>null),
+            db.ref('categories').once('value').catch(()=>null),
+            db.ref('posts').once('value').catch(()=>null),
+            db.ref('services').once('value').catch(()=>null),
+            db.ref('users').once('value').catch(()=>null),
+            db.ref('announcements').once('value').catch(()=>null),
+            db.ref('popups').once('value').catch(()=>null)
+        ]);
+
+        if (ss && ss.exists()) {
             const s = ss.val();
             document.getElementById('set_title').value = s.title || '';
             document.getElementById('set_tagline').value = s.tagline || '';
@@ -2180,9 +2052,7 @@ async function loadAllData() {
             document.getElementById('set_hero_title').value = s.heroTitle || '';
             document.getElementById('set_hero_sub').value = s.heroSubtitle || '';
         }
-
-        const ads = await db.ref('settings/adsense').once('value');
-        if (ads.exists()) {
+        if (ads && ads.exists()) {
             const a = ads.val();
             document.getElementById('ads_client').value = a.client || '';
             document.getElementById('ads_auto').value = a.autoAds || 'no';
@@ -2193,23 +2063,16 @@ async function loadAllData() {
             document.getElementById('ads_slot_bottom').value = a.slotBottom || '';
             document.getElementById('ads_slot_article').value = a.slotArticle || '';
             adToggles = {
-                ad_top: a.toggleTop !== false,
-                ad_mid: a.toggleMid !== false,
-                ad_side: a.toggleSide !== false,
-                ad_bottom: a.toggleBottom !== false,
-                ad_article: a.toggleArticle !== false
+                ad_top: a.toggleTop !== false, ad_mid: a.toggleMid !== false, ad_side: a.toggleSide !== false,
+                ad_bottom: a.toggleBottom !== false, ad_article: a.toggleArticle !== false
             };
             document.querySelectorAll('.switch[data-key]').forEach(el => {
-                const key = el.dataset.key;
-                if (adToggles[key]) el.classList.add('on');
-                else el.classList.remove('on');
+                if (adToggles[el.dataset.key]) el.classList.add('on'); else el.classList.remove('on');
             });
             document.getElementById('statusAdsense').innerText = a.client ? 'Configured ✓' : 'Not Configured';
             document.getElementById('statusAdsense').style.color = a.client ? 'var(--g600)' : 'var(--r500)';
         }
-
-        const seo = await db.ref('settings/seo').once('value');
-        if (seo.exists()) {
+        if (seo && seo.exists()) {
             const s = seo.val();
             document.getElementById('seo_home_title').value = s.homeTitle || '';
             document.getElementById('seo_home_desc').value = s.homeDesc || '';
@@ -2226,9 +2089,7 @@ async function loadAllData() {
             document.getElementById('statusSEO').innerText = s.homeTitle ? 'Configured ✓' : 'Not Configured';
             document.getElementById('statusSEO').style.color = s.homeTitle ? 'var(--g600)' : 'var(--r500)';
         }
-
-        const an = await db.ref('settings/analytics').once('value');
-        if (an.exists()) {
+        if (an && an.exists()) {
             const a = an.val();
             document.getElementById('an_ga4').value = a.ga4 || '';
             document.getElementById('an_gtm').value = a.gtm || '';
@@ -2237,9 +2098,7 @@ async function loadAllData() {
             document.getElementById('statusAnalytics').innerText = a.ga4 ? 'Configured ✓' : 'Not Configured';
             document.getElementById('statusAnalytics').style.color = a.ga4 ? 'var(--g600)' : 'var(--r500)';
         }
-
-        const soc = await db.ref('settings/social').once('value');
-        if (soc.exists()) {
+        if (soc && soc.exists()) {
             const s = soc.val();
             document.getElementById('soc_facebook').value = s.facebook || '';
             document.getElementById('soc_twitter').value = s.twitter || '';
@@ -2248,42 +2107,35 @@ async function loadAllData() {
             document.getElementById('soc_telegram').value = s.telegram || '';
             document.getElementById('soc_whatsapp_ch').value = s.whatsappChannel || '';
         }
-
-        const cc = await db.ref('settings/customCode').once('value');
-        if (cc.exists()) {
-            const c = cc.val();
-            document.getElementById('custom_head').value = c.head || '';
-            document.getElementById('custom_body').value = c.body || '';
+        if (cc && cc.exists()) {
+            document.getElementById('custom_head').value = cc.val().head || '';
+            document.getElementById('custom_body').value = cc.val().body || '';
         }
 
-        const cs = await db.ref('categories').once('value');
-        allCats = cs.exists() ? cs.val() : {};
+        allCats = (cs && cs.exists()) ? cs.val() : {};
         renderCats();
 
-        const ps = await db.ref('posts').once('value');
-        allPosts = ps.exists() ? Object.keys(ps.val()).map(k => ({id:k,...ps.val()[k]})) : [];
+        allPosts = (ps && ps.exists()) ? Object.keys(ps.val()).map(k => ({id:k,...ps.val()[k]})) : [];
         allPosts.sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
         renderPosts();
 
-        const svs = await db.ref('services').once('value');
-        allServices = svs.exists() ? svs.val() : {};
+        allServices = (svs && svs.exists()) ? svs.val() : {};
         renderServices();
 
-        const us = await db.ref('users').once('value');
-        allUsers = us.exists() ? us.val() : {};
+        allUsers = (us && us.exists()) ? us.val() : {};
         renderUsers();
 
-        await loadAnnouncements();
+        allAnnouncements = (ann && ann.exists()) ? ann.val() : {};
+        renderAnnouncements();
 
+        allPopups = (pop && pop.exists()) ? pop.val() : {};
+        renderPopups();
     } catch (e) {
         console.error('Load data error:', e);
         toast('Error loading data: ' + e.message, 'error');
     }
 }
 
-// ==========================================
-// DASHBOARD
-// ==========================================
 async function loadDashboard() {
     try {
         document.getElementById('dashPosts').innerText = allPosts.length;
@@ -2291,53 +2143,38 @@ async function loadDashboard() {
         document.getElementById('dashCats').innerText = Object.keys(allCats).length;
         document.getElementById('dashUsers').innerText = Object.keys(allUsers).length;
         document.getElementById('dashAnnouncements').innerText = Object.keys(allAnnouncements).length;
-
+        document.getElementById('dashPopups').innerText = Object.keys(allPopups).length;
         const recentBox = document.getElementById('recentPosts');
         const recent = allPosts.slice(0, 5);
         if (recent.length === 0) {
-            recentBox.innerHTML = `<div class="empty"><i class="fas fa-inbox"></i><h4>No posts yet</h4><p>Create your first post to get started</p></div>`;
+            recentBox.innerHTML = `<div class="empty"><i class="fas fa-inbox"></i><h4>No posts yet</h4><p>Create your first post</p></div>`;
         } else {
             let html = '<div class="table-wrap"><table><thead><tr><th>Title</th><th>Category</th><th>Date</th></tr></thead><tbody>';
             recent.forEach(p => {
-                html += `<tr>
-                    <td style="font-weight:700;color:var(--p600)">${p.title.length > 50 ? p.title.substring(0,50)+'...' : p.title}</td>
-                    <td><span style="background:var(--p50);color:var(--p700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${allCats[p.category]?.name || 'Unknown'}</span></td>
-                    <td>${formatDate(p.timestamp)}</td>
-                </tr>`;
+                html += `<tr><td style="font-weight:700;color:var(--p600)">${p.title.length > 50 ? p.title.substring(0,50)+'...' : p.title}</td><td><span style="background:var(--p50);color:var(--p700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${allCats[p.category]?.name || 'Unknown'}</span></td><td>${formatDate(p.timestamp)}</td></tr>`;
             });
             html += '</tbody></table></div>';
             recentBox.innerHTML = html;
         }
-    } catch (e) { console.error('Dashboard error:', e); }
+    } catch (e) { console.error(e); }
 }
 
-// ==========================================
-// RENDER CATEGORIES
-// ==========================================
 function renderCats() {
     const ct = document.getElementById('catsTable');
     const pc = document.getElementById('ep_cat');
     ct.innerHTML = '';
     pc.innerHTML = '<option value="">Select Category</option>';
-
     const catArr = Object.entries(allCats);
     if (catArr.length === 0) {
-        ct.innerHTML = `<tr><td colspan="3" class="empty"><i class="fas fa-tags"></i><h4>No categories</h4><p>Click "Add Category" to create one</p></td></tr>`;
+        ct.innerHTML = `<tr><td colspan="3" class="empty"><i class="fas fa-tags"></i><h4>No categories</h4><p>Click "Add Category"</p></td></tr>`;
     } else {
         catArr.forEach(([k, v]) => {
-            ct.innerHTML += `<tr>
-                <td style="font-weight:700">${v.name}</td>
-                <td><code style="background:var(--s100);padding:4px 10px;border-radius:6px;font-size:.82rem">${v.slug}</code></td>
-                <td><button class="btn btn-r btn-sm" onclick="delItem('categories','${k}')"><i class="fas fa-trash"></i> Delete</button></td>
-            </tr>`;
+            ct.innerHTML += `<tr><td style="font-weight:700">${v.name}</td><td><code style="background:var(--s100);padding:4px 10px;border-radius:6px;font-size:.82rem">${v.slug}</code></td><td><button class="btn btn-r btn-sm" onclick="delItem('categories','${k}')"><i class="fas fa-trash"></i> Delete</button></td></tr>`;
             pc.innerHTML += `<option value="${k}">${v.name}</option>`;
         });
     }
 }
 
-// ==========================================
-// RENDER POSTS
-// ==========================================
 function renderPosts() {
     const pt = document.getElementById('postsTable');
     pt.innerHTML = '';
@@ -2348,7 +2185,7 @@ function renderPosts() {
     allPosts.forEach(p => {
         const title = p.title.length > 50 ? p.title.substring(0, 50) + '...' : p.title;
         const thumbHtml = p.image
-            ? `<img src="${p.image}" class="thumb" alt="" onerror="this.outerHTML='<div class=\\'thumb-icon\\'><i class=\\'fas fa-file-alt\\'></i></div>'">`
+            ? `<img src="${p.image}" class="thumb" alt="" loading="lazy" onerror="this.outerHTML='<div class=\\'thumb-icon\\'><i class=\\'fas fa-file-alt\\'></i></div>'">`
             : `<div class="thumb-icon"><i class="fas fa-file-alt"></i></div>`;
         pt.innerHTML += `<tr>
             <td>${thumbHtml}</td>
@@ -2363,20 +2200,17 @@ function renderPosts() {
     });
 }
 
-// ==========================================
-// RENDER SERVICES
-// ==========================================
 function renderServices() {
     const st = document.getElementById('servicesTable');
     st.innerHTML = '';
     const entries = Object.entries(allServices);
     if (entries.length === 0) {
-        st.innerHTML = `<tr><td colspan="5" class="empty"><i class="fas fa-briefcase"></i><h4>No custom services</h4><p>Default 18 services showing on website. Click "Add New Service" to customize!</p></td></tr>`;
+        st.innerHTML = `<tr><td colspan="5" class="empty"><i class="fas fa-briefcase"></i><h4>No custom services</h4><p>Default 18 services showing on website.</p></td></tr>`;
         return;
     }
     entries.forEach(([k, s]) => {
         const thumbHtml = s.image
-            ? `<img src="${s.image}" class="thumb" alt="" onerror="this.outerHTML='<div class=\\'thumb-icon\\'><i class=\\'fas ${s.icon||'fa-id-card'}\\'></i></div>'">`
+            ? `<img src="${s.image}" class="thumb" alt="" loading="lazy" onerror="this.outerHTML='<div class=\\'thumb-icon\\'><i class=\\'fas ${s.icon||'fa-id-card'}\\'></i></div>'">`
             : `<div class="thumb-icon"><i class="fas ${s.icon || 'fa-id-card'}"></i></div>`;
         st.innerHTML += `<tr>
             <td>${thumbHtml}</td>
@@ -2391,31 +2225,24 @@ function renderServices() {
     });
 }
 
-// ==========================================
-// RENDER USERS
-// ==========================================
 function renderUsers() {
     const ut = document.getElementById('usersTable');
     ut.innerHTML = '';
-
     const userArr = Object.entries(allUsers);
     const total = userArr.length;
     const admins = userArr.filter(([k,v]) => v.role === 'admin').length;
     const editors = userArr.filter(([k,v]) => v.role === 'editor').length;
     const viewers = userArr.filter(([k,v]) => v.role === 'viewer' || !v.role).length;
-
     document.getElementById('userStatTotal').innerText = total;
     document.getElementById('userStatAdmins').innerText = admins;
     document.getElementById('userStatEditors').innerText = editors;
     document.getElementById('userStatViewers').innerText = viewers;
     document.getElementById('userCountBadge').innerText = total;
     document.getElementById('dashUsers').innerText = total;
-
     if (userArr.length === 0) {
-        ut.innerHTML = `<tr><td colspan="6" class="empty"><i class="fas fa-users"></i><h4>No users yet</h4><p>Click "Add New User" to create your team</p></td></tr>`;
+        ut.innerHTML = `<tr><td colspan="6" class="empty"><i class="fas fa-users"></i><h4>No users yet</h4><p>Click "Add New User"</p></td></tr>`;
         return;
     }
-
     const roleOrder = { admin: 0, editor: 1, viewer: 2 };
     userArr.sort((a, b) => {
         const ra = roleOrder[a[1].role] ?? 3;
@@ -2423,7 +2250,6 @@ function renderUsers() {
         if (ra !== rb) return ra - rb;
         return (a[1].name || '').localeCompare(b[1].name || '');
     });
-
     const avatarColors = ['', 'gold', 'purple', 'pink'];
     userArr.forEach(([uid, u], index) => {
         const name = u.name || u.email?.split('@')[0] || 'Unknown';
@@ -2432,17 +2258,8 @@ function renderUsers() {
         const status = u.status || 'active';
         const avatarClass = avatarColors[index % avatarColors.length];
         const isCurrentUser = auth.currentUser?.uid === uid;
-
         ut.innerHTML += `<tr>
-            <td>
-                <div class="user-cell">
-                    <div class="user-avatar-cell ${avatarClass}">${initial}</div>
-                    <div class="user-cell-info">
-                        <strong>${name} ${isCurrentUser ? '<span style="color:var(--p600);font-size:.7rem">(You)</span>' : ''}</strong>
-                        <small>${u.phone || 'No phone'}</small>
-                    </div>
-                </div>
-            </td>
+            <td><div class="user-cell"><div class="user-avatar-cell ${avatarClass}">${initial}</div><div class="user-cell-info"><strong>${name} ${isCurrentUser ? '<span style="color:var(--p600);font-size:.7rem">(You)</span>' : ''}</strong><small>${u.phone || 'No phone'}</small></div></div></td>
             <td style="font-size:.82rem;color:var(--s600)">${u.email || 'N/A'}</td>
             <td>
                 <select class="role-select" onchange="changeUserRole('${uid}', this.value)">
@@ -2451,53 +2268,17 @@ function renderUsers() {
                     <option value="admin" ${role === 'admin' ? 'selected' : ''}>Admin</option>
                 </select>
             </td>
-            <td>
-                <span style="display:flex;align-items:center;font-size:.8rem;font-weight:700;color:${status === 'active' ? 'var(--g600)' : 'var(--s500)'}">
-                    <span class="status-dot ${status === 'active' ? 'active' : 'inactive'}"></span>
-                    ${status === 'active' ? 'Active' : 'Inactive'}
-                </span>
-            </td>
+            <td><span style="display:flex;align-items:center;font-size:.8rem;font-weight:700;color:${status === 'active' ? 'var(--g600)' : 'var(--s500)'}"><span class="status-dot ${status === 'active' ? 'active' : 'inactive'}"></span>${status === 'active' ? 'Active' : 'Inactive'}</span></td>
             <td style="font-size:.78rem;color:var(--s500)">${formatDate(u.createdAt)}</td>
             <td>
                 <button class="btn btn-p btn-sm" onclick="editUser('${uid}')" style="margin-right:4px"><i class="fas fa-edit"></i></button>
-                <button class="btn btn-y btn-sm" onclick="toggleUserStatus('${uid}')" style="margin-right:4px" title="${status === 'active' ? 'Deactivate' : 'Activate'}">
-                    <i class="fas fa-${status === 'active' ? 'toggle-on' : 'toggle-off'}"></i>
-                </button>
+                <button class="btn btn-y btn-sm" onclick="toggleUserStatus('${uid}')" style="margin-right:4px"><i class="fas fa-${status === 'active' ? 'toggle-on' : 'toggle-off'}"></i></button>
                 ${isCurrentUser ? '' : `<button class="btn btn-r btn-sm" onclick="deleteUser('${uid}')"><i class="fas fa-trash"></i></button>`}
             </td>
         </tr>`;
     });
 }
 
-window.changeUserRole = async function(uid, newRole) {
-    if (auth.currentUser?.uid === uid) {
-        if (!confirm('You are changing your own role. This may reduce your access. Continue?')) {
-            renderUsers();
-            return;
-        }
-    }
-    try {
-        await db.ref(`users/${uid}`).update({ role: newRole, updatedAt: new Date().toISOString() });
-        toast(`Role updated to ${newRole}`, 'success');
-        await loadAllData();
-    } catch (e) { toast('Error updating role', 'error'); }
-};
-
-window.deleteUser = async function(uid) {
-    const u = allUsers[uid];
-    if (!u) return;
-    if (!confirm(`Delete user "${u.name || u.email}"?\n\nNOTE: This removes user data from database. The auth account must be deleted separately from Firebase Console.`)) return;
-    try {
-        await db.ref(`users/${uid}`).remove();
-        toast('User removed', 'info');
-        await loadAllData();
-        await loadDashboard();
-    } catch (e) { toast('Error deleting user', 'error'); }
-};
-
-// ==========================================
-// SAVE SETTINGS
-// ==========================================
 window.saveSettings = async function() {
     try {
         await db.ref('settings/general').update({
@@ -2527,17 +2308,14 @@ window.saveAdsense = async function() {
             slotSide: document.getElementById('ads_slot_side').value.trim(),
             slotBottom: document.getElementById('ads_slot_bottom').value.trim(),
             slotArticle: document.getElementById('ads_slot_article').value.trim(),
-            toggleTop: adToggles.ad_top,
-            toggleMid: adToggles.ad_mid,
-            toggleSide: adToggles.ad_side,
-            toggleBottom: adToggles.ad_bottom,
-            toggleArticle: adToggles.ad_article,
+            toggleTop: adToggles.ad_top, toggleMid: adToggles.ad_mid, toggleSide: adToggles.ad_side,
+            toggleBottom: adToggles.ad_bottom, toggleArticle: adToggles.ad_article,
             updatedAt: new Date().toISOString()
         });
         document.getElementById('statusAdsense').innerText = 'Configured ✓';
         document.getElementById('statusAdsense').style.color = 'var(--g600)';
-        toast('AdSense configuration saved!', 'success');
-    } catch (e) { toast('Error saving AdSense config', 'error'); }
+        toast('AdSense saved!', 'success');
+    } catch (e) { toast('Error saving AdSense', 'error'); }
 };
 
 window.saveSEO = async function() {
@@ -2559,7 +2337,7 @@ window.saveSEO = async function() {
         });
         document.getElementById('statusSEO').innerText = 'Configured ✓';
         document.getElementById('statusSEO').style.color = 'var(--g600)';
-        toast('SEO settings saved!', 'success');
+        toast('SEO saved!', 'success');
     } catch (e) { toast('Error saving SEO', 'error'); }
 };
 
@@ -2605,7 +2383,7 @@ window.saveCustom = async function() {
 };
 
 window.addCat = async function() {
-    const name = prompt('Enter Category Name:\n(e.g., Latest Jobs, Results, Sarkari Yojna)');
+    const name = prompt('Enter Category Name:');
     if (!name || !name.trim()) return;
     try {
         await db.ref('categories').push({
@@ -2618,9 +2396,6 @@ window.addCat = async function() {
     } catch (e) { toast('Error adding category', 'error'); }
 };
 
-// ==========================================
-// POST MANAGEMENT
-// ==========================================
 window.openPostModal = function() {
     document.getElementById('ep_id').value = '';
     ['ep_title', 'ep_sum', 'ep_date', 'ep_edu', 'ep_steps', 'ep_docs', 'ep_faq', 'ep_image'].forEach(id => {
@@ -2649,34 +2424,25 @@ window.editPost = function(id) {
     const preview = document.getElementById('ep_imagePreview');
     const img = document.getElementById('ep_imagePreviewImg');
     if (p.image) { img.src = p.image; preview.style.display = 'block'; }
-    else { preview.style.display = 'none'; }
+    else preview.style.display = 'none';
     let faqTxt = '';
     if (p.faq && Array.isArray(p.faq)) faqTxt = p.faq.map(f => `${f.q}|${f.a}`).join('\n');
     document.getElementById('ep_faq').value = faqTxt;
-
     let linksToLoad = [];
-    if (Array.isArray(p.links) && p.links.length > 0) {
-        linksToLoad = p.links;
-    } else if (p.link && p.link.trim()) {
-        linksToLoad = [{ name: 'Apply Online', url: p.link.trim() }];
-    }
+    if (Array.isArray(p.links) && p.links.length > 0) linksToLoad = p.links;
+    else if (p.link && p.link.trim()) linksToLoad = [{ name: 'Apply Online', url: p.link.trim() }];
     resetPostLinks(linksToLoad);
-
     document.getElementById('postModal').classList.add('show');
     document.body.style.overflow = 'hidden';
-    setTimeout(() => document.getElementById('ep_title').focus(), 100);
 };
 
 window.savePost = async function() {
     const id = document.getElementById('ep_id').value;
     const title = document.getElementById('ep_title').value.trim();
     if (!title) { toast('Title is required', 'warning'); return; }
-
     const links = collectPostLinks();
-
     let image = document.getElementById('ep_image').value.trim();
     if (image && !image.startsWith('http')) image = 'https://' + image;
-
     const faqRaw = document.getElementById('ep_faq').value.trim();
     const faq = [];
     if (faqRaw) {
@@ -2685,13 +2451,11 @@ window.savePost = async function() {
             if (parts.length >= 2) faq.push({ q: parts[0].trim(), a: parts.slice(1).join('|').trim() });
         });
     }
-
     const data = {
         title,
         category: document.getElementById('ep_cat').value,
         summary: document.getElementById('ep_sum').value.trim(),
-        image: image,
-        links: links,
+        image, links,
         link: links.length > 0 ? links[0].url : '',
         lastDate: document.getElementById('ep_date').value.trim(),
         education: document.getElementById('ep_edu').value.trim(),
@@ -2700,7 +2464,6 @@ window.savePost = async function() {
         faq,
         timestamp: new Date().toISOString()
     };
-
     try {
         if (id) {
             await db.ref(`posts/${id}`).update(data);
@@ -2715,9 +2478,6 @@ window.savePost = async function() {
     } catch (e) { toast('Error saving post', 'error'); }
 };
 
-// ==========================================
-// SERVICE MANAGEMENT
-// ==========================================
 window.openServiceModal = function() {
     document.getElementById('es_id').value = '';
     ['es_name', 'es_sub', 'es_about', 'es_steps', 'es_docs', 'es_links', 'es_image'].forEach(id => {
@@ -2729,7 +2489,6 @@ window.openServiceModal = function() {
     document.getElementById('es_imagePreview').style.display = 'none';
     document.getElementById('serviceModal').classList.add('show');
     document.body.style.overflow = 'hidden';
-    setTimeout(() => document.getElementById('es_name').focus(), 100);
 };
 
 window.editService = function(key) {
@@ -2748,10 +2507,9 @@ window.editService = function(key) {
     const preview = document.getElementById('es_imagePreview');
     const img = document.getElementById('es_imagePreviewImg');
     if (s.image) { img.src = s.image; preview.style.display = 'block'; }
-    else { preview.style.display = 'none'; }
+    else preview.style.display = 'none';
     document.getElementById('serviceModal').classList.add('show');
     document.body.style.overflow = 'hidden';
-    setTimeout(() => document.getElementById('es_name').focus(), 100);
 };
 
 window.saveService = async function() {
@@ -2772,7 +2530,7 @@ window.saveService = async function() {
             }
         });
     }
-    if (links.length === 0) { toast('At least one official link is required', 'warning'); return; }
+    if (links.length === 0) { toast('At least one link is required', 'warning'); return; }
     let image = document.getElementById('es_image').value.trim();
     if (image && !image.startsWith('http')) image = 'https://' + image;
     const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
@@ -2781,11 +2539,8 @@ window.saveService = async function() {
         sub: document.getElementById('es_sub').value.trim(),
         icon: document.getElementById('es_icon').value.trim() || 'fa-id-card',
         color: document.getElementById('es_color').value,
-        image: image,
-        about: document.getElementById('es_about').value.trim(),
-        steps,
-        docs,
-        links,
+        image, about: document.getElementById('es_about').value.trim(),
+        steps, docs, links,
         timestamp: new Date().toISOString()
     };
     try {
@@ -2803,13 +2558,13 @@ window.saveService = async function() {
 };
 
 window.delItem = async function(col, key) {
-    if (!confirm('Are you sure you want to delete this? This action cannot be undone.')) return;
+    if (!confirm('Delete this item? Cannot be undone.')) return;
     try {
         await db.ref(`${col}/${key}`).remove();
-        toast('Deleted successfully', 'info');
+        toast('Deleted', 'info');
         await loadAllData();
         await loadDashboard();
-    } catch (e) { toast('Error deleting item', 'error'); }
+    } catch (e) { toast('Error', 'error'); }
 };
 
 function formatDate(iso) {
@@ -2822,9 +2577,9 @@ function formatDate(iso) {
 document.addEventListener('DOMContentLoaded', () => {
     setupImagePreview('ep_image','ep_imagePreview','ep_imagePreviewImg');
     setupImagePreview('es_image','es_imagePreview','es_imagePreviewImg');
+    setupImagePreview('pop_image','pop_imagePreview','pop_imagePreviewImg');
     resetPostLinks([]);
     updateRolePreview();
-    console.log('🚀 Admin panel initialized with Announcements + User Management + Multi-Link Builder');
 });
 </script>
 </body>
