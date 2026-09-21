@@ -51,6 +51,37 @@ img{max-width:100%;height:auto;display:block}
 .toast.info{border-left:4px solid var(--p500)}.toast.info i{color:var(--p500)}
 @keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
 
+/* ============ ANNOUNCEMENT BAR (NEW) ============ */
+@keyframes blinkDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+}
+@keyframes annScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+#annBar:hover #annScroll {
+    animation-play-state: paused;
+}
+.ann-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding-right: 40px;
+}
+.ann-item i {
+    color: #fbbf24;
+    font-size: .85rem;
+}
+.ann-item a {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.ann-item a:hover {
+    color: #fef3c7;
+}
+
 /* ============ TOPBAR ============ */
 .topbar{background:var(--s900);color:var(--s300);padding:10px 0;font-size:.82rem;font-weight:500}
 .topbar .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
@@ -344,6 +375,10 @@ img{max-width:100%;height:auto;display:block}
 .foot-social{justify-content:center}
 .foot-bottom .links{justify-content:center}
 .back-top{bottom:16px;left:16px;width:42px;height:42px}
+#annBar { font-size:.78rem; padding:9px 0; }
+#annLiveBadge { padding:3px 9px; font-size:.6rem; }
+#annLinkBtn { padding:5px 10px; font-size:.68rem; }
+#annLinkBtn span { display:none; }
 }
 
 @media(max-width:600px){
@@ -470,7 +505,7 @@ img{max-width:100%;height:auto;display:block}
 }
 
 @media print{
-.topbar,.navbar,.back-top,.ad-container,.hero-btns,.newsletter,.back-top{display:none!important}
+.topbar,.navbar,.back-top,.ad-container,.hero-btns,.newsletter,.back-top,#annBar{display:none!important}
 body{background:#fff}
 .footer{background:#fff;color:#000}
 }
@@ -479,6 +514,24 @@ body{background:#fff}
 <body>
 
 <div id="toastBox"></div>
+
+<!-- ============ ANNOUNCEMENT BAR (NEW) ============ -->
+<div id="annBar" style="display:none;background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff;padding:11px 0;position:relative;overflow:hidden;font-size:.88rem;font-weight:600">
+    <div class="container" style="display:flex;align-items:center;gap:14px;position:relative">
+        <span id="annLiveBadge" style="background:rgba(255,255,255,.25);padding:4px 12px;border-radius:9999px;font-size:.68rem;font-weight:800;letter-spacing:.1em;display:inline-flex;align-items:center;gap:6px;flex-shrink:0;text-transform:uppercase">
+            <span style="width:7px;height:7px;background:#fff;border-radius:50%;animation:blinkDot 1s infinite"></span> LIVE
+        </span>
+        <div style="flex:1;overflow:hidden;position:relative;min-width:0">
+            <div id="annScroll" style="display:flex;gap:40px;animation:annScroll 30s linear infinite;white-space:nowrap;will-change:transform"></div>
+        </div>
+        <a id="annLinkBtn" href="#" target="_blank" rel="noopener" style="display:none;background:#fff;color:#dc2626;padding:6px 14px;border-radius:6px;font-size:.76rem;font-weight:800;text-decoration:none;flex-shrink:0;text-transform:uppercase;letter-spacing:.05em">
+            View <i class="fas fa-arrow-right"></i>
+        </a>
+        <button onclick="dismissAnnBar()" style="background:rgba(255,255,255,.15);color:#fff;border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.3)'" onmouseout="this.style.background='rgba(255,255,255,.15)'" aria-label="Close">
+            <i class="fas fa-times" style="font-size:.8rem"></i>
+        </button>
+    </div>
+</div>
 
 <!-- TOPBAR -->
 <div class="topbar">
@@ -712,6 +765,7 @@ let allPosts=[],allCats={},allServices={};
 let currentFilter='all';
 let searchTimeout=null;
 let selectedSuggestionIndex=-1;
+let announcementsData=[];
 
 const DEFAULT_SERVICES={
     aadhar:{name:'Aadhar Card',sub:'Update & Download',icon:'fa-id-card',color:'ic-aadhar'},
@@ -780,7 +834,6 @@ async function applyAdsenseSettings(){
         if(!snap.exists())return;
         const a=snap.val();
         if(a.client){
-            document.getElementById('adsenseAccount').setAttribute('content',a.client);
             const script=document.getElementById('adsenseScript');
             if(script)script.src=`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${a.client}`;
             document.querySelectorAll('.adsbygoogle').forEach(el=>el.setAttribute('data-ad-client',a.client));
@@ -834,6 +887,85 @@ async function applyCustomCode(){
     }catch(e){console.warn(e);}
 }
 
+// ==========================================
+// ANNOUNCEMENT BAR (NEW)
+// ==========================================
+async function loadAnnouncements() {
+    try {
+        const snap = await db.ref('announcements').once('value');
+        if (!snap.exists()) return;
+        const data = snap.val();
+        const now = Date.now();
+
+        announcementsData = Object.values(data).filter(a => {
+            if (a.active === false) return false;
+            if (a.startDate && new Date(a.startDate).getTime() > now) return false;
+            if (a.endDate && new Date(a.endDate).getTime() < now) return false;
+            return true;
+        });
+
+        announcementsData.sort((a, b) => (b.priority || 0) - (a.priority || 0));
+
+        if (announcementsData.length > 0) renderAnnouncementBar();
+    } catch (e) { console.warn('Announcements load error:', e); }
+}
+
+function renderAnnouncementBar() {
+    const bar = document.getElementById('annBar');
+    const scroll = document.getElementById('annScroll');
+    const linkBtn = document.getElementById('annLinkBtn');
+    const badge = document.getElementById('annLiveBadge');
+
+    if (!bar || !scroll) return;
+
+    const dismissedAt = localStorage.getItem('annBarDismissed');
+    if (dismissedAt && (Date.now() - parseInt(dismissedAt)) < 6 * 60 * 60 * 1000) {
+        return;
+    }
+
+    const topAnn = announcementsData[0];
+    const colors = {
+        live: 'linear-gradient(135deg,#dc2626,#b91c1c)',
+        job: 'linear-gradient(135deg,#2563eb,#1d4ed8)',
+        yojna: 'linear-gradient(135deg,#16a34a,#15803d)',
+        admit: 'linear-gradient(135deg,#8b5cf6,#6d28d9)',
+        important: 'linear-gradient(135deg,#f59e0b,#d97706)',
+        info: 'linear-gradient(135deg,#475569,#334155)'
+    };
+    bar.style.background = colors[topAnn.type] || colors.live;
+
+    const badgeText = { live:'LIVE', job:'NEW JOB', yojna:'YOJNA', admit:'ADMIT CARD', important:'IMPORTANT', info:'INFO' };
+    if (badge) badge.innerHTML = `<span style="width:7px;height:7px;background:#fff;border-radius:50%;animation:blinkDot 1s infinite"></span> ${badgeText[topAnn.type] || 'LIVE'}`;
+
+    let itemsHtml = '';
+    announcementsData.forEach(a => {
+        const linkHtml = a.link ? ` <a href="${a.link}" target="_blank" rel="noopener">Read More →</a>` : '';
+        itemsHtml += `<span class="ann-item"><i class="fas fa-bullhorn"></i> <strong>${a.title}</strong> — ${a.message}${linkHtml}</span>`;
+    });
+    scroll.innerHTML = itemsHtml + itemsHtml;
+
+    const topWithLink = announcementsData.find(a => a.link);
+    if (topWithLink && linkBtn) {
+        linkBtn.href = topWithLink.link;
+        linkBtn.style.display = 'inline-flex';
+        linkBtn.innerHTML = 'View <i class="fas fa-arrow-right"></i>';
+    }
+
+    bar.style.display = 'block';
+}
+
+window.dismissAnnBar = function() {
+    const bar = document.getElementById('annBar');
+    if (bar) {
+        bar.style.transition = 'all .4s';
+        bar.style.maxHeight = '0';
+        bar.style.padding = '0';
+        bar.style.opacity = '0';
+        setTimeout(() => { bar.style.display = 'none'; }, 400);
+    }
+    localStorage.setItem('annBarDismissed', Date.now().toString());
+};
+
 async function loadData(){
     try{
         await Promise.all([applySEOSettings(),applyAdsenseSettings(),applyAnalyticsSettings(),applySocialSettings(),applyCustomCode()]);
@@ -882,6 +1014,7 @@ async function loadData(){
         renderFeatured();
         renderGrid();
         renderTrending();
+        await loadAnnouncements();
     }catch(e){
         console.error(e);
         allCats=DEFAULT_CATEGORIES;
