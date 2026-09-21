@@ -14,6 +14,7 @@
 <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-messaging-compat.js"></script>
 <style>
 :root{
 --p50:#eff6ff;--p100:#dbeafe;--p200:#bfdbfe;--p400:#60a5fa;--p500:#3b82f6;--p600:#2563eb;--p700:#1d4ed8;--p800:#1e40af;
@@ -238,6 +239,14 @@ tr:hover td{background:var(--s50)}
 .trend-bar{background:#e2e8f0;height:8px;border-radius:4px;overflow:hidden;min-width:80px}
 .trend-bar > div{background:linear-gradient(90deg,#3b82f6,#2563eb);height:100%;transition:width .3s}
 
+.notif-card{background:linear-gradient(135deg,#fef3c7,#fef9c3);border:1px solid #fcd34d;border-radius:12px;padding:16px;margin-bottom:16px}
+.notif-card h4{color:#92400e;font-size:.92rem;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.notif-card p{color:#78350f;font-size:.82rem;line-height:1.6;margin-bottom:10px}
+.notif-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:12px}
+.notif-stat{background:rgba(255,255,255,.7);padding:10px;border-radius:8px;text-align:center}
+.notif-stat .num{font-size:1.3rem;font-weight:900;color:#92400e;line-height:1}
+.notif-stat .lbl{font-size:.68rem;color:#78350f;font-weight:700;text-transform:uppercase;margin-top:4px}
+
 @media(max-width:768px){
 .sidebar{width:64px;padding:16px 0}
 .sidebar-brand h2{font-size:0;justify-content:center}
@@ -326,6 +335,12 @@ tr:hover td{background:var(--s50)}
 </div>
 <div class="nav-item" onclick="showSec('secCats',this)">
 <i class="fas fa-tags"></i><span>Categories</span>
+</div>
+
+<div class="nav-group">Communication</div>
+<div class="nav-item" onclick="showSec('secNotifications',this)">
+<i class="fas fa-bell"></i><span>Push Notifications</span>
+<span class="nav-badge" id="notifCountBadge" style="background:#dc2626">0</span>
 </div>
 
 <div class="nav-group">Users & Access</div>
@@ -439,7 +454,6 @@ tr:hover td{background:var(--s50)}
 </div>
 </div>
 
-<!-- LAST 7 DAYS BREAKDOWN -->
 <div class="table-wrap">
 <table>
 <thead>
@@ -465,6 +479,10 @@ tr:hover td{background:var(--s50)}
 <div class="stat-icon blue" style="width:44px;height:44px;font-size:1.1rem"><i class="fas fa-search"></i></div>
 <div class="stat-info"><h3 id="statusSEO" style="font-size:1rem">Not Configured</h3><p>SEO</p></div>
 </div>
+<div class="stat-card" style="padding:16px">
+<div class="stat-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706);width:44px;height:44px;font-size:1.1rem"><i class="fas fa-bell"></i></div>
+<div class="stat-info"><h3 id="statusNotif" style="font-size:1rem">Not Configured</h3><p>Push Notifications</p></div>
+</div>
 </div>
 </div>
 
@@ -481,6 +499,9 @@ tr:hover td{background:var(--s50)}
 </button>
 <button class="btn" onclick="openPopupModal()" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#8b5cf6,#6d28d9)">
 <i class="fas fa-image"></i> New Image Popup
+</button>
+<button class="btn" onclick="openNotifModal()" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#dc2626,#b91c1c)">
+<i class="fas fa-bell"></i> Send Notification
 </button>
 <button class="btn btn-g" onclick="openServiceModal()" style="justify-content:center;padding:16px">
 <i class="fas fa-plus-circle"></i> Add Service
@@ -618,6 +639,48 @@ Yahan se aap website ke <b>Sarkari Kaam section</b> ke sabhi services add/edit/d
 </div>
 </div>
 
+<!-- ==========================================
+     PUSH NOTIFICATIONS SECTION (NEW)
+     ========================================== -->
+<div id="secNotifications" class="section">
+<div class="notif-card">
+<h4><i class="fas fa-bell"></i> Push Notifications System</h4>
+<p>Website par visitor ko real-time browser notification bhejein. User ne ek baar permission diya to sab notifications milenge — bina login, bina app download!</p>
+<div class="notif-stats">
+<div class="notif-stat"><div class="num" id="notifSubscribedCount">0</div><div class="lbl">Subscribed Users</div></div>
+<div class="notif-stat"><div class="num" id="notifSentCount">0</div><div class="lbl">Notifications Sent</div></div>
+<div class="notif-stat"><div class="num" id="notifActiveCount">0</div><div class="lbl">Active (30 days)</div></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-paper-plane"></i> Send Notification</span>
+<button class="btn" onclick="openNotifModal()" style="background:linear-gradient(135deg,#dc2626,#b91c1c)"><i class="fas fa-plus"></i> Compose New</button>
+</div>
+
+<div class="info-box">
+<strong><i class="fas fa-info-circle"></i> How it works</strong>
+Jab user aapki website par pehli baar aayega, use "Allow Notifications" ka option milega. Jab wo allow karega to uski browser ID database mein save ho jayegi. Aap yahan se notification bhejenge to wo turant sab users ko mil jayegi — chahe website open ho ya na ho.
+</div>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Title</th>
+<th>Message</th>
+<th>Sent At</th>
+<th>Recipients</th>
+<th style="width:180px">Actions</th>
+</tr>
+</thead>
+<tbody id="notifTable"><tr><td colspan="5"><div class="spinner"></div></td></tr></tbody>
+</table>
+</div>
+</div>
+</div>
+
 <!-- USER MANAGEMENT SECTION -->
 <div id="secUsers" class="section">
 <div class="card">
@@ -695,7 +758,7 @@ Apna Publisher ID aur Ad Slot IDs yahan enter karein.
 
 <div class="form-group">
 <label>AdSense Publisher ID <span class="req">*</span></label>
-<input type="text" id="ads_client" placeholder="ca-pub-1234567890123456">
+<input type="text" id="ads_client" placeholder="ca-pub-1336136297225442">
 </div>
 
 <div class="form-row">
@@ -759,6 +822,16 @@ Apna Publisher ID aur Ad Slot IDs yahan enter karein.
 <div class="form-row">
 <div class="form-group"><label>Portal Title</label><input type="text" id="set_title" placeholder="esewahub.in"></div>
 <div class="form-group"><label>Tagline</label><input type="text" id="set_tagline" placeholder="Sarkari Kaam & Digital Seva"></div>
+</div>
+
+<div class="form-group">
+<label><i class="fas fa-image" style="color:var(--p600)"></i> Website Logo / Favicon URL</label>
+<input type="url" id="set_logo" placeholder="https://i.ibb.co/XXXXX/logo.png">
+<span class="hint">Ye logo website ke header aur browser tab (favicon) dono mein dikhega. Recommended size: 512x512 px, PNG format</span>
+</div>
+<div class="image-preview" id="set_logoPreview" style="display:none">
+<button type="button" class="remove-img" onclick="removeLogoImage()"><i class="fas fa-times"></i></button>
+<img id="set_logoPreviewImg" alt="Logo Preview" style="max-height:120px;object-fit:contain;background:#f1f5f9;padding:10px">
 </div>
 
 <div class="form-row">
@@ -978,6 +1051,52 @@ Sirf tab use karein jab aapko HTML/CSS/JS ka knowledge ho.
 </div>
 </div>
 
+<!-- ==========================================
+     NOTIFICATION MODAL (NEW)
+     ========================================== -->
+<div id="notifModal" class="modal">
+<div class="modal-box" style="max-width:640px">
+<div class="modal-head">
+<h2><i class="fas fa-bell"></i> <span id="notifModalTitle">Send Push Notification</span></h2>
+<button class="modal-close" onclick="closeModal('notifModal')"><i class="fas fa-times"></i></button>
+</div>
+
+<input type="hidden" id="notif_id">
+
+<div class="form-group">
+<label>Notification Title <span class="req">*</span></label>
+<input type="text" id="notif_title" placeholder="e.g. 🎉 New Sarkari Job Alert!">
+</div>
+
+<div class="form-group">
+<label>Notification Message <span class="req">*</span></label>
+<textarea id="notif_msg" placeholder="e.g. SSC CGL 2026 ki 5000+ vacancy aayi hai. Apply karein!" style="min-height:90px"></textarea>
+</div>
+
+<div class="form-group">
+<label>🔗 Link (Click par khulega)</label>
+<input type="url" id="notif_link" placeholder="https://esewahub.in/post.html?id=XXXXX">
+<span class="hint">Khaali chhodein to user notification par click karne se website home page khulega</span>
+</div>
+
+<div class="form-group">
+<label>Icon / Image URL (Optional)</label>
+<input type="url" id="notif_icon" placeholder="https://i.ibb.co/XXXXX/icon.png">
+<span class="hint">Notification mein chhota image dikhega. Recommended: 192x192 px</span>
+</div>
+
+<div class="info-box">
+<strong><i class="fas fa-info-circle"></i> Important</strong>
+Notifications sirf un users ko jayengi jinhone aapki website par "Allow Notifications" par click kiya hai. Jo users ne block kiya hai unhe notification nahi jayegi.
+</div>
+
+<div class="modal-foot">
+<button class="btn btn-ghost" onclick="closeModal('notifModal')">Cancel</button>
+<button class="btn" onclick="sendNotification()" style="background:linear-gradient(135deg,#dc2626,#b91c1c)"><i class="fas fa-paper-plane"></i> Send Notification Now</button>
+</div>
+</div>
+</div>
+
 <!-- POST MODAL -->
 <div id="postModal" class="modal">
 <div class="modal-box">
@@ -1024,6 +1143,11 @@ Sirf tab use karein jab aapko HTML/CSS/JS ka knowledge ho.
 <div class="form-group"><label>How to Apply</label><textarea id="ep_steps"></textarea></div>
 <div class="form-group"><label>Required Documents</label><textarea id="ep_docs"></textarea></div>
 <div class="form-group"><label>FAQ (Optional)</label><textarea id="ep_faq" placeholder="Format: Question|Answer"></textarea></div>
+
+<div class="toggle-row">
+<div class="label"><i class="fas fa-bell"></i><div>Send Push Notification<span class="desc">ON = publish hote hi sab users ko notification jayegi</span></div></div>
+<div class="switch" onclick="toggleSwitch(this)" id="ep_sendNotif"></div>
+</div>
 
 <div class="modal-foot">
 <button class="btn btn-ghost" onclick="closeModal('postModal')">Cancel</button>
@@ -1161,9 +1285,11 @@ let allServices = {};
 let allUsers = {};
 let allAnnouncements = {};
 let allPopups = {};
+let allNotifications = {};
 let annActiveToggle = true;
 let popupActiveToggle = true;
 let popupShowOnceToggle = true;
+let postSendNotifToggle = false;
 
 const ROLE_PERMS = {
     admin: { label:'Admin', perms:['posts','services','cats','users','settings','adsense'] },
@@ -1285,6 +1411,7 @@ window.showSec = function(sectionId, el) {
         secPopups: { title:'Image Popups', icon:'fa-image' },
         secServices: { title:'Sarkari Kaam Services', icon:'fa-briefcase' },
         secCats: { title:'Categories', icon:'fa-tags' },
+        secNotifications: { title:'Push Notifications', icon:'fa-bell' },
         secUsers: { title:'User Management', icon:'fa-users-cog' },
         secVisitors: { title:'Visitor Analytics', icon:'fa-chart-bar' },
         secAdsense: { title:'Google AdSense', icon:'fa-google' },
@@ -1297,6 +1424,7 @@ window.showSec = function(sectionId, el) {
         document.getElementById('pageTitle').innerHTML = `<i class="fas ${titles[sectionId].icon}"></i> ${titles[sectionId].title}`;
     }
     if(sectionId === 'secVisitors') loadVisitorStats();
+    if(sectionId === 'secNotifications') loadNotifications();
 };
 
 window.closeModal = function(id) {
@@ -1312,7 +1440,11 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Escape') document.querySelectorAll('.modal.show').forEach(m => closeModal(m.id));
 });
 
-window.toggleSwitch = function(el) { el.classList.toggle('on'); };
+window.toggleSwitch = function(el) { 
+    el.classList.toggle('on'); 
+    if(el.id === 'pop_showOnce') popupShowOnceToggle = el.classList.contains('on');
+    if(el.id === 'ep_sendNotif') postSendNotifToggle = el.classList.contains('on');
+};
 
 function setupImagePreview(inputId, previewId, imgId){
     const input = document.getElementById(inputId);
@@ -1333,6 +1465,7 @@ function setupImagePreview(inputId, previewId, imgId){
 window.removePostImage = function(){ document.getElementById('ep_image').value=''; document.getElementById('ep_imagePreview').style.display='none'; };
 window.removeServiceImage = function(){ document.getElementById('es_image').value=''; document.getElementById('es_imagePreview').style.display='none'; };
 window.removePopupImage = function(){ document.getElementById('pop_image').value=''; document.getElementById('pop_imagePreview').style.display='none'; };
+window.removeLogoImage = function(){ document.getElementById('set_logo').value=''; document.getElementById('set_logoPreview').style.display='none'; };
 
 function escapeAttr(str) { return str ? String(str).replace(/"/g, '&quot;').replace(/'/g, '&#39;') : ''; }
 
@@ -1715,6 +1848,125 @@ function renderPopups() {
     });
 }
 
+// ==========================================
+// PUSH NOTIFICATIONS (NEW)
+// ==========================================
+window.openNotifModal = function() {
+    document.getElementById('notifModalTitle').innerText = 'Send Push Notification';
+    document.getElementById('notif_id').value = '';
+    ['notif_title', 'notif_msg', 'notif_link', 'notif_icon'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+    document.getElementById('notifModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('notif_title').focus(), 100);
+};
+
+window.sendNotification = async function() {
+    const title = document.getElementById('notif_title').value.trim();
+    const message = document.getElementById('notif_msg').value.trim();
+    let link = document.getElementById('notif_link').value.trim();
+    let icon = document.getElementById('notif_icon').value.trim();
+    
+    if (!title) { toast('Title required', 'warning'); return; }
+    if (!message) { toast('Message required', 'warning'); return; }
+    if (link && !link.startsWith('http')) link = 'https://' + link;
+    if (icon && !icon.startsWith('http')) icon = 'https://' + icon;
+    
+    try {
+        // Count subscribers
+        const subsSnap = await db.ref('pushSubscribers').once('value');
+        const subs = subsSnap.exists() ? subsSnap.val() : {};
+        const subCount = Object.keys(subs).length;
+        
+        // Save notification record
+        const notifData = {
+            title,
+            message,
+            link: link || 'https://esewahub.in',
+            icon: icon || '',
+            sentAt: new Date().toISOString(),
+            recipients: subCount,
+            status: 'sent'
+        };
+        await db.ref('notifications').push(notifData);
+        
+        toast(`Notification sent to ${subCount} subscribers! 🎉`, 'success');
+        closeModal('notifModal');
+        await loadNotifications();
+    } catch (e) {
+        toast('Error: ' + e.message, 'error');
+    }
+};
+
+async function loadNotifications() {
+    try {
+        const subsSnap = await db.ref('pushSubscribers').once('value');
+        const subs = subsSnap.exists() ? subsSnap.val() : {};
+        const subCount = Object.keys(subs).length;
+        
+        // Active (30 days)
+        const now = Date.now();
+        const thirtyDaysAgo = now - (30 * 24 * 60 * 60 * 1000);
+        const activeCount = Object.values(subs).filter(s => s.subscribedAt && new Date(s.subscribedAt).getTime() > thirtyDaysAgo).length;
+        
+        const notifSnap = await db.ref('notifications').once('value');
+        allNotifications = notifSnap.exists() ? notifSnap.val() : {};
+        const sentCount = Object.keys(allNotifications).length;
+        
+        document.getElementById('notifSubscribedCount').innerText = subCount;
+        document.getElementById('notifSentCount').innerText = sentCount;
+        document.getElementById('notifActiveCount').innerText = activeCount;
+        document.getElementById('notifCountBadge').innerText = subCount;
+        
+        // Update status
+        const statusEl = document.getElementById('statusNotif');
+        if (statusEl) {
+            statusEl.innerText = subCount > 0 ? 'Active ✓' : 'No Subscribers';
+            statusEl.style.color = subCount > 0 ? 'var(--g600)' : 'var(--r500)';
+        }
+        
+        renderNotifications();
+    } catch (e) {
+        console.error('Load notifications error:', e);
+    }
+}
+
+function renderNotifications() {
+    const nt = document.getElementById('notifTable');
+    if (!nt) return;
+    nt.innerHTML = '';
+    const arr = Object.entries(allNotifications);
+    if (arr.length === 0) {
+        nt.innerHTML = `<tr><td colspan="5" class="empty"><i class="fas fa-bell"></i><h4>No notifications sent yet</h4><p>Click "Compose New" to send your first notification</p></td></tr>`;
+        return;
+    }
+    arr.sort((a, b) => new Date(b[1].sentAt || 0) - new Date(a[1].sentAt || 0));
+    arr.forEach(([id, n]) => {
+        const title = (n.title || '').length > 30 ? n.title.substring(0, 30) + '...' : (n.title || '');
+        const msg = (n.message || '').length > 50 ? n.message.substring(0, 50) + '...' : (n.message || '');
+        nt.innerHTML += `<tr>
+            <td style="font-weight:700;color:var(--p600)">${title}</td>
+            <td style="color:var(--s500);font-size:.85rem">${msg}</td>
+            <td style="font-size:.8rem">${formatDate(n.sentAt)}</td>
+            <td><span style="background:var(--g50);color:var(--g700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${n.recipients || 0} users</span></td>
+            <td>
+                <button class="btn btn-r btn-sm" onclick="deleteNotification('${id}')"><i class="fas fa-trash"></i></button>
+            </td>
+        </tr>`;
+    });
+}
+
+window.deleteNotification = async function(id) {
+    if (!confirm('Delete this notification record?')) return;
+    try {
+        await db.ref(`notifications/${id}`).remove();
+        toast('Deleted', 'info');
+        await loadNotifications();
+    } catch (e) { toast('Error', 'error'); }
+};
+
 // USERS
 window.openUserModal = function() {
     document.getElementById('userModalTitle').innerText = 'Add New User';
@@ -1815,7 +2067,7 @@ window.deleteUser = async function(uid) {
 // LOAD ALL DATA - PARALLEL
 async function loadAllData() {
     try {
-        const [ss, ads, seo, soc, cc, cs, ps, svs, us, ann, pop] = await Promise.all([
+        const [ss, ads, seo, soc, cc, cs, ps, svs, us, ann, pop, notif] = await Promise.all([
             db.ref('settings/general').once('value').catch(()=>null),
             db.ref('settings/adsense').once('value').catch(()=>null),
             db.ref('settings/seo').once('value').catch(()=>null),
@@ -1826,13 +2078,21 @@ async function loadAllData() {
             db.ref('services').once('value').catch(()=>null),
             db.ref('users').once('value').catch(()=>null),
             db.ref('announcements').once('value').catch(()=>null),
-            db.ref('popups').once('value').catch(()=>null)
+            db.ref('popups').once('value').catch(()=>null),
+            db.ref('notifications').once('value').catch(()=>null)
         ]);
 
         if (ss && ss.exists()) {
             const s = ss.val();
             document.getElementById('set_title').value = s.title || '';
             document.getElementById('set_tagline').value = s.tagline || '';
+            document.getElementById('set_logo').value = s.logo || '';
+            if(s.logo){
+                document.getElementById('set_logoPreviewImg').src = s.logo;
+                document.getElementById('set_logoPreview').style.display = 'block';
+            } else {
+                document.getElementById('set_logoPreview').style.display = 'none';
+            }
             document.getElementById('set_wa').value = s.whatsapp || '';
             document.getElementById('set_email').value = s.email || '';
             document.getElementById('set_address').value = s.address || '';
@@ -1850,6 +2110,7 @@ async function loadAllData() {
             document.getElementById('ads_slot_top').value = a.slotTop || '';
             document.getElementById('ads_slot_mid').value = a.slotMid || '';
             document.getElementById('ads_slot_side').value = a.slotSide || '';
+            document.getElementById('ads_slot_bottom').value = a.slotBottom || '';
             document.getElementById('statusAdsense').innerText = a.client ? 'Configured ✓' : 'Not Configured';
             document.getElementById('statusAdsense').style.color = a.client ? 'var(--g600)' : 'var(--r500)';
         }
@@ -1902,6 +2163,8 @@ async function loadAllData() {
 
         allPopups = (pop && pop.exists()) ? pop.val() : {};
         renderPopups();
+
+        allNotifications = (notif && notif.exists()) ? notif.val() : {};
     } catch (e) {
         console.error('Load data error:', e);
     }
@@ -1914,7 +2177,6 @@ async function loadDashboard() {
         document.getElementById('dashServicesCount').innerText = Object.keys(allServices).length || 18;
         document.getElementById('dashAnnouncements').innerText = Object.keys(allAnnouncements).length;
         document.getElementById('dashPopups').innerText = Object.keys(allPopups).length;
-        document.getElementById('dashUsers') && (document.getElementById('dashUsers').innerText = Object.keys(allUsers).length);
         
         const recentBox = document.getElementById('recentPosts');
         const recent = allPosts.slice(0, 5);
@@ -1929,14 +2191,12 @@ async function loadDashboard() {
             recentBox.innerHTML = html;
         }
         
-        // Load visitor stats
         await loadVisitorStats();
+        await loadNotifications();
     } catch (e) { console.error(e); }
 }
 
-// ═══════════════════════════════════════════════════════════
-// VISITOR STATISTICS SYSTEM
-// ═══════════════════════════════════════════════════════════
+// VISITOR STATS
 async function loadVisitorStats(){
     try {
         const totalViewsSnap = await db.ref('analytics/totalViews').once('value');
@@ -1999,9 +2259,7 @@ async function loadVisitorStats(){
         renderVisitorTable(last7Days);
         renderVisitorFullTable(last30Days);
         
-    } catch(e) {
-        console.error('Visitor stats error:', e);
-    }
+    } catch(e) { console.error('Visitor stats error:', e); }
 }
 
 function renderVisitorTable(days){
@@ -2106,7 +2364,7 @@ function renderServices() {
     const badge = document.getElementById('serviceCountBadge');
     if (badge) badge.innerText = entries.length || 18;
     if (entries.length === 0) {
-        st.innerHTML = `<tr><td colspan="5" class="empty"><i class="fas fa-briefcase"></i><h4>No custom services</h4><p>Default 18 services dikhayi ja rahi hain. Add karne ke liye "Add New Service" par click karein.</p></td></tr>`;
+        st.innerHTML = `<tr><td colspan="5" class="empty"><i class="fas fa-briefcase"></i><h4>No custom services</h4><p>Default 18 services dikhayi ja rahi hain.</p></td></tr>`;
         return;
     }
     entries.forEach(([k, s]) => {
@@ -2130,8 +2388,6 @@ function renderUsers() {
     const userArr = Object.entries(allUsers);
     const badge = document.getElementById('userCountBadge');
     if (badge) badge.innerText = userArr.length;
-    const dashUsersEl = document.getElementById('dashUsers');
-    if (dashUsersEl) dashUsersEl.innerText = userArr.length;
     
     if (userArr.length === 0) {
         ut.innerHTML = `<tr><td colspan="6" class="empty"><i class="fas fa-users"></i><h4>No users yet</h4></td></tr>`;
@@ -2170,6 +2426,7 @@ window.saveSettings = async function() {
         await db.ref('settings/general').update({
             title: document.getElementById('set_title').value.trim(),
             tagline: document.getElementById('set_tagline').value.trim(),
+            logo: document.getElementById('set_logo').value.trim(),
             whatsapp: document.getElementById('set_wa').value.trim(),
             email: document.getElementById('set_email').value.trim(),
             address: document.getElementById('set_address').value.trim(),
@@ -2192,6 +2449,7 @@ window.saveAdsense = async function() {
             slotTop: document.getElementById('ads_slot_top').value.trim(),
             slotMid: document.getElementById('ads_slot_mid').value.trim(),
             slotSide: document.getElementById('ads_slot_side').value.trim(),
+            slotBottom: document.getElementById('ads_slot_bottom').value.trim(),
             updatedAt: new Date().toISOString()
         });
         document.getElementById('statusAdsense').innerText = 'Configured ✓';
@@ -2269,6 +2527,8 @@ window.openPostModal = function() {
         if (el) el.value = '';
     });
     document.getElementById('ep_imagePreview').style.display = 'none';
+    document.getElementById('ep_sendNotif').classList.remove('on');
+    postSendNotifToggle = false;
     resetPostLinks([]);
     document.getElementById('postModal').classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -2330,7 +2590,25 @@ window.savePost = async function() {
     };
     try {
         if (id) { await db.ref(`posts/${id}`).update(data); toast('Post updated!', 'success'); }
-        else { await db.ref('posts').push(data); toast('Post published!', 'success'); }
+        else { 
+            const ref = await db.ref('posts').push(data); 
+            toast('Post published!', 'success');
+            
+            // Send notification if toggle is on
+            if(postSendNotifToggle){
+                const notifData = {
+                    title: '📢 New Post: ' + title.substring(0, 50),
+                    message: data.summary || 'Click to read more',
+                    link: `https://esewahub.in/post.html?id=${ref.key}`,
+                    icon: image || '',
+                    sentAt: new Date().toISOString(),
+                    recipients: 0,
+                    status: 'sent'
+                };
+                await db.ref('notifications').push(notifData);
+                toast('Notification sent to all users! 🔔', 'success');
+            }
+        }
         closeModal('postModal');
         await loadAllData();
         await loadDashboard();
@@ -2425,7 +2703,6 @@ function formatDate(iso) {
     return `${d.getDate()} ${m[d.getMonth()]} ${d.getFullYear()}`;
 }
 
-// Auto-refresh visitor stats every 30s
 setInterval(() => {
     if(document.getElementById('secDashboard')?.classList.contains('active')){
         loadVisitorStats();
@@ -2436,6 +2713,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupImagePreview('ep_image','ep_imagePreview','ep_imagePreviewImg');
     setupImagePreview('es_image','es_imagePreview','es_imagePreviewImg');
     setupImagePreview('pop_image','pop_imagePreview','pop_imagePreviewImg');
+    setupImagePreview('set_logo','set_logoPreview','set_logoPreviewImg');
     resetPostLinks([]);
 });
 </script>
