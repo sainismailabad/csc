@@ -96,7 +96,7 @@ a{text-decoration:none;color:inherit}
 .card-head span{display:flex;align-items:center;gap:10px}
 .card-head span i{color:var(--p600)}
 
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:26px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;margin-bottom:26px}
 .stat-card{background:#fff;padding:22px;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid var(--s200);display:flex;align-items:center;gap:16px;transition:all .25s}
 .stat-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.08)}
 .stat-icon{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;flex-shrink:0}
@@ -117,7 +117,7 @@ td{padding:16px;border-bottom:1px solid var(--s200);font-size:.88rem;color:var(-
 tr:last-child td{border-bottom:none}
 tr:hover td{background:var(--s50)}
 
-.thumb{width:70px;height:55px;border-radius:10px;object-fit:cover;border:2px solid var(--s200);background:var(--s100);loading:lazy}
+.thumb{width:70px;height:55px;border-radius:10px;object-fit:cover;border:2px solid var(--s200);background:var(--s100)}
 .thumb-icon{width:60px;height:50px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;background:linear-gradient(135deg,var(--p600),var(--p800))}
 
 .btn{padding:11px 20px;border-radius:9px;font-weight:700;display:inline-flex;align-items:center;gap:8px;color:#fff;font-size:.85rem;transition:all .15s;cursor:pointer;border:none}
@@ -139,7 +139,6 @@ tr:hover td{background:var(--s50)}
 .form-group textarea{min-height:100px;resize:vertical;line-height:1.6}
 .form-group .hint{font-size:.75rem;color:var(--s400);margin-top:6px;display:block;font-weight:500;line-height:1.5}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
 
 .image-preview{display:none;margin-bottom:18px;position:relative;border-radius:12px;overflow:hidden;border:2px solid var(--s200);background:var(--s50)}
 .image-preview img{width:100%;max-height:240px;object-fit:cover;display:block}
@@ -181,24 +180,15 @@ tr:hover td{background:var(--s50)}
 .modal-close:hover{background:var(--r50);color:var(--r600);transform:rotate(90deg)}
 .modal-foot{display:flex;justify-content:flex-end;gap:12px;margin-top:26px;padding-top:20px;border-top:1px solid var(--s200)}
 
-.guide-step{display:flex;gap:14px;padding:16px;background:var(--s50);border-radius:10px;margin-bottom:12px;border:1px solid var(--s200)}
-.guide-num{width:32px;height:32px;background:linear-gradient(135deg,var(--p600),var(--p800));color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;flex-shrink:0}
-.guide-content{flex:1}
-.guide-content h4{font-size:.9rem;font-weight:800;color:var(--s900);margin-bottom:4px}
-.guide-content p{font-size:.82rem;color:var(--s600);line-height:1.6}
-.guide-content code{background:var(--s200);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:.78rem;color:var(--p700)}
-
 .link-builder{margin-bottom:16px}
 .link-builder-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .link-builder-head label{font-weight:700;color:var(--s800);font-size:.84rem;margin:0}
 .link-builder-head .link-counter{font-size:.72rem;color:var(--s500);font-weight:600;background:var(--s100);padding:3px 10px;border-radius:9999px}
-.link-row{display:grid;grid-template-columns:1fr 1.4fr 42px;gap:8px;margin-bottom:8px;align-items:center;background:var(--s50);padding:10px;border-radius:10px;border:1px solid var(--s200);animation:fadeInRow .25s ease}
-@keyframes fadeInRow{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.link-row{display:grid;grid-template-columns:1fr 1.4fr 42px;gap:8px;margin-bottom:8px;align-items:center;background:var(--s50);padding:10px;border-radius:10px;border:1px solid var(--s200)}
 .link-row input{padding:10px 12px;border:2px solid var(--s200);border-radius:8px;background:#fff;font-size:.85rem;width:100%}
 .link-row input:focus{outline:none;border-color:var(--p500);box-shadow:0 0 0 3px rgba(37,99,235,.08)}
 .link-row .remove-link-btn{width:42px;height:42px;border-radius:8px;background:var(--r50);color:var(--r500);display:flex;align-items:center;justify-content:center;font-size:.9rem;border:none;cursor:pointer;transition:all .2s;flex-shrink:0}
 .link-row .remove-link-btn:hover{background:var(--r500);color:#fff;transform:scale(1.05)}
-.link-row .remove-link-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
 .add-link-btn{width:100%;padding:11px;background:var(--p50);color:var(--p700);border:2px dashed #93c5fd;border-radius:10px;font-weight:700;font-size:.84rem;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all .2s;margin-top:4px}
 .add-link-btn:hover{background:var(--p100);border-color:var(--p500);border-style:solid}
 
@@ -206,13 +196,12 @@ tr:hover td{background:var(--s50)}
 .multiline-builder-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .multiline-builder-head label{font-weight:700;color:var(--s800);font-size:.84rem;margin:0}
 .multiline-builder-head .line-counter{font-size:.72rem;color:var(--s500);font-weight:600;background:var(--s100);padding:3px 10px;border-radius:9999px}
-.line-row{display:grid;grid-template-columns:44px 1fr 44px;gap:8px;margin-bottom:8px;align-items:center;background:var(--s50);padding:10px;border-radius:10px;border:1px solid var(--s200);animation:fadeInRow .25s ease}
+.line-row{display:grid;grid-template-columns:44px 1fr 44px;gap:8px;margin-bottom:8px;align-items:center;background:var(--s50);padding:10px;border-radius:10px;border:1px solid var(--s200)}
 .line-row .line-num{width:32px;height:32px;background:linear-gradient(135deg,var(--p600),var(--p800));color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;flex-shrink:0}
 .line-row input{padding:10px 12px;border:2px solid var(--s200);border-radius:8px;background:#fff;font-size:.85rem;width:100%}
 .line-row input:focus{outline:none;border-color:var(--p500);box-shadow:0 0 0 3px rgba(37,99,235,.08)}
 .line-row .remove-line-btn{width:38px;height:38px;border-radius:8px;background:var(--r50);color:var(--r500);display:flex;align-items:center;justify-content:center;font-size:.85rem;border:none;cursor:pointer;transition:all .2s;flex-shrink:0}
 .line-row .remove-line-btn:hover{background:var(--r500);color:#fff;transform:scale(1.05)}
-.line-row .remove-line-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
 .add-line-btn{width:100%;padding:11px;background:var(--g50);color:var(--g700);border:2px dashed #86efac;border-radius:10px;font-weight:700;font-size:.84rem;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all .2s;margin-top:4px}
 .add-line-btn:hover{background:var(--g50);border-color:var(--g500);border-style:solid}
 
@@ -220,51 +209,34 @@ tr:hover td{background:var(--s50)}
 .status-dot.active{background:var(--g500);box-shadow:0 0 0 3px rgba(34,197,94,.2)}
 .status-dot.inactive{background:var(--s400)}
 .user-avatar-cell{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--p600),var(--p800));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;flex-shrink:0}
-.user-avatar-cell.gold{background:linear-gradient(135deg,#f59e0b,#d97706)}
-.user-avatar-cell.purple{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
-.user-avatar-cell.pink{background:linear-gradient(135deg,#ec4899,#be185d)}
 .user-cell{display:flex;align-items:center;gap:12px}
 .user-cell-info{min-width:0}
 .user-cell-info strong{display:block;font-weight:700;color:var(--s900);font-size:.88rem}
 .user-cell-info small{display:block;font-size:.74rem;color:var(--s500)}
 .role-select{padding:8px 12px;border:2px solid var(--s200);border-radius:8px;font-size:.82rem;font-weight:700;background:var(--s50);cursor:pointer;transition:all .2s}
 .role-select:focus{outline:none;border-color:var(--p500);background:#fff}
-.perm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:12px}
-.perm-item{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--s50);border:2px solid var(--s200);border-radius:10px;cursor:pointer;transition:all .2s;font-size:.85rem;font-weight:600;color:var(--s700)}
-.perm-item.checked{border-color:var(--p500);background:var(--p50);color:var(--p800)}
-.perm-item input{width:18px;height:18px;cursor:pointer;accent-color:var(--p600)}
-.perm-item span{flex:1}
-.role-preview{margin-top:16px;padding:14px 18px;background:linear-gradient(135deg,#f0fdf4,#ecfdf5);border:1px solid #bbf7d0;border-radius:10px;font-size:.84rem;color:var(--g700);line-height:1.6}
-.role-preview strong{display:block;margin-bottom:6px;color:var(--g700)}
-.role-preview ul{margin:6px 0 0 20px;color:var(--g600)}
-.role-preview li{margin-bottom:3px;font-size:.82rem}
 
 .stat-mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:20px}
 .stat-mini{background:linear-gradient(135deg,var(--s50),#fff);border:1px solid var(--s200);border-radius:12px;padding:16px;text-align:center}
 .stat-mini .num{font-size:1.5rem;font-weight:900;color:var(--p700);font-family:var(--serif);line-height:1}
 .stat-mini .lbl{font-size:.7rem;color:var(--s500);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-top:6px}
 
-@keyframes blinkDot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.85); }
-}
-.ann-type-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 5px 12px;
-    border-radius: 9999px;
-    font-size: .7rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: .05em;
-}
-.ann-type-live { background: linear-gradient(135deg,#fee2e2,#fecaca); color: #991b1b; }
-.ann-type-job { background: linear-gradient(135deg,#dbeafe,#bfdbfe); color: #1e40af; }
-.ann-type-yojna { background: linear-gradient(135deg,#dcfce7,#bbf7d0); color: #15803d; }
-.ann-type-admit { background: linear-gradient(135deg,#f3e8ff,#e9d5ff); color: #6b21a8; }
-.ann-type-important { background: linear-gradient(135deg,#fef3c7,#fde68a); color: #92400e; }
-.ann-type-info { background: linear-gradient(135deg,#f1f5f9,#e2e8f0); color: #475569; }
+@keyframes blinkDot {0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
+
+.ann-type-badge {display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:9999px;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.ann-type-live {background:linear-gradient(135deg,#fee2e2,#fecaca);color:#991b1b}
+.ann-type-job {background:linear-gradient(135deg,#dbeafe,#bfdbfe);color:#1e40af}
+.ann-type-yojna {background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#15803d}
+.ann-type-admit {background:linear-gradient(135deg,#f3e8ff,#e9d5ff);color:#6b21a8}
+.ann-type-important {background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e}
+.ann-type-info {background:linear-gradient(135deg,#f1f5f9,#e2e8f0);color:#475569}
+
+.live-pulse{display:inline-block;width:10px;height:10px;background:#22c55e;border-radius:50%;position:relative;margin-right:6px}
+.live-pulse::before{content:'';position:absolute;inset:-4px;background:rgba(34,197,94,.3);border-radius:50%;animation:pulse-ring 1.5s infinite}
+@keyframes pulse-ring{0%{transform:scale(1);opacity:1}100%{transform:scale(2);opacity:0}}
+
+.trend-bar{background:#e2e8f0;height:8px;border-radius:4px;overflow:hidden;min-width:80px}
+.trend-bar > div{background:linear-gradient(90deg,#3b82f6,#2563eb);height:100%;transition:width .3s}
 
 @media(max-width:768px){
 .sidebar{width:64px;padding:16px 0}
@@ -277,7 +249,7 @@ tr:hover td{background:var(--s50)}
 .nav-item i{width:auto;font-size:1.15rem}
 .nav-badge{position:absolute;top:8px;right:8px;font-size:.55rem;padding:1px 5px;min-width:16px}
 .main-content{margin-left:64px;width:calc(100% - 64px);padding:16px}
-.form-row,.form-row-3{grid-template-columns:1fr}
+.form-row{grid-template-columns:1fr}
 .top-bar{flex-direction:column;align-items:flex-start;padding:16px}
 .top-bar h2{font-size:1.15rem}
 .modal-box{padding:20px}
@@ -285,7 +257,6 @@ tr:hover td{background:var(--s50)}
 .login-box{padding:32px 24px}
 .toggle-row{flex-direction:column;align-items:flex-start;gap:12px}
 .link-row{grid-template-columns:1fr 1fr 42px;gap:6px}
-.perm-grid{grid-template-columns:1fr}
 .line-row{grid-template-columns:44px 1fr 38px;gap:6px}
 }
 @media(max-width:480px){
@@ -351,6 +322,7 @@ tr:hover td{background:var(--s50)}
 </div>
 <div class="nav-item" onclick="showSec('secServices',this)">
 <i class="fas fa-briefcase"></i><span>Sarkari Kaam</span>
+<span class="nav-badge" id="serviceCountBadge" style="background:#22c55e">0</span>
 </div>
 <div class="nav-item" onclick="showSec('secCats',this)">
 <i class="fas fa-tags"></i><span>Categories</span>
@@ -362,17 +334,19 @@ tr:hover td{background:var(--s50)}
 <span class="nav-badge" id="userCountBadge">0</span>
 </div>
 
+<div class="nav-group">Analytics</div>
+<div class="nav-item" onclick="showSec('secVisitors',this)">
+<i class="fas fa-chart-bar"></i><span>Visitor Analytics</span>
+</div>
+
 <div class="nav-group">Monetization</div>
 <div class="nav-item" onclick="showSec('secAdsense',this)">
 <i class="fab fa-google"></i><span>Google AdSense</span>
 </div>
 
-<div class="nav-group">SEO & Analytics</div>
+<div class="nav-group">SEO</div>
 <div class="nav-item" onclick="showSec('secSEO',this)">
 <i class="fas fa-search"></i><span>SEO Settings</span>
-</div>
-<div class="nav-item" onclick="showSec('secAnalytics',this)">
-<i class="fas fa-chart-bar"></i><span>Analytics</span>
 </div>
 
 <div class="nav-group">Configuration</div>
@@ -418,6 +392,10 @@ tr:hover td{background:var(--s50)}
 <div class="stat-info"><h3 id="dashPosts">0</h3><p>Total Posts</p></div>
 </div>
 <div class="stat-card">
+<div class="stat-icon green"><i class="fas fa-briefcase"></i></div>
+<div class="stat-info"><h3 id="dashServicesCount">0</h3><p>Services</p></div>
+</div>
+<div class="stat-card">
 <div class="stat-icon orange"><i class="fas fa-bullhorn"></i></div>
 <div class="stat-info"><h3 id="dashAnnouncements">0</h3><p>Announcements</p></div>
 </div>
@@ -426,8 +404,51 @@ tr:hover td{background:var(--s50)}
 <div class="stat-info"><h3 id="dashPopups">0</h3><p>Image Popups</p></div>
 </div>
 <div class="stat-card">
-<div class="stat-icon pink"><i class="fas fa-users"></i></div>
-<div class="stat-info"><h3 id="dashUsers">0</h3><p>Team Users</p></div>
+<div class="stat-icon cyan"><i class="fas fa-eye"></i></div>
+<div class="stat-info"><h3 id="dashTotalViews">0</h3><p>Total Views</p></div>
+</div>
+<div class="stat-card">
+<div class="stat-icon pink"><i class="fas fa-user-check"></i></div>
+<div class="stat-info"><h3 id="dashTotalVisitors">0</h3><p>Unique Visitors</p></div>
+</div>
+</div>
+
+<!-- LIVE VISITOR COUNTER -->
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-chart-line"></i> Live Traffic Analytics</span>
+<button class="btn btn-p btn-sm" onclick="refreshVisitorStats()"><i class="fas fa-sync-alt"></i> Refresh</button>
+</div>
+
+<div class="stats-grid" style="margin-bottom:20px">
+<div class="stat-card" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0);border-color:#22c55e">
+<div class="stat-icon" style="background:linear-gradient(135deg,#22c55e,#15803d);width:44px;height:44px;font-size:1.1rem"><i class="fas fa-circle" style="font-size:.7rem"></i></div>
+<div class="stat-info"><h3 id="statOnlineNow" style="font-size:1.5rem;color:#15803d">0</h3><p style="color:#15803d">Online Now</p></div>
+</div>
+<div class="stat-card" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);border-color:#2563eb">
+<div class="stat-icon blue" style="width:44px;height:44px;font-size:1.1rem"><i class="fas fa-calendar-day"></i></div>
+<div class="stat-info"><h3 id="statTodayViews" style="font-size:1.5rem">0</h3><p>Views Today</p></div>
+</div>
+<div class="stat-card" style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-color:#f59e0b">
+<div class="stat-icon orange" style="width:44px;height:44px;font-size:1.1rem"><i class="fas fa-user-plus"></i></div>
+<div class="stat-info"><h3 id="statTodayVisitors" style="font-size:1.5rem">0</h3><p>Visitors Today</p></div>
+</div>
+<div class="stat-card" style="background:linear-gradient(135deg,#f3e8ff,#e9d5ff);border-color:#8b5cf6">
+<div class="stat-icon purple" style="width:44px;height:44px;font-size:1.1rem"><i class="fas fa-calendar-week"></i></div>
+<div class="stat-info"><h3 id="statWeekViews" style="font-size:1.5rem">0</h3><p>Views (7 Days)</p></div>
+</div>
+</div>
+
+<!-- LAST 7 DAYS BREAKDOWN -->
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Date</th><th>Page Views</th><th>Unique Visitors</th><th>Trend</th></tr>
+</thead>
+<tbody id="visitorDailyTable">
+<tr><td colspan="4"><div class="spinner"></div></td></tr>
+</tbody>
+</table>
 </div>
 </div>
 
@@ -443,10 +464,6 @@ tr:hover td{background:var(--s50)}
 <div class="stat-card" style="padding:16px">
 <div class="stat-icon blue" style="width:44px;height:44px;font-size:1.1rem"><i class="fas fa-search"></i></div>
 <div class="stat-info"><h3 id="statusSEO" style="font-size:1rem">Not Configured</h3><p>SEO</p></div>
-</div>
-<div class="stat-card" style="padding:16px">
-<div class="stat-icon green" style="width:44px;height:44px;font-size:1.1rem"><i class="fas fa-chart-bar"></i></div>
-<div class="stat-info"><h3 id="statusAnalytics" style="font-size:1rem">Not Configured</h3><p>Analytics</p></div>
 </div>
 </div>
 </div>
@@ -508,7 +525,7 @@ tr:hover td{background:var(--s50)}
 
 <div class="info-box">
 <strong><i class="fas fa-info-circle"></i> Live Announcement Bar (Multi-line)</strong>
-Yahan se aap website ke top par scrolling announcement bar show kar sakte hain. Ek announcement mein <b>multiple lines</b> add kar sakte hain.
+Yahan se aap website ke top par scrolling announcement bar show kar sakte hain. Ek announcement mein multiple lines add kar sakte hain.
 </div>
 
 <div class="table-wrap">
@@ -528,19 +545,6 @@ Yahan se aap website ke top par scrolling announcement bar show kar sakte hain. 
 </table>
 </div>
 </div>
-
-<div class="card">
-<div class="card-head">
-<span><i class="fas fa-eye"></i> Live Preview</span>
-</div>
-<p style="font-size:.85rem;color:var(--s500);margin-bottom:14px">Yeh exactly aise dikhega website ke top par:</p>
-<div id="annPreviewBox" style="background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff;padding:12px 18px;border-radius:8px;display:flex;align-items:center;gap:10px;font-weight:600;font-size:.88rem">
-<span style="background:rgba(255,255,255,.25);padding:3px 10px;border-radius:9999px;font-size:.7rem;font-weight:800;letter-spacing:.08em;display:inline-flex;align-items:center;gap:5px">
-<span style="width:7px;height:7px;background:#fff;border-radius:50%;animation:blinkDot 1s infinite"></span> LIVE
-</span>
-<span id="annPreviewText">Aapki announcement yahan dikhegi...</span>
-</div>
-</div>
 </div>
 
 <!-- IMAGE POPUPS SECTION -->
@@ -553,19 +557,7 @@ Yahan se aap website ke top par scrolling announcement bar show kar sakte hain. 
 
 <div class="info-box">
 <strong><i class="fas fa-info-circle"></i> Image Popup / Banner</strong>
-Yeh feature website load hone par ek <b>full-image popup modal</b> show karta hai — jaise koi result link, advertisement, ya special notice.
-User <b>ek baar close karega to 24 ghante tak nahi dikhega</b> (per-user memory).
-</div>
-
-<div class="warn-box">
-<strong><i class="fas fa-lightbulb"></i> Important Tips</strong>
-<ul style="margin:6px 0 0 20px;color:#92400e">
-<li><b>Image URL:</b> Full URL with <code>https://</code> (example: <code>https://i.imgur.com/abc.jpg</code>)</li>
-<li><b>Test:</b> Browser mein URL paste karke pehle check karein ki image khul rahi hai ya nahi</li>
-<li><b>Recommended size:</b> 800x600 or 1200x900 pixels</li>
-<li><b>Format:</b> JPG, PNG, WEBP — sab chalega</li>
-<li><b>Ek baar mein sirf 1 popup active rakhein</b> — multiple active mein top priority wala show hoga</li>
-</ul>
+Yeh feature website load hone par ek full-image popup modal show karta hai.
 </div>
 
 <div class="table-wrap">
@@ -595,7 +587,7 @@ User <b>ek baar close karega to 24 ghante tak nahi dikhega</b> (per-user memory)
 <button class="btn btn-g" onclick="openServiceModal()"><i class="fas fa-plus"></i> Add New Service</button>
 </div>
 <p style="font-size:.86rem;color:var(--s500);margin-bottom:18px;line-height:1.7">
-Yahan se aap website ke <b>Sarkari Kaam section</b> ke sabhi services add/edit/delete kar sakte hain.
+Yahan se aap website ke <b>Sarkari Kaam section</b> ke sabhi services add/edit/delete kar sakte hain. Ye services automatically website par show hongi.
 </p>
 <div class="table-wrap">
 <table>
@@ -634,28 +626,56 @@ Yahan se aap website ke <b>Sarkari Kaam section</b> ke sabhi services add/edit/d
 <button class="btn" onclick="openUserModal()" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)"><i class="fas fa-user-plus"></i> Add New User</button>
 </div>
 
-<div class="info-box">
-<strong><i class="fas fa-info-circle"></i> User Roles & Permissions</strong>
-<ul style="margin:8px 0 0 20px;color:var(--p700)">
-<li><b>Admin:</b> Full access — sab kuch manage kar sakta hai</li>
-<li><b>Editor:</b> Posts, Services, Categories manage kar sakta hai</li>
-<li><b>Viewer:</b> Sirf view kar sakta hai</li>
-</ul>
-</div>
-
-<div class="stat-mini-grid">
-<div class="stat-mini"><div class="num" id="userStatTotal">0</div><div class="lbl">Total Users</div></div>
-<div class="stat-mini"><div class="num" id="userStatAdmins" style="color:#dc2626">0</div><div class="lbl">Admins</div></div>
-<div class="stat-mini"><div class="num" id="userStatEditors" style="color:#2563eb">0</div><div class="lbl">Editors</div></div>
-<div class="stat-mini"><div class="num" id="userStatViewers" style="color:#64748b">0</div><div class="lbl">Viewers</div></div>
-</div>
-
 <div class="table-wrap">
 <table>
 <thead>
 <tr><th style="width:220px">User</th><th>Email</th><th>Role</th><th>Status</th><th>Created</th><th style="width:200px">Actions</th></tr>
 </thead>
 <tbody id="usersTable"><tr><td colspan="6"><div class="spinner"></div></td></tr></tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- VISITOR ANALYTICS SECTION -->
+<div id="secVisitors" class="section">
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-chart-bar"></i> Complete Visitor Analytics</span>
+<button class="btn btn-p btn-sm" onclick="refreshVisitorStats()"><i class="fas fa-sync-alt"></i> Refresh</button>
+</div>
+
+<div class="stats-grid">
+<div class="stat-card" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);border-color:#2563eb">
+<div class="stat-icon blue"><i class="fas fa-eye"></i></div>
+<div class="stat-info"><h3 id="analyticsTotalViews">0</h3><p>Total Page Views</p></div>
+</div>
+<div class="stat-card" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0);border-color:#22c55e">
+<div class="stat-icon green"><i class="fas fa-user-check"></i></div>
+<div class="stat-info"><h3 id="analyticsTotalVisitors">0</h3><p>Unique Visitors</p></div>
+</div>
+<div class="stat-card" style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-color:#f59e0b">
+<div class="stat-icon orange"><i class="fas fa-circle" style="font-size:.7rem"></i></div>
+<div class="stat-info"><h3 id="analyticsOnlineNow">0</h3><p>Online Now</p></div>
+</div>
+<div class="stat-card" style="background:linear-gradient(135deg,#f3e8ff,#e9d5ff);border-color:#8b5cf6">
+<div class="stat-icon purple"><i class="fas fa-calendar-day"></i></div>
+<div class="stat-info"><h3 id="analyticsTodayViews">0</h3><p>Views Today</p></div>
+</div>
+</div>
+
+<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
+<i class="fas fa-history" style="color:var(--p600)"></i> Last 30 Days History
+</h3>
+
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>Date</th><th>Day</th><th>Page Views</th><th>Unique Visitors</th><th>Trend</th></tr>
+</thead>
+<tbody id="visitorFullTable">
+<tr><td colspan="5"><div class="spinner"></div></td></tr>
+</tbody>
 </table>
 </div>
 </div>
@@ -670,33 +690,18 @@ Yahan se aap website ke <b>Sarkari Kaam section</b> ke sabhi services add/edit/d
 
 <div class="info-box">
 <strong><i class="fas fa-info-circle"></i> AdSense Setup Guide</strong>
-Apna Publisher ID aur Ad Slot IDs yahan enter karein. Ye automatically website par apply ho jayenge.
+Apna Publisher ID aur Ad Slot IDs yahan enter karein.
 </div>
 
 <div class="form-group">
 <label>AdSense Publisher ID <span class="req">*</span></label>
 <input type="text" id="ads_client" placeholder="ca-pub-1234567890123456">
-<span class="hint">Format: ca-pub-XXXXXXXXXXXXXXXX</span>
 </div>
 
 <div class="form-row">
-<div class="form-group">
-<label>Auto Ads Enabled?</label>
-<select id="ads_auto"><option value="no">No</option><option value="yes">Yes (Recommended)</option></select>
+<div class="form-group"><label>Auto Ads Enabled?</label><select id="ads_auto"><option value="no">No</option><option value="yes">Yes (Recommended)</option></select></div>
+<div class="form-group"><label>Ad Frequency</label><select id="ads_freq"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></div>
 </div>
-<div class="form-group">
-<label>Ad Frequency</label>
-<select id="ads_freq">
-<option value="low">Low</option>
-<option value="medium" selected>Medium</option>
-<option value="high">High</option>
-</select>
-</div>
-</div>
-
-<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
-<i class="fas fa-th" style="color:var(--p600)"></i> Ad Slot IDs
-</h3>
 
 <div class="form-row">
 <div class="form-group"><label>Top Banner Ad Slot</label><input type="text" id="ads_slot_top" placeholder="1234567890"></div>
@@ -706,37 +711,10 @@ Apna Publisher ID aur Ad Slot IDs yahan enter karein. Ye automatically website p
 <div class="form-group"><label>Sidebar Ad Slot</label><input type="text" id="ads_slot_side" placeholder="1234567890"></div>
 <div class="form-group"><label>Bottom Ad Slot</label><input type="text" id="ads_slot_bottom" placeholder="1234567890"></div>
 </div>
-<div class="form-group">
-<label>In-Article Ad Slot (Post pages)</label>
-<input type="text" id="ads_slot_article" placeholder="1234567890">
-</div>
-
-<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
-<i class="fas fa-toggle-on" style="color:var(--p600)"></i> Ad Position Toggles
-</h3>
-
-<div class="toggle-row"><div class="label"><i class="fas fa-arrow-up"></i><div>Top Banner<span class="desc">Homepage top par</span></div></div><div class="switch on" onclick="toggleSwitch(this)" data-key="ad_top"></div></div>
-<div class="toggle-row"><div class="label"><i class="fas fa-align-center"></i><div>Mid Content<span class="desc">Posts grid ke beech</span></div></div><div class="switch on" onclick="toggleSwitch(this)" data-key="ad_mid"></div></div>
-<div class="toggle-row"><div class="label"><i class="fas fa-columns"></i><div>Sidebar Ads<span class="desc">Right sidebar</span></div></div><div class="switch on" onclick="toggleSwitch(this)" data-key="ad_side"></div></div>
-<div class="toggle-row"><div class="label"><i class="fas fa-arrow-down"></i><div>Bottom Ad<span class="desc">Content ke neeche</span></div></div><div class="switch on" onclick="toggleSwitch(this)" data-key="ad_bottom"></div></div>
-<div class="toggle-row"><div class="label"><i class="fas fa-file-alt"></i><div>In-Article Ads<span class="desc">Post pages ke andar</span></div></div><div class="switch on" onclick="toggleSwitch(this)" data-key="ad_article"></div></div>
 
 <button class="btn btn-g" onclick="saveAdsense()" style="padding:14px 28px;margin-top:14px">
 <i class="fas fa-save"></i> Save AdSense Configuration
 </button>
-</div>
-
-<div class="card">
-<div class="card-head">
-<span><i class="fas fa-book"></i> AdSense Approval Checklist</span>
-</div>
-
-<div class="guide-step"><div class="guide-num">1</div><div class="guide-content"><h4>Required Pages</h4><p>About Us, Contact Us, Privacy Policy, Disclaimer, Terms & Conditions — ye 5 pages zaroor honi chahiye.</p></div></div>
-<div class="guide-step"><div class="guide-num">2</div><div class="guide-content"><h4>20+ Quality Posts</h4><p>Har post minimum <b>800+ words</b>. Original content — copy-paste bilkul na karein.</p></div></div>
-<div class="guide-step"><div class="guide-num">3</div><div class="guide-content"><h4>Traffic Generate Karein</h4><p>Google Search Console, Facebook, WhatsApp, Telegram par content share karein.</p></div></div>
-<div class="guide-step"><div class="guide-num">4</div><div class="guide-content"><h4>AdSense Apply Karein</h4><p><a href="https://adsense.google.com" target="_blank" style="color:var(--p600);font-weight:700">adsense.google.com</a> → Sign up → Site URL add → Wait 1-2 weeks.</p></div></div>
-<div class="guide-step"><div class="guide-num">5</div><div class="guide-content"><h4>Publisher ID Copy</h4><p>AdSense Dashboard → Account → Account Information → <code>ca-pub-XXXXXXXX</code></p></div></div>
-<div class="guide-step"><div class="guide-num">6</div><div class="guide-content"><h4>Ad Units Create</h4><p>AdSense Dashboard → Ads → By ad unit → Create new → Display ads → Copy <code>data-ad-slot</code>.</p></div></div>
 </div>
 </div>
 
@@ -747,18 +725,9 @@ Apna Publisher ID aur Ad Slot IDs yahan enter karein. Ye automatically website p
 <span><i class="fas fa-search"></i> SEO Settings</span>
 </div>
 
-<div class="info-box">
-<strong><i class="fas fa-info-circle"></i> SEO Configuration</strong>
-Ye settings Google Search mein aapki website ko rank karne mein help karti hain.
-</div>
-
-<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:8px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)"><i class="fas fa-home" style="color:var(--p600)"></i> Homepage Meta</h3>
-
-<div class="form-group"><label>Meta Title <span class="req">*</span></label><input type="text" id="seo_home_title" placeholder="esewahub.in - Sarkari Job, Result, Yojna 2026"><span class="hint">50-60 characters</span></div>
-<div class="form-group"><label>Meta Description <span class="req">*</span></label><textarea id="seo_home_desc" style="min-height:80px" placeholder="India's trusted portal for latest Sarkari Job notifications..."></textarea><span class="hint">150-160 characters</span></div>
-<div class="form-group"><label>Meta Keywords</label><textarea id="seo_home_keywords" style="min-height:60px" placeholder="sarkari job, sarkari result, government jobs..."></textarea><span class="hint">Comma se separate karein</span></div>
-
-<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)"><i class="fas fa-globe" style="color:var(--p600)"></i> Site Information</h3>
+<div class="form-group"><label>Meta Title <span class="req">*</span></label><input type="text" id="seo_home_title" placeholder="esewahub.in - Sarkari Job, Result, Yojna 2026"></div>
+<div class="form-group"><label>Meta Description <span class="req">*</span></label><textarea id="seo_home_desc" style="min-height:80px"></textarea></div>
+<div class="form-group"><label>Meta Keywords</label><textarea id="seo_home_keywords" style="min-height:60px"></textarea></div>
 
 <div class="form-row">
 <div class="form-group"><label>Site URL</label><input type="text" id="seo_site_url" placeholder="https://esewahub.in"></div>
@@ -767,42 +736,16 @@ Ye settings Google Search mein aapki website ko rank karne mein help karti hain.
 
 <div class="form-row">
 <div class="form-group"><label>Author Name</label><input type="text" id="seo_author" placeholder="esewahub.in"></div>
-<div class="form-group"><label>Robots</label><select id="seo_robots"><option value="index, follow" selected>Index, Follow</option><option value="noindex, nofollow">No Index, No Follow</option><option value="index, nofollow">Index, No Follow</option></select></div>
+<div class="form-group"><label>Robots</label><select id="seo_robots"><option value="index, follow" selected>Index, Follow</option><option value="noindex, nofollow">No Index, No Follow</option></select></div>
 </div>
 
-<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)"><i class="fab fa-facebook" style="color:var(--p600)"></i> Open Graph</h3>
-
-<div class="form-group"><label>OG Title</label><input type="text" id="seo_og_title" placeholder="Leave empty to use Meta Title"></div>
-<div class="form-group"><label>OG Description</label><textarea id="seo_og_desc" style="min-height:70px" placeholder="Leave empty to use Meta Description"></textarea></div>
-<div class="form-group"><label>OG Image URL</label><input type="text" id="seo_og_image" placeholder="https://example.com/image.jpg"><span class="hint">1200x630 px</span></div>
-
-<h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)"><i class="fas fa-check-double" style="color:var(--p600)"></i> Verification</h3>
-
-<div class="form-group"><label>Google Search Console Verification Code</label><input type="text" id="seo_gsc" placeholder="abc123xyz..."></div>
-<div class="form-group"><label>Bing Webmaster Verification</label><input type="text" id="seo_bing" placeholder="Verification code"></div>
+<div class="form-group"><label>OG Title</label><input type="text" id="seo_og_title"></div>
+<div class="form-group"><label>OG Description</label><textarea id="seo_og_desc" style="min-height:70px"></textarea></div>
+<div class="form-group"><label>OG Image URL</label><input type="text" id="seo_og_image" placeholder="https://example.com/image.jpg"></div>
+<div class="form-group"><label>Google Search Console Verification Code</label><input type="text" id="seo_gsc"></div>
+<div class="form-group"><label>Bing Webmaster Verification</label><input type="text" id="seo_bing"></div>
 
 <button class="btn btn-g" onclick="saveSEO()" style="padding:14px 28px"><i class="fas fa-save"></i> Save SEO Settings</button>
-</div>
-</div>
-
-<!-- ANALYTICS SECTION -->
-<div id="secAnalytics" class="section">
-<div class="card">
-<div class="card-head">
-<span><i class="fas fa-chart-bar"></i> Analytics & Tracking</span>
-</div>
-
-<div class="info-box">
-<strong><i class="fas fa-info-circle"></i> Analytics Setup</strong>
-Google Analytics aur other tracking IDs yahan add karein.
-</div>
-
-<div class="form-group"><label>Google Analytics ID (GA4)</label><input type="text" id="an_ga4" placeholder="G-XXXXXXXXXX"></div>
-<div class="form-group"><label>Google Tag Manager ID</label><input type="text" id="an_gtm" placeholder="GTM-XXXXXXX"></div>
-<div class="form-group"><label>Facebook Pixel ID</label><input type="text" id="an_fb" placeholder="1234567890"></div>
-<div class="form-group"><label>Microsoft Clarity ID</label><input type="text" id="an_clarity" placeholder="abcdefghij"></div>
-
-<button class="btn btn-g" onclick="saveAnalytics()" style="padding:14px 28px"><i class="fas fa-save"></i> Save Analytics</button>
 </div>
 </div>
 
@@ -829,12 +772,12 @@ Google Analytics aur other tracking IDs yahan add karein.
 </div>
 
 <div class="form-row">
-<div class="form-group"><label>Hero Title</label><input type="text" id="set_hero_title" placeholder="🎯 India's Trusted Sarkari Portal"></div>
-<div class="form-group"><label>Hero Subtitle</label><input type="text" id="set_hero_sub" placeholder="Description below hero title"></div>
+<div class="form-group"><label>Hero Title</label><input type="text" id="set_hero_title"></div>
+<div class="form-group"><label>Hero Subtitle</label><input type="text" id="set_hero_sub"></div>
 </div>
 
-<div class="form-group"><label>About Us</label><textarea id="set_about" placeholder="Describe your center and mission..."></textarea></div>
-<div class="form-group"><label>Footer Disclaimer</label><textarea id="set_disclaimer" placeholder="This website is not an official government website..."></textarea></div>
+<div class="form-group"><label>About Us</label><textarea id="set_about"></textarea></div>
+<div class="form-group"><label>Footer Disclaimer</label><textarea id="set_disclaimer"></textarea></div>
 
 <button class="btn btn-g" onclick="saveSettings()" style="padding:14px 28px"><i class="fas fa-save"></i> Save Site Settings</button>
 </div>
@@ -848,16 +791,16 @@ Google Analytics aur other tracking IDs yahan add karein.
 </div>
 
 <div class="form-row">
-<div class="form-group"><label><i class="fab fa-facebook" style="color:#1877F2"></i> Facebook Page URL</label><input type="text" id="soc_facebook" placeholder="https://facebook.com/yourpage"></div>
-<div class="form-group"><label><i class="fab fa-twitter" style="color:#1DA1F2"></i> Twitter / X URL</label><input type="text" id="soc_twitter" placeholder="https://twitter.com/yourhandle"></div>
+<div class="form-group"><label><i class="fab fa-facebook" style="color:#1877F2"></i> Facebook Page URL</label><input type="text" id="soc_facebook"></div>
+<div class="form-group"><label><i class="fab fa-twitter" style="color:#1DA1F2"></i> Twitter / X URL</label><input type="text" id="soc_twitter"></div>
 </div>
 <div class="form-row">
-<div class="form-group"><label><i class="fab fa-instagram" style="color:#E4405F"></i> Instagram URL</label><input type="text" id="soc_instagram" placeholder="https://instagram.com/yourhandle"></div>
-<div class="form-group"><label><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube Channel URL</label><input type="text" id="soc_youtube" placeholder="https://youtube.com/@yourchannel"></div>
+<div class="form-group"><label><i class="fab fa-instagram" style="color:#E4405F"></i> Instagram URL</label><input type="text" id="soc_instagram"></div>
+<div class="form-group"><label><i class="fab fa-youtube" style="color:#FF0000"></i> YouTube Channel URL</label><input type="text" id="soc_youtube"></div>
 </div>
 <div class="form-row">
-<div class="form-group"><label><i class="fab fa-telegram-plane" style="color:#0088cc"></i> Telegram Channel URL</label><input type="text" id="soc_telegram" placeholder="https://t.me/yourchannel"></div>
-<div class="form-group"><label><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp Channel URL</label><input type="text" id="soc_whatsapp_ch" placeholder="https://whatsapp.com/channel/..."></div>
+<div class="form-group"><label><i class="fab fa-telegram-plane" style="color:#0088cc"></i> Telegram Channel URL</label><input type="text" id="soc_telegram"></div>
+<div class="form-group"><label><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp Channel URL</label><input type="text" id="soc_whatsapp_ch"></div>
 </div>
 
 <button class="btn btn-g" onclick="saveSocial()" style="padding:14px 28px"><i class="fas fa-save"></i> Save Social Links</button>
@@ -899,7 +842,6 @@ Sirf tab use karein jab aapko HTML/CSS/JS ka knowledge ho.
 <div class="form-group">
 <label>Announcement Title <span class="req">*</span></label>
 <input type="text" id="an_title" placeholder="e.g. 🔥 SSC CGL Result 2026 LIVE!">
-<span class="hint">Short, attention-grabbing title — emoji use kar sakte hain</span>
 </div>
 
 <div class="multiline-builder">
@@ -911,15 +853,12 @@ Sirf tab use karein jab aapko HTML/CSS/JS ka knowledge ho.
 <button type="button" class="add-line-btn" onclick="addAnnLineRow()">
 <i class="fas fa-plus-circle"></i> Add Another Line
 </button>
-<span class="hint" style="margin-top:8px;display:block">
-Har line alag-alag scroll hogi.
-</span>
 </div>
 
 <div class="form-row">
 <div class="form-group">
 <label>Type / Category <span class="req">*</span></label>
-<select id="an_type" onchange="updateAnnPreview()">
+<select id="an_type">
 <option value="live">🔴 LIVE (Red)</option>
 <option value="job">💼 Job (Blue)</option>
 <option value="yojna">🌾 Yojna (Green)</option>
@@ -934,7 +873,7 @@ Har line alag-alag scroll hogi.
 <option value="1">1 — Low</option>
 <option value="2">2 — Normal</option>
 <option value="3" selected>3 — High</option>
-<option value="4">4 — Urgent (Top)</option>
+<option value="4">4 — Urgent</option>
 </select>
 </div>
 </div>
@@ -945,8 +884,8 @@ Har line alag-alag scroll hogi.
 </div>
 
 <div class="form-row">
-<div class="form-group"><label>Start Date (Optional)</label><input type="datetime-local" id="an_start"></div>
-<div class="form-group"><label>End Date (Optional)</label><input type="datetime-local" id="an_end"></div>
+<div class="form-group"><label>Start Date</label><input type="datetime-local" id="an_start"></div>
+<div class="form-group"><label>End Date</label><input type="datetime-local" id="an_end"></div>
 </div>
 
 <div class="toggle-row">
@@ -978,13 +917,12 @@ Har line alag-alag scroll hogi.
 
 <div class="form-group">
 <label>Popup Message</label>
-<textarea id="pop_msg" placeholder="Short description shown below title..." style="min-height:70px"></textarea>
+<textarea id="pop_msg" placeholder="Short description..." style="min-height:70px"></textarea>
 </div>
 
 <div class="form-group">
 <label>🖼️ Image URL <span class="req">*</span></label>
-<input type="url" id="pop_image" placeholder="https://i.imgur.com/yourimage.jpg">
-<span class="hint">Full URL with https:// — Recommended: 800x600 or 1200x900 px</span>
+<input type="url" id="pop_image" placeholder="https://i.ibb.co/yourimage.jpg">
 </div>
 <div class="image-preview" id="pop_imagePreview">
 <button type="button" class="remove-img" onclick="removePopupImage()"><i class="fas fa-times"></i></button>
@@ -992,14 +930,8 @@ Har line alag-alag scroll hogi.
 </div>
 
 <div class="form-row">
-<div class="form-group">
-<label>Button Text</label>
-<input type="text" id="pop_btnText" placeholder="e.g. View Result" value="View More">
-</div>
-<div class="form-group">
-<label>Button Link</label>
-<input type="url" id="pop_btnLink" placeholder="https://example.com/result">
-</div>
+<div class="form-group"><label>Button Text</label><input type="text" id="pop_btnText" value="View More"></div>
+<div class="form-group"><label>Button Link</label><input type="url" id="pop_btnLink"></div>
 </div>
 
 <div class="form-row">
@@ -1019,14 +951,14 @@ Har line alag-alag scroll hogi.
 <option value="1">1 — Low</option>
 <option value="2">2 — Normal</option>
 <option value="3" selected>3 — High</option>
-<option value="4">4 — Urgent (Top)</option>
+<option value="4">4 — Urgent</option>
 </select>
 </div>
 </div>
 
 <div class="form-row">
-<div class="form-group"><label>Start Date (Optional)</label><input type="datetime-local" id="pop_start"></div>
-<div class="form-group"><label>End Date (Optional)</label><input type="datetime-local" id="pop_end"></div>
+<div class="form-group"><label>Start Date</label><input type="datetime-local" id="pop_start"></div>
+<div class="form-group"><label>End Date</label><input type="datetime-local" id="pop_end"></div>
 </div>
 
 <div class="toggle-row">
@@ -1058,12 +990,12 @@ Har line alag-alag scroll hogi.
 
 <div class="form-group">
 <label>Post Title <span class="req">*</span></label>
-<input type="text" id="ep_title" placeholder="Enter clear, descriptive title...">
+<input type="text" id="ep_title" placeholder="Enter title...">
 </div>
 
 <div class="form-row">
 <div class="form-group"><label>Category</label><select id="ep_cat"></select></div>
-<div class="form-group"><label>Last Date</label><input type="text" id="ep_date" placeholder="e.g. 25 Nov 2026 or N/A"></div>
+<div class="form-group"><label>Last Date</label><input type="text" id="ep_date" placeholder="e.g. 25 Nov 2026"></div>
 </div>
 
 <div class="form-group">
@@ -1075,11 +1007,11 @@ Har line alag-alag scroll hogi.
 <img id="ep_imagePreviewImg" alt="Preview">
 </div>
 
-<div class="form-group"><label>Short Summary</label><textarea id="ep_sum" style="min-height:70px" placeholder="Brief description shown on card..."></textarea></div>
+<div class="form-group"><label>Short Summary</label><textarea id="ep_sum" style="min-height:70px"></textarea></div>
 
 <div class="link-builder">
 <div class="link-builder-head">
-<label><i class="fas fa-link" style="color:var(--p600)"></i> Official Links (Multiple)</label>
+<label><i class="fas fa-link" style="color:var(--p600)"></i> Official Links</label>
 <span class="link-counter" id="ep_linkCounter">0 links</span>
 </div>
 <div id="ep_linksContainer"></div>
@@ -1088,14 +1020,10 @@ Har line alag-alag scroll hogi.
 </button>
 </div>
 
-<div class="form-group"><label>Eligibility Details</label><textarea id="ep_edu" placeholder="One requirement per line..."></textarea></div>
-<div class="form-group"><label>How to Apply</label><textarea id="ep_steps" placeholder="One step per line..."></textarea></div>
-<div class="form-group"><label>Required Documents</label><textarea id="ep_docs" placeholder="One document per line..."></textarea></div>
-
-<div class="form-group">
-<label>FAQ (Optional)</label>
-<textarea id="ep_faq" placeholder="Format: Question|Answer (one per line)"></textarea>
-</div>
+<div class="form-group"><label>Eligibility Details</label><textarea id="ep_edu"></textarea></div>
+<div class="form-group"><label>How to Apply</label><textarea id="ep_steps"></textarea></div>
+<div class="form-group"><label>Required Documents</label><textarea id="ep_docs"></textarea></div>
+<div class="form-group"><label>FAQ (Optional)</label><textarea id="ep_faq" placeholder="Format: Question|Answer"></textarea></div>
 
 <div class="modal-foot">
 <button class="btn btn-ghost" onclick="closeModal('postModal')">Cancel</button>
@@ -1142,12 +1070,13 @@ Har line alag-alag scroll hogi.
 <option value="ic-pmkisan">Green (PM Kisan)</option>
 <option value="ic-lic">Indigo (LIC)</option>
 <option value="ic-bank">Cyan (Bank)</option>
+<option value="ic-custom">Gray (Custom)</option>
 </select>
 </div>
 </div>
 
 <div class="form-group">
-<label>📷 Service Image URL</label>
+<label>📷 Service Image URL (Optional)</label>
 <input type="url" id="es_image" placeholder="https://example.com/service-image.jpg">
 </div>
 <div class="image-preview" id="es_imagePreview">
@@ -1155,7 +1084,7 @@ Har line alag-alag scroll hogi.
 <img id="es_imagePreviewImg" alt="Preview">
 </div>
 
-<div class="form-group"><label>Description / About</label><textarea id="es_about" style="min-height:70px" placeholder="Short description..."></textarea></div>
+<div class="form-group"><label>Description / About</label><textarea id="es_about" style="min-height:70px"></textarea></div>
 <div class="form-group"><label>How to Apply (Steps)</label><textarea id="es_steps" placeholder="One step per line..."></textarea></div>
 <div class="form-group"><label>Required Documents</label><textarea id="es_docs" placeholder="One document per line..."></textarea></div>
 
@@ -1182,42 +1111,27 @@ Har line alag-alag scroll hogi.
 <input type="hidden" id="eu_id">
 
 <div class="form-row">
-<div class="form-group"><label>Full Name <span class="req">*</span></label><input type="text" id="eu_name" placeholder="e.g. Rahul Sharma"></div>
-<div class="form-group"><label>Email Address <span class="req">*</span></label><input type="email" id="eu_email" placeholder="user@example.com"><span class="hint" id="eu_emailHint">User is email se login karega</span></div>
+<div class="form-group"><label>Full Name <span class="req">*</span></label><input type="text" id="eu_name"></div>
+<div class="form-group"><label>Email Address <span class="req">*</span></label><input type="email" id="eu_email"></div>
 </div>
 
 <div class="form-row">
-<div class="form-group"><label>Phone (Optional)</label><input type="text" id="eu_phone" placeholder="+91 XXXXXXXXXX"></div>
+<div class="form-group"><label>Phone (Optional)</label><input type="text" id="eu_phone"></div>
 <div class="form-group"><label>Status</label><select id="eu_status"><option value="active" selected>Active</option><option value="inactive">Inactive</option></select></div>
 </div>
 
 <div class="form-group" id="eu_passwordGroup">
 <label>Password <span class="req">*</span></label>
 <input type="text" id="eu_password" placeholder="Min 6 characters">
-<span class="hint" id="eu_passwordHint">User is password se login karega</span>
 </div>
 
 <div class="form-group">
 <label>User Role <span class="req">*</span></label>
-<select id="eu_role" onchange="updateRolePreview()">
-<option value="viewer">Viewer — Sirf dekh sakta hai</option>
-<option value="editor">Editor — Content manage kar sakta hai</option>
-<option value="admin">Admin — Full access</option>
+<select id="eu_role">
+<option value="viewer">Viewer</option>
+<option value="editor">Editor</option>
+<option value="admin">Admin</option>
 </select>
-</div>
-
-<div class="perm-grid" id="eu_perms">
-<div class="perm-item checked" data-perm="posts"><input type="checkbox" checked disabled><span>Manage Posts</span></div>
-<div class="perm-item checked" data-perm="services"><input type="checkbox" checked disabled><span>Manage Services</span></div>
-<div class="perm-item checked" data-perm="cats"><input type="checkbox" checked disabled><span>Manage Categories</span></div>
-<div class="perm-item" data-perm="users"><input type="checkbox" disabled><span>Manage Users</span></div>
-<div class="perm-item" data-perm="settings"><input type="checkbox" disabled><span>Site Settings</span></div>
-<div class="perm-item" data-perm="adsense"><input type="checkbox" disabled><span>AdSense Config</span></div>
-</div>
-
-<div class="role-preview" id="rolePreview">
-<strong><i class="fas fa-shield-alt"></i> Role Permissions:</strong>
-<ul id="rolePreviewList"><li>Content view only</li></ul>
 </div>
 
 <div class="modal-foot">
@@ -1250,7 +1164,6 @@ let allPopups = {};
 let annActiveToggle = true;
 let popupActiveToggle = true;
 let popupShowOnceToggle = true;
-let adToggles = { ad_top:true, ad_mid:true, ad_side:true, ad_bottom:true, ad_article:true };
 
 const ROLE_PERMS = {
     admin: { label:'Admin', perms:['posts','services','cats','users','settings','adsense'] },
@@ -1297,7 +1210,7 @@ window.doLogin = async function() {
             toast('Admin account activated!', 'success');
         } else if (snap.val().status === 'inactive') {
             await auth.signOut();
-            toast('Account is inactive. Contact admin.', 'error');
+            toast('Account is inactive.', 'error');
             btn.disabled = false;
             btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Secure Login';
             return;
@@ -1309,13 +1222,12 @@ window.doLogin = async function() {
         await loadDashboard();
     } catch (e) {
         const msgs = {
-            'auth/user-not-found':'No account found with this email.',
+            'auth/user-not-found':'No account found.',
             'auth/wrong-password':'Incorrect password.',
-            'auth/invalid-email':'Invalid email format.',
+            'auth/invalid-email':'Invalid email.',
             'auth/invalid-credential':'Invalid email or password.',
-            'auth/too-many-requests':'Too many attempts. Try later.',
-            'auth/network-request-failed':'Network error.',
-            'auth/user-disabled':'Account disabled.'
+            'auth/too-many-requests':'Too many attempts.',
+            'auth/network-request-failed':'Network error.'
         };
         toast(msgs[e.code] || 'Login failed: ' + e.message, 'error');
         btn.disabled = false;
@@ -1350,14 +1262,14 @@ function updateUserUI(user, data) {
 }
 
 window.doLogout = async function() {
-    if (!confirm('Are you sure you want to logout?')) return;
+    if (!confirm('Logout?')) return;
     try {
         await auth.signOut();
-        toast('Logged out successfully', 'info');
+        toast('Logged out', 'info');
         document.getElementById('lEmail').value = '';
         document.getElementById('lPass').value = '';
         showView('loginView');
-    } catch (e) { toast('Error logging out', 'error'); }
+    } catch (e) { toast('Error', 'error'); }
 };
 
 window.showSec = function(sectionId, el) {
@@ -1374,9 +1286,9 @@ window.showSec = function(sectionId, el) {
         secServices: { title:'Sarkari Kaam Services', icon:'fa-briefcase' },
         secCats: { title:'Categories', icon:'fa-tags' },
         secUsers: { title:'User Management', icon:'fa-users-cog' },
+        secVisitors: { title:'Visitor Analytics', icon:'fa-chart-bar' },
         secAdsense: { title:'Google AdSense', icon:'fa-google' },
         secSEO: { title:'SEO Settings', icon:'fa-search' },
-        secAnalytics: { title:'Analytics', icon:'fa-chart-bar' },
         secSettings: { title:'Site Settings', icon:'fa-cog' },
         secSocial: { title:'Social Links', icon:'fa-share-alt' },
         secCustom: { title:'Custom Code', icon:'fa-code' }
@@ -1384,6 +1296,7 @@ window.showSec = function(sectionId, el) {
     if (titles[sectionId]) {
         document.getElementById('pageTitle').innerHTML = `<i class="fas ${titles[sectionId].icon}"></i> ${titles[sectionId].title}`;
     }
+    if(sectionId === 'secVisitors') loadVisitorStats();
 };
 
 window.closeModal = function(id) {
@@ -1399,11 +1312,7 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Escape') document.querySelectorAll('.modal.show').forEach(m => closeModal(m.id));
 });
 
-window.toggleSwitch = function(el) {
-    el.classList.toggle('on');
-    const key = el.dataset.key;
-    if (key) adToggles[key] = el.classList.contains('on');
-};
+window.toggleSwitch = function(el) { el.classList.toggle('on'); };
 
 function setupImagePreview(inputId, previewId, imgId){
     const input = document.getElementById(inputId);
@@ -1417,9 +1326,7 @@ function setupImagePreview(inputId, previewId, imgId){
             img.style.display = 'block';
             img.onerror = () => { preview.style.display = 'none'; };
             img.onload = () => { preview.style.display = 'block'; };
-        } else {
-            preview.style.display = 'none';
-        }
+        } else preview.style.display = 'none';
     });
 }
 
@@ -1427,10 +1334,7 @@ window.removePostImage = function(){ document.getElementById('ep_image').value='
 window.removeServiceImage = function(){ document.getElementById('es_image').value=''; document.getElementById('es_imagePreview').style.display='none'; };
 window.removePopupImage = function(){ document.getElementById('pop_image').value=''; document.getElementById('pop_imagePreview').style.display='none'; };
 
-function escapeAttr(str) {
-    if (!str) return '';
-    return String(str).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-}
+function escapeAttr(str) { return str ? String(str).replace(/"/g, '&quot;').replace(/'/g, '&#39;') : ''; }
 
 function createLinkRow(name = '', url = '', showRemove = true) {
     const row = document.createElement('div');
@@ -1441,9 +1345,9 @@ function createLinkRow(name = '', url = '', showRemove = true) {
         <button type="button" class="remove-link-btn" ${showRemove ? '' : 'disabled'}><i class="fas fa-trash-alt"></i></button>
     `;
     row.querySelector('.remove-link-btn').addEventListener('click', () => {
-        const container = document.getElementById('ep_linksContainer');
-        if (container.children.length > 1) { row.remove(); updateLinkCounter(); }
-        else toast('At least one link row is required', 'warning');
+        const c = document.getElementById('ep_linksContainer');
+        if (c.children.length > 1) { row.remove(); updateLinkCounter(); }
+        else toast('At least one link required', 'warning');
     });
     return row;
 }
@@ -1465,9 +1369,7 @@ function resetPostLinks(links = []) {
     container.innerHTML = '';
     if (links && links.length > 0) {
         links.forEach(l => container.appendChild(createLinkRow(l.name || '', l.url || '', links.length > 1)));
-    } else {
-        container.appendChild(createLinkRow('', '', false));
-    }
+    } else container.appendChild(createLinkRow('', '', false));
     updateLinkCounter();
 }
 
@@ -1484,7 +1386,7 @@ function collectPostLinks() {
     return links;
 }
 
-// ANNOUNCEMENT MULTI-LINE
+// ANNOUNCEMENT
 function createAnnLineRow(text = '', showRemove = true) {
     const row = document.createElement('div');
     row.className = 'line-row';
@@ -1495,16 +1397,10 @@ function createAnnLineRow(text = '', showRemove = true) {
         <button type="button" class="remove-line-btn" ${showRemove ? '' : 'disabled'}><i class="fas fa-times"></i></button>
     `;
     row.querySelector('.remove-line-btn').addEventListener('click', () => {
-        const container = document.getElementById('an_linesContainer');
-        if (container.children.length > 1) {
-            row.remove();
-            renumberAnnLines();
-            updateAnnLineCounter();
-        } else {
-            toast('At least one line is required', 'warning');
-        }
+        const c = document.getElementById('an_linesContainer');
+        if (c.children.length > 1) { row.remove(); renumberAnnLines(); updateAnnLineCounter(); }
+        else toast('At least one line required', 'warning');
     });
-    row.querySelector('.line-text').addEventListener('input', updateAnnPreview);
     return row;
 }
 
@@ -1525,7 +1421,6 @@ window.addAnnLineRow = function(text = '') {
     document.getElementById('an_linesContainer').appendChild(createAnnLineRow(text, true));
     renumberAnnLines();
     updateAnnLineCounter();
-    updateAnnPreview();
 };
 
 function resetAnnLines(lines = []) {
@@ -1533,9 +1428,7 @@ function resetAnnLines(lines = []) {
     container.innerHTML = '';
     if (lines && lines.length > 0) {
         lines.forEach(l => container.appendChild(createAnnLineRow(l, lines.length > 1)));
-    } else {
-        container.appendChild(createAnnLineRow('', false));
-    }
+    } else container.appendChild(createAnnLineRow('', false));
     renumberAnnLines();
     updateAnnLineCounter();
 }
@@ -1549,7 +1442,6 @@ function collectAnnLines() {
     return lines;
 }
 
-// ANNOUNCEMENTS
 window.openAnnModal = function() {
     document.getElementById('annModalTitle').innerText = 'New Announcement';
     document.getElementById('an_id').value = '';
@@ -1562,10 +1454,8 @@ window.openAnnModal = function() {
     document.getElementById('an_activeSwitch').classList.add('on');
     annActiveToggle = true;
     resetAnnLines([]);
-    updateAnnPreview();
     document.getElementById('annModal').classList.add('show');
     document.body.style.overflow = 'hidden';
-    setTimeout(() => document.getElementById('an_title').focus(), 100);
 };
 
 window.toggleAnnActive = function(el) {
@@ -1573,34 +1463,9 @@ window.toggleAnnActive = function(el) {
     annActiveToggle = el.classList.contains('on');
 };
 
-window.updateAnnPreview = function() {
-    const type = document.getElementById('an_type')?.value || 'live';
-    const title = document.getElementById('an_title')?.value || '';
-    const lines = collectAnnLines();
-    const colors = {
-        live:'linear-gradient(135deg,#dc2626,#b91c1c)',
-        job:'linear-gradient(135deg,#2563eb,#1d4ed8)',
-        yojna:'linear-gradient(135deg,#16a34a,#15803d)',
-        admit:'linear-gradient(135deg,#8b5cf6,#6d28d9)',
-        important:'linear-gradient(135deg,#f59e0b,#d97706)',
-        info:'linear-gradient(135deg,#475569,#334155)'
-    };
-    const box = document.getElementById('annPreviewBox');
-    const txt = document.getElementById('annPreviewText');
-    if (box) box.style.background = colors[type] || colors.live;
-    if (txt) {
-        const preview = (title ? title + ' — ' : '') + (lines.length > 0 ? lines.join(' • ') : 'Aapki announcement yahan dikhegi...');
-        txt.innerText = preview;
-    }
-};
-
-document.addEventListener('input', function(e) {
-    if (e.target && e.target.id === 'an_title') updateAnnPreview();
-});
-
 window.editAnnouncement = function(id) {
     const a = allAnnouncements[id];
-    if (!a) return toast('Announcement not found', 'error');
+    if (!a) return toast('Not found', 'error');
     document.getElementById('annModalTitle').innerText = 'Edit Announcement';
     document.getElementById('an_id').value = id;
     document.getElementById('an_title').value = a.title || '';
@@ -1613,7 +1478,6 @@ window.editAnnouncement = function(id) {
     if (a.active !== false) { sw.classList.add('on'); annActiveToggle = true; }
     else { sw.classList.remove('on'); annActiveToggle = false; }
     resetAnnLines(Array.isArray(a.lines) ? a.lines : []);
-    updateAnnPreview();
     document.getElementById('annModal').classList.add('show');
     document.body.style.overflow = 'hidden';
 };
@@ -1622,7 +1486,7 @@ window.saveAnnouncement = async function() {
     const id = document.getElementById('an_id').value;
     const title = document.getElementById('an_title').value.trim();
     const lines = collectAnnLines();
-    if (!title) { toast('Title is required', 'warning'); return; }
+    if (!title) { toast('Title required', 'warning'); return; }
     if (lines.length === 0) { toast('At least one line required', 'warning'); return; }
     let link = document.getElementById('an_link').value.trim();
     if (link && !link.startsWith('http')) link = 'https://' + link;
@@ -1637,14 +1501,8 @@ window.saveAnnouncement = async function() {
         updatedAt: new Date().toISOString()
     };
     try {
-        if (id) {
-            await db.ref(`announcements/${id}`).update(data);
-            toast('Announcement updated!', 'success');
-        } else {
-            data.createdAt = new Date().toISOString();
-            await db.ref('announcements').push(data);
-            toast('Announcement published! 🎉', 'success');
-        }
+        if (id) { await db.ref(`announcements/${id}`).update(data); toast('Updated!', 'success'); }
+        else { data.createdAt = new Date().toISOString(); await db.ref('announcements').push(data); toast('Published! 🎉', 'success'); }
         closeModal('annModal');
         await loadAnnouncements();
     } catch (e) { toast('Error: ' + e.message, 'error'); }
@@ -1662,12 +1520,9 @@ window.toggleAnnStatus = async function(id) {
 };
 
 window.deleteAnnouncement = async function(id) {
-    if (!confirm('Delete this announcement?')) return;
-    try {
-        await db.ref(`announcements/${id}`).remove();
-        toast('Deleted', 'info');
-        await loadAnnouncements();
-    } catch (e) { toast('Error', 'error'); }
+    if (!confirm('Delete?')) return;
+    try { await db.ref(`announcements/${id}`).remove(); toast('Deleted', 'info'); await loadAnnouncements(); }
+    catch (e) { toast('Error', 'error'); }
 };
 
 async function loadAnnouncements() {
@@ -1685,10 +1540,8 @@ function renderAnnouncements() {
     const arr = Object.entries(allAnnouncements);
     const badge = document.getElementById('annCountBadge');
     if (badge) badge.innerText = arr.length;
-    const dashAnn = document.getElementById('dashAnnouncements');
-    if (dashAnn) dashAnn.innerText = arr.length;
     if (arr.length === 0) {
-        at.innerHTML = `<tr><td colspan="7" class="empty"><i class="fas fa-bullhorn"></i><h4>No announcements yet</h4><p>Click "New Announcement" to create</p></td></tr>`;
+        at.innerHTML = `<tr><td colspan="7" class="empty"><i class="fas fa-bullhorn"></i><h4>No announcements yet</h4></td></tr>`;
         return;
     }
     arr.sort((a, b) => (b[1].priority || 0) - (a[1].priority || 0));
@@ -1702,7 +1555,7 @@ function renderAnnouncements() {
         const endStr = a.endDate ? formatDate(a.endDate) : '∞';
         at.innerHTML += `<tr>
             <td><div class="switch ${active ? 'on' : ''}" onclick="toggleAnnStatus('${id}')" style="cursor:pointer"></div></td>
-            <td style="font-weight:700;color:var(--s900)">${title}</td>
+            <td style="font-weight:700">${title}</td>
             <td><span style="background:var(--p50);color:var(--p700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${lineCount} lines</span></td>
             <td><span class="ann-type-badge ann-type-${type}">${typeLabels[type] || type}</span></td>
             <td><span style="font-weight:800;color:${a.priority >= 4 ? 'var(--r600)' : a.priority === 3 ? 'var(--y600)' : 'var(--s500)'}">P${a.priority || 3}</span></td>
@@ -1715,7 +1568,7 @@ function renderAnnouncements() {
     });
 }
 
-// IMAGE POPUPS
+// POPUPS
 window.openPopupModal = function() {
     document.getElementById('popupModalTitle').innerText = 'New Image Popup';
     document.getElementById('pop_id').value = '';
@@ -1733,7 +1586,6 @@ window.openPopupModal = function() {
     document.getElementById('pop_imagePreview').style.display = 'none';
     document.getElementById('popupModal').classList.add('show');
     document.body.style.overflow = 'hidden';
-    setTimeout(() => document.getElementById('pop_title').focus(), 100);
 };
 
 window.togglePopupActive = function(el) {
@@ -1743,7 +1595,7 @@ window.togglePopupActive = function(el) {
 
 window.editPopup = function(id) {
     const p = allPopups[id];
-    if (!p) return toast('Popup not found', 'error');
+    if (!p) return toast('Not found', 'error');
     document.getElementById('popupModalTitle').innerText = 'Edit Image Popup';
     document.getElementById('pop_id').value = id;
     document.getElementById('pop_title').value = p.title || '';
@@ -1757,12 +1609,8 @@ window.editPopup = function(id) {
     document.getElementById('pop_end').value = p.endDate || '';
     const preview = document.getElementById('pop_imagePreview');
     const img = document.getElementById('pop_imagePreviewImg');
-    if (p.image) {
-        img.src = p.image;
-        img.style.display = 'block';
-        img.onload = () => { preview.style.display = 'block'; };
-        img.onerror = () => { preview.style.display = 'none'; };
-    } else preview.style.display = 'none';
+    if (p.image) { img.src = p.image; preview.style.display = 'block'; }
+    else preview.style.display = 'none';
     const showOnceSw = document.getElementById('pop_showOnce');
     if (p.showOnce !== false) { showOnceSw.classList.add('on'); popupShowOnceToggle = true; }
     else { showOnceSw.classList.remove('on'); popupShowOnceToggle = false; }
@@ -1777,8 +1625,8 @@ window.savePopup = async function() {
     const id = document.getElementById('pop_id').value;
     const title = document.getElementById('pop_title').value.trim();
     let image = document.getElementById('pop_image').value.trim();
-    if (!title) { toast('Title is required', 'warning'); return; }
-    if (!image) { toast('Image URL is required', 'warning'); return; }
+    if (!title) { toast('Title required', 'warning'); return; }
+    if (!image) { toast('Image URL required', 'warning'); return; }
     if (image && !image.startsWith('http')) image = 'https://' + image;
     let btnLink = document.getElementById('pop_btnLink').value.trim();
     if (btnLink && !btnLink.startsWith('http')) btnLink = 'https://' + btnLink;
@@ -1797,14 +1645,8 @@ window.savePopup = async function() {
         updatedAt: new Date().toISOString()
     };
     try {
-        if (id) {
-            await db.ref(`popups/${id}`).update(data);
-            toast('Popup updated!', 'success');
-        } else {
-            data.createdAt = new Date().toISOString();
-            await db.ref('popups').push(data);
-            toast('Popup published! 🎉', 'success');
-        }
+        if (id) { await db.ref(`popups/${id}`).update(data); toast('Updated!', 'success'); }
+        else { data.createdAt = new Date().toISOString(); await db.ref('popups').push(data); toast('Published! 🎉', 'success'); }
         closeModal('popupModal');
         await loadPopups();
     } catch (e) { toast('Error: ' + e.message, 'error'); }
@@ -1822,12 +1664,9 @@ window.togglePopupStatus = async function(id) {
 };
 
 window.deletePopup = async function(id) {
-    if (!confirm('Delete this popup?')) return;
-    try {
-        await db.ref(`popups/${id}`).remove();
-        toast('Deleted', 'info');
-        await loadPopups();
-    } catch (e) { toast('Error', 'error'); }
+    if (!confirm('Delete?')) return;
+    try { await db.ref(`popups/${id}`).remove(); toast('Deleted', 'info'); await loadPopups(); }
+    catch (e) { toast('Error', 'error'); }
 };
 
 async function loadPopups() {
@@ -1845,10 +1684,8 @@ function renderPopups() {
     const arr = Object.entries(allPopups);
     const badge = document.getElementById('popupCountBadge');
     if (badge) badge.innerText = arr.length;
-    const dashPop = document.getElementById('dashPopups');
-    if (dashPop) dashPop.innerText = arr.length;
     if (arr.length === 0) {
-        pt.innerHTML = `<tr><td colspan="7" class="empty"><i class="fas fa-image"></i><h4>No popups yet</h4><p>Click "New Popup" to create</p></td></tr>`;
+        pt.innerHTML = `<tr><td colspan="7" class="empty"><i class="fas fa-image"></i><h4>No popups yet</h4></td></tr>`;
         return;
     }
     arr.sort((a, b) => (b[1].priority || 0) - (a[1].priority || 0));
@@ -1864,14 +1701,11 @@ function renderPopups() {
             : `<div class="thumb-icon"><i class="fas fa-image"></i></div>`;
         pt.innerHTML += `<tr>
             <td>${thumbHtml}</td>
-            <td style="font-weight:700;color:var(--s900)">${title}</td>
+            <td style="font-weight:700">${title}</td>
             <td><span class="ann-type-badge ann-type-${type}">${typeLabels[type] || type}</span></td>
             <td><span style="font-weight:800;color:${p.priority >= 4 ? 'var(--r600)' : p.priority === 3 ? 'var(--y600)' : 'var(--s500)'}">P${p.priority || 3}</span></td>
             <td style="font-size:.78rem;color:var(--s500)">${startStr} → ${endStr}</td>
-            <td><span style="display:flex;align-items:center;font-size:.8rem;font-weight:700;color:${p.showOnce !== false ? 'var(--g600)' : 'var(--s500)'}">
-                <span class="status-dot ${p.showOnce !== false ? 'active' : 'inactive'}"></span>
-                ${p.showOnce !== false ? 'Once' : 'Always'}
-            </span></td>
+            <td><span style="display:flex;align-items:center;font-size:.8rem;font-weight:700;color:${p.showOnce !== false ? 'var(--g600)' : 'var(--s500)'}"><span class="status-dot ${p.showOnce !== false ? 'active' : 'inactive'}"></span>${p.showOnce !== false ? 'Once' : 'Always'}</span></td>
             <td>
                 <div class="switch ${active ? 'on' : ''}" onclick="togglePopupStatus('${id}')" style="cursor:pointer;display:inline-block;margin-right:6px"></div>
                 <button class="btn btn-p btn-sm" onclick="editPopup('${id}')" style="margin-right:4px"><i class="fas fa-edit"></i></button>
@@ -1881,31 +1715,7 @@ function renderPopups() {
     });
 }
 
-// USER MANAGEMENT
-function updateRolePreview() {
-    const role = document.getElementById('eu_role').value;
-    const roleInfo = ROLE_PERMS[role] || ROLE_PERMS.viewer;
-    document.querySelectorAll('#eu_perms .perm-item').forEach(item => {
-        const perm = item.dataset.perm;
-        const checked = roleInfo.perms.includes(perm);
-        item.querySelector('input').checked = checked;
-        if (checked) item.classList.add('checked'); else item.classList.remove('checked');
-    });
-    const previewList = document.getElementById('rolePreviewList');
-    const previewTitle = document.querySelector('#rolePreview strong');
-    if (role === 'admin') {
-        previewTitle.innerHTML = '<i class="fas fa-crown"></i> Admin Permissions:';
-        previewList.innerHTML = `<li>✓ Full access to everything</li><li>✓ Manage posts, services, categories</li><li>✓ Manage users</li><li>✓ Site settings & AdSense</li><li>✓ SEO, Analytics & Custom Code</li>`;
-    } else if (role === 'editor') {
-        previewTitle.innerHTML = '<i class="fas fa-edit"></i> Editor Permissions:';
-        previewList.innerHTML = `<li>✓ Create and manage posts</li><li>✓ Add/edit services</li><li>✓ Manage categories</li><li>✗ Cannot manage users</li><li>✗ Cannot change settings</li>`;
-    } else {
-        previewTitle.innerHTML = '<i class="fas fa-eye"></i> Viewer Permissions:';
-        previewList.innerHTML = `<li>✓ View dashboard</li><li>✓ View posts and services</li><li>✗ Cannot edit content</li><li>✗ Cannot manage settings</li>`;
-    }
-}
-window.updateRolePreview = updateRolePreview;
-
+// USERS
 window.openUserModal = function() {
     document.getElementById('userModalTitle').innerText = 'Add New User';
     document.getElementById('eu_id').value = '';
@@ -1918,17 +1728,13 @@ window.openUserModal = function() {
     document.getElementById('eu_email').disabled = false;
     document.getElementById('eu_password').disabled = false;
     document.getElementById('eu_passwordGroup').style.display = 'block';
-    document.getElementById('eu_emailHint').innerText = 'User is email se login karega';
-    document.getElementById('eu_passwordHint').innerText = 'User is password se login karega.';
-    updateRolePreview();
     document.getElementById('userModal').classList.add('show');
     document.body.style.overflow = 'hidden';
-    setTimeout(() => document.getElementById('eu_name').focus(), 100);
 };
 
 window.editUser = function(uid) {
     const u = allUsers[uid];
-    if (!u) return toast('User not found', 'error');
+    if (!u) return toast('Not found', 'error');
     document.getElementById('userModalTitle').innerText = 'Edit User';
     document.getElementById('eu_id').value = uid;
     document.getElementById('eu_name').value = u.name || '';
@@ -1939,8 +1745,6 @@ window.editUser = function(uid) {
     document.getElementById('eu_email').disabled = true;
     document.getElementById('eu_password').disabled = true;
     document.getElementById('eu_passwordGroup').style.display = 'none';
-    document.getElementById('eu_emailHint').innerText = 'Email cannot be changed';
-    updateRolePreview();
     document.getElementById('userModal').classList.add('show');
     document.body.style.overflow = 'hidden';
 };
@@ -1952,16 +1756,15 @@ window.saveUser = async function() {
     const phone = document.getElementById('eu_phone').value.trim();
     const role = document.getElementById('eu_role').value;
     const status = document.getElementById('eu_status').value;
-    if (!name) { toast('Name is required', 'warning'); return; }
-    if (!id && !email) { toast('Email is required', 'warning'); return; }
-    if (!id && !email.includes('@')) { toast('Invalid email', 'warning'); return; }
+    if (!name) { toast('Name required', 'warning'); return; }
+    if (!id && !email) { toast('Email required', 'warning'); return; }
     try {
         if (id) {
             await db.ref(`users/${id}`).update({ name, phone, role, status, updatedAt: new Date().toISOString() });
             toast('User updated!', 'success');
         } else {
             const password = document.getElementById('eu_password').value;
-            if (!password || password.length < 6) { toast('Password must be 6+ chars', 'warning'); return; }
+            if (!password || password.length < 6) { toast('Password 6+ chars', 'warning'); return; }
             const secondaryApp = firebase.apps.find(a => a.name === 'Secondary') || firebase.initializeApp(firebaseConfig, 'Secondary');
             const secondaryAuth = secondaryApp.auth();
             const newUser = await secondaryAuth.createUserWithEmailAndPassword(email, password);
@@ -1977,14 +1780,7 @@ window.saveUser = async function() {
         closeModal('userModal');
         await loadAllData();
         await loadDashboard();
-    } catch (e) {
-        const msgs = {
-            'auth/email-already-in-use': 'Email already registered',
-            'auth/weak-password': 'Password too weak',
-            'auth/invalid-email': 'Invalid email format'
-        };
-        toast(msgs[e.code] || 'Error: ' + e.message, 'error');
-    }
+    } catch (e) { toast('Error: ' + e.message, 'error'); }
 };
 
 window.toggleUserStatus = async function(uid) {
@@ -1993,26 +1789,21 @@ window.toggleUserStatus = async function(uid) {
     const newStatus = u.status === 'active' ? 'inactive' : 'active';
     try {
         await db.ref(`users/${uid}`).update({ status: newStatus });
-        toast(`User ${newStatus === 'active' ? 'activated' : 'deactivated'}`, 'info');
+        toast(`User ${newStatus}`, 'info');
         await loadAllData();
     } catch (e) { toast('Error', 'error'); }
 };
 
 window.changeUserRole = async function(uid, newRole) {
-    if (auth.currentUser?.uid === uid) {
-        if (!confirm('You are changing your own role. Continue?')) { renderUsers(); return; }
-    }
     try {
-        await db.ref(`users/${uid}`).update({ role: newRole, updatedAt: new Date().toISOString() });
-        toast(`Role updated to ${newRole}`, 'success');
+        await db.ref(`users/${uid}`).update({ role: newRole });
+        toast(`Role: ${newRole}`, 'success');
         await loadAllData();
     } catch (e) { toast('Error', 'error'); }
 };
 
 window.deleteUser = async function(uid) {
-    const u = allUsers[uid];
-    if (!u) return;
-    if (!confirm(`Delete user "${u.name || u.email}"?`)) return;
+    if (!confirm('Delete user?')) return;
     try {
         await db.ref(`users/${uid}`).remove();
         toast('User removed', 'info');
@@ -2021,14 +1812,13 @@ window.deleteUser = async function(uid) {
     } catch (e) { toast('Error', 'error'); }
 };
 
-// ✅ OPTIMIZED: Parallel data loading
+// LOAD ALL DATA - PARALLEL
 async function loadAllData() {
     try {
-        const [ss, ads, seo, an, soc, cc, cs, ps, svs, us, ann, pop] = await Promise.all([
+        const [ss, ads, seo, soc, cc, cs, ps, svs, us, ann, pop] = await Promise.all([
             db.ref('settings/general').once('value').catch(()=>null),
             db.ref('settings/adsense').once('value').catch(()=>null),
             db.ref('settings/seo').once('value').catch(()=>null),
-            db.ref('settings/analytics').once('value').catch(()=>null),
             db.ref('settings/social').once('value').catch(()=>null),
             db.ref('settings/customCode').once('value').catch(()=>null),
             db.ref('categories').once('value').catch(()=>null),
@@ -2060,15 +1850,6 @@ async function loadAllData() {
             document.getElementById('ads_slot_top').value = a.slotTop || '';
             document.getElementById('ads_slot_mid').value = a.slotMid || '';
             document.getElementById('ads_slot_side').value = a.slotSide || '';
-            document.getElementById('ads_slot_bottom').value = a.slotBottom || '';
-            document.getElementById('ads_slot_article').value = a.slotArticle || '';
-            adToggles = {
-                ad_top: a.toggleTop !== false, ad_mid: a.toggleMid !== false, ad_side: a.toggleSide !== false,
-                ad_bottom: a.toggleBottom !== false, ad_article: a.toggleArticle !== false
-            };
-            document.querySelectorAll('.switch[data-key]').forEach(el => {
-                if (adToggles[el.dataset.key]) el.classList.add('on'); else el.classList.remove('on');
-            });
             document.getElementById('statusAdsense').innerText = a.client ? 'Configured ✓' : 'Not Configured';
             document.getElementById('statusAdsense').style.color = a.client ? 'var(--g600)' : 'var(--r500)';
         }
@@ -2088,15 +1869,6 @@ async function loadAllData() {
             document.getElementById('seo_bing').value = s.bing || '';
             document.getElementById('statusSEO').innerText = s.homeTitle ? 'Configured ✓' : 'Not Configured';
             document.getElementById('statusSEO').style.color = s.homeTitle ? 'var(--g600)' : 'var(--r500)';
-        }
-        if (an && an.exists()) {
-            const a = an.val();
-            document.getElementById('an_ga4').value = a.ga4 || '';
-            document.getElementById('an_gtm').value = a.gtm || '';
-            document.getElementById('an_fb').value = a.fb || '';
-            document.getElementById('an_clarity').value = a.clarity || '';
-            document.getElementById('statusAnalytics').innerText = a.ga4 ? 'Configured ✓' : 'Not Configured';
-            document.getElementById('statusAnalytics').style.color = a.ga4 ? 'var(--g600)' : 'var(--r500)';
         }
         if (soc && soc.exists()) {
             const s = soc.val();
@@ -2132,22 +1904,22 @@ async function loadAllData() {
         renderPopups();
     } catch (e) {
         console.error('Load data error:', e);
-        toast('Error loading data: ' + e.message, 'error');
     }
 }
 
+// DASHBOARD
 async function loadDashboard() {
     try {
         document.getElementById('dashPosts').innerText = allPosts.length;
-        document.getElementById('dashServices').innerText = Object.keys(allServices).length || 18;
-        document.getElementById('dashCats').innerText = Object.keys(allCats).length;
-        document.getElementById('dashUsers').innerText = Object.keys(allUsers).length;
+        document.getElementById('dashServicesCount').innerText = Object.keys(allServices).length || 18;
         document.getElementById('dashAnnouncements').innerText = Object.keys(allAnnouncements).length;
         document.getElementById('dashPopups').innerText = Object.keys(allPopups).length;
+        document.getElementById('dashUsers') && (document.getElementById('dashUsers').innerText = Object.keys(allUsers).length);
+        
         const recentBox = document.getElementById('recentPosts');
         const recent = allPosts.slice(0, 5);
         if (recent.length === 0) {
-            recentBox.innerHTML = `<div class="empty"><i class="fas fa-inbox"></i><h4>No posts yet</h4><p>Create your first post</p></div>`;
+            recentBox.innerHTML = `<div class="empty"><i class="fas fa-inbox"></i><h4>No posts yet</h4></div>`;
         } else {
             let html = '<div class="table-wrap"><table><thead><tr><th>Title</th><th>Category</th><th>Date</th></tr></thead><tbody>';
             recent.forEach(p => {
@@ -2156,9 +1928,138 @@ async function loadDashboard() {
             html += '</tbody></table></div>';
             recentBox.innerHTML = html;
         }
+        
+        // Load visitor stats
+        await loadVisitorStats();
     } catch (e) { console.error(e); }
 }
 
+// ═══════════════════════════════════════════════════════════
+// VISITOR STATISTICS SYSTEM
+// ═══════════════════════════════════════════════════════════
+async function loadVisitorStats(){
+    try {
+        const totalViewsSnap = await db.ref('analytics/totalViews').once('value');
+        const totalViews = totalViewsSnap.val() || 0;
+        ['dashTotalViews','analyticsTotalViews'].forEach(id => {
+            const el = document.getElementById(id);
+            if(el) el.innerText = formatNumber(totalViews);
+        });
+        
+        const totalVisitorsSnap = await db.ref('analytics/totalVisitors').once('value');
+        const totalVisitors = totalVisitorsSnap.val() || 0;
+        ['dashTotalVisitors','analyticsTotalVisitors'].forEach(id => {
+            const el = document.getElementById(id);
+            if(el) el.innerText = formatNumber(totalVisitors);
+        });
+        
+        const onlineSnap = await db.ref('analytics/online').once('value');
+        let onlineCount = 0;
+        if(onlineSnap.exists()){
+            const now = Date.now();
+            onlineCount = Object.values(onlineSnap.val()).filter(u => (now - u.timestamp) < 5 * 60 * 1000).length;
+        }
+        ['statOnlineNow','analyticsOnlineNow'].forEach(id => {
+            const el = document.getElementById(id);
+            if(el) el.innerText = onlineCount;
+        });
+        
+        const today = new Date().toISOString().split('T')[0];
+        const todaySnap = await db.ref(`analytics/daily/${today}`).once('value');
+        const todayData = todaySnap.val() || {views:0, visitors:0};
+        
+        const el4 = document.getElementById('statTodayViews');
+        if(el4) el4.innerText = formatNumber(todayData.views || 0);
+        const el4b = document.getElementById('analyticsTodayViews');
+        if(el4b) el4b.innerText = formatNumber(todayData.views || 0);
+        
+        const el5 = document.getElementById('statTodayVisitors');
+        if(el5) el5.innerText = formatNumber(todayData.visitors || 0);
+        
+        const dailySnap = await db.ref('analytics/daily').once('value');
+        const dailyData = dailySnap.exists() ? dailySnap.val() : {};
+        
+        let weekViews = 0;
+        const last7Days = [];
+        const last30Days = [];
+        for(let i = 0; i < 30; i++){
+            const d = new Date();
+            d.setDate(d.getDate() - i);
+            const dateStr = d.toISOString().split('T')[0];
+            const dayData = dailyData[dateStr] || {views:0, visitors:0};
+            if(i < 7) weekViews += dayData.views || 0;
+            const item = { date: dateStr, views: dayData.views || 0, visitors: dayData.visitors || 0 };
+            if(i < 7) last7Days.push(item);
+            last30Days.push(item);
+        }
+        
+        const el6 = document.getElementById('statWeekViews');
+        if(el6) el6.innerText = formatNumber(weekViews);
+        
+        renderVisitorTable(last7Days);
+        renderVisitorFullTable(last30Days);
+        
+    } catch(e) {
+        console.error('Visitor stats error:', e);
+    }
+}
+
+function renderVisitorTable(days){
+    const tbody = document.getElementById('visitorDailyTable');
+    if(!tbody) return;
+    const maxViews = Math.max(...days.map(d => d.views), 1);
+    let html = '';
+    days.forEach((d, i) => {
+        const date = new Date(d.date);
+        const dateStr = date.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+        const dayName = date.toLocaleDateString('en-IN', { weekday: 'short' });
+        const barWidth = Math.round((d.views / maxViews) * 100);
+        const isToday = i === 0;
+        html += `<tr style="${isToday ? 'background:#eff6ff' : ''}">
+            <td style="font-weight:700">${isToday ? '<span style="color:#2563eb">●</span> ' : ''}${dayName}, ${dateStr}${isToday ? ' <span style="background:#2563eb;color:#fff;font-size:.65rem;padding:2px 6px;border-radius:4px;margin-left:6px">TODAY</span>' : ''}</td>
+            <td><strong>${formatNumber(d.views)}</strong></td>
+            <td><strong>${formatNumber(d.visitors)}</strong></td>
+            <td><div class="trend-bar"><div style="width:${barWidth}%"></div></div></td>
+        </tr>`;
+    });
+    tbody.innerHTML = html || '<tr><td colspan="4" style="text-align:center;padding:40px;color:#94a3b8">No data yet</td></tr>';
+}
+
+function renderVisitorFullTable(days){
+    const tbody = document.getElementById('visitorFullTable');
+    if(!tbody) return;
+    const maxViews = Math.max(...days.map(d => d.views), 1);
+    let html = '';
+    days.forEach((d, i) => {
+        const date = new Date(d.date);
+        const dateStr = date.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+        const dayName = date.toLocaleDateString('en-IN', { weekday: 'long' });
+        const barWidth = Math.round((d.views / maxViews) * 100);
+        const isToday = i === 0;
+        html += `<tr style="${isToday ? 'background:#eff6ff' : ''}">
+            <td style="font-weight:700">${dateStr}</td>
+            <td style="color:var(--s500);font-weight:600">${dayName}${isToday ? ' <span style="background:#2563eb;color:#fff;font-size:.65rem;padding:2px 6px;border-radius:4px;margin-left:6px">TODAY</span>' : ''}</td>
+            <td><strong>${formatNumber(d.views)}</strong></td>
+            <td><strong>${formatNumber(d.visitors)}</strong></td>
+            <td><div class="trend-bar"><div style="width:${barWidth}%"></div></div></td>
+        </tr>`;
+    });
+    tbody.innerHTML = html || '<tr><td colspan="5" style="text-align:center;padding:40px;color:#94a3b8">No data yet</td></tr>';
+}
+
+function formatNumber(n){
+    if(n >= 1000000) return (n/1000000).toFixed(1) + 'M';
+    if(n >= 1000) return (n/1000).toFixed(1) + 'K';
+    return n.toString();
+}
+
+window.refreshVisitorStats = async function(){
+    toast('Refreshing stats...', 'info');
+    await loadVisitorStats();
+    toast('Stats updated!', 'success');
+};
+
+// RENDER CATEGORIES
 function renderCats() {
     const ct = document.getElementById('catsTable');
     const pc = document.getElementById('ep_cat');
@@ -2166,10 +2067,10 @@ function renderCats() {
     pc.innerHTML = '<option value="">Select Category</option>';
     const catArr = Object.entries(allCats);
     if (catArr.length === 0) {
-        ct.innerHTML = `<tr><td colspan="3" class="empty"><i class="fas fa-tags"></i><h4>No categories</h4><p>Click "Add Category"</p></td></tr>`;
+        ct.innerHTML = `<tr><td colspan="3" class="empty"><i class="fas fa-tags"></i><h4>No categories</h4></td></tr>`;
     } else {
         catArr.forEach(([k, v]) => {
-            ct.innerHTML += `<tr><td style="font-weight:700">${v.name}</td><td><code style="background:var(--s100);padding:4px 10px;border-radius:6px;font-size:.82rem">${v.slug}</code></td><td><button class="btn btn-r btn-sm" onclick="delItem('categories','${k}')"><i class="fas fa-trash"></i> Delete</button></td></tr>`;
+            ct.innerHTML += `<tr><td style="font-weight:700">${v.name}</td><td><code style="background:var(--s100);padding:4px 10px;border-radius:6px;font-size:.82rem">${v.slug}</code></td><td><button class="btn btn-r btn-sm" onclick="delItem('categories','${k}')"><i class="fas fa-trash"></i></button></td></tr>`;
             pc.innerHTML += `<option value="${k}">${v.name}</option>`;
         });
     }
@@ -2179,22 +2080,20 @@ function renderPosts() {
     const pt = document.getElementById('postsTable');
     pt.innerHTML = '';
     if (allPosts.length === 0) {
-        pt.innerHTML = `<tr><td colspan="5" class="empty"><i class="fas fa-inbox"></i><h4>No posts yet</h4><p>Click "Create New Post"</p></td></tr>`;
+        pt.innerHTML = `<tr><td colspan="5" class="empty"><i class="fas fa-inbox"></i><h4>No posts yet</h4></td></tr>`;
         return;
     }
     allPosts.forEach(p => {
         const title = p.title.length > 50 ? p.title.substring(0, 50) + '...' : p.title;
-        const thumbHtml = p.image
-            ? `<img src="${p.image}" class="thumb" alt="" loading="lazy" onerror="this.outerHTML='<div class=\\'thumb-icon\\'><i class=\\'fas fa-file-alt\\'></i></div>'">`
-            : `<div class="thumb-icon"><i class="fas fa-file-alt"></i></div>`;
+        const thumbHtml = p.image ? `<img src="${p.image}" class="thumb" alt="" loading="lazy">` : `<div class="thumb-icon"><i class="fas fa-file-alt"></i></div>`;
         pt.innerHTML += `<tr>
             <td>${thumbHtml}</td>
             <td style="font-weight:700;color:var(--p600)">${title}</td>
             <td><span style="background:var(--p50);color:var(--p700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${allCats[p.category]?.name || 'Unknown'}</span></td>
             <td>${p.lastDate || 'N/A'}</td>
             <td>
-                <button class="btn btn-p btn-sm" onclick="editPost('${p.id}')" style="margin-right:6px"><i class="fas fa-edit"></i> Edit</button>
-                <button class="btn btn-r btn-sm" onclick="delItem('posts','${p.id}')"><i class="fas fa-trash"></i> Delete</button>
+                <button class="btn btn-p btn-sm" onclick="editPost('${p.id}')" style="margin-right:6px"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-r btn-sm" onclick="delItem('posts','${p.id}')"><i class="fas fa-trash"></i></button>
             </td>
         </tr>`;
     });
@@ -2204,22 +2103,22 @@ function renderServices() {
     const st = document.getElementById('servicesTable');
     st.innerHTML = '';
     const entries = Object.entries(allServices);
+    const badge = document.getElementById('serviceCountBadge');
+    if (badge) badge.innerText = entries.length || 18;
     if (entries.length === 0) {
-        st.innerHTML = `<tr><td colspan="5" class="empty"><i class="fas fa-briefcase"></i><h4>No custom services</h4><p>Default 18 services showing on website.</p></td></tr>`;
+        st.innerHTML = `<tr><td colspan="5" class="empty"><i class="fas fa-briefcase"></i><h4>No custom services</h4><p>Default 18 services dikhayi ja rahi hain. Add karne ke liye "Add New Service" par click karein.</p></td></tr>`;
         return;
     }
     entries.forEach(([k, s]) => {
-        const thumbHtml = s.image
-            ? `<img src="${s.image}" class="thumb" alt="" loading="lazy" onerror="this.outerHTML='<div class=\\'thumb-icon\\'><i class=\\'fas ${s.icon||'fa-id-card'}\\'></i></div>'">`
-            : `<div class="thumb-icon"><i class="fas ${s.icon || 'fa-id-card'}"></i></div>`;
+        const thumbHtml = s.image ? `<img src="${s.image}" class="thumb" alt="" loading="lazy" onerror="this.outerHTML='<div class=\\'thumb-icon\\'><i class=\\'fas ${s.icon||'fa-id-card'}\\'></i></div>'">` : `<div class="thumb-icon"><i class="fas ${s.icon || 'fa-id-card'}"></i></div>`;
         st.innerHTML += `<tr>
             <td>${thumbHtml}</td>
             <td style="font-weight:700">${s.name}</td>
             <td style="color:var(--s500)">${s.sub || '-'}</td>
             <td><span style="background:var(--g50);color:var(--g700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${(s.links || []).length} links</span></td>
             <td>
-                <button class="btn btn-p btn-sm" onclick="editService('${k}')" style="margin-right:6px"><i class="fas fa-edit"></i> Edit</button>
-                <button class="btn btn-r btn-sm" onclick="delItem('services','${k}')"><i class="fas fa-trash"></i> Delete</button>
+                <button class="btn btn-p btn-sm" onclick="editService('${k}')" style="margin-right:6px"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-r btn-sm" onclick="delItem('services','${k}')"><i class="fas fa-trash"></i></button>
             </td>
         </tr>`;
     });
@@ -2229,37 +2128,23 @@ function renderUsers() {
     const ut = document.getElementById('usersTable');
     ut.innerHTML = '';
     const userArr = Object.entries(allUsers);
-    const total = userArr.length;
-    const admins = userArr.filter(([k,v]) => v.role === 'admin').length;
-    const editors = userArr.filter(([k,v]) => v.role === 'editor').length;
-    const viewers = userArr.filter(([k,v]) => v.role === 'viewer' || !v.role).length;
-    document.getElementById('userStatTotal').innerText = total;
-    document.getElementById('userStatAdmins').innerText = admins;
-    document.getElementById('userStatEditors').innerText = editors;
-    document.getElementById('userStatViewers').innerText = viewers;
-    document.getElementById('userCountBadge').innerText = total;
-    document.getElementById('dashUsers').innerText = total;
+    const badge = document.getElementById('userCountBadge');
+    if (badge) badge.innerText = userArr.length;
+    const dashUsersEl = document.getElementById('dashUsers');
+    if (dashUsersEl) dashUsersEl.innerText = userArr.length;
+    
     if (userArr.length === 0) {
-        ut.innerHTML = `<tr><td colspan="6" class="empty"><i class="fas fa-users"></i><h4>No users yet</h4><p>Click "Add New User"</p></td></tr>`;
+        ut.innerHTML = `<tr><td colspan="6" class="empty"><i class="fas fa-users"></i><h4>No users yet</h4></td></tr>`;
         return;
     }
-    const roleOrder = { admin: 0, editor: 1, viewer: 2 };
-    userArr.sort((a, b) => {
-        const ra = roleOrder[a[1].role] ?? 3;
-        const rb = roleOrder[b[1].role] ?? 3;
-        if (ra !== rb) return ra - rb;
-        return (a[1].name || '').localeCompare(b[1].name || '');
-    });
-    const avatarColors = ['', 'gold', 'purple', 'pink'];
-    userArr.forEach(([uid, u], index) => {
+    userArr.forEach(([uid, u]) => {
         const name = u.name || u.email?.split('@')[0] || 'Unknown';
         const initial = name.charAt(0).toUpperCase();
         const role = u.role || 'viewer';
         const status = u.status || 'active';
-        const avatarClass = avatarColors[index % avatarColors.length];
         const isCurrentUser = auth.currentUser?.uid === uid;
         ut.innerHTML += `<tr>
-            <td><div class="user-cell"><div class="user-avatar-cell ${avatarClass}">${initial}</div><div class="user-cell-info"><strong>${name} ${isCurrentUser ? '<span style="color:var(--p600);font-size:.7rem">(You)</span>' : ''}</strong><small>${u.phone || 'No phone'}</small></div></div></td>
+            <td><div class="user-cell"><div class="user-avatar-cell">${initial}</div><div class="user-cell-info"><strong>${name} ${isCurrentUser ? '(You)' : ''}</strong><small>${u.phone || 'No phone'}</small></div></div></td>
             <td style="font-size:.82rem;color:var(--s600)">${u.email || 'N/A'}</td>
             <td>
                 <select class="role-select" onchange="changeUserRole('${uid}', this.value)">
@@ -2279,6 +2164,7 @@ function renderUsers() {
     });
 }
 
+// SAVE FUNCTIONS
 window.saveSettings = async function() {
     try {
         await db.ref('settings/general').update({
@@ -2293,8 +2179,8 @@ window.saveSettings = async function() {
             heroTitle: document.getElementById('set_hero_title').value.trim(),
             heroSubtitle: document.getElementById('set_hero_sub').value.trim()
         });
-        toast('Site settings saved!', 'success');
-    } catch (e) { toast('Error saving settings', 'error'); }
+        toast('Settings saved!', 'success');
+    } catch (e) { toast('Error', 'error'); }
 };
 
 window.saveAdsense = async function() {
@@ -2306,16 +2192,12 @@ window.saveAdsense = async function() {
             slotTop: document.getElementById('ads_slot_top').value.trim(),
             slotMid: document.getElementById('ads_slot_mid').value.trim(),
             slotSide: document.getElementById('ads_slot_side').value.trim(),
-            slotBottom: document.getElementById('ads_slot_bottom').value.trim(),
-            slotArticle: document.getElementById('ads_slot_article').value.trim(),
-            toggleTop: adToggles.ad_top, toggleMid: adToggles.ad_mid, toggleSide: adToggles.ad_side,
-            toggleBottom: adToggles.ad_bottom, toggleArticle: adToggles.ad_article,
             updatedAt: new Date().toISOString()
         });
         document.getElementById('statusAdsense').innerText = 'Configured ✓';
         document.getElementById('statusAdsense').style.color = 'var(--g600)';
         toast('AdSense saved!', 'success');
-    } catch (e) { toast('Error saving AdSense', 'error'); }
+    } catch (e) { toast('Error', 'error'); }
 };
 
 window.saveSEO = async function() {
@@ -2338,22 +2220,7 @@ window.saveSEO = async function() {
         document.getElementById('statusSEO').innerText = 'Configured ✓';
         document.getElementById('statusSEO').style.color = 'var(--g600)';
         toast('SEO saved!', 'success');
-    } catch (e) { toast('Error saving SEO', 'error'); }
-};
-
-window.saveAnalytics = async function() {
-    try {
-        await db.ref('settings/analytics').set({
-            ga4: document.getElementById('an_ga4').value.trim(),
-            gtm: document.getElementById('an_gtm').value.trim(),
-            fb: document.getElementById('an_fb').value.trim(),
-            clarity: document.getElementById('an_clarity').value.trim(),
-            updatedAt: new Date().toISOString()
-        });
-        document.getElementById('statusAnalytics').innerText = 'Configured ✓';
-        document.getElementById('statusAnalytics').style.color = 'var(--g600)';
-        toast('Analytics saved!', 'success');
-    } catch (e) { toast('Error saving analytics', 'error'); }
+    } catch (e) { toast('Error', 'error'); }
 };
 
 window.saveSocial = async function() {
@@ -2368,7 +2235,7 @@ window.saveSocial = async function() {
             updatedAt: new Date().toISOString()
         });
         toast('Social links saved!', 'success');
-    } catch (e) { toast('Error saving social', 'error'); }
+    } catch (e) { toast('Error', 'error'); }
 };
 
 window.saveCustom = async function() {
@@ -2379,7 +2246,7 @@ window.saveCustom = async function() {
             updatedAt: new Date().toISOString()
         });
         toast('Custom code saved!', 'success');
-    } catch (e) { toast('Error saving custom code', 'error'); }
+    } catch (e) { toast('Error', 'error'); }
 };
 
 window.addCat = async function() {
@@ -2392,8 +2259,7 @@ window.addCat = async function() {
         });
         toast('Category added!', 'success');
         await loadAllData();
-        await loadDashboard();
-    } catch (e) { toast('Error adding category', 'error'); }
+    } catch (e) { toast('Error', 'error'); }
 };
 
 window.openPostModal = function() {
@@ -2406,7 +2272,6 @@ window.openPostModal = function() {
     resetPostLinks([]);
     document.getElementById('postModal').classList.add('show');
     document.body.style.overflow = 'hidden';
-    setTimeout(() => document.getElementById('ep_title').focus(), 100);
 };
 
 window.editPost = function(id) {
@@ -2422,8 +2287,7 @@ window.editPost = function(id) {
     document.getElementById('ep_docs').value = p.documents || '';
     document.getElementById('ep_image').value = p.image || '';
     const preview = document.getElementById('ep_imagePreview');
-    const img = document.getElementById('ep_imagePreviewImg');
-    if (p.image) { img.src = p.image; preview.style.display = 'block'; }
+    if (p.image) { document.getElementById('ep_imagePreviewImg').src = p.image; preview.style.display = 'block'; }
     else preview.style.display = 'none';
     let faqTxt = '';
     if (p.faq && Array.isArray(p.faq)) faqTxt = p.faq.map(f => `${f.q}|${f.a}`).join('\n');
@@ -2439,7 +2303,7 @@ window.editPost = function(id) {
 window.savePost = async function() {
     const id = document.getElementById('ep_id').value;
     const title = document.getElementById('ep_title').value.trim();
-    if (!title) { toast('Title is required', 'warning'); return; }
+    if (!title) { toast('Title required', 'warning'); return; }
     const links = collectPostLinks();
     let image = document.getElementById('ep_image').value.trim();
     if (image && !image.startsWith('http')) image = 'https://' + image;
@@ -2465,17 +2329,12 @@ window.savePost = async function() {
         timestamp: new Date().toISOString()
     };
     try {
-        if (id) {
-            await db.ref(`posts/${id}`).update(data);
-            toast('Post updated!', 'success');
-        } else {
-            await db.ref('posts').push(data);
-            toast('Post published!', 'success');
-        }
+        if (id) { await db.ref(`posts/${id}`).update(data); toast('Post updated!', 'success'); }
+        else { await db.ref('posts').push(data); toast('Post published!', 'success'); }
         closeModal('postModal');
         await loadAllData();
         await loadDashboard();
-    } catch (e) { toast('Error saving post', 'error'); }
+    } catch (e) { toast('Error', 'error'); }
 };
 
 window.openServiceModal = function() {
@@ -2493,7 +2352,7 @@ window.openServiceModal = function() {
 
 window.editService = function(key) {
     const s = allServices[key];
-    if (!s) return toast('Service not found', 'error');
+    if (!s) return toast('Not found', 'error');
     document.getElementById('es_id').value = key;
     document.getElementById('es_name').value = s.name || '';
     document.getElementById('es_sub').value = s.sub || '';
@@ -2505,8 +2364,7 @@ window.editService = function(key) {
     document.getElementById('es_links').value = (s.links || []).map(l => `${l.name}|${l.url}`).join('\n');
     document.getElementById('es_image').value = s.image || '';
     const preview = document.getElementById('es_imagePreview');
-    const img = document.getElementById('es_imagePreviewImg');
-    if (s.image) { img.src = s.image; preview.style.display = 'block'; }
+    if (s.image) { document.getElementById('es_imagePreviewImg').src = s.image; preview.style.display = 'block'; }
     else preview.style.display = 'none';
     document.getElementById('serviceModal').classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -2515,7 +2373,7 @@ window.editService = function(key) {
 window.saveService = async function() {
     const id = document.getElementById('es_id').value;
     const name = document.getElementById('es_name').value.trim();
-    if (!name) { toast('Service name is required', 'warning'); return; }
+    if (!name) { toast('Service name required', 'warning'); return; }
     const steps = document.getElementById('es_steps').value.split('\n').filter(l => l.trim());
     const docs = document.getElementById('es_docs').value.split('\n').filter(l => l.trim());
     const linksRaw = document.getElementById('es_links').value.trim();
@@ -2530,7 +2388,7 @@ window.saveService = async function() {
             }
         });
     }
-    if (links.length === 0) { toast('At least one link is required', 'warning'); return; }
+    if (links.length === 0) { toast('At least one link required', 'warning'); return; }
     let image = document.getElementById('es_image').value.trim();
     if (image && !image.startsWith('http')) image = 'https://' + image;
     const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
@@ -2544,26 +2402,19 @@ window.saveService = async function() {
         timestamp: new Date().toISOString()
     };
     try {
-        if (id) {
-            await db.ref(`services/${id}`).update(data);
-            toast('Service updated!', 'success');
-        } else {
-            await db.ref(`services/${slug}`).set(data);
-            toast('Service added!', 'success');
-        }
+        if (id) { await db.ref(`services/${id}`).update(data); toast('Service updated!', 'success'); }
+        else { await db.ref(`services/${slug}`).set(data); toast('Service added! Website par turant dikhegi.', 'success'); }
         closeModal('serviceModal');
         await loadAllData();
-        await loadDashboard();
-    } catch (e) { toast('Error saving service', 'error'); }
+    } catch (e) { toast('Error', 'error'); }
 };
 
 window.delItem = async function(col, key) {
-    if (!confirm('Delete this item? Cannot be undone.')) return;
+    if (!confirm('Delete this item?')) return;
     try {
         await db.ref(`${col}/${key}`).remove();
         toast('Deleted', 'info');
         await loadAllData();
-        await loadDashboard();
     } catch (e) { toast('Error', 'error'); }
 };
 
@@ -2574,12 +2425,18 @@ function formatDate(iso) {
     return `${d.getDate()} ${m[d.getMonth()]} ${d.getFullYear()}`;
 }
 
+// Auto-refresh visitor stats every 30s
+setInterval(() => {
+    if(document.getElementById('secDashboard')?.classList.contains('active')){
+        loadVisitorStats();
+    }
+}, 30000);
+
 document.addEventListener('DOMContentLoaded', () => {
     setupImagePreview('ep_image','ep_imagePreview','ep_imagePreviewImg');
     setupImagePreview('es_image','es_imagePreview','es_imagePreviewImg');
     setupImagePreview('pop_image','pop_imagePreview','pop_imagePreviewImg');
     resetPostLinks([]);
-    updateRolePreview();
 });
 </script>
 </body>
