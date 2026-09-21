@@ -5,10 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact Us - esewahub.in</title>
 <meta name="description" content="Contact esewahub.in for any queries about government jobs, schemes, or services.">
-<meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX">
+<meta name="google-adsense-account" content="ca-pub-1336136297225442">
+<link rel="icon" id="faviconLink" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1336136297225442" crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database-compat.js"></script>
 <style>
 :root{--p50:#eff6ff;--p600:#2563eb;--p700:#1d4ed8;--s50:#f8fafc;--s100:#f1f5f9;--s200:#e2e8f0;--s500:#64748b;--s600:#475569;--s800:#1e293b;--s900:#0f172a}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -79,7 +82,7 @@ h2 i{color:var(--p600)}
 </div>
 
 <div class="ad-container">
-<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="6666666666" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1336136297225442" data-ad-slot="6666666666" data-ad-format="auto" data-full-width-responsive="true"></ins>
 </div>
 
 <h2><i class="fas fa-paper-plane"></i> Send Us a Message</h2>
@@ -102,6 +105,19 @@ h2 i{color:var(--p600)}
 </div>
 </div>
 <script>
+const firebaseConfig={apiKey:"AIzaSyDLnDVmkVcXxOFDxxfmXmqU1HflB2EpalQ",authDomain:"ibad-csc.firebaseapp.com",databaseURL:"https://ibad-csc-default-rtdb.firebaseio.com",projectId:"ibad-csc",storageBucket:"ibad-csc.firebasestorage.app",messagingSenderId:"106244842489",appId:"1:106244842489:web:ac67a8cdf714b4231d1328"};
+if(typeof firebase !== 'undefined' && !firebase.apps.length){firebase.initializeApp(firebaseConfig);}
+try{
+    if(typeof firebase !== 'undefined' && firebase.apps.length){
+        firebase.database().ref('settings/general/logo').once('value').then(snap=>{
+            if(snap.exists() && snap.val()){
+                const logoUrl = snap.val();
+                const favicon = document.getElementById('faviconLink');
+                if(favicon) favicon.href = logoUrl;
+            }
+        }).catch(()=>{});
+    }
+}catch(e){}
 function submitForm(){
 const name=document.getElementById('cName').value.trim();
 const email=document.getElementById('cEmail').value.trim();
