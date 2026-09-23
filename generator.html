@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Static Page Generator | esewahub.in</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<style>
+:root{--p50:#eff6ff;--p100:#dbeafe;--p200:#bfdbfe;--p400:#60a5fa;--p500:#3b82f6;--p600:#2563eb;--p700:#1d4ed8;--p800:#1e40af;--s50:#f8fafc;--s100:#f1f5f9;--s200:#e2e8f0;--s300:#cbd5e1;--s400:#94a3b8;--s500:#64748b;--s600:#475569;--s700:#334155;--s800:#1e293b;--s900:#0f172a;--g50:#f0fdf4;--g500:#22c55e;--g600:#16a34a;--g700:#15803d;--r50:#fef2f2;--r500:#ef4444;--r600:#dc2626;--y50:#fffbeb;--y500:#f59e0b;--y600:#d97706;--font:'Inter',sans-serif;--serif:'Merriweather',serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:linear-gradient(135deg,#0f172a,#1e293b);color:var(--s800);min-height:100vh;padding:20px;line-height:1.6}
+.container{max-width:900px;margin:0 auto;background:#fff;border-radius:20px;padding:40px;box-shadow:0 30px 60px rgba(0,0,0,.3)}
+h1{font-family:var(--serif);font-size:1.8rem;font-weight:900;color:var(--s900);margin-bottom:8px;display:flex;align-items:center;gap:12px}
+h1 i{color:var(--p600)}
+.subtitle{color:var(--s500);font-size:.95rem;margin-bottom:30px}
+.card{background:var(--s50);border:2px solid var(--s200);border-radius:14px;padding:24px;margin-bottom:20px}
+.card h3{font-size:1.05rem;font-weight:800;color:var(--s900);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.card h3 i{color:var(--p600)}
+.status-list{list-style:none;margin:0}
+.status-list li{padding:10px 0;border-bottom:1px dashed var(--s300);display:flex;justify-content:space-between;align-items:center;font-size:.9rem;font-weight:600;color:var(--s600)}
+.status-list li:last-child{border-bottom:none}
+.status-val{font-weight:800;color:var(--p700)}
+.status-ok{color:var(--g600)}
+.status-error{color:var(--r600)}
+.btn{padding:16px 28px;border-radius:12px;font-weight:800;font-size:.95rem;display:inline-flex;align-items:center;gap:10px;transition:all .2s;cursor:pointer;border:none;color:#fff}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(0,0,0,.15)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-p{background:linear-gradient(135deg,var(--p600),var(--p700))}
+.btn-g{background:linear-gradient(135deg,var(--g600),var(--g700))}
+.btn-lg{width:100%;justify-content:center;padding:20px;font-size:1rem}
+.log-box{background:#0f172a;color:#22c55e;padding:16px;border-radius:10px;font-family:monospace;font-size:.82rem;max-height:300px;overflow-y:auto;line-height:1.7}
+.log-box .log-error{color:#ef4444}
+.log-box .log-info{color:#60a5fa}
+.log-box .log-success{color:#22c55e}
+.log-box .log-warn{color:#f59e0b}
+.progress-bar{width:100%;height:8px;background:var(--s200);border-radius:4px;overflow:hidden;margin:16px 0}
+.progress-bar-inner{height:100%;background:linear-gradient(90deg,var(--p500),var(--p700));width:0%;transition:width .3s;border-radius:4px}
+.login-form{display:flex;flex-direction:column;gap:14px}
+.login-form input{padding:14px 16px;border:2px solid var(--s200);border-radius:10px;font-size:.95rem;font-family:inherit;background:#fff}
+.login-form input:focus{outline:none;border-color:var(--p500);box-shadow:0 0 0 4px rgba(37,99,235,.1)}
+.preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:12px}
+.preview-item{background:#fff;padding:12px;border-radius:10px;border:1px solid var(--s200);font-size:.78rem}
+.preview-item strong{color:var(--p700);display:block;margin-bottom:4px;font-weight:800}
+.preview-item small{color:var(--s500);font-family:monospace;word-break:break-all}
+.tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.tab{padding:10px 18px;background:var(--s100);border-radius:8px;font-weight:700;font-size:.85rem;cursor:pointer;color:var(--s600);border:2px solid transparent;transition:all .2s}
+.tab.active{background:var(--p600);color:#fff;border-color:var(--p700)}
+.tab:hover:not(.active){background:var(--s200)}
+.hidden{display:none}
+.info-box{background:var(--p50);border-left:4px solid var(--p600);padding:16px;border-radius:10px;font-size:.86rem;color:var(--p800);margin-bottom:20px;line-height:1.7}
+.info-box strong{display:block;margin-bottom:6px;font-weight:800}
+.info-box code{background:var(--p100);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:.82rem}
+.step-list{counter-reset:step;list-style:none;padding-left:0}
+.step-list li{counter-increment:step;padding:14px 14px 14px 56px;position:relative;margin-bottom:10px;background:var(--s50);border-radius:10px;font-size:.88rem;color:var(--s700);line-height:1.6}
+.step-list li::before{content:counter(step);position:absolute;left:14px;top:12px;width:30px;height:30px;background:var(--p600);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem}
+.step-list li strong{color:var(--s900);font-weight:800}
+@media(max-width:640px){.container{padding:22px}h1{font-size:1.35rem}.btn{padding:14px 20px;font-size:.88rem}}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1><i class="fas fa-rocket"></i> Static Page Generator</h1>
+<p class="subtitle">Firebase se saari posts aur services ki static HTML pages banayein — Google mein index ke liye</p>
+
+<!-- LOGIN -->
+<div id="loginSection">
+<div class="card">
+<h3><i class="fas fa-lock"></i> Admin Login</h3>
+<div class="login-form">
+<input type="email" id="gEmail" placeholder="Admin Email" autocomplete="email">
+<input type="password" id="gPassword" placeholder="Admin Password" autocomplete="current-password">
+<button class="btn btn-p" onclick="doGeneratorLogin()"><i class="fas fa-sign-in-alt"></i> Login to Continue</button>
+</div>
+</div>
+</div>
+
+<!-- GENERATOR -->
+<div id="generatorSection" class="hidden">
+
+<div class="info-box">
+<strong><i class="fas fa-info-circle"></i> Ye tool kya karega?</strong>
+1. Firebase se saari <strong>posts</strong> aur <strong>services</strong> uthayega<br>
+2. Har post/service ke liye <strong>alag HTML file</strong> banayega (SEO-friendly URLs ke saath)<br>
+3. <strong>sitemap.xml</strong> auto-generate karega<br>
+4. Sab kuch <strong>ZIP file</strong> mein download kar dega — aap GitHub par upload kar dein
+</div>
+
+<div class="tabs">
+<div class="tab active" onclick="switchTab('all', this)"><i class="fas fa-globe"></i> All Pages</div>
+<div class="tab" onclick="switchTab('posts', this)"><i class="fas fa-newspaper"></i> Posts Only</div>
+<div class="tab" onclick="switchTab('services', this)"><i class="fas fa-briefcase"></i> Services Only</div>
+</div>
+
+<div class="card">
+<h3><i class="fas fa-database"></i> Firebase Status</h3>
+<ul class="status-list" id="statusList">
+<li><span>Posts</span><span class="status-val" id="sPosts">-</span></li>
+<li><span>Services</span><span class="status-val" id="sServices">-</span></li>
+<li><span>Categories</span><span class="status-val" id="sCats">-</span></li>
+<li><span>Settings</span><span class="status-val" id="sSettings">-</span></li>
+</ul>
+</div>
+
+<div class="progress-bar"><div class="progress-bar-inner" id="progressBar"></div></div>
+
+<div class="card">
+<h3><i class="fas fa-cogs"></i> Generate</h3>
+<button class="btn btn-p btn-lg" id="genBtn" onclick="generateAll()" disabled>
+<i class="fas fa-play"></i> Generate All Static Pages
+</button>
+<p style="font-size:.82rem;color:var(--s500);margin-top:12px;text-align:center">
+Ye process 30 seconds se 5 minute tak le sakti hai — posts ki quantity par depend karta hai.
+</p>
+</div>
+
+<div class="card">
+<h3><i class="fas fa-terminal"></i> Live Log</h3>
+<div class="log-box" id="logBox">
+<div class="log-info">⏳ Waiting to start...</div>
+</div>
+</div>
+
+<div class="card hidden" id="resultCard">
+<h3><i class="fas fa-check-circle" style="color:var(--g600)"></i> Generation Complete!</h3>
+<div id="resultSummary"></div>
+<button class="btn btn-g btn-lg" onclick="downloadZip()" style="margin-top:16px">
+<i class="fas fa-download"></i> Download ZIP File
+</button>
+</div>
+
+<div class="card">
+<h3><i class="fas fa-book"></i> How to Use (Steps)</h3>
+<ol class="step-list">
+<li><strong>Download ZIP</strong> — Generate button dabayein aur ZIP download karein</li>
+<li><strong>Extract ZIP</strong> — ZIP ko apne computer par extract karein</li>
+<li><strong>GitHub par upload karein</strong> — Jo folder mile uske andar saari files apni GitHub repository mein upload karein</li>
+<li><strong>Wait for deploy</strong> — GitHub Pages automatically deploy karega (2-3 minute)</li>
+<li><strong>Sitemap submit karein</strong> — Search Console mein <code>sitemap.xml</code> submit karein</li>
+<li><strong>Indexing request</strong> — Search Console mein har page ke liye "Request Indexing" karein</li>
+<li><strong>2-4 weeks wait</strong> — Google saare pages index karega</li>
+<li><strong>Verify karein</strong> — <code>site:www.esewahub.in</code> search karein → saare posts dikhenge!</li>
+</ol>
+</div>
+
+</div>
+
+</div>
+
+<script>
+const firebaseConfig={apiKey:"AIzaSyDLnDVmkVcXxOFDxxfmXmqU1HflB2EpalQ",authDomain:"ibad-csc.firebaseapp.com",databaseURL:"https://ibad-csc-default-rtdb.firebaseio.com",projectId:"ibad-csc",storageBucket:"ibad-csc.firebasestorage.app",messagingSenderId:"106244842489",appId:"1:106244842489:web:ac67a8cdf714b4231d1328"};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.database();
+
+let allPosts = [];
+let allServices = {};
+let allCats = {};
+let siteSettings = {};
+let zip = null;
+let currentTab = 'all';
+
+// ==========================================
+// LOGIN
+// ==========================================
+window.doGeneratorLogin = async function() {
+    const email = document.getElementById('gEmail').value.trim();
+    const pass = document.getElementById('gPassword').value;
+    if(!email || !pass) return alert('Email aur password dono bharein');
+    
+    try {
+        await auth.signInWithEmailAndPassword(email, pass);
+        document.getElementById('loginSection').classList.add('hidden');
+        document.getElementById('generatorSection').classList.remove('hidden');
+        loadFirebaseData();
+    } catch(e) {
+        alert('Login failed: ' + e.message);
+    }
+};
+
+auth.onAuthStateChanged(async (user) => {
+    if(user) {
+        document.getElementById('loginSection').classList.add('hidden');
+        document.getElementById('generatorSection').classList.remove('hidden');
+        loadFirebaseData();
+    }
+});
+
+// ==========================================
+// LOAD DATA
+// ==========================================
+async function loadFirebaseData() {
+    log('info', '📥 Firebase se data load kar raha hai...');
+    
+    try {
+        const [ps, svs, cs, ss] = await Promise.all([
+            db.ref('posts').once('value'),
+            db.ref('services').once('value'),
+            db.ref('categories').once('value'),
+            db.ref('settings/general').once('value')
+        ]);
+        
+        allPosts = ps.exists() ? Object.keys(ps.val()).map(k => ({id: k, ...ps.val()[k]})) : [];
+        allPosts.sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
+        
+        allServices = svs.exists() ? svs.val() : {};
+        allCats = cs.exists() ? cs.val() : {};
+        siteSettings = ss.exists() ? ss.val() : {};
+        
+        document.getElementById('sPosts').innerHTML = `<span class="status-ok">${allPosts.length} ✅</span>`;
+        document.getElementById('sServices').innerHTML = `<span class="status-ok">${Object.keys(allServices).length} ✅</span>`;
+        document.getElementById('sCats').innerHTML = `<span class="status-ok">${Object.keys(allCats).length} ✅</span>`;
+        document.getElementById('sSettings').innerHTML = `<span class="status-ok">${Object.keys(siteSettings).length} fields ✅</span>`;
+        
+        log('success', `✅ Loaded: ${allPosts.length} posts, ${Object.keys(allServices).length} services`);
+        document.getElementById('genBtn').disabled = false;
+        
+    } catch(e) {
+        log('error', '❌ Error: ' + e.message);
+    }
+}
+
+// ==========================================
+// TAB SWITCH
+// ==========================================
+window.switchTab = function(tab, el) {
+    currentTab = tab;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+};
+
+// ==========================================
+// LOG
+// ==========================================
+function log(type, msg) {
+    const box = document.getElementById('logBox');
+    const line = document.createElement('div');
+    line.className = 'log-' + type;
+    line.textContent = msg;
+    box.appendChild(line);
+    box.scrollTop = box.scrollHeight;
+}
+
+function updateProgress(pct) {
+    document.getElementById('progressBar').style.width = pct + '%';
+}
+
+// ==========================================
+// SLUG GENERATOR
+// ==========================================
+function slugify(text) {
+    return String(text || '')
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .substring(0, 80);
+}
+
+function escapeHtml(text) {
+    if(!text) return '';
+    return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function escapeAttr(text) {
+    if(!text) return '';
+    return String(text).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// ==========================================
+// HTML TEMPLATE
+// ==========================================
+function generatePageHTML({ title, description, keywords, image, content, breadcrumb, category, type, timestamp, lastDate, officialLinks }) {
+    const siteTitle = siteSettings.title || 'esewahub.in';
+    const tagline = siteSettings.tagline || 'Sarkari Kaam & Digital Seva';
+    const logo = siteSettings.logo || '';
+    const whatsapp = siteSettings.whatsapp || '917056836166';
+    const email = siteSettings.email || 'info@esewahub.in';
+    const address = siteSettings.address || 'India';
+    const canonical = `https://esewahub.in/${type === 'post' ? 'posts' : 'services'}/${slugify(title)}.html`;
+    
+    const logoHtml = logo 
+        ? `<img src="${escapeAttr(logo)}" alt="${escapeHtml(siteTitle)}" style="width:100%;height:100%;object-fit:cover;border-radius:11px">`
+        : `<i class="fas fa-shield-halved"></i>`;
+    
+    const breadcrumbHtml = breadcrumb.map((b, i) => {
+        if(i === breadcrumb.length - 1) return `<span>${escapeHtml(b.name)}</span>`;
+        return `<a href="${b.url}">${escapeHtml(b.name)}</a><span class="sep">/</span>`;
+    }).join('');
+    
+    const formattedDate = timestamp ? new Date(timestamp).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : 'N/A';
+    
+    const linksHtml = officialLinks && officialLinks.length 
+        ? officialLinks.map(l => {
+            let url = l.url || '#';
+            if(url !== '#' && !url.startsWith('http')) url = 'https://' + url;
+            return `<a href="${escapeAttr(url)}" target="_blank" rel="noopener" class="link-btn"><i class="fas fa-external-link-alt"></i><span>${escapeHtml(l.name)}</span><i class="fas fa-arrow-right"></i></a>`;
+        }).join('')
+        : '<p style="color:#94a3b8;font-style:italic">No official links available.</p>';
+    
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${escapeHtml(title)} | ${escapeHtml(siteTitle)}</title>
+<meta name="description" content="${escapeAttr(description || title)}">
+<meta name="keywords" content="${escapeAttr(keywords || '')}">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="google-adsense-account" content="ca-pub-1336136297225442">
+<link rel="canonical" href="${canonical}">
+${image ? `<meta property="og:image" content="${escapeAttr(image)}">` : ''}
+<meta property="og:title" content="${escapeAttr(title)}">
+<meta property="og:description" content="${escapeAttr(description || title)}">
+<meta property="og:type" content="${type === 'post' ? 'article' : 'website'}">
+<meta property="og:url" content="${canonical}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${escapeAttr(title)}">
+<meta name="twitter:description" content="${escapeAttr(description || title)}">
+${logo ? `<link rel="icon" href="${escapeAttr(logo)}">` : ''}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1336136297225442" crossorigin="anonymous"></script>
+<style>
+:root{--p50:#eff6ff;--p100:#dbeafe;--p200:#bfdbfe;--p400:#60a5fa;--p500:#3b82f6;--p600:#2563eb;--p700:#1d4ed8;--p800:#1e40af;--s50:#f8fafc;--s100:#f1f5f9;--s200:#e2e8f0;--s300:#cbd5e1;--s400:#94a3b8;--s500:#64748b;--s600:#475569;--s700:#334155;--s800:#1e293b;--s900:#0f172a;--g50:#f0fdf4;--g500:#22c55e;--g600:#16a34a;--g700:#15803d;--r50:#fef2f2;--r500:#ef4444;--r600:#dc2626;--y50:#fffbeb;--y500:#f59e0b;--y600:#d97706;--font:'Inter',sans-serif;--serif:'Merriweather',serif}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html,body{max-width:100%;overflow-x:hidden;position:relative}
+body{font-family:var(--font);background:var(--s100);color:var(--s800);line-height:1.6;-webkit-font-smoothing:antialiased;width:100%}
+a{text-decoration:none;color:inherit;transition:all .2s;cursor:pointer}
+button{font-family:inherit;cursor:pointer;border:none}
+img{max-width:100%;height:auto;display:block}
+.container{max-width:1280px;margin:0 auto;padding:0 20px;width:100%;box-sizing:border-box}
+.topbar{background:var(--s900);color:var(--s300);padding:10px 0;font-size:.82rem;font-weight:500}
+.topbar .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.topbar-left i{color:var(--p400);margin-right:6px}
+.topbar-right a{padding:6px 12px;border-radius:6px;font-size:.8rem;font-weight:600;color:var(--g500)}
+.topbar-right a:hover{background:rgba(255,255,255,.1);color:#fff}
+.header{background:#fff;padding:18px 0;border-bottom:1px solid var(--s200)}
+.header .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:48px;height:48px;background:linear-gradient(135deg,var(--p600),var(--p800));border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;flex-shrink:0;overflow:hidden;padding:0}
+.logo-text h1{font-family:var(--serif);color:var(--p700);font-size:1.4rem;font-weight:900;line-height:1.2}
+.logo-text p{color:var(--s500);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.navbar{background:#fff;border-bottom:1px solid var(--s200);position:sticky;top:0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,.04)}
+.nav-list{display:flex;list-style:none;gap:4px;padding:10px 0;overflow-x:auto;scrollbar-width:none}
+.nav-list::-webkit-scrollbar{display:none}
+.nav-list li a{font-size:.8rem;font-weight:700;color:var(--s600);padding:9px 14px;border-radius:6px;text-transform:uppercase;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.nav-list li a:hover{color:var(--p700);background:var(--p50)}
+.ad-container{background:var(--s50);border:1px dashed var(--s300);border-radius:10px;padding:16px 12px 12px;text-align:center;margin:20px 0;min-height:100px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;width:100%}
+.ad-label{position:absolute;top:6px;left:12px;font-size:.6rem;text-transform:uppercase;letter-spacing:.15em;color:var(--s400);font-weight:800;background:#fff;padding:2px 8px;border-radius:3px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;margin:28px auto;max-width:1280px;padding:0 20px;width:100%;box-sizing:border-box}
+.article{background:#fff;border-radius:14px;padding:36px;border:1px solid var(--s200);box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}
+.breadcrumb{font-size:.78rem;color:var(--s500);margin-bottom:18px;font-weight:600;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.breadcrumb a{color:var(--p600)}
+.breadcrumb .sep{color:var(--s300)}
+.article-title{font-family:var(--serif);font-size:1.85rem;color:var(--s900);margin-bottom:16px;font-weight:900;line-height:1.3;letter-spacing:-.02em;word-wrap:break-word;overflow-wrap:break-word}
+.article-image{margin-bottom:22px;border-radius:12px;overflow:hidden;border:1px solid var(--s200);background:var(--s50);width:100%;aspect-ratio:16/9}
+.article-image img{width:100%;height:100%;object-fit:cover;display:block;max-height:520px}
+.author-box{display:flex;align-items:center;gap:14px;padding:16px;background:var(--s50);border-radius:10px;margin-bottom:20px;border:1px solid var(--s200)}
+.author-av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--p600),var(--p800));display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;flex-shrink:0}
+.author-info h4{font-size:.9rem;font-weight:800;color:var(--s900);margin-bottom:3px}
+.author-info p{font-size:.78rem;color:var(--s500);line-height:1.5}
+.author-info .ver{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;color:var(--g600);font-weight:700;margin-top:3px}
+.art-meta{display:flex;flex-wrap:wrap;gap:16px;background:var(--s50);padding:14px 20px;border-radius:10px;margin-bottom:22px;font-weight:600;border-left:4px solid var(--p600);font-size:.82rem}
+.art-meta span{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.apply-box{background:linear-gradient(135deg,var(--p50),#eff6ff);border:1px solid var(--p200);padding:26px;border-radius:14px;text-align:center;margin-bottom:24px}
+.apply-box h3{margin-bottom:16px;font-size:1.05rem;color:var(--s900);font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.link-btn{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--g600),var(--g700));color:#fff;padding:15px 22px;border-radius:10px;font-weight:700;font-size:.92rem;margin-bottom:10px;transition:all .25s;box-shadow:0 4px 12px rgba(22,163,74,.25);text-decoration:none;width:100%;box-sizing:border-box}
+.link-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(22,163,74,.35);background:linear-gradient(135deg,var(--g700),#166534)}
+.link-btn i:first-child{font-size:1.05rem;flex-shrink:0}
+.link-btn span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.link-btn i:last-child{margin-left:auto;opacity:.8;font-size:.85rem;flex-shrink:0}
+.art-content h3{font-size:1.05rem;color:var(--s900);margin:28px 0 14px;border-bottom:1px solid var(--s200);padding-bottom:10px;display:flex;align-items:center;gap:10px;font-weight:800;flex-wrap:wrap}
+.art-content h3 i{color:var(--p600)}
+.art-content ul{margin-left:8px;list-style:none}
+.art-content li{color:var(--s600);font-size:.92rem;line-height:1.8;margin-bottom:8px;display:flex;align-items:flex-start;gap:10px;word-break:break-word}
+.art-content li i{color:var(--p500);font-size:.75rem;margin-top:7px;flex-shrink:0}
+.art-content p{color:var(--s600);font-size:.92rem;line-height:1.8;margin-bottom:12px;word-break:break-word}
+.info-box{background:var(--p50);border-left:4px solid var(--p600);padding:14px 18px;border-radius:10px;margin-bottom:20px}
+.info-box p{margin:0;color:var(--p800);font-size:.9rem;font-weight:600;line-height:1.7}
+.steps-list{background:var(--s50);padding:20px;border-radius:12px;margin-bottom:20px}
+.step-item{display:flex;gap:14px;margin-bottom:14px;align-items:flex-start}
+.step-item:last-child{margin-bottom:0}
+.step-num{width:32px;height:32px;background:linear-gradient(135deg,var(--p600),var(--p800));color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;flex-shrink:0;box-shadow:0 3px 8px rgba(37,99,235,.3)}
+.step-text{font-size:.92rem;color:var(--s700);line-height:1.6;padding-top:5px;flex:1;word-break:break-word}
+.side-widget{background:#fff;border:1px solid var(--s200);border-radius:14px;padding:20px;margin-bottom:22px}
+.side-title{font-size:.88rem;font-weight:800;margin-bottom:14px;color:var(--s900);border-bottom:2px solid var(--s200);padding-bottom:10px;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.side-title i{color:var(--p600)}
+.side-link{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px dashed var(--s200);font-size:.85rem;font-weight:600;color:var(--s600);text-decoration:none}
+.side-link:last-child{border-bottom:none}
+.side-link:hover{color:var(--p600);padding-left:6px}
+.newsletter{background:linear-gradient(135deg,var(--p600),var(--p800));color:#fff;padding:24px 20px;border-radius:14px;text-align:center;margin-bottom:22px}
+.newsletter h3{font-size:.95rem;font-weight:800;margin-bottom:6px}
+.newsletter p{font-size:.78rem;opacity:.9;margin-bottom:14px;line-height:1.6}
+.newsletter input{width:100%;padding:11px 14px;border:none;border-radius:6px;font-size:.85rem;margin-bottom:8px;outline:none;font-family:inherit;box-sizing:border-box}
+.newsletter button{width:100%;padding:11px;background:#fff;color:var(--p700);border-radius:6px;font-weight:800;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer;border:none}
+.footer{background:var(--s900);color:var(--s400);padding:50px 0 24px;margin-top:50px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:32px}
+.foot-brand h3{color:#fff;margin-bottom:14px;font-size:1.15rem;font-weight:800;font-family:var(--serif);display:flex;align-items:center;gap:10px}
+.foot-brand h3 i{color:var(--p500)}
+.foot-brand p{font-size:.86rem;line-height:1.7;margin-bottom:14px}
+.foot-grid h4{color:#fff;margin-bottom:16px;font-size:.88rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.foot-links a{display:block;margin-bottom:8px;font-size:.84rem;color:var(--s400)}
+.foot-links a:hover{color:var(--p400);padding-left:4px}
+.foot-disc{background:var(--s800);padding:14px;border-radius:10px;margin-top:20px;font-size:.76rem;line-height:1.6;border-left:3px solid var(--y500);color:var(--s400)}
+.foot-bottom{text-align:center;border-top:1px solid var(--s700);margin-top:24px;padding-top:20px;font-size:.8rem;color:var(--s500);line-height:1.8}
+.foot-bottom i{color:var(--r500)}
+.foot-bottom .links{margin-top:8px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.foot-bottom .links a{color:var(--s400);font-size:.78rem}
+@media(max-width:1024px){.container{padding:0 16px}.layout{grid-template-columns:1fr;padding:0 16px}.foot-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){
+.container{padding:0 14px}
+.header .container{flex-direction:column;text-align:center}
+.layout{display:block;padding:0 14px}
+.article{padding:16px;border-radius:12px}
+.article-title{font-size:1.25rem;line-height:1.32;margin-bottom:12px}
+.article-image{aspect-ratio:16/9;margin-bottom:14px}
+.article-image img{max-height:260px}
+.author-box{padding:12px}
+.author-av{width:42px;height:42px;font-size:1rem}
+.art-meta{font-size:.72rem;padding:10px 12px;flex-direction:column;align-items:flex-start;gap:8px}
+.apply-box{padding:18px 14px}
+.link-btn{padding:12px 14px;font-size:.82rem}
+.art-content h3{font-size:.95rem;margin:20px 0 10px}
+.art-content li{font-size:.82rem}
+.art-content p{font-size:.85rem}
+.steps-list{padding:14px}
+.step-num{width:26px;height:26px;font-size:.74rem}
+.step-text{font-size:.82rem}
+.side-widget{padding:16px;margin-bottom:16px}
+.footer .container{padding:0 14px}
+.foot-grid{grid-template-columns:1fr;text-align:center;gap:22px}
+.foot-bottom .links{justify-content:center}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+<div class="container">
+<div class="topbar-left"><i class="fas fa-map-marker-alt"></i><span>${escapeHtml(address)}</span></div>
+<div class="topbar-right"><a href="https://wa.me/${escapeAttr(whatsapp)}" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp Help</a></div>
+</div>
+</div>
+<div class="header">
+<div class="container">
+<a href="/index.html" class="logo">
+<div class="logo-icon">${logoHtml}</div>
+<div class="logo-text">
+<h1>${escapeHtml(siteTitle)}</h1>
+<p>${escapeHtml(tagline)}</p>
+</div>
+</a>
+</div>
+</div>
+<nav class="navbar">
+<div class="container">
+<ul class="nav-list">
+<li><a href="/index.html"><i class="fas fa-home"></i> Home</a></li>
+<li><a href="/index.html#sarkari-kaam"><i class="fas fa-briefcase"></i> Sarkari Kaam</a></li>
+<li><a href="/index.html"><i class="fas fa-newspaper"></i> Latest Jobs</a></li>
+<li><a href="/index.html"><i class="fas fa-award"></i> Results</a></li>
+</ul>
+</div>
+</nav>
+<div class="layout">
+<main>
+<div class="article">
+<div class="breadcrumb">${breadcrumbHtml}</div>
+<h1 class="article-title">${escapeHtml(title)}</h1>
+${image ? `<div class="article-image"><img src="${escapeAttr(image)}" alt="${escapeAttr(title)}" loading="eager" onerror="this.parentElement.style.display='none'"></div>` : ''}
+<div class="author-box">
+<div class="author-av"><i class="fas fa-user-tie"></i></div>
+<div class="author-info">
+<h4>${escapeHtml(siteTitle)} Editorial Team</h4>
+<p>Government services expert with hands-on experience in CSC operations & Sarkari Kaam guidance.</p>
+<div class="ver"><i class="fas fa-check-circle"></i> Verified Author</div>
+</div>
+</div>
+<div class="art-meta">
+<span><i class="fas fa-calendar" style="color:var(--p600)"></i> Published: <strong>${formattedDate}</strong></span>
+${lastDate ? `<span><i class="fas fa-clock" style="color:var(--p600)"></i> Last Date: <strong>${escapeHtml(lastDate)}</strong></span>` : ''}
+<span><i class="fas fa-check-circle" style="color:var(--g600)"></i> Verified</span>
+</div>
+<div class="ad-container">
+<span class="ad-label">Advertisement</span>
+<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="1111111111" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+${content}
+<div class="ad-container">
+<span class="ad-label">Advertisement</span>
+<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="4444444444" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+</div>
+</main>
+<aside>
+<div class="newsletter">
+<h3>Never Miss an Update!</h3>
+<p>Get latest Sarkari alerts in your inbox.</p>
+<input type="email" placeholder="Enter your email" id="nlEmail">
+<button onclick="subscribeNL()">Subscribe Free</button>
+</div>
+<div class="ad-container" style="min-height:250px">
+<span class="ad-label">Advertisement</span>
+<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="3333333333" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<div class="side-widget">
+<h3 class="side-title"><i class="fas fa-link"></i> Important Portals</h3>
+<a href="https://digitalseva.csc.gov.in" target="_blank" rel="noopener nofollow" class="side-link"><i class="fas fa-laptop-house"></i> CSC Digital Seva</a>
+<a href="https://pmkisan.gov.in" target="_blank" rel="noopener nofollow" class="side-link"><i class="fas fa-tractor"></i> PM Kisan Yojana</a>
+<a href="https://uidai.gov.in" target="_blank" rel="noopener nofollow" class="side-link"><i class="fas fa-id-card"></i> Aadhar Portal</a>
+<a href="https://www.india.gov.in" target="_blank" rel="noopener nofollow" class="side-link"><i class="fas fa-landmark"></i> National Portal</a>
+</div>
+</aside>
+</div>
+<footer class="footer">
+<div class="container">
+<div class="foot-grid">
+<div class="foot-brand">
+<h3><i class="fas fa-shield-halved"></i> ${escapeHtml(siteTitle)}</h3>
+<p>Your trusted Digital Seva Kendra for government jobs, schemes, and digital services.</p>
+</div>
+<div>
+<h4>Quick Links</h4>
+<div class="foot-links">
+<a href="/index.html">Home</a>
+<a href="/index.html#sarkari-kaam">Sarkari Kaam</a>
+<a href="/about.html">About Us</a>
+<a href="/contact.html">Contact</a>
+</div>
+</div>
+<div>
+<h4>Information</h4>
+<div class="foot-links">
+<a href="/privacy.html">Privacy Policy</a>
+<a href="/disclaimer.html">Disclaimer</a>
+<a href="/terms.html">Terms</a>
+</div>
+</div>
+<div>
+<h4>Support</h4>
+<div class="foot-links">
+<a href="https://wa.me/${escapeAttr(whatsapp)}" target="_blank" rel="noopener">WhatsApp Help</a>
+<a href="mailto:${escapeAttr(email)}">Email Support</a>
+</div>
+</div>
+</div>
+<div class="foot-disc"><strong>Disclaimer:</strong> This website is not an official government website. All information is provided for informational purposes only.</div>
+<div class="foot-bottom">
+<div>&copy; 2026 ${escapeHtml(siteTitle)}. All Rights Reserved. Made with <i class="fas fa-heart"></i> for Digital India.</div>
+<div class="links"><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="/disclaimer.html">Disclaimer</a><a href="/contact.html">Contact</a></div>
+</div>
+</div>
+</footer>
+<script>
+function subscribeNL(){
+    const email = document.getElementById('nlEmail').value.trim();
+    if(!email || !email.includes('@')) { alert('Enter valid email'); return; }
+    alert('Subscribed! Check your email.');
+}
+</script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</body>
+</html>`;
+}
+
+// ==========================================
+// GENERATE POST CONTENT
+// ==========================================
+function generatePostContent(post) {
+    const links = (post.links && post.links.length > 0) 
+        ? post.links 
+        : (post.link ? [{ name: 'Apply Online', url: post.link }] : []);
+    
+    let linksHtml = '';
+    if(links.length === 0) {
+        linksHtml = `<button class="link-btn" style="background:var(--s400);cursor:not-allowed;box-shadow:none" disabled><i class="fas fa-lock"></i> Link Not Available</button>`;
+    } else if(links.length === 1) {
+        let url = links[0].url;
+        if(!url.startsWith('http')) url = 'https://' + url;
+        linksHtml = `<a href="${escapeAttr(url)}" target="_blank" rel="noopener" class="link-btn"><i class="fas fa-external-link-alt"></i><span>${escapeHtml(links[0].name)}</span><i class="fas fa-arrow-right"></i></a>`;
+    } else {
+        linksHtml = '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px">';
+        links.forEach(l => {
+            let url = l.url;
+            if(!url.startsWith('http')) url = 'https://' + url;
+            linksHtml += `<a href="${escapeAttr(url)}" target="_blank" rel="noopener" class="link-btn"><i class="fas fa-external-link-alt"></i><span>${escapeHtml(l.name)}</span><i class="fas fa-arrow-right"></i></a>`;
+        });
+        linksHtml += '</div>';
+    }
+    
+    const fmtList = (txt, em) => {
+        if(!txt || !txt.trim()) return `<p style="color:var(--s400);font-style:italic">${em}</p>`;
+        const items = txt.split('\n').filter(l => l.trim());
+        if(!items.length) return `<p style="color:var(--s400);font-style:italic">${em}</p>`;
+        return '<ul>' + items.map(l => `<li><i class="fas fa-check-circle"></i><span>${escapeHtml(l.trim())}</span></li>`).join('') + '</ul>';
+    };
+    
+    const faqs = (post.faq && post.faq.length) ? post.faq : [
+        { q: 'Is this information verified?', a: 'Yes, all information is verified from official government sources.' },
+        { q: 'What is the last date?', a: `Last date is ${post.lastDate || 'mentioned in official notification'}.` },
+        { q: 'How can I get help?', a: 'Contact us via WhatsApp for assistance.' }
+    ];
+    
+    let faqHtml = '';
+    faqs.forEach(f => {
+        faqHtml += `<div class="info-box" style="margin-bottom:10px"><p><strong>Q: ${escapeHtml(f.q)}</strong><br>A: ${escapeHtml(f.a)}</p></div>`;
+    });
+    
+    return `
+<div class="apply-box">
+<h3><i class="fas fa-external-link-alt"></i> ${links.length > 1 ? 'Important Links (Official)' : 'Important Link'}</h3>
+${linksHtml}
+</div>
+<div class="art-content">
+<h3><i class="fas fa-info-circle"></i> Eligibility / Details</h3>
+${fmtList(post.education, 'No eligibility details provided.')}
+<div class="ad-container">
+<span class="ad-label">Advertisement</span>
+<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="2222222222" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h3><i class="fas fa-laptop"></i> How to Apply</h3>
+${fmtList(post.steps, 'Application process not specified.')}
+<h3><i class="fas fa-file-upload"></i> Required Documents</h3>
+${fmtList(post.documents, 'No documents listed.')}
+<h3><i class="fas fa-question-circle"></i> FAQ</h3>
+${faqHtml}
+</div>`;
+}
+
+// ==========================================
+// GENERATE SERVICE CONTENT
+// ==========================================
+function generateServiceContent(service) {
+    const links = service.links || [];
+    let linksHtml = links.length 
+        ? links.map(l => {
+            let url = l.url || '#';
+            if(url !== '#' && !url.startsWith('http')) url = 'https://' + url;
+            return `<a href="${escapeAttr(url)}" target="_blank" rel="noopener" class="link-btn"><i class="fas fa-external-link-alt"></i><span>${escapeHtml(l.name)}</span><i class="fas fa-arrow-right"></i></a>`;
+        }).join('')
+        : '<p style="color:var(--s400);font-style:italic">No links available.</p>';
+    
+    let stepsHtml = '';
+    if(service.steps && service.steps.length) {
+        stepsHtml = '<div class="steps-list">';
+        service.steps.forEach((step, i) => {
+            stepsHtml += `<div class="step-item"><div class="step-num">${i+1}</div><div class="step-text">${escapeHtml(step)}</div></div>`;
+        });
+        stepsHtml += '</div>';
+    } else {
+        stepsHtml = '<p style="color:var(--s400);font-style:italic">Steps not specified.</p>';
+    }
+    
+    let docsHtml = '';
+    if(service.docs && service.docs.length) {
+        docsHtml = '<ul>' + service.docs.map(d => `<li><i class="fas fa-check-circle"></i><span>${escapeHtml(d)}</span></li>`).join('') + '</ul>';
+    } else {
+        docsHtml = '<p style="color:var(--s400);font-style:italic">No documents listed.</p>';
+    }
+    
+    const aboutHtml = service.about ? `<div class="info-box"><p><i class="fas fa-info-circle"></i> ${escapeHtml(service.about)}</p></div>` : '';
+    
+    return `
+${aboutHtml}
+<div class="art-content">
+<h3><i class="fas fa-list-ol"></i> How to Apply (Step by Step)</h3>
+${stepsHtml}
+<div class="ad-container">
+<span class="ad-label">Advertisement</span>
+<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="2222222222" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+<h3><i class="fas fa-external-link-alt"></i> Official Links (Direct)</h3>
+${linksHtml}
+<h3><i class="fas fa-file-upload"></i> Required Documents</h3>
+${docsHtml}
+</div>`;
+}
+
+// ==========================================
+// GENERATE ALL
+// ==========================================
+window.generateAll = async function() {
+    const btn = document.getElementById('genBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+    document.getElementById('logBox').innerHTML = '';
+    document.getElementById('resultCard').classList.add('hidden');
+    
+    try {
+        zip = new JSZip();
+        let totalFiles = 0;
+        const urls = [];
+        const now = new Date().toISOString().split('T')[0];
+        
+        // Add homepage + policy pages
+        const staticPages = [
+            { url: 'https://esewahub.in/', priority: '1.0', changefreq: 'daily' },
+            { url: 'https://esewahub.in/about.html', priority: '0.5', changefreq: 'monthly' },
+            { url: 'https://esewahub.in/contact.html', priority: '0.5', changefreq: 'monthly' },
+            { url: 'https://esewahub.in/privacy.html', priority: '0.3', changefreq: 'yearly' },
+            { url: 'https://esewahub.in/disclaimer.html', priority: '0.3', changefreq: 'yearly' },
+            { url: 'https://esewahub.in/terms.html', priority: '0.3', changefreq: 'yearly' }
+        ];
+        staticPages.forEach(p => urls.push(p));
+        
+        // Posts
+        if(currentTab === 'all' || currentTab === 'posts') {
+            log('info', `📝 ${allPosts.length} posts generate kar raha hoon...`);
+            
+            for(let i = 0; i < allPosts.length; i++) {
+                const post = allPosts[i];
+                const slug = slugify(post.title);
+                if(!slug) continue;
+                
+                const catName = post.categoryName || allCats[post.category]?.name || 'Update';
+                const content = generatePostContent(post);
+                
+                const html = generatePageHTML({
+                    title: post.title,
+                    description: post.summary || post.title,
+                    keywords: `${post.title}, sarkari job, ${catName}, government job`,
+                    image: post.image || '',
+                    content: content,
+                    breadcrumb: [
+                        { name: 'Home', url: '/index.html' },
+                        { name: catName, url: '/index.html' },
+                        { name: post.title.substring(0, 50) }
+                    ],
+                    category: catName,
+                    type: 'post',
+                    timestamp: post.timestamp,
+                    lastDate: post.lastDate || '',
+                    officialLinks: post.links || []
+                });
+                
+                zip.file(`posts/${slug}.html`, html);
+                urls.push({
+                    url: `https://esewahub.in/posts/${slug}.html`,
+                    priority: '0.8',
+                    changefreq: 'weekly',
+                    lastmod: post.timestamp ? post.timestamp.split('T')[0] : now
+                });
+                totalFiles++;
+                updateProgress(Math.round((i+1) / allPosts.length * 50));
+                log('success', `✅ Post ${i+1}/${allPosts.length}: ${slug}.html`);
+            }
+        }
+        
+        // Services
+        if(currentTab === 'all' || currentTab === 'services') {
+            const serviceEntries = Object.entries(allServices);
+            log('info', `🔧 ${serviceEntries.length} services generate kar raha hoon...`);
+            
+            for(let i = 0; i < serviceEntries.length; i++) {
+                const [key, service] = serviceEntries[i];
+                const slug = slugify(service.name || key);
+                if(!slug) continue;
+                
+                const content = generateServiceContent(service);
+                
+                const html = generatePageHTML({
+                    title: `${service.name} - Complete Guide`,
+                    description: service.about || `${service.name} - ${service.sub || 'Government Service'}. Complete guide with official links, steps and required documents.`,
+                    keywords: `${service.name}, sarkari kaam, government service, ${service.sub || ''}`,
+                    image: service.image || '',
+                    content: content,
+                    breadcrumb: [
+                        { name: 'Home', url: '/index.html' },
+                        { name: 'Sarkari Kaam', url: '/index.html#sarkari-kaam' },
+                        { name: service.name }
+                    ],
+                    type: 'service',
+                    timestamp: service.timestamp || '',
+                    officialLinks: service.links || []
+                });
+                
+                zip.file(`services/${slug}.html`, html);
+                urls.push({
+                    url: `https://esewahub.in/services/${slug}.html`,
+                    priority: '0.7',
+                    changefreq: 'monthly',
+                    lastmod: now
+                });
+                totalFiles++;
+                const pct = 50 + Math.round((i+1) / serviceEntries.length * 40);
+                updateProgress(pct);
+                log('success', `✅ Service ${i+1}/${serviceEntries.length}: ${slug}.html`);
+            }
+        }
+        
+        // Sitemap
+        log('info', '🗺️ sitemap.xml generate kar raha hoon...');
+        
+        let sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+`;
+        urls.forEach(u => {
+            sitemapXml += `  <url>
+    <loc>${u.url}</loc>
+    <lastmod>${u.lastmod || now}</lastmod>
+    <changefreq>${u.changefreq || 'weekly'}</changefreq>
+    <priority>${u.priority || '0.5'}</priority>
+  </url>
+`;
+        });
+        sitemapXml += `</urlset>`;
+        
+        zip.file('sitemap.xml', sitemapXml);
+        totalFiles++;
+        log('success', `✅ sitemap.xml (${urls.length} URLs)`);
+        
+        // robots.txt
+        const robotsTxt = `User-agent: *
+Allow: /
+
+Sitemap: https://esewahub.in/sitemap.xml
+`;
+        zip.file('robots.txt', robotsTxt);
+        totalFiles++;
+        log('success', '✅ robots.txt');
+        
+        updateProgress(100);
+        log('success', '🎉 Generation complete!');
+        
+        // Show result
+        document.getElementById('resultCard').classList.remove('hidden');
+        document.getElementById('resultSummary').innerHTML = `
+            <div class="status-list">
+                <li><span><i class="fas fa-file-code"></i> Total Files</span><span class="status-val">${totalFiles}</span></li>
+                <li><span><i class="fas fa-newspaper"></i> Posts Generated</span><span class="status-val">${currentTab === 'services' ? 0 : allPosts.length}</span></li>
+                <li><span><i class="fas fa-briefcase"></i> Services Generated</span><span class="status-val">${currentTab === 'posts' ? 0 : Object.keys(allServices).length}</span></li>
+                <li><span><i class="fas fa-sitemap"></i> Sitemap URLs</span><span class="status-val">${urls.length}</span></li>
+            </div>
+            <div class="info-box" style="margin-top:16px">
+                <strong>📥 Next Step:</strong>
+                Download ZIP file → Extract → Upload to GitHub → Wait for deploy → Submit sitemap in Search Console.
+            </div>
+        `;
+        
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-play"></i> Generate Again';
+        
+    } catch(e) {
+        log('error', '❌ Error: ' + e.message);
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-play"></i> Retry';
+    }
+};
+
+// ==========================================
+// DOWNLOAD ZIP
+// ==========================================
+window.downloadZip = async function() {
+    if(!zip) return alert('Generate first!');
+    
+    log('info', '📦 ZIP file bana raha hoon...');
+    const content = await zip.generateAsync({ type: 'blob' });
+    
+    const url = URL.createObjectURL(content);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `esewahub-static-pages-${Date.now()}.zip`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    log('success', '✅ ZIP downloaded!');
+};
+</script>
+</body>
+</html>
