@@ -247,6 +247,45 @@ tr:hover td{background:var(--s50)}
 .notif-stat .num{font-size:1.3rem;font-weight:900;color:#92400e;line-height:1}
 .notif-stat .lbl{font-size:.68rem;color:#78350f;font-weight:700;text-transform:uppercase;margin-top:4px}
 
+/* AUTO UPDATE SPECIFIC STYLES */
+.auto-update-hero{background:linear-gradient(135deg,#7c3aed,#6d28d9);border-radius:14px;padding:30px;color:#fff;margin-bottom:24px;position:relative;overflow:hidden}
+.auto-update-hero::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.15),transparent 70%);border-radius:50%}
+.auto-update-hero h2{font-family:var(--serif);font-size:1.5rem;font-weight:900;margin-bottom:8px;position:relative;z-index:1;display:flex;align-items:center;gap:12px}
+.auto-update-hero p{font-size:.9rem;opacity:.95;line-height:1.7;margin-bottom:20px;position:relative;z-index:1}
+.auto-update-hero .actions{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1}
+.auto-update-hero .actions .btn{background:rgba(255,255,255,.2);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);color:#fff;padding:14px 24px;font-size:.9rem}
+.auto-update-hero .actions .btn:hover{background:rgba(255,255,255,.3)}
+.auto-update-hero .actions .btn.primary{background:#fff;color:#6d28d9;border-color:#fff}
+.auto-update-hero .actions .btn.primary:hover{background:#f3e8ff;box-shadow:0 10px 25px rgba(0,0,0,.2)}
+
+.status-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:20px}
+.status-item{background:#fff;border:1px solid var(--s200);border-radius:12px;padding:16px;text-align:center}
+.status-item .icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.3rem;color:#fff}
+.status-item .icon.green{background:linear-gradient(135deg,#22c55e,#15803d)}
+.status-item .icon.blue{background:linear-gradient(135deg,#3b82f6,#1d4ed8)}
+.status-item .icon.orange{background:linear-gradient(135deg,#f59e0b,#d97706)}
+.status-item .icon.red{background:linear-gradient(135deg,#ef4444,#b91c1c)}
+.status-item .icon.purple{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+.status-item h4{font-size:.95rem;font-weight:800;color:var(--s900);margin-bottom:4px}
+.status-item p{font-size:.78rem;color:var(--s500);line-height:1.5}
+
+.log-box{background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px;font-family:monospace;font-size:.78rem;line-height:1.7;max-height:280px;overflow-y:auto}
+.log-box .log-line{padding:2px 0;display:flex;gap:10px}
+.log-box .log-time{color:#64748b;flex-shrink:0}
+.log-box .log-info{color:#60a5fa}
+.log-box .log-success{color:#22c55e}
+.log-box .log-error{color:#ef4444}
+.log-box .log-warn{color:#f59e0b}
+
+.workflow-list{background:#fff;border:1px solid var(--s200);border-radius:12px;overflow:hidden}
+.workflow-item{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--s200);gap:12px;flex-wrap:wrap}
+.workflow-item:last-child{border-bottom:none}
+.workflow-status{display:flex;align-items:center;gap:10px;font-size:.85rem;font-weight:700}
+.workflow-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.workflow-dot.success{background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.2)}
+.workflow-dot.running{background:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.2);animation:blinkDot 1s infinite}
+.workflow-dot.failed{background:#ef4444;box-shadow:0 0 0 3px rgba(239,68,68,.2)}
+
 @media(max-width:768px){
 .sidebar{width:64px;padding:16px 0}
 .sidebar-brand h2{font-size:0;justify-content:center}
@@ -343,6 +382,13 @@ tr:hover td{background:var(--s50)}
 <span class="nav-badge" id="notifCountBadge" style="background:#dc2626">0</span>
 </div>
 
+<!-- ============ AUTO UPDATE (NEW) ============ -->
+<div class="nav-group">Auto Update</div>
+<div class="nav-item" onclick="showSec('secAutoUpdate',this)">
+<i class="fas fa-magic"></i><span>Auto Update</span>
+<span class="nav-badge" id="autoUpdateBadge" style="background:#8b5cf6">⚡</span>
+</div>
+
 <div class="nav-group">Users & Access</div>
 <div class="nav-item" onclick="showSec('secUsers',this)">
 <i class="fas fa-users-cog"></i><span>User Management</span>
@@ -428,6 +474,25 @@ tr:hover td{background:var(--s50)}
 </div>
 </div>
 
+<!-- ============ AUTO UPDATE CARD (NEW) ============ -->
+<div class="card" style="background:linear-gradient(135deg,#f3e8ff,#e9d5ff);border-color:#c4b5fd">
+<div class="card-head">
+<span style="color:#6d28d9"><i class="fas fa-magic"></i> Auto Update Pages & Sitemap</span>
+<span class="ann-type-badge" style="background:#6d28d9;color:#fff">⚡ INSTANT</span>
+</div>
+<p style="font-size:.88rem;color:#5b21b6;line-height:1.7;margin-bottom:16px">
+Jab bhi aap naya post ya service publish karein, ye button dabakar GitHub par automatic generation trigger kar sakte hain. 2-3 minute mein saare HTML pages + sitemap update ho jayenge.
+</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<button class="btn" onclick="triggerAutoUpdate()" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);justify-content:center;padding:14px">
+<i class="fas fa-play-circle"></i> Trigger Auto Update
+</button>
+<button class="btn" onclick="showSec('secAutoUpdate',document.querySelector('[onclick*=secAutoUpdate]'))" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);justify-content:center;padding:14px">
+<i class="fas fa-cog"></i> Configure
+</button>
+</div>
+</div>
+
 <!-- LIVE VISITOR COUNTER -->
 <div class="card">
 <div class="card-head">
@@ -483,6 +548,10 @@ tr:hover td{background:var(--s50)}
 <div class="stat-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706);width:44px;height:44px;font-size:1.1rem"><i class="fas fa-bell"></i></div>
 <div class="stat-info"><h3 id="statusNotif" style="font-size:1rem">Not Configured</h3><p>Push Notifications</p></div>
 </div>
+<div class="stat-card" style="padding:16px">
+<div class="stat-icon" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9);width:44px;height:44px;font-size:1.1rem"><i class="fas fa-magic"></i></div>
+<div class="stat-info"><h3 id="statusAutoUpdate" style="font-size:1rem">Setup Required</h3><p>Auto Update</p></div>
+</div>
 </div>
 </div>
 
@@ -506,6 +575,9 @@ tr:hover td{background:var(--s50)}
 <button class="btn btn-g" onclick="openServiceModal()" style="justify-content:center;padding:16px">
 <i class="fas fa-plus-circle"></i> Add Service
 </button>
+<button class="btn" onclick="triggerAutoUpdate()" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#7c3aed,#6d28d9)">
+<i class="fas fa-magic"></i> Auto Update
+</button>
 </div>
 </div>
 
@@ -516,6 +588,175 @@ tr:hover td{background:var(--s50)}
 </div>
 <div id="recentPosts"><div class="spinner"></div></div>
 </div>
+</div>
+
+<!-- ==========================================
+     AUTO UPDATE SECTION (NEW)
+     ========================================== -->
+<div id="secAutoUpdate" class="section">
+
+<div class="auto-update-hero">
+<h2><i class="fas fa-magic"></i> Auto Update System</h2>
+<p>Ye system automatically aapke Firebase database se data uthakar HTML pages + sitemap generate karta hai aur GitHub par upload kar deta hai. Aapko manually kuch nahi karna!</p>
+<div class="actions">
+<button class="btn primary" onclick="triggerAutoUpdate()">
+<i class="fas fa-play-circle"></i> Trigger Now
+</button>
+<button class="btn" onclick="checkWorkflowStatus()">
+<i class="fas fa-sync-alt"></i> Check Status
+</button>
+<button class="btn" onclick="viewLiveSitemap()">
+<i class="fas fa-external-link-alt"></i> View Live Sitemap
+</button>
+</div>
+</div>
+
+<div class="status-grid">
+<div class="status-item">
+<div class="icon blue"><i class="fab fa-github"></i></div>
+<h4>GitHub Actions</h4>
+<p id="ghStatus">Setup Required</p>
+</div>
+<div class="status-item">
+<div class="icon green"><i class="fas fa-fire"></i></div>
+<h4>Firebase Data</h4>
+<p id="fbStatus">Connected</p>
+</div>
+<div class="status-item">
+<div class="icon orange"><i class="fas fa-clock"></i></div>
+<h4>Last Run</h4>
+<p id="lastRunStatus">Never</p>
+</div>
+<div class="status-item">
+<div class="icon purple"><i class="fas fa-file-code"></i></div>
+<h4>Auto Schedule</h4>
+<p>Daily 2 AM IST</p>
+</div>
+</div>
+
+<!-- GITHUB CONFIGURATION -->
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-cog"></i> GitHub Configuration</span>
+</div>
+
+<div class="info-box">
+<strong><i class="fas fa-info-circle"></i> Ek Baar Setup Karein</strong>
+GitHub Personal Access Token generate karein aur yahan paste karein. Ye token sirf workflow trigger karne ke liye use hoga. Token ko safely localStorage mein store kiya jayega.
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>GitHub Username / Owner</label>
+<input type="text" id="gh_owner" placeholder="sainismailabad">
+<span class="hint">Aapka GitHub username</span>
+</div>
+<div class="form-group">
+<label>Repository Name</label>
+<input type="text" id="gh_repo" placeholder="csc">
+<span class="hint">Aapka repository ka naam</span>
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label>Workflow File Name</label>
+<input type="text" id="gh_workflow" placeholder="auto-generate.yml">
+</div>
+<div class="form-group">
+<label>Branch Name</label>
+<input type="text" id="gh_branch" placeholder="main">
+</div>
+</div>
+
+<div class="form-group">
+<label>GitHub Personal Access Token <span class="req">*</span></label>
+<input type="password" id="gh_token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+<span class="hint">
+Token banane ke liye: GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token → Scope: <code>workflow</code> tick karein
+</span>
+</div>
+
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px">
+<button class="btn btn-g" onclick="saveGitHubConfig()" style="padding:14px 28px">
+<i class="fas fa-save"></i> Save Configuration
+</button>
+<button class="btn btn-ghost" onclick="clearGitHubConfig()" style="padding:14px 28px">
+<i class="fas fa-trash"></i> Clear Config
+</button>
+<button class="btn btn-p" onclick="testGitHubConnection()" style="padding:14px 28px">
+<i class="fas fa-plug"></i> Test Connection
+</button>
+</div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-question-circle"></i> How It Works</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
+<div style="background:linear-gradient(135deg,#eff6ff,#dbeafe);padding:20px;border-radius:12px;border-left:4px solid #2563eb">
+<div style="width:44px;height:44px;background:linear-gradient(135deg,#2563eb,#1d4ed8);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;margin-bottom:12px">1</div>
+<h4 style="font-size:.95rem;font-weight:800;color:#1e40af;margin-bottom:6px">Firebase Data</h4>
+<p style="font-size:.82rem;color:#1e40af;line-height:1.6">GitHub Action Firebase se fresh data fetch karta hai (posts + services)</p>
+</div>
+<div style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);padding:20px;border-radius:12px;border-left:4px solid #16a34a">
+<div style="width:44px;height:44px;background:linear-gradient(135deg,#16a34a,#15803d);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;margin-bottom:12px">2</div>
+<h4 style="font-size:.95rem;font-weight:800;color:#15803d;margin-bottom:6px">HTML Generate</h4>
+<p style="font-size:.82rem;color:#15803d;line-height:1.6">Har post/service ke liye SEO-friendly HTML page automatically banata hai</p>
+</div>
+<div style="background:linear-gradient(135deg,#fef3c7,#fef9c3);padding:20px;border-radius:12px;border-left:4px solid #f59e0b">
+<div style="width:44px;height:44px;background:linear-gradient(135deg,#f59e0b,#d97706);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;margin-bottom:12px">3</div>
+<h4 style="font-size:.95rem;font-weight:800;color:#92400e;margin-bottom:6px">Sitemap Update</h4>
+<p style="font-size:.82rem;color:#92400e;line-height:1.6">sitemap.xml aur robots.txt automatically update ho jate hain</p>
+</div>
+<div style="background:linear-gradient(135deg,#f3e8ff,#e9d5ff);padding:20px;border-radius:12px;border-left:4px solid #8b5cf6">
+<div style="width:44px;height:44px;background:linear-gradient(135deg,#8b5cf6,#6d28d9);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;margin-bottom:12px">4</div>
+<h4 style="font-size:.95rem;font-weight:800;color:#6d28d9;margin-bottom:6px">Auto Deploy</h4>
+<p style="font-size:.82rem;color:#6d28d9;line-height:1.6">GitHub automatically commit karta hai aur GitHub Pages 2-3 min mein live</p>
+</div>
+</div>
+</div>
+
+<!-- WORKFLOW STATUS -->
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-tasks"></i> Recent Workflow Runs</span>
+<button class="btn btn-p btn-sm" onclick="checkWorkflowStatus()"><i class="fas fa-sync-alt"></i> Refresh</button>
+</div>
+<div class="workflow-list" id="workflowList">
+<div style="padding:40px;text-align:center;color:#94a3b8">
+<i class="fas fa-info-circle" style="font-size:2rem;margin-bottom:10px;display:block"></i>
+<p style="font-size:.85rem">GitHub configure karne ke baad workflow runs yahan dikhenge</p>
+</div>
+</div>
+</div>
+
+<!-- LIVE LOG -->
+<div class="card">
+<div class="card-head">
+<span><i class="fas fa-terminal"></i> Live Log</span>
+<button class="btn btn-ghost btn-sm" onclick="document.getElementById('autoUpdateLog').innerHTML=''"><i class="fas fa-trash"></i> Clear</button>
+</div>
+<div class="log-box" id="autoUpdateLog">
+<div class="log-line"><span class="log-time">--:--:--</span><span class="log-info">Auto Update system ready. Configure GitHub to start.</span></div>
+</div>
+</div>
+
+<!-- OPTIONAL: FIREBASE CLOUD FUNCTION -->
+<div class="card" style="background:linear-gradient(135deg,#fef2f2,#fee2e2);border-color:#fca5a5">
+<div class="card-head">
+<span style="color:#991b1b"><i class="fas fa-exclamation-triangle"></i> Advanced: Real-time Auto Trigger</span>
+</div>
+<p style="font-size:.85rem;color:#7f1d1d;line-height:1.7;margin-bottom:14px">
+Agar aap chahte hain ki <b>naya post publish karte hi automatic</b> GitHub workflow trigger ho jaye (bina button dabaye), to Firebase Cloud Function setup karna padega. Filhal aap button dabakar trigger kar sakte hain.
+</p>
+<button class="btn" onclick="alert('Firebase Cloud Function setup ke liye alag guide chahiye. Abhi ke liye manual trigger use karein.')" style="background:linear-gradient(135deg,#dc2626,#b91c1c)">
+<i class="fas fa-info-circle"></i> Learn More
+</button>
+</div>
+
 </div>
 
 <!-- POSTS SECTION -->
@@ -639,9 +880,7 @@ Yahan se aap website ke <b>Sarkari Kaam section</b> ke sabhi services add/edit/d
 </div>
 </div>
 
-<!-- ==========================================
-     PUSH NOTIFICATIONS SECTION (NEW)
-     ========================================== -->
+<!-- PUSH NOTIFICATIONS SECTION -->
 <div id="secNotifications" class="section">
 <div class="notif-card">
 <h4><i class="fas fa-bell"></i> Push Notifications System</h4>
@@ -1051,9 +1290,7 @@ Sirf tab use karein jab aapko HTML/CSS/JS ka knowledge ho.
 </div>
 </div>
 
-<!-- ==========================================
-     NOTIFICATION MODAL (NEW)
-     ========================================== -->
+<!-- NOTIFICATION MODAL -->
 <div id="notifModal" class="modal">
 <div class="modal-box" style="max-width:640px">
 <div class="modal-head">
@@ -1291,6 +1528,12 @@ let popupActiveToggle = true;
 let popupShowOnceToggle = true;
 let postSendNotifToggle = false;
 
+/* ==========================================
+   AUTO UPDATE STATE
+   ========================================== */
+const GITHUB_CONFIG_KEY = 'esewahub_github_config';
+let githubConfig = { owner:'', repo:'', workflow:'auto-generate.yml', branch:'main', token:'' };
+
 const ROLE_PERMS = {
     admin: { label:'Admin', perms:['posts','services','cats','users','settings','adsense'] },
     editor: { label:'Editor', perms:['posts','services','cats'] },
@@ -1346,6 +1589,7 @@ window.doLogin = async function() {
         toast('Welcome back, ' + (snap.val()?.name || cred.user.email.split('@')[0]) + '!', 'success');
         await loadAllData();
         await loadDashboard();
+        loadGitHubConfig();
     } catch (e) {
         const msgs = {
             'auth/user-not-found':'No account found.',
@@ -1372,6 +1616,7 @@ auth.onAuthStateChanged(async (user) => {
                 showView('dashView');
                 loadAllData();
                 loadDashboard();
+                loadGitHubConfig();
             }
         } catch (e) { console.error(e); }
     } else {
@@ -1412,6 +1657,7 @@ window.showSec = function(sectionId, el) {
         secServices: { title:'Sarkari Kaam Services', icon:'fa-briefcase' },
         secCats: { title:'Categories', icon:'fa-tags' },
         secNotifications: { title:'Push Notifications', icon:'fa-bell' },
+        secAutoUpdate: { title:'Auto Update System', icon:'fa-magic' },
         secUsers: { title:'User Management', icon:'fa-users-cog' },
         secVisitors: { title:'Visitor Analytics', icon:'fa-chart-bar' },
         secAdsense: { title:'Google AdSense', icon:'fa-google' },
@@ -1425,6 +1671,7 @@ window.showSec = function(sectionId, el) {
     }
     if(sectionId === 'secVisitors') loadVisitorStats();
     if(sectionId === 'secNotifications') loadNotifications();
+    if(sectionId === 'secAutoUpdate') { loadGitHubConfig(); checkWorkflowStatus(); }
 };
 
 window.closeModal = function(id) {
@@ -1519,7 +1766,6 @@ function collectPostLinks() {
     return links;
 }
 
-// ANNOUNCEMENT
 function createAnnLineRow(text = '', showRemove = true) {
     const row = document.createElement('div');
     row.className = 'line-row';
@@ -1701,7 +1947,6 @@ function renderAnnouncements() {
     });
 }
 
-// POPUPS
 window.openPopupModal = function() {
     document.getElementById('popupModalTitle').innerText = 'New Image Popup';
     document.getElementById('pop_id').value = '';
@@ -1848,9 +2093,9 @@ function renderPopups() {
     });
 }
 
-// ==========================================
-// PUSH NOTIFICATIONS (NEW)
-// ==========================================
+/* ==========================================
+   PUSH NOTIFICATIONS
+   ========================================== */
 window.openNotifModal = function() {
     document.getElementById('notifModalTitle').innerText = 'Send Push Notification';
     document.getElementById('notif_id').value = '';
@@ -1875,15 +2120,12 @@ window.sendNotification = async function() {
     if (icon && !icon.startsWith('http')) icon = 'https://' + icon;
     
     try {
-        // Count subscribers
         const subsSnap = await db.ref('pushSubscribers').once('value');
         const subs = subsSnap.exists() ? subsSnap.val() : {};
         const subCount = Object.keys(subs).length;
         
-        // Save notification record
         const notifData = {
-            title,
-            message,
+            title, message,
             link: link || 'https://esewahub.in',
             icon: icon || '',
             sentAt: new Date().toISOString(),
@@ -1906,7 +2148,6 @@ async function loadNotifications() {
         const subs = subsSnap.exists() ? subsSnap.val() : {};
         const subCount = Object.keys(subs).length;
         
-        // Active (30 days)
         const now = Date.now();
         const thirtyDaysAgo = now - (30 * 24 * 60 * 60 * 1000);
         const activeCount = Object.values(subs).filter(s => s.subscribedAt && new Date(s.subscribedAt).getTime() > thirtyDaysAgo).length;
@@ -1920,7 +2161,6 @@ async function loadNotifications() {
         document.getElementById('notifActiveCount').innerText = activeCount;
         document.getElementById('notifCountBadge').innerText = subCount;
         
-        // Update status
         const statusEl = document.getElementById('statusNotif');
         if (statusEl) {
             statusEl.innerText = subCount > 0 ? 'Active ✓' : 'No Subscribers';
@@ -1967,7 +2207,328 @@ window.deleteNotification = async function(id) {
     } catch (e) { toast('Error', 'error'); }
 };
 
-// USERS
+/* ==========================================
+   AUTO UPDATE - GITHUB INTEGRATION (NEW)
+   ========================================== */
+function loadGitHubConfig() {
+    try {
+        const saved = localStorage.getItem(GITHUB_CONFIG_KEY);
+        if (saved) {
+            githubConfig = JSON.parse(saved);
+        } else {
+            // Defaults
+            githubConfig = { owner:'sainismailabad', repo:'csc', workflow:'auto-generate.yml', branch:'main', token:'' };
+        }
+        document.getElementById('gh_owner').value = githubConfig.owner || '';
+        document.getElementById('gh_repo').value = githubConfig.repo || '';
+        document.getElementById('gh_workflow').value = githubConfig.workflow || 'auto-generate.yml';
+        document.getElementById('gh_branch').value = githubConfig.branch || 'main';
+        document.getElementById('gh_token').value = githubConfig.token || '';
+        
+        updateGitHubStatus();
+    } catch(e) { console.error('Load GitHub config error:', e); }
+}
+
+function updateGitHubStatus() {
+    const statusEl = document.getElementById('statusAutoUpdate');
+    const ghStatusEl = document.getElementById('ghStatus');
+    if (githubConfig.token && githubConfig.owner && githubConfig.repo) {
+        if (statusEl) { statusEl.innerText = 'Configured ✓'; statusEl.style.color = 'var(--g600)'; }
+        if (ghStatusEl) { ghStatusEl.innerText = 'Ready ✓'; ghStatusEl.style.color = 'var(--g600)'; }
+    } else {
+        if (statusEl) { statusEl.innerText = 'Setup Required'; statusEl.style.color = 'var(--r500)'; }
+        if (ghStatusEl) { ghStatusEl.innerText = 'Setup Required'; ghStatusEl.style.color = 'var(--r500)'; }
+    }
+}
+
+window.saveGitHubConfig = function() {
+    const owner = document.getElementById('gh_owner').value.trim();
+    const repo = document.getElementById('gh_repo').value.trim();
+    const workflow = document.getElementById('gh_workflow').value.trim() || 'auto-generate.yml';
+    const branch = document.getElementById('gh_branch').value.trim() || 'main';
+    const token = document.getElementById('gh_token').value.trim();
+    
+    if (!owner) { toast('GitHub username required', 'warning'); return; }
+    if (!repo) { toast('Repository name required', 'warning'); return; }
+    if (!token) { toast('GitHub token required', 'warning'); return; }
+    
+    githubConfig = { owner, repo, workflow, branch, token };
+    try {
+        localStorage.setItem(GITHUB_CONFIG_KEY, JSON.stringify(githubConfig));
+        toast('GitHub configuration saved! ✓', 'success');
+        updateGitHubStatus();
+        addLog('success', 'GitHub configuration saved: ' + owner + '/' + repo);
+    } catch(e) {
+        toast('Failed to save: ' + e.message, 'error');
+    }
+};
+
+window.clearGitHubConfig = function() {
+    if (!confirm('Clear GitHub configuration? Ye token delete ho jayega.')) return;
+    localStorage.removeItem(GITHUB_CONFIG_KEY);
+    githubConfig = { owner:'', repo:'', workflow:'auto-generate.yml', branch:'main', token:'' };
+    document.getElementById('gh_owner').value = '';
+    document.getElementById('gh_repo').value = '';
+    document.getElementById('gh_workflow').value = 'auto-generate.yml';
+    document.getElementById('gh_branch').value = 'main';
+    document.getElementById('gh_token').value = '';
+    toast('Configuration cleared', 'info');
+    updateGitHubStatus();
+};
+
+window.testGitHubConnection = async function() {
+    if (!githubConfig.token || !githubConfig.owner || !githubConfig.repo) {
+        toast('Pehle configuration save karein', 'warning');
+        return;
+    }
+    toast('Testing connection...', 'info');
+    addLog('info', 'Testing GitHub connection...');
+    
+    try {
+        const response = await fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}`, {
+            headers: {
+                'Authorization': `Bearer ${githubConfig.token}`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            toast('✓ Connection successful!', 'success');
+            addLog('success', 'Connected to: ' + data.full_name + ' (⭐ ' + data.stargazers_count + ')');
+            updateGitHubStatus();
+        } else if (response.status === 401) {
+            toast('✗ Token invalid or expired', 'error');
+            addLog('error', 'Token authentication failed. Please generate a new token.');
+        } else if (response.status === 404) {
+            toast('✗ Repository not found', 'error');
+            addLog('error', 'Repo not found. Check owner/repo name and token scope.');
+        } else {
+            toast('✗ Connection failed: HTTP ' + response.status, 'error');
+            addLog('error', 'HTTP ' + response.status + ': ' + response.statusText);
+        }
+    } catch(e) {
+        toast('✗ Network error', 'error');
+        addLog('error', 'Network error: ' + e.message);
+    }
+};
+
+window.triggerAutoUpdate = async function() {
+    if (!githubConfig.token || !githubConfig.owner || !githubConfig.repo) {
+        toast('Pehle GitHub configuration save karein', 'warning');
+        // Auto-navigate to setup
+        setTimeout(() => {
+            showSec('secAutoUpdate', document.querySelector('[onclick*=secAutoUpdate]'));
+        }, 500);
+        return;
+    }
+    
+    if (!confirm('GitHub par auto-generation trigger karein?\n\n2-3 minute mein saare HTML pages + sitemap update ho jayenge.')) return;
+    
+    addLog('info', 'Triggering GitHub workflow...');
+    toast('Triggering GitHub workflow...', 'info');
+    
+    try {
+        const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/actions/workflows/${githubConfig.workflow}/dispatches`;
+        
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${githubConfig.token}`,
+                'Accept': 'application/vnd.github.v3+json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                ref: githubConfig.branch,
+                inputs: {
+                    reason: 'Manual trigger from admin panel at ' + new Date().toISOString()
+                }
+            })
+        });
+        
+        if (response.status === 204 || response.ok) {
+            toast('✅ Auto-update triggered! Check GitHub in 2-3 minutes.', 'success');
+            addLog('success', '✓ Workflow triggered successfully');
+            addLog('info', 'Checking status in 5 seconds...');
+            
+            // Save last run time
+            localStorage.setItem('esewahub_last_run', new Date().toISOString());
+            updateLastRunStatus();
+            
+            // Auto-check status after 5 seconds
+            setTimeout(() => {
+                checkWorkflowStatus();
+            }, 5000);
+        } else if (response.status === 401) {
+            toast('✗ GitHub token invalid', 'error');
+            addLog('error', 'Token authentication failed. Generate new token.');
+        } else if (response.status === 404) {
+            toast('✗ Workflow file not found', 'error');
+            addLog('error', 'Workflow file "' + githubConfig.workflow + '" not found. Check name.');
+        } else if (response.status === 403) {
+            toast('✗ Permission denied', 'error');
+            addLog('error', 'Token needs "workflow" scope. Regenerate token.');
+        } else {
+            const errData = await response.json().catch(() => ({}));
+            toast('✗ Failed: ' + (errData.message || 'HTTP ' + response.status), 'error');
+            addLog('error', 'Error: ' + (errData.message || response.statusText));
+        }
+    } catch(e) {
+        toast('✗ Error: ' + e.message, 'error');
+        addLog('error', 'Network error: ' + e.message);
+    }
+};
+
+window.checkWorkflowStatus = async function() {
+    if (!githubConfig.token || !githubConfig.owner || !githubConfig.repo) return;
+    
+    addLog('info', 'Fetching recent workflow runs...');
+    
+    try {
+        const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/actions/workflows/${githubConfig.workflow}/runs?per_page=5`;
+        
+        const response = await fetch(url, {
+            headers: {
+                'Authorization': `Bearer ${githubConfig.token}`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        });
+        
+        if (!response.ok) {
+            addLog('error', 'Failed to fetch runs: HTTP ' + response.status);
+            return;
+        }
+        
+        const data = await response.json();
+        const runs = data.workflow_runs || [];
+        
+        if (runs.length === 0) {
+            renderWorkflowList([]);
+            addLog('warn', 'No workflow runs found yet');
+            return;
+        }
+        
+        renderWorkflowList(runs);
+        const latest = runs[0];
+        addLog('success', 'Latest run: ' + latest.status + ' (' + latest.conclusion + ') - ' + formatRelativeTime(latest.created_at));
+        
+        // Update last run status
+        const lastRunEl = document.getElementById('lastRunStatus');
+        if (lastRunEl) {
+            lastRunEl.innerText = formatRelativeTime(latest.created_at);
+        }
+        localStorage.setItem('esewahub_last_run', latest.created_at);
+        
+        // Update GH status
+        const ghStatusEl = document.getElementById('ghStatus');
+        if (ghStatusEl) {
+            if (latest.status === 'in_progress' || latest.status === 'queued') {
+                ghStatusEl.innerText = 'Running...';
+                ghStatusEl.style.color = 'var(--y600)';
+            } else if (latest.conclusion === 'success') {
+                ghStatusEl.innerText = 'Last: Success ✓';
+                ghStatusEl.style.color = 'var(--g600)';
+            } else if (latest.conclusion === 'failure') {
+                ghStatusEl.innerText = 'Last: Failed ✗';
+                ghStatusEl.style.color = 'var(--r500)';
+            }
+        }
+    } catch(e) {
+        addLog('error', 'Error: ' + e.message);
+    }
+};
+
+function renderWorkflowList(runs) {
+    const list = document.getElementById('workflowList');
+    if (!list) return;
+    
+    if (runs.length === 0) {
+        list.innerHTML = `<div style="padding:40px;text-align:center;color:#94a3b8">
+            <i class="fas fa-info-circle" style="font-size:2rem;margin-bottom:10px;display:block"></i>
+            <p style="font-size:.85rem">Koi workflow run nahi mila abhi tak</p>
+        </div>`;
+        return;
+    }
+    
+    let html = '';
+    runs.forEach(run => {
+        let dotClass = 'success';
+        let statusText = 'Success';
+        if (run.status === 'in_progress' || run.status === 'queued') {
+            dotClass = 'running';
+            statusText = 'Running...';
+        } else if (run.conclusion === 'failure') {
+            dotClass = 'failed';
+            statusText = 'Failed';
+        } else if (run.conclusion === 'success') {
+            dotClass = 'success';
+            statusText = 'Success';
+        }
+        
+        const commit = (run.head_commit && run.head_commit.message) || 'No message';
+        const commitShort = commit.length > 50 ? commit.substring(0, 50) + '...' : commit;
+        
+        html += `<div class="workflow-item">
+            <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0">
+                <div class="workflow-dot ${dotClass}"></div>
+                <div style="min-width:0">
+                    <div style="font-weight:700;font-size:.88rem;color:var(--s900)">${statusText}</div>
+                    <div style="font-size:.75rem;color:var(--s500);overflow:hidden;text-overflow:ellipsis">${commitShort}</div>
+                </div>
+            </div>
+            <div style="font-size:.78rem;color:var(--s500);white-space:nowrap">${formatRelativeTime(run.created_at)}</div>
+            <a href="${run.html_url}" target="_blank" class="btn btn-p btn-sm"><i class="fas fa-external-link-alt"></i> View</a>
+        </div>`;
+    });
+    
+    list.innerHTML = html;
+}
+
+function formatRelativeTime(isoString) {
+    if (!isoString) return 'Never';
+    const now = Date.now();
+    const then = new Date(isoString).getTime();
+    const diff = Math.floor((now - then) / 1000); // seconds
+    
+    if (diff < 60) return 'Just now';
+    if (diff < 3600) return Math.floor(diff / 60) + ' min ago';
+    if (diff < 86400) return Math.floor(diff / 3600) + ' hr ago';
+    if (diff < 604800) return Math.floor(diff / 86400) + ' days ago';
+    return new Date(isoString).toLocaleDateString('en-IN');
+}
+
+window.viewLiveSitemap = function() {
+    window.open('https://www.esewahub.in/sitemap.xml', '_blank');
+};
+
+function addLog(type, message) {
+    const logBox = document.getElementById('autoUpdateLog');
+    if (!logBox) return;
+    
+    const time = new Date().toLocaleTimeString('en-IN', { hour12: false });
+    const line = document.createElement('div');
+    line.className = 'log-line';
+    line.innerHTML = `<span class="log-time">${time}</span><span class="log-${type}">${message}</span>`;
+    logBox.appendChild(line);
+    logBox.scrollTop = logBox.scrollHeight;
+    
+    // Keep only last 100 lines
+    while (logBox.children.length > 100) {
+        logBox.removeChild(logBox.firstChild);
+    }
+}
+
+function updateLastRunStatus() {
+    const lastRun = localStorage.getItem('esewahub_last_run');
+    const el = document.getElementById('lastRunStatus');
+    if (el && lastRun) {
+        el.innerText = formatRelativeTime(lastRun);
+    }
+}
+
+/* ==========================================
+   USERS
+   ========================================== */
 window.openUserModal = function() {
     document.getElementById('userModalTitle').innerText = 'Add New User';
     document.getElementById('eu_id').value = '';
@@ -2064,7 +2625,9 @@ window.deleteUser = async function(uid) {
     } catch (e) { toast('Error', 'error'); }
 };
 
-// LOAD ALL DATA - PARALLEL
+/* ==========================================
+   LOAD ALL DATA
+   ========================================== */
 async function loadAllData() {
     try {
         const [ss, ads, seo, soc, cc, cs, ps, svs, us, ann, pop, notif] = await Promise.all([
@@ -2170,7 +2733,6 @@ async function loadAllData() {
     }
 }
 
-// DASHBOARD
 async function loadDashboard() {
     try {
         document.getElementById('dashPosts').innerText = allPosts.length;
@@ -2193,10 +2755,10 @@ async function loadDashboard() {
         
         await loadVisitorStats();
         await loadNotifications();
+        updateLastRunStatus();
     } catch (e) { console.error(e); }
 }
 
-// VISITOR STATS
 async function loadVisitorStats(){
     try {
         const totalViewsSnap = await db.ref('analytics/totalViews').once('value');
@@ -2317,7 +2879,6 @@ window.refreshVisitorStats = async function(){
     toast('Stats updated!', 'success');
 };
 
-// RENDER CATEGORIES
 function renderCats() {
     const ct = document.getElementById('catsTable');
     const pc = document.getElementById('ep_cat');
@@ -2420,7 +2981,6 @@ function renderUsers() {
     });
 }
 
-// SAVE FUNCTIONS
 window.saveSettings = async function() {
     try {
         await db.ref('settings/general').update({
@@ -2594,7 +3154,6 @@ window.savePost = async function() {
             const ref = await db.ref('posts').push(data); 
             toast('Post published!', 'success');
             
-            // Send notification if toggle is on
             if(postSendNotifToggle){
                 const notifData = {
                     title: '📢 New Post: ' + title.substring(0, 50),
@@ -2715,6 +3274,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupImagePreview('pop_image','pop_imagePreview','pop_imagePreviewImg');
     setupImagePreview('set_logo','set_logoPreview','set_logoPreviewImg');
     resetPostLinks([]);
+    loadGitHubConfig();
 });
 </script>
 </body>
