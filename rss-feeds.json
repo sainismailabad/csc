@@ -1,0 +1,34 @@
+{
+  "feeds": [
+    {
+      "name": "SarkariNaukri",
+      "url": "https://feeds.feedburner.com/SarkariNaukriBlog",
+      "category": "central",
+      "categoryName": "Central Govt Jobs"
+    },
+    {
+      "name": "FreeJobAlert",
+      "url": "https://www.freejobalert.com/feed/",
+      "category": "all",
+      "categoryName": "Latest Jobs"
+    },
+    {
+      "name": "JagranJosh Jobs",
+      "url": "https://www.jagranjosh.com/rss/jju/jobs.xml",
+      "category": "all",
+      "categoryName": "Sarkari Naukri"
+    },
+    {
+      "name": "BankersAdda",
+      "url": "https://www.bankersadda.com/feed/",
+      "category": "banking",
+      "categoryName": "Banking Jobs"
+    },
+    {
+      "name": "SarkariResult",
+      "url": "https://www.sarkariresult.com/rss.php",
+      "category": "all",
+      "categoryName": "Result & Jobs"
+    }
+  ]
+}
