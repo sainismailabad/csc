@@ -1,0 +1,45 @@
+name: Auto Fetch Government Jobs
+
+on:
+  schedule:
+    # Roz subah 6 AM IST (0:30 UTC)
+    - cron: '30 0 * * *'
+  
+  # Manual trigger ke liye
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Manual trigger reason'
+        required: false
+        default: 'Manual run'
+
+jobs:
+  fetch-jobs:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Fetch jobs from RSS feeds
+        env:
+          FIREBASE_CREDENTIALS: ${{ secrets.FIREBASE_CREDENTIALS }}
+        run: node fetch-jobs.js
+      
+      - name: Summary
+        if: always()
+        run: |
+          echo "### 📊 Job Fetch Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Time:** $(date +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Admin panel mein jaakar Auto Update trigger karein." >> $GITHUB_STEP_SUMMARY
