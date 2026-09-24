@@ -5,7 +5,7 @@ on:
     # Roz subah 6 AM IST (0:30 UTC)
     - cron: '30 0 * * *'
   
-  # Manual trigger ke liye
+  # Manual trigger
   workflow_dispatch:
     inputs:
       reason:
@@ -15,7 +15,7 @@ on:
 
 jobs:
   fetch-jobs:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     
     steps:
       - name: Checkout repository
@@ -25,7 +25,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
+      
+      - name: Verify files exist
+        run: |
+          echo "📁 Repository files:"
+          ls -la
+          echo ""
+          echo "🔍 Checking required files..."
+          test -f rss-feeds.json && echo "✅ rss-feeds.json found" || echo "❌ rss-feeds.json MISSING"
+          test -f fetch-jobs.js && echo "✅ fetch-jobs.js found" || echo "❌ fetch-jobs.js MISSING"
+          test -f package.json && echo "✅ package.json found" || echo "❌ package.json MISSING"
       
       - name: Install dependencies
         run: npm install
@@ -38,8 +47,9 @@ jobs:
       - name: Summary
         if: always()
         run: |
-          echo "### 📊 Job Fetch Complete" >> $GITHUB_STEP_SUMMARY
+          echo "### 📊 Job Fetch Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Time:** $(date +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Admin panel mein jaakar Auto Update trigger karein." >> $GITHUB_STEP_SUMMARY
