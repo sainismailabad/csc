@@ -132,6 +132,25 @@ tr:hover td{background:var(--s50)}
 .btn-ghost{background:var(--s200);color:var(--s700)}
 .btn-ghost:hover{background:var(--s300);color:var(--s800)}
 
+/* ===== BULK DELETE BAR ===== */
+.bulk-bar{display:none;background:linear-gradient(135deg,#fef2f2,#fee2e2);border:1px solid #fca5a5;border-radius:10px;padding:12px 18px;margin-bottom:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;animation:fade .2s ease}
+.bulk-bar.show{display:flex}
+.bulk-bar .bulk-info{font-weight:700;color:#991b1b;font-size:.88rem;display:flex;align-items:center;gap:8px}
+.bulk-bar .bulk-info i{font-size:1rem}
+.bulk-bar .bulk-actions{display:flex;gap:8px;flex-wrap:wrap}
+.bulk-bar .btn{padding:9px 16px;font-size:.8rem}
+.bulk-bar .btn-clear{background:#fff;color:#991b1b;border:1px solid #fca5a5}
+.bulk-bar .btn-clear:hover{background:#fef2f2}
+
+/* ===== CHECKBOXES ===== */
+.row-checkbox, #selectAllPosts, #selectAllServices{
+    width:18px;height:18px;cursor:pointer;accent-color:#2563eb;
+    vertical-align:middle;
+}
+td.check-cell, th.check-cell{width:50px;text-align:center;padding:14px 8px}
+th.check-cell label, td.check-cell label{display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+tr.selected-row td{background:#eff6ff !important}
+
 .form-group{margin-bottom:18px}
 .form-group label{display:block;font-weight:700;margin-bottom:8px;color:var(--s800);font-size:.84rem}
 .form-group label .req{color:var(--r500)}
@@ -247,7 +266,6 @@ tr:hover td{background:var(--s50)}
 .notif-stat .num{font-size:1.3rem;font-weight:900;color:#92400e;line-height:1}
 .notif-stat .lbl{font-size:.68rem;color:#78350f;font-weight:700;text-transform:uppercase;margin-top:4px}
 
-/* AUTO UPDATE SPECIFIC STYLES */
 .auto-update-hero{background:linear-gradient(135deg,#7c3aed,#6d28d9);border-radius:14px;padding:30px;color:#fff;margin-bottom:24px;position:relative;overflow:hidden}
 .auto-update-hero::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.15),transparent 70%);border-radius:50%}
 .auto-update-hero h2{font-family:var(--serif);font-size:1.5rem;font-weight:900;margin-bottom:8px;position:relative;z-index:1;display:flex;align-items:center;gap:12px}
@@ -766,12 +784,25 @@ Agar aap chahte hain ki <b>naya post publish karte hi automatic</b> GitHub workf
 <span><i class="fas fa-file-alt"></i> Manage Posts</span>
 <button class="btn btn-p" onclick="openPostModal()"><i class="fas fa-plus"></i> Create New Post</button>
 </div>
+
+<!-- ===== BULK DELETE BAR (Posts) ===== -->
+<div class="bulk-bar" id="bulkBarPosts">
+<div class="bulk-info"><i class="fas fa-check-square"></i> <span id="bulkCountPosts">0</span> post(s) selected</div>
+<div class="bulk-actions">
+<button class="btn btn-r" onclick="bulkDeletePosts()"><i class="fas fa-trash-alt"></i> Delete Selected</button>
+<button class="btn btn-clear" onclick="clearPostSelection()"><i class="fas fa-times"></i> Clear Selection</button>
+</div>
+</div>
+
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th style="width:80px">Image</th><th>Title</th><th>Category</th><th>Last Date</th><th style="width:180px">Actions</th></tr>
+<tr>
+<th class="check-cell"><input type="checkbox" id="selectAllPosts" onchange="toggleSelectAllPosts(this)"></th>
+<th style="width:80px">Image</th><th>Title</th><th>Category</th><th>Last Date</th><th style="width:180px">Actions</th>
+</tr>
 </thead>
-<tbody id="postsTable"><tr><td colspan="5"><div class="spinner"></div></td></tr></tbody>
+<tbody id="postsTable"><tr><td colspan="6"><div class="spinner"></div></td></tr></tbody>
 </table>
 </div>
 </div>
@@ -851,12 +882,25 @@ Yeh feature website load hone par ek full-image popup modal show karta hai.
 <p style="font-size:.86rem;color:var(--s500);margin-bottom:18px;line-height:1.7">
 Yahan se aap website ke <b>Sarkari Kaam section</b> ke sabhi services add/edit/delete kar sakte hain. Ye services automatically website par show hongi.
 </p>
+
+<!-- ===== BULK DELETE BAR (Services) ===== -->
+<div class="bulk-bar" id="bulkBarServices">
+<div class="bulk-info"><i class="fas fa-check-square"></i> <span id="bulkCountServices">0</span> service(s) selected</div>
+<div class="bulk-actions">
+<button class="btn btn-r" onclick="bulkDeleteServices()"><i class="fas fa-trash-alt"></i> Delete Selected</button>
+<button class="btn btn-clear" onclick="clearServiceSelection()"><i class="fas fa-times"></i> Clear Selection</button>
+</div>
+</div>
+
 <div class="table-wrap">
 <table>
 <thead>
-<tr><th style="width:70px">Image</th><th>Service Name</th><th>Subtitle</th><th>Links</th><th style="width:180px">Actions</th></tr>
+<tr>
+<th class="check-cell"><input type="checkbox" id="selectAllServices" onchange="toggleSelectAllServices(this)"></th>
+<th style="width:70px">Image</th><th>Service Name</th><th>Subtitle</th><th>Links</th><th style="width:180px">Actions</th>
+</tr>
 </thead>
-<tbody id="servicesTable"><tr><td colspan="5"><div class="spinner"></div></td></tr></tbody>
+<tbody id="servicesTable"><tr><td colspan="6"><div class="spinner"></div></td></tr></tbody>
 </table>
 </div>
 </div>
@@ -1523,6 +1567,11 @@ let allUsers = {};
 let allAnnouncements = {};
 let allPopups = {};
 let allNotifications = {};
+
+// ===== BULK DELETE STATE =====
+let selectedPosts = new Set();
+let selectedServices = new Set();
+
 let annActiveToggle = true;
 let popupActiveToggle = true;
 let popupShowOnceToggle = true;
@@ -2895,17 +2944,31 @@ function renderCats() {
     }
 }
 
+/* ==========================================
+   RENDER POSTS WITH CHECKBOXES
+   ========================================== */
 function renderPosts() {
     const pt = document.getElementById('postsTable');
     pt.innerHTML = '';
+    
+    // Clean up any stale selections (deleted posts)
+    const currentIds = new Set(allPosts.map(p => p.id));
+    for (const id of selectedPosts) {
+        if (!currentIds.has(id)) selectedPosts.delete(id);
+    }
+    
     if (allPosts.length === 0) {
-        pt.innerHTML = `<tr><td colspan="5" class="empty"><i class="fas fa-inbox"></i><h4>No posts yet</h4></td></tr>`;
+        pt.innerHTML = `<tr><td colspan="6" class="empty"><i class="fas fa-inbox"></i><h4>No posts yet</h4></td></tr>`;
+        updatePostBulkBar();
         return;
     }
     allPosts.forEach(p => {
         const title = p.title.length > 50 ? p.title.substring(0, 50) + '...' : p.title;
         const thumbHtml = p.image ? `<img src="${p.image}" class="thumb" alt="" loading="lazy">` : `<div class="thumb-icon"><i class="fas fa-file-alt"></i></div>`;
-        pt.innerHTML += `<tr>
+        const checked = selectedPosts.has(p.id) ? 'checked' : '';
+        const rowClass = selectedPosts.has(p.id) ? 'selected-row' : '';
+        pt.innerHTML += `<tr class="${rowClass}" data-post-id="${p.id}">
+            <td class="check-cell"><input type="checkbox" class="row-checkbox post-checkbox" data-id="${p.id}" ${checked} onchange="togglePostSelection('${p.id}', this.checked)"></td>
             <td>${thumbHtml}</td>
             <td style="font-weight:700;color:var(--p600)">${title}</td>
             <td><span style="background:var(--p50);color:var(--p700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${allCats[p.category]?.name || 'Unknown'}</span></td>
@@ -2916,21 +2979,37 @@ function renderPosts() {
             </td>
         </tr>`;
     });
+    updatePostBulkBar();
+    updateSelectAllPostsState();
 }
 
+/* ==========================================
+   RENDER SERVICES WITH CHECKBOXES
+   ========================================== */
 function renderServices() {
     const st = document.getElementById('servicesTable');
     st.innerHTML = '';
     const entries = Object.entries(allServices);
     const badge = document.getElementById('serviceCountBadge');
     if (badge) badge.innerText = entries.length || 18;
+    
+    // Clean up stale selections
+    const currentKeys = new Set(entries.map(([k]) => k));
+    for (const key of selectedServices) {
+        if (!currentKeys.has(key)) selectedServices.delete(key);
+    }
+    
     if (entries.length === 0) {
-        st.innerHTML = `<tr><td colspan="5" class="empty"><i class="fas fa-briefcase"></i><h4>No custom services</h4><p>Default 18 services dikhayi ja rahi hain.</p></td></tr>`;
+        st.innerHTML = `<tr><td colspan="6" class="empty"><i class="fas fa-briefcase"></i><h4>No custom services</h4><p>Default 18 services dikhayi ja rahi hain.</p></td></tr>`;
+        updateServiceBulkBar();
         return;
     }
     entries.forEach(([k, s]) => {
         const thumbHtml = s.image ? `<img src="${s.image}" class="thumb" alt="" loading="lazy" onerror="this.outerHTML='<div class=\\'thumb-icon\\'><i class=\\'fas ${s.icon||'fa-id-card'}\\'></i></div>'">` : `<div class="thumb-icon"><i class="fas ${s.icon || 'fa-id-card'}"></i></div>`;
-        st.innerHTML += `<tr>
+        const checked = selectedServices.has(k) ? 'checked' : '';
+        const rowClass = selectedServices.has(k) ? 'selected-row' : '';
+        st.innerHTML += `<tr class="${rowClass}" data-service-key="${k}">
+            <td class="check-cell"><input type="checkbox" class="row-checkbox service-checkbox" data-key="${k}" ${checked} onchange="toggleServiceSelection('${k}', this.checked)"></td>
             <td>${thumbHtml}</td>
             <td style="font-weight:700">${s.name}</td>
             <td style="color:var(--s500)">${s.sub || '-'}</td>
@@ -2941,8 +3020,229 @@ function renderServices() {
             </td>
         </tr>`;
     });
+    updateServiceBulkBar();
+    updateSelectAllServicesState();
 }
 
+/* ==========================================
+   BULK DELETE LOGIC - POSTS
+   ========================================== */
+window.togglePostSelection = function(id, checked) {
+    if (checked) selectedPosts.add(id);
+    else selectedPosts.delete(id);
+    // Update row class
+    const row = document.querySelector(`tr[data-post-id="${id}"]`);
+    if (row) {
+        if (checked) row.classList.add('selected-row');
+        else row.classList.remove('selected-row');
+    }
+    updatePostBulkBar();
+    updateSelectAllPostsState();
+};
+
+window.toggleSelectAllPosts = function(el) {
+    const checked = el.checked;
+    allPosts.forEach(p => {
+        if (checked) selectedPosts.add(p.id);
+        else selectedPosts.delete(p.id);
+    });
+    // Update all checkboxes
+    document.querySelectorAll('.post-checkbox').forEach(cb => {
+        cb.checked = checked;
+        const id = cb.getAttribute('data-id');
+        const row = document.querySelector(`tr[data-post-id="${id}"]`);
+        if (row) {
+            if (checked) row.classList.add('selected-row');
+            else row.classList.remove('selected-row');
+        }
+    });
+    updatePostBulkBar();
+};
+
+function updateSelectAllPostsState() {
+    const selectAll = document.getElementById('selectAllPosts');
+    if (!selectAll) return;
+    if (allPosts.length === 0) {
+        selectAll.checked = false;
+        selectAll.indeterminate = false;
+        return;
+    }
+    const total = allPosts.length;
+    const selectedCount = selectedPosts.size;
+    selectAll.checked = selectedCount === total;
+    selectAll.indeterminate = selectedCount > 0 && selectedCount < total;
+}
+
+function updatePostBulkBar() {
+    const bar = document.getElementById('bulkBarPosts');
+    const countEl = document.getElementById('bulkCountPosts');
+    if (!bar || !countEl) return;
+    const count = selectedPosts.size;
+    countEl.textContent = count;
+    if (count > 0) bar.classList.add('show');
+    else bar.classList.remove('show');
+}
+
+window.clearPostSelection = function() {
+    selectedPosts.clear();
+    document.querySelectorAll('.post-checkbox').forEach(cb => { cb.checked = false; });
+    document.querySelectorAll('tr[data-post-id]').forEach(r => r.classList.remove('selected-row'));
+    updatePostBulkBar();
+    updateSelectAllPostsState();
+};
+
+window.bulkDeletePosts = async function() {
+    const count = selectedPosts.size;
+    if (count === 0) { toast('No posts selected', 'warning'); return; }
+    if (!confirm(`Are you sure you want to delete ${count} post(s)? This cannot be undone.`)) return;
+    
+    const ids = Array.from(selectedPosts);
+    let successCount = 0;
+    let failCount = 0;
+    
+    try {
+        // Batch delete using Firebase multi-path update (atomic)
+        const updates = {};
+        ids.forEach(id => { updates[`posts/${id}`] = null; });
+        await db.ref().update(updates);
+        successCount = ids.length;
+    } catch (e) {
+        // Fallback: delete one by one
+        console.warn('Batch delete failed, falling back to individual deletes:', e);
+        for (const id of ids) {
+            try {
+                await db.ref(`posts/${id}`).remove();
+                successCount++;
+            } catch (err) {
+                failCount++;
+                console.error('Failed to delete post:', id, err);
+            }
+        }
+    }
+    
+    selectedPosts.clear();
+    document.getElementById('selectAllPosts').checked = false;
+    document.getElementById('selectAllPosts').indeterminate = false;
+    
+    if (failCount === 0) {
+        toast(`✅ Deleted ${successCount} post(s) successfully!`, 'success');
+    } else {
+        toast(`Deleted ${successCount}, failed ${failCount}`, 'warning');
+    }
+    
+    await loadAllData();
+    await loadDashboard();
+};
+
+/* ==========================================
+   BULK DELETE LOGIC - SERVICES
+   ========================================== */
+window.toggleServiceSelection = function(key, checked) {
+    if (checked) selectedServices.add(key);
+    else selectedServices.delete(key);
+    const row = document.querySelector(`tr[data-service-key="${key}"]`);
+    if (row) {
+        if (checked) row.classList.add('selected-row');
+        else row.classList.remove('selected-row');
+    }
+    updateServiceBulkBar();
+    updateSelectAllServicesState();
+};
+
+window.toggleSelectAllServices = function(el) {
+    const checked = el.checked;
+    Object.keys(allServices).forEach(k => {
+        if (checked) selectedServices.add(k);
+        else selectedServices.delete(k);
+    });
+    document.querySelectorAll('.service-checkbox').forEach(cb => {
+        cb.checked = checked;
+        const key = cb.getAttribute('data-key');
+        const row = document.querySelector(`tr[data-service-key="${key}"]`);
+        if (row) {
+            if (checked) row.classList.add('selected-row');
+            else row.classList.remove('selected-row');
+        }
+    });
+    updateServiceBulkBar();
+};
+
+function updateSelectAllServicesState() {
+    const selectAll = document.getElementById('selectAllServices');
+    if (!selectAll) return;
+    const total = Object.keys(allServices).length;
+    if (total === 0) {
+        selectAll.checked = false;
+        selectAll.indeterminate = false;
+        return;
+    }
+    const selectedCount = selectedServices.size;
+    selectAll.checked = selectedCount === total;
+    selectAll.indeterminate = selectedCount > 0 && selectedCount < total;
+}
+
+function updateServiceBulkBar() {
+    const bar = document.getElementById('bulkBarServices');
+    const countEl = document.getElementById('bulkCountServices');
+    if (!bar || !countEl) return;
+    const count = selectedServices.size;
+    countEl.textContent = count;
+    if (count > 0) bar.classList.add('show');
+    else bar.classList.remove('show');
+}
+
+window.clearServiceSelection = function() {
+    selectedServices.clear();
+    document.querySelectorAll('.service-checkbox').forEach(cb => { cb.checked = false; });
+    document.querySelectorAll('tr[data-service-key]').forEach(r => r.classList.remove('selected-row'));
+    updateServiceBulkBar();
+    updateSelectAllServicesState();
+};
+
+window.bulkDeleteServices = async function() {
+    const count = selectedServices.size;
+    if (count === 0) { toast('No services selected', 'warning'); return; }
+    if (!confirm(`Are you sure you want to delete ${count} service(s)? This cannot be undone.`)) return;
+    
+    const keys = Array.from(selectedServices);
+    let successCount = 0;
+    let failCount = 0;
+    
+    try {
+        const updates = {};
+        keys.forEach(k => { updates[`services/${k}`] = null; });
+        await db.ref().update(updates);
+        successCount = keys.length;
+    } catch (e) {
+        console.warn('Batch delete failed, falling back:', e);
+        for (const k of keys) {
+            try {
+                await db.ref(`services/${k}`).remove();
+                successCount++;
+            } catch (err) {
+                failCount++;
+                console.error('Failed to delete service:', k, err);
+            }
+        }
+    }
+    
+    selectedServices.clear();
+    const sa = document.getElementById('selectAllServices');
+    if (sa) { sa.checked = false; sa.indeterminate = false; }
+    
+    if (failCount === 0) {
+        toast(`✅ Deleted ${successCount} service(s) successfully!`, 'success');
+    } else {
+        toast(`Deleted ${successCount}, failed ${failCount}`, 'warning');
+    }
+    
+    await loadAllData();
+    await loadDashboard();
+};
+
+/* ==========================================
+   USERS RENDER
+   ========================================== */
 function renderUsers() {
     const ut = document.getElementById('usersTable');
     ut.innerHTML = '';
