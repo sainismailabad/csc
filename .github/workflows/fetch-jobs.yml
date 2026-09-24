@@ -5,7 +5,6 @@ on:
     # Roz subah 6 AM IST (0:30 UTC)
     - cron: '30 0 * * *'
   
-  # Manual trigger
   workflow_dispatch:
     inputs:
       reason:
@@ -24,7 +23,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
       
       - name: Verify files exist
         run: |
@@ -51,5 +50,3 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Time:** $(date +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
           echo "**Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "Admin panel mein jaakar Auto Update trigger karein." >> $GITHUB_STEP_SUMMARY
