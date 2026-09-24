@@ -1,13 +1,17 @@
 {
   "name": "esewahub-auto-generator",
   "version": "1.0.0",
-  "description": "Auto generate HTML pages and sitemap for esewahub.in",
+  "description": "Auto generate HTML pages + sitemap + fetch govt jobs for esewahub.in",
   "main": "generate-all.js",
   "scripts": {
-    "generate": "node generate-all.js"
+    "generate": "node generate-all.js",
+    "fetch-jobs": "node fetch-jobs.js"
   },
   "dependencies": {
-    "firebase-admin": "^12.0.0"
+    "firebase-admin": "^12.0.0",
+    "rss-parser": "^3.13.0",
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12"
   },
   "engines": {
     "node": ">=18"
