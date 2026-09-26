@@ -114,8 +114,6 @@ img{max-width:100%;height:auto;display:block}
 
 .search-suggestions{position:absolute;top:calc(100% + 8px);left:0;right:0;background:#fff;border-radius:14px;box-shadow:0 20px 40px rgba(0,0,0,.12);border:1px solid var(--s200);max-height:420px;overflow-y:auto;z-index:1000;display:none}
 .search-suggestions.show{display:block;animation:fadeIn .2s ease}
-.search-suggestions::-webkit-scrollbar{width:6px}
-.search-suggestions::-webkit-scrollbar-thumb{background:var(--s300);border-radius:3px}
 .suggestion-header{padding:10px 16px 8px;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--s400);font-weight:800;background:var(--s50);border-bottom:1px solid var(--s200);display:flex;align-items:center;gap:6px}
 .suggestion-header i{color:var(--p600)}
 .suggestion-item{display:flex;align-items:center;gap:12px;padding:12px 16px;cursor:pointer;transition:all .15s;border-bottom:1px solid var(--s100);text-decoration:none;color:inherit}
@@ -130,6 +128,7 @@ img{max-width:100%;height:auto;display:block}
 .suggestion-item .type-badge{font-size:.62rem;font-weight:800;padding:3px 8px;border-radius:5px;text-transform:uppercase;letter-spacing:.05em;flex-shrink:0}
 .type-badge.post{background:var(--p50);color:var(--p700)}
 .type-badge.service{background:var(--g50);color:var(--g700)}
+.type-badge.blog{background:#e0f2fe;color:#0369a1}
 .suggestion-empty{padding:24px 20px;text-align:center;color:var(--s400);font-size:.85rem;font-weight:600}
 .suggestion-empty i{font-size:1.6rem;color:var(--s300);margin-bottom:8px;display:block}
 
@@ -207,7 +206,6 @@ img{max-width:100%;height:auto;display:block}
 .featured:hover{transform:translateY(-4px);box-shadow:0 20px 25px rgba(0,0,0,.08)}
 .feat-img{background:linear-gradient(135deg,var(--p600),var(--p800));display:flex;align-items:center;justify-content:center;color:#fff;font-size:4rem;min-height:280px;position:relative;overflow:hidden}
 .feat-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
-.feat-img::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.15),transparent 70%);z-index:1;pointer-events:none}
 .feat-content{padding:28px;display:flex;flex-direction:column;justify-content:center}
 .feat-badge{display:inline-flex;align-items:center;gap:6px;background:var(--r500);color:#fff;font-size:.68rem;font-weight:800;padding:6px 12px;border-radius:9999px;text-transform:uppercase;letter-spacing:.06em;width:fit-content;margin-bottom:14px;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
@@ -241,6 +239,31 @@ img{max-width:100%;height:auto;display:block}
 .card-meta .date i{color:var(--p500)}
 .btn-view{background:var(--p600);color:#fff;padding:7px 14px;border-radius:6px;font-weight:700;font-size:.74rem;display:flex;align-items:center;gap:5px;transition:all .2s;text-decoration:none}
 .btn-view:hover{background:var(--p700);transform:translateX(2px)}
+
+/* ===== BLOG CARDS ===== */
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;margin-bottom:24px}
+.blog-card{background:#fff;border:1px solid var(--s200);border-radius:16px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.04);transition:all .3s;display:flex;flex-direction:column;text-decoration:none;color:inherit;position:relative}
+.blog-card:hover{transform:translateY(-6px);box-shadow:0 20px 30px rgba(0,0,0,.1);border-color:#7dd3fc}
+.blog-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0ea5e9,#0284c7);z-index:2}
+.blog-img{width:100%;height:200px;object-fit:cover;display:block;background:linear-gradient(135deg,#e0f2fe,#bae6fd)}
+.blog-body{padding:22px;flex-grow:1;display:flex;flex-direction:column}
+.blog-cat-badge{display:inline-flex;align-items:center;gap:6px;background:#e0f2fe;color:#0369a1;font-size:.68rem;font-weight:800;padding:5px 12px;border-radius:9999px;text-transform:uppercase;letter-spacing:.06em;width:fit-content;margin-bottom:12px}
+.blog-title{font-family:var(--serif);font-size:1.05rem;font-weight:800;color:var(--s900);margin-bottom:10px;line-height:1.4;transition:color .2s}
+.blog-card:hover .blog-title{color:#0284c7}
+.blog-excerpt{font-size:.85rem;color:var(--s500);line-height:1.65;margin-bottom:14px;flex-grow:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.blog-meta{display:flex;align-items:center;gap:12px;font-size:.72rem;color:var(--s400);font-weight:600;border-top:1px solid var(--s200);padding-top:12px;margin-top:auto;flex-wrap:wrap}
+.blog-meta span{display:flex;align-items:center;gap:4px}
+.blog-meta i{color:#0284c7}
+
+/* ===== BLOGS SECTION ===== */
+.blogs-section{background:#fff;padding:50px 0;border-top:1px solid var(--s200);border-bottom:1px solid var(--s200)}
+.blogs-head{text-align:center;margin-bottom:34px}
+.blogs-head h2{font-family:var(--serif);font-size:1.75rem;font-weight:900;color:var(--s900);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.blogs-head h2 i{color:#0284c7}
+.blogs-head p{color:var(--s500);font-size:.95rem;line-height:1.7;max-width:600px;margin:0 auto}
+.blogs-view-all{display:flex;justify-content:center;margin-top:30px}
+.btn-view-all-blogs{padding:13px 30px;background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff;border-radius:10px;font-weight:800;font-size:.9rem;display:inline-flex;align-items:center;gap:10px;transition:all .25s;box-shadow:0 6px 18px rgba(14,165,233,.3)}
+.btn-view-all-blogs:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(14,165,233,.4)}
 
 .service-card{background:#fff;border:1px solid var(--s200);border-radius:14px;padding:20px;text-align:center;transition:all .25s;display:block;text-decoration:none;color:inherit}
 .service-card:hover{transform:translateY(-6px);border-color:var(--p600);box-shadow:0 12px 24px rgba(37,99,235,.15)}
@@ -334,6 +357,7 @@ img{max-width:100%;height:auto;display:block}
 .hero h2{font-size:1.9rem}
 .sarkari-grid{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
 .grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.blog-grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
 .about-grid{grid-template-columns:1fr;gap:30px}
 }
 @media(max-width:768px){
@@ -368,8 +392,12 @@ img{max-width:100%;height:auto;display:block}
 .feat-content{padding:22px}
 .feat-title{font-size:1.15rem}
 .grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.blog-grid{grid-template-columns:1fr;gap:16px}
+.blog-img{height:200px}
 .card-img{height:160px}
 .card-body{padding:16px}
+.blogs-section{padding:34px 0}
+.blogs-head h2{font-size:1.35rem}
 .side-widget{padding:18px;margin-bottom:18px}
 .newsletter{padding:22px 18px}
 .foot-grid{grid-template-columns:1fr;gap:24px;text-align:center}
@@ -425,6 +453,10 @@ img{max-width:100%;height:auto;display:block}
 .grid{grid-template-columns:1fr;gap:14px}
 .card-img{height:180px}
 .card-body{padding:16px}
+.blogs-section{padding:26px 0}
+.blogs-head h2{font-size:1.2rem}
+.blog-body{padding:18px}
+.blog-title{font-size:.98rem}
 .side-widget{padding:16px;margin-bottom:16px}
 .newsletter{padding:20px 16px;margin-bottom:16px}
 .ad-container{min-height:90px;padding:14px 10px 10px}
@@ -524,7 +556,7 @@ body{background:#fff}
 </a>
 <div class="search-wrap">
 <div class="search-box">
-<input type="text" id="searchInput" placeholder="Search jobs, yojna, services..." autocomplete="off" oninput="handleSearchInput()" onkeydown="handleSearchKey(event)" onfocus="handleSearchFocus()">
+<input type="text" id="searchInput" placeholder="Search jobs, yojna, blogs, services..." autocomplete="off" oninput="handleSearchInput()" onkeydown="handleSearchKey(event)" onfocus="handleSearchFocus()">
 <button onclick="searchNow()"><i class="fas fa-search"></i> <span>Search</span></button>
 </div>
 <div class="search-suggestions" id="searchSuggestions"></div>
@@ -541,6 +573,7 @@ body{background:#fff}
 <li><a onclick="filterCat('latest-jobs',event)"><i class="fas fa-newspaper"></i> Latest Jobs</a></li>
 <li><a onclick="filterCat('results',event)"><i class="fas fa-award"></i> Results</a></li>
 <li><a onclick="filterCat('sarkari-yojna',event)"><i class="fas fa-file-contract"></i> Yojna</a></li>
+<li><a href="blogs.html"><i class="fas fa-book-open"></i> Blogs</a></li>
 <li><a onclick="filterCat('admit-card',event)"><i class="fas fa-id-card"></i> Admit Card</a></li>
 <li><a onclick="filterCat('finance',event)"><i class="fas fa-rupee-sign"></i> Finance</a></li>
 </ul>
@@ -581,8 +614,8 @@ body{background:#fff}
 <div class="stats-grid">
 <div class="stat-item"><div class="stat-val" id="statPosts">0+</div><div class="stat-lbl">Updates</div></div>
 <div class="stat-item"><div class="stat-val" id="statServices">18+</div><div class="stat-lbl">Services</div></div>
+<div class="stat-item"><div class="stat-val" id="statBlogs">0+</div><div class="stat-lbl">Blogs</div></div>
 <div class="stat-item"><div class="stat-val">100%</div><div class="stat-lbl">Verified</div></div>
-<div class="stat-item"><div class="stat-val">24/7</div><div class="stat-lbl">Support</div></div>
 </div>
 </div>
 </div>
@@ -664,6 +697,30 @@ body{background:#fff}
 </aside>
 </div>
 
+<!-- ==========================================
+     BLOGS SECTION (NEW)
+     ========================================== -->
+<section class="blogs-section" id="blogs-section">
+<div class="container">
+<div class="blogs-head">
+<h2><i class="fas fa-book-open"></i> Latest Blogs & Guides</h2>
+<p>Detailed guides, tips, and how-to articles on Sarkari Kaam, documents, and government schemes — written in simple language.</p>
+</div>
+<div class="blog-grid" id="blogsGrid">
+<div class="empty" style="grid-column:1/-1">
+<div class="spinner"></div>
+<p style="margin-top:14px;color:var(--s500)">Loading blogs...</p>
+</div>
+</div>
+<div class="blogs-view-all">
+<a href="blogs.html" class="btn-view-all-blogs">
+<i class="fas fa-book-reader"></i> View All Blogs
+<i class="fas fa-arrow-right"></i>
+</a>
+</div>
+</div>
+</section>
+
 <!-- ABOUT SECTION -->
 <section class="about-section">
 <div class="container">
@@ -739,6 +796,7 @@ body{background:#fff}
 <div class="foot-links">
 <a href="index.html">Home</a>
 <a href="#sarkari-kaam">Sarkari Kaam</a>
+<a href="blogs.html">Blogs</a>
 <a onclick="filterCat('latest-jobs',event)">Latest Jobs</a>
 <a onclick="filterCat('results',event)">Exam Results</a>
 <a onclick="filterCat('sarkari-yojna',event)">Sarkari Yojna</a>
@@ -777,7 +835,7 @@ const firebaseConfig={apiKey:"AIzaSyDLnDVmkVcXxOFDxxfmXmqU1HflB2EpalQ",authDomai
 firebase.initializeApp(firebaseConfig);
 const db=firebase.database();
 
-let allPosts=[],allCats={},allServices={};
+let allPosts=[],allCats={},allServices={},allBlogs=[];
 let currentFilter='all';
 let searchTimeout=null;
 let selectedSuggestionIndex=-1;
@@ -824,20 +882,13 @@ function toast(msg,type='success'){
     setTimeout(()=>t.remove(),3200);
 }
 
-// ✅ LOGO + FAVICON SETUP
 function applyLogo(logoUrl, title){
     if(!logoUrl || !logoUrl.trim()) return;
     currentLogoUrl = logoUrl;
-    
-    // 1. Favicon (browser tab)
     let favicon = document.getElementById('faviconLink');
     if(favicon) favicon.href = logoUrl;
-    
-    // 2. Apple touch icon
     let appleIcon = document.getElementById('appleIconLink');
     if(appleIcon) appleIcon.href = logoUrl;
-    
-    // 3. Header logo replace
     const logoIcon = document.getElementById('logoIcon');
     if(logoIcon){
         logoIcon.innerHTML = `<img src="${logoUrl}" alt="${title||'esewahub.in'}" style="width:100%;height:100%;object-fit:cover;border-radius:12px" onerror="this.parentElement.innerHTML='<i class=\\'fas fa-shield-halved\\'></i>'">`;
@@ -848,7 +899,7 @@ function applyLogo(logoUrl, title){
 
 async function loadData(){
     try{
-        const [seoSnap, adsSnap, anSnap, socSnap, ccSnap, ssSnap, csSnap, psSnap, svsSnap, annSnap, popSnap] = await Promise.all([
+        const [seoSnap, adsSnap, anSnap, socSnap, ccSnap, ssSnap, csSnap, psSnap, svsSnap, annSnap, popSnap, blogsSnap] = await Promise.all([
             db.ref('settings/seo').once('value').catch(()=>null),
             db.ref('settings/adsense').once('value').catch(()=>null),
             db.ref('settings/analytics').once('value').catch(()=>null),
@@ -859,7 +910,8 @@ async function loadData(){
             db.ref('posts').once('value').catch(()=>null),
             db.ref('services').once('value').catch(()=>null),
             db.ref('announcements').once('value').catch(()=>null),
-            db.ref('popups').once('value').catch(()=>null)
+            db.ref('popups').once('value').catch(()=>null),
+            db.ref('blogs').once('value').catch(()=>null)
         ]);
 
         try{
@@ -940,13 +992,12 @@ async function loadData(){
             document.getElementById('siteTagline').innerText=s.tagline||'Sarkari Kaam & Digital Seva';
             document.getElementById('topAddr').innerText=s.address||'India';
             document.getElementById('addrFoot').innerText=s.address||'India';
-            document.getElementById('dynAbout').innerText=s.about||'Welcome to our Digital Seva Kendra. We provide verified information about government jobs, schemes, and digital services. Our mission is to make government information accessible to every Indian citizen in simple, easy-to-understand language.';
+            document.getElementById('dynAbout').innerText=s.about||'Welcome to our Digital Seva Kendra. We provide verified information about government jobs, schemes, and digital services.';
             document.getElementById('footTitle').innerText=title;
             document.getElementById('footAbout').innerText=s.about||'Your trusted Digital Seva Kendra.';
             document.getElementById('heroTitle').innerText=s.heroTitle||"🎯 India's Trusted Sarkari Kaam Portal";
             document.getElementById('heroSubtitle').innerText=s.heroSubtitle||"Sarkari Jobs, Yojna, Documents, Aadhar, PAN, Voter ID - Sab Kuch Ek Jagah!";
             
-            // ✅ APPLY LOGO
             if(s.logo && s.logo.trim()) applyLogo(s.logo, title);
             
             const waUrl=`https://wa.me/${s.whatsapp||'917056836166'}`;
@@ -970,6 +1021,20 @@ async function loadData(){
         if(statServicesEl) statServicesEl.innerText = serviceCount + '+';
         const aboutServicesEl = document.getElementById('aboutServicesCount');
         if(aboutServicesEl) aboutServicesEl.innerText = serviceCount + '+';
+
+        // ✅ LOAD BLOGS
+        if(blogsSnap && blogsSnap.exists()){
+            const blogsData = blogsSnap.val();
+            allBlogs = Object.entries(blogsData)
+                .map(([id, b]) => ({id, ...b}))
+                .filter(b => b.status !== 'draft')
+                .sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
+            const statBlogsEl = document.getElementById('statBlogs');
+            if(statBlogsEl) statBlogsEl.innerText = allBlogs.length + '+';
+            renderBlogsSection();
+        } else {
+            renderBlogsEmpty();
+        }
 
         if(annSnap && annSnap.exists()){
             const data=annSnap.val();
@@ -1007,7 +1072,59 @@ async function loadData(){
         allCats=DEFAULT_CATEGORIES;
         renderSarkariGrid();
         renderGrid();
+        renderBlogsEmpty();
     }
+}
+
+/* ==========================================
+   BLOGS SECTION RENDER
+   ========================================== */
+function renderBlogsSection() {
+    const grid = document.getElementById('blogsGrid');
+    if (!grid) return;
+    
+    if (allBlogs.length === 0) {
+        renderBlogsEmpty();
+        return;
+    }
+    
+    // Show only latest 6 blogs on homepage
+    const topBlogs = allBlogs.slice(0, 6);
+    
+    let html = '';
+    topBlogs.forEach(b => {
+        const title = b.title || 'Untitled Blog';
+        const excerpt = b.excerpt || (b.content || '').replace(/<[^>]*>/g, ' ').substring(0, 150) + '...';
+        const image = b.image 
+            ? `<img src="${b.image}" alt="${escapeAttr(title)}" class="blog-img" loading="lazy" onerror="this.outerHTML='<div class=\\'blog-img\\' style=\\'display:flex;align-items:center;justify-content:center;font-size:3rem;color:#0284c7\\'><i class=\\'fas fa-book-open\\'></i></div>'">`
+            : `<div class="blog-img" style="display:flex;align-items:center;justify-content:center;font-size:3rem;color:#0284c7"><i class="fas fa-book-open"></i></div>`;
+        
+        html += `<a href="blog.html?id=${b.id}" class="blog-card">
+            ${image}
+            <div class="blog-body">
+                <span class="blog-cat-badge"><i class="fas fa-tag"></i> ${escapeHtml(b.category || 'General')}</span>
+                <h3 class="blog-title">${escapeHtml(title)}</h3>
+                <p class="blog-excerpt">${escapeHtml(excerpt.substring(0, 150))}${excerpt.length > 150 ? '...' : ''}</p>
+                <div class="blog-meta">
+                    <span><i class="fas fa-user"></i> ${escapeHtml(b.author || 'Team')}</span>
+                    <span><i class="fas fa-clock"></i> ${b.readingTime || '2 min read'}</span>
+                    <span><i class="fas fa-calendar"></i> ${fmtDate(b.timestamp)}</span>
+                </div>
+            </div>
+        </a>`;
+    });
+    
+    grid.innerHTML = html;
+}
+
+function renderBlogsEmpty() {
+    const grid = document.getElementById('blogsGrid');
+    if (!grid) return;
+    grid.innerHTML = `<div class="empty" style="grid-column:1/-1">
+        <i class="fas fa-book-open"></i>
+        <p><b>No blogs published yet.</b></p>
+        <p style="font-size:.82rem;margin-top:8px;color:var(--s500)">Coming soon — expert guides on Sarkari Kaam, documents, and schemes.</p>
+    </div>`;
 }
 
 function renderAnnouncementBar() {
@@ -1128,7 +1245,7 @@ function showImagePopup(p) {
         img.style.display = 'none';
         const errDiv = document.createElement('div');
         errDiv.style.cssText = 'padding:60px 20px;text-align:center;color:#94a3b8;width:100%;background:linear-gradient(135deg,#f8fafc,#f1f5f9);min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center';
-        errDiv.innerHTML = `<i class="fas fa-exclamation-triangle" style="font-size:2.5rem;margin-bottom:12px;color:#f59e0b"></i><strong style="display:block;color:#64748b;margin-bottom:6px;font-size:.95rem">Image Load Failed</strong><span style="font-size:.72rem;color:#94a3b8;word-break:break-all;max-width:90%;line-height:1.4">${p.image}</span>`;
+        errDiv.innerHTML = `<i class="fas fa-exclamation-triangle" style="font-size:2.5rem;margin-bottom:12px;color:#f59e0b"></i><strong style="display:block;color:#64748b;margin-bottom:6px;font-size:.95rem">Image Load Failed</strong>`;
         imgWrap.appendChild(errDiv);
     };
 
@@ -1272,14 +1389,20 @@ function showSuggestions(query){
         const summary=(p.summary||'').toLowerCase();
         if(title.includes(query)||summary.includes(query)){matches.push({type:'post',key:p.id,title:p.title,subtitle:`${p.categoryName||allCats[p.category]?.name||'Update'} • ${p.lastDate||'Check Notice'}`,icon:'fa-newspaper',color:'ic-pan',image:p.image||'',url:`post.html?id=${p.id}`});}
     });
+    allBlogs.forEach(b=>{
+        const title=(b.title||'').toLowerCase();
+        const excerpt=(b.excerpt||'').toLowerCase();
+        if(title.includes(query)||excerpt.includes(query)){matches.push({type:'blog',key:b.id,title:b.title,subtitle:`Blog • ${b.category||'General'}`,icon:'fa-book-open',color:'ic-bank',image:b.image||'',url:`blog.html?id=${b.id}`});}
+    });
     matches.sort((a,b)=>a.type===b.type?0:a.type==='service'?-1:1);
-    matches=matches.slice(0,8);
+    matches=matches.slice(0,10);
     if(matches.length===0){box.innerHTML=`<div class="suggestion-empty"><i class="fas fa-search"></i><p>No results for "${query}"</p></div>`;box.classList.add('show');return;}
     let html='';let currentType='';
     matches.forEach((m,i)=>{
         if(m.type!==currentType){
             if(m.type==='service')html+=`<div class="suggestion-header"><i class="fas fa-briefcase"></i> Sarkari Kaam Services</div>`;
             if(m.type==='post')html+=`<div class="suggestion-header"><i class="fas fa-newspaper"></i> Latest Updates</div>`;
+            if(m.type==='blog')html+=`<div class="suggestion-header"><i class="fas fa-book-open"></i> Blogs</div>`;
             currentType=m.type;
         }
         const iconHtml=m.image?`<div class="icon-box"><img src="${m.image}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<i class=\\'fas ${m.icon}\\'></i>';this.parentElement.classList.add('${m.color}')"></div>`:`<div class="icon-box ${m.color}"><i class="fas ${m.icon}"></i></div>`;
@@ -1309,12 +1432,14 @@ window.searchNow=function(){
     const grid=document.getElementById('postsGrid');
     const serviceMatches=Object.entries(services).filter(([key,s])=>{const name=(s.name||'').toLowerCase();const sub=(s.sub||'').toLowerCase();return name.includes(q)||sub.includes(q);}).map(([key,s])=>({type:'service',key,...s}));
     const postMatches=allPosts.filter(p=>(p.title||'').toLowerCase().includes(q)||(p.summary&&p.summary.toLowerCase().includes(q)));
-    if(serviceMatches.length===0&&postMatches.length===0){grid.innerHTML=`<div class="empty" style="grid-column:1/-1"><i class="fas fa-search"></i><p>No results for "${q}"</p></div>`;document.getElementById('secTitleText').innerText=`Search: "${q}"`;return;}
+    const blogMatches=allBlogs.filter(b=>(b.title||'').toLowerCase().includes(q)||(b.excerpt&&b.excerpt.toLowerCase().includes(q)));
+    if(serviceMatches.length===0&&postMatches.length===0&&blogMatches.length===0){grid.innerHTML=`<div class="empty" style="grid-column:1/-1"><i class="fas fa-search"></i><p>No results for "${q}"</p></div>`;document.getElementById('secTitleText').innerText=`Search: "${q}"`;return;}
     let html='';
     if(serviceMatches.length>0){serviceMatches.forEach(s=>{const visualHtml=s.image?`<div class="icon"><img src="${s.image}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<i class=\\'fas ${s.icon||'fa-id-card'}\\'></i>';this.parentElement.classList.add('${s.color||'ic-aadhar'}')"></div>`:`<div class="icon ${s.color||'ic-aadhar'}"><i class="fas ${s.icon||'fa-id-card'}"></i></div>`;html+=`<a href="service.html?service=${s.key}" class="service-card">${visualHtml}<h3>${highlightMatch(s.name,q)}</h3><p>${s.sub||''}</p></a>`;});}
     if(postMatches.length>0){postMatches.forEach(p=>{const imgHtml=p.image?`<img src="${p.image}" alt="${p.title}" loading="lazy" class="card-img" onerror="this.style.display='none'">`:'';html+=`<div class="card">${imgHtml}<div class="card-cat">${p.categoryName||allCats[p.category]?.name||'Update'}</div><div class="card-body"><a href="post.html?id=${p.id}" class="card-title">${highlightMatch(p.title,q)}</a><p class="card-sum">${p.summary||''}</p><div class="card-meta"><span class="date"><i class="fas fa-clock"></i> ${p.lastDate||'N/A'}</span><a href="post.html?id=${p.id}" class="btn-view">View</a></div></div></div>`;});}
+    if(blogMatches.length>0){blogMatches.forEach(b=>{const image=b.image?`<img src="${b.image}" class="card-img">`:`<div class="card-img" style="display:flex;align-items:center;justify-content:center;font-size:3rem;color:#0284c7;background:linear-gradient(135deg,#e0f2fe,#bae6fd)"><i class="fas fa-book-open"></i></div>`;html+=`<a href="blog.html?id=${b.id}" class="card" style="text-decoration:none">${image}<div class="card-cat" style="background:#e0f2fe;color:#0369a1">${b.category||'Blog'}</div><div class="card-body"><div class="card-title">${highlightMatch(b.title,q)}</div><p class="card-sum">${b.excerpt||''}</p><div class="card-meta"><span class="date"><i class="fas fa-clock"></i> ${b.readingTime||'2 min'}</span><span class="btn-view">Read <i class="fas fa-arrow-right"></i></span></div></div></a>`;});}
     grid.innerHTML=html;
-    const total=serviceMatches.length+postMatches.length;
+    const total=serviceMatches.length+postMatches.length+blogMatches.length;
     document.getElementById('secTitleText').innerText=`Search: "${q}" — ${total} result${total!==1?'s':''} found`;
     window.scrollTo({top:document.getElementById('secTitle').offsetTop-100,behavior:'smooth'});
 };
@@ -1342,202 +1467,105 @@ window.subscribeNL=async function(){
 };
 
 function fmtDate(iso){if(!iso)return 'N/A';const d=new Date(iso);const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return `${d.getDate()} ${m[d.getMonth()]} ${d.getFullYear()}`;}
+function escapeHtml(t){if(!t)return '';return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+function escapeAttr(t){if(!t)return '';return String(t).replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 
-// ═══════════════════════════════════════════════════════════
 // VISITOR COUNTER SYSTEM
-// ═══════════════════════════════════════════════════════════
 async function trackVisitor(){
     try {
         const today = new Date().toISOString().split('T')[0];
-        
         let visitorId = localStorage.getItem('visitor_id');
-        if (!visitorId) {
-            visitorId = 'v_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-            localStorage.setItem('visitor_id', visitorId);
-        }
-        
+        if (!visitorId) { visitorId = 'v_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9); localStorage.setItem('visitor_id', visitorId); }
         const lastVisit = localStorage.getItem('last_visit_date');
         const isNewVisitorToday = lastVisit !== today;
-        
         await db.ref('analytics/totalViews').transaction(v => (v || 0) + 1);
         await db.ref(`analytics/daily/${today}/views`).transaction(v => (v || 0) + 1);
-        
         if (isNewVisitorToday) {
             localStorage.setItem('last_visit_date', today);
             await db.ref('analytics/totalVisitors').transaction(v => (v || 0) + 1);
             await db.ref(`analytics/daily/${today}/visitors`).transaction(v => (v || 0) + 1);
         }
-        
         const onlineRef = db.ref(`analytics/online/${visitorId}`);
-        await onlineRef.set({
-            timestamp: Date.now(),
-            page: window.location.pathname
-        });
-        
+        await onlineRef.set({ timestamp: Date.now(), page: window.location.pathname });
         setTimeout(() => { onlineRef.remove(); }, 5 * 60 * 1000);
-        
-    } catch(e) {
-        console.warn('Visitor tracking error:', e);
-    }
+    } catch(e) { console.warn('Visitor tracking error:', e); }
 }
 
 window.addEventListener('beforeunload', () => {
     const visitorId = localStorage.getItem('visitor_id');
-    if (visitorId) {
-        db.ref(`analytics/online/${visitorId}`).remove();
-    }
+    if (visitorId) db.ref(`analytics/online/${visitorId}`).remove();
 });
 
-// ═══════════════════════════════════════════════════════════
 // PUSH NOTIFICATIONS
-// ═══════════════════════════════════════════════════════════
 async function initPushNotifications(){
-    if(!('Notification' in window)){
-        console.log('❌ Notifications not supported');
-        return;
-    }
-    
+    if(!('Notification' in window)) return;
     let visitorId = localStorage.getItem('visitor_id');
-    if(!visitorId){
-        visitorId = 'v_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        localStorage.setItem('visitor_id', visitorId);
-    }
-    
+    if(!visitorId){visitorId = 'v_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);localStorage.setItem('visitor_id', visitorId);}
     const alreadySubscribed = localStorage.getItem('push_subscribed');
-    
-    if(Notification.permission === 'granted'){
-        await registerPushSubscription(visitorId);
-        startNotificationListener(visitorId);
-        return;
-    }
-    
-    if(Notification.permission === 'denied'){
-        console.log('ℹ️ Notifications blocked');
-        return;
-    }
-    
-    if(!alreadySubscribed){
-        setTimeout(() => {
-            showNotificationPrompt(visitorId);
-        }, 15000);
-    }
+    if(Notification.permission === 'granted'){await registerPushSubscription(visitorId);startNotificationListener(visitorId);return;}
+    if(Notification.permission === 'denied'){return;}
+    if(!alreadySubscribed){setTimeout(() => {showNotificationPrompt(visitorId);}, 15000);}
 }
 
 function showNotificationPrompt(visitorId){
     if(localStorage.getItem('push_prompt_dismissed') === 'true') return;
     if(document.getElementById('pushPrompt')) return;
-    
     const prompt = document.createElement('div');
     prompt.id = 'pushPrompt';
     prompt.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#fff;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.25);padding:22px;max-width:380px;z-index:99997;border:1px solid #e2e8f0;animation:slideUp .4s cubic-bezier(.16,1,.3,1);font-family:Inter,sans-serif';
     prompt.innerHTML = `
         <div style="display:flex;gap:14px;margin-bottom:14px">
-            <div style="width:48px;height:48px;background:linear-gradient(135deg,#dc2626,#b91c1c);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;flex-shrink:0">
-                <i class="fas fa-bell"></i>
-            </div>
+            <div style="width:48px;height:48px;background:linear-gradient(135deg,#dc2626,#b91c1c);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;flex-shrink:0"><i class="fas fa-bell"></i></div>
             <div style="flex:1;min-width:0">
                 <h3 style="font-family:Merriweather,serif;font-size:1rem;font-weight:900;color:#0f172a;margin-bottom:4px">🔔 Get Instant Alerts!</h3>
                 <p style="font-size:.82rem;color:#64748b;line-height:1.5">Naye sarkari job, result aur yojna ki update turant payein — bina website kholne ke.</p>
             </div>
-            <button onclick="dismissPushPrompt()" style="background:#f1f5f9;border:none;width:28px;height:28px;border-radius:50%;cursor:pointer;color:#64748b;flex-shrink:0" aria-label="Close">
-                <i class="fas fa-times" style="font-size:.75rem"></i>
-            </button>
+            <button onclick="dismissPushPrompt()" style="background:#f1f5f9;border:none;width:28px;height:28px;border-radius:50%;cursor:pointer;color:#64748b;flex-shrink:0"><i class="fas fa-times" style="font-size:.75rem"></i></button>
         </div>
         <div style="display:flex;gap:8px">
-            <button onclick="requestPushPermission('${visitorId}')" style="flex:1;padding:11px;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit">
-                <i class="fas fa-bell"></i> Allow Notifications
-            </button>
-            <button onclick="dismissPushPrompt()" style="padding:11px 16px;background:#f1f5f9;color:#475569;border:none;border-radius:8px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit">
-                Later
-            </button>
-        </div>
-    `;
+            <button onclick="requestPushPermission('${visitorId}')" style="flex:1;padding:11px;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit"><i class="fas fa-bell"></i> Allow Notifications</button>
+            <button onclick="dismissPushPrompt()" style="padding:11px 16px;background:#f1f5f9;color:#475569;border:none;border-radius:8px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit">Later</button>
+        </div>`;
     document.body.appendChild(prompt);
 }
 
-window.dismissPushPrompt = function(){
-    const p = document.getElementById('pushPrompt');
-    if(p) p.remove();
-    localStorage.setItem('push_prompt_dismissed', 'true');
-};
+window.dismissPushPrompt = function(){const p = document.getElementById('pushPrompt');if(p) p.remove();localStorage.setItem('push_prompt_dismissed', 'true');};
 
 window.requestPushPermission = async function(visitorId){
     try {
         const permission = await Notification.requestPermission();
         const p = document.getElementById('pushPrompt');
         if(p) p.remove();
-        
         if(permission === 'granted'){
             localStorage.setItem('push_subscribed', 'true');
             await registerPushSubscription(visitorId);
             startNotificationListener(visitorId);
-            
-            setTimeout(() => {
-                new Notification('✅ Notifications Enabled!', {
-                    body: 'Ab aapko sab sarkari updates turant milengi. Thank you!',
-                    icon: currentLogoUrl || 'https://esewahub.in/favicon.ico'
-                });
-            }, 500);
-        } else {
-            localStorage.setItem('push_prompt_dismissed', 'true');
-        }
-    } catch(e) {
-        console.warn('Notification permission error:', e);
-    }
+            setTimeout(() => {new Notification('✅ Notifications Enabled!', {body: 'Ab aapko sab sarkari updates turant milengi. Thank you!', icon: currentLogoUrl || 'https://esewahub.in/favicon.ico'});}, 500);
+        } else {localStorage.setItem('push_prompt_dismissed', 'true');}
+    } catch(e) {console.warn('Notification permission error:', e);}
 };
 
 async function registerPushSubscription(visitorId){
     try {
-        await db.ref(`pushSubscribers/${visitorId}`).set({
-            subscribedAt: new Date().toISOString(),
-            userAgent: navigator.userAgent.substring(0, 200),
-            page: window.location.pathname,
-            lastActive: new Date().toISOString()
-        });
-        
-        setInterval(() => {
-            db.ref(`pushSubscribers/${visitorId}/lastActive`).set(new Date().toISOString());
-        }, 5 * 60 * 1000);
-        
-    } catch(e) {
-        console.warn('Push register error:', e);
-    }
+        await db.ref(`pushSubscribers/${visitorId}`).set({subscribedAt: new Date().toISOString(),userAgent: navigator.userAgent.substring(0, 200),page: window.location.pathname,lastActive: new Date().toISOString()});
+        setInterval(() => {db.ref(`pushSubscribers/${visitorId}/lastActive`).set(new Date().toISOString());}, 5 * 60 * 1000);
+    } catch(e) {console.warn('Push register error:', e);}
 }
 
 function startNotificationListener(visitorId){
     const notifRef = db.ref('notifications').limitToLast(1);
     let isFirstLoad = true;
-    
     notifRef.on('child_added', (snap) => {
         const notif = snap.val();
         if(!notif) return;
-        
         const notifTime = new Date(notif.sentAt || 0).getTime();
-        if(isFirstLoad){
-            isFirstLoad = false;
-            if(Date.now() - notifTime > 5 * 60 * 1000) return;
-        }
-        
+        if(isFirstLoad){isFirstLoad = false;if(Date.now() - notifTime > 5 * 60 * 1000) return;}
         const notifKey = `notif_seen_${snap.key}`;
         if(localStorage.getItem(notifKey)) return;
         localStorage.setItem(notifKey, 'true');
-        
         if(Notification.permission === 'granted'){
-            const n = new Notification(notif.title || 'esewahub.in', {
-                body: notif.message || '',
-                icon: notif.icon || currentLogoUrl || 'https://esewahub.in/favicon.ico',
-                badge: currentLogoUrl || 'https://esewahub.in/favicon.ico',
-                tag: snap.key,
-                requireInteraction: false,
-                data: { url: notif.link || 'https://esewahub.in' }
-            });
-            
-            n.onclick = function(e){
-                e.preventDefault();
-                window.focus();
-                if(notif.link) window.open(notif.link, '_blank');
-                n.close();
-            };
+            const n = new Notification(notif.title || 'esewahub.in', {body: notif.message || '',icon: notif.icon || currentLogoUrl || 'https://esewahub.in/favicon.ico',badge: currentLogoUrl || 'https://esewahub.in/favicon.ico',tag: snap.key,data: { url: notif.link || 'https://esewahub.in' }});
+            n.onclick = function(e){e.preventDefault();window.focus();if(notif.link) window.open(notif.link, '_blank');n.close();};
         }
     });
 }
@@ -1551,7 +1579,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<!-- Google AdSense Auto Ads -->
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({
     google_ad_client: "ca-pub-1336136297225442",
