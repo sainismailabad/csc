@@ -2,13 +2,13 @@
   "feeds": [
     {
       "name": "SarkariNaukri",
-      "url": "https://feeds.feedburner.com/SarkariNaukriBlog",
+      "url": "https://sarkariresult.com.cm/latest-jobs/",
       "category": "central",
       "categoryName": "Central Govt Jobs"
     },
     {
       "name": "FreeJobAlert",
-      "url": "https://www.freejobalert.com/feed/",
+      "url": "https://www.freejobalert.com/latest-notifications/",
       "category": "all",
       "categoryName": "Latest Jobs"
     },
