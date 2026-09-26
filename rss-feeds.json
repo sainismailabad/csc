@@ -1,34 +1,83 @@
-{
-  "feeds": [
+import Parser from "rss-parser";
+
+// 1. Updated Feeds Configuration with Filter Settings
+const config = {
+  settings: {
+    maxJobsPerFeed: 10,
+    includeKeywords: ["recruitment", "online form", "vacancy", "bharti", "apply online", "jobs", "officer"],
+    excludeKeywords: ["result", "admit card", "answer key", "cutoff", "syllabus"]
+  },
+  feeds: [
     {
-      "name": "SarkariNaukri",
-      "url": "https://sarkariresult.com.cm/latest-jobs/",
-      "category": "central",
-      "categoryName": "Central Govt Jobs"
+      name: "SarkariResult",
+      url: "https://www.sarkariresult.com/rss.php",
+      category: "Central & State Jobs"
     },
     {
-      "name": "FreeJobAlert",
-      "url": "https://www.freejobalert.com/latest-notifications/",
-      "category": "all",
-      "categoryName": "Latest Jobs"
+      name: "JagranJosh",
+      url: "https://www.jagranjosh.com/rss/jju/jobs.xml",
+      category: "Sarkari Naukri"
     },
     {
-      "name": "JagranJosh Jobs",
-      "url": "https://www.jagranjosh.com/rss/jju/jobs.xml",
-      "category": "all",
-      "categoryName": "Sarkari Naukri"
-    },
-    {
-      "name": "BankersAdda",
-      "url": "https://www.bankersadda.com/feed/",
-      "category": "banking",
-      "categoryName": "Banking Jobs"
-    },
-    {
-      "name": "SarkariResult",
-      "url": "https://www.sarkariresult.com/rss.php",
-      "category": "all",
-      "categoryName": "Result & Jobs"
+      name: "BankersAdda",
+      url: "https://www.bankersadda.com/feed/",
+      category: "Banking Jobs"
     }
   ]
+};
+
+// 2. Fetch, Filter, and Sort Engine
+async function fetchLatestJobs() {
+  const parser = new Parser();
+  const { maxJobsPerFeed, includeKeywords, excludeKeywords } = config.settings;
+  let jobList = [];
+
+  console.log("Fetching latest job feeds...\n");
+
+  for (const feed of config.feeds) {
+    try {
+      const data = await parser.parseURL(feed.url);
+
+      const filteredItems = (data.items || [])
+        .filter((item) => {
+          const title = (item.title || "").toLowerCase();
+
+          // Admit card ya Result wali posts ko drop karein
+          const isInvalid = excludeKeywords.some((word) => title.includes(word));
+          if (isInvalid) return false;
+
+          // Recruitment / Vacancy se jude keywords check karein
+          return includeKeywords.some((word) => title.includes(word));
+        })
+        .slice(0, maxJobsPerFeed)
+        .map((item) => ({
+          title: item.title?.trim(),
+          link: item.link?.trim(),
+          source: feed.name,
+          category: feed.category,
+          date: item.pubDate ? new Date(item.pubDate) : new Date()
+        }));
+
+      jobList.push(...filteredItems);
+    } catch (error) {
+      console.error(`Failed to fetch from ${feed.name}:`, error.message);
+    }
+  }
+
+  // Sabhi feeds ki jobs ko latest date ke hisaab se arrange karein (Newest first)
+  jobList.sort((a, b) => b.date.getTime() - a.date.getTime());
+
+  // Result print karein
+  console.log(`--- Total Latest Jobs Found: ${jobList.length} ---\n`);
+  jobList.forEach((job, index) => {
+    console.log(`${index + 1}. [${job.source} | ${job.category}]`);
+    console.log(`   Title: ${job.title}`);
+    console.log(`   Date : ${job.date.toLocaleString("en-IN")}`);
+    console.log(`   Link : ${job.link}\n`);
+  });
+
+  return jobList;
 }
+
+// Function run karein
+fetchLatestJobs();
