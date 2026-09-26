@@ -1,5 +1,6 @@
 // generate-all.js
 // Auto-generates static HTML pages + sitemap + robots.txt
+// Now includes: Posts + Services + Blogs
 // Runs via GitHub Actions daily
 
 const admin = require('firebase-admin');
@@ -74,9 +75,11 @@ function extractKeywords(text, max) {
 function generateKeywords(item, type, category) {
     var keywords = [];
     extractKeywords(item.title || item.name, 6).forEach(function (w) { if (keywords.indexOf(w) === -1) keywords.push(w); });
-    extractKeywords(item.summary || item.about, 5).forEach(function (w) { if (keywords.indexOf(w) === -1) keywords.push(w); });
+    extractKeywords(item.summary || item.about || item.excerpt, 5).forEach(function (w) { if (keywords.indexOf(w) === -1) keywords.push(w); });
     if (type === 'post') {
         ['sarkari job','sarkari naukri','govt job','recruitment 2026','apply online'].forEach(function (w) { if (keywords.indexOf(w) === -1) keywords.push(w); });
+    } else if (type === 'blog') {
+        ['sarkari guide','how to','tutorial','step by step','sarkari help','esewahub blog'].forEach(function (w) { if (keywords.indexOf(w) === -1) keywords.push(w); });
     } else {
         ['sarkari kaam','govt service','online apply','official portal'].forEach(function (w) { if (keywords.indexOf(w) === -1) keywords.push(w); });
     }
@@ -88,14 +91,15 @@ function generateKeywords(item, type, category) {
 
 function generateDescription(item, type, category) {
     var title = item.title || item.name || '';
-    var summary = item.summary || item.about || '';
+    var summary = item.summary || item.about || item.excerpt || '';
     var lastDate = item.lastDate || '';
     var desc = '';
-    if (summary && summary.length > 30) desc = summary.trim();
+    if (summary && summary.length > 30) desc = summary.replace(/<[^>]*>/g, '').trim();
     else if (type === 'post') desc = title + ' - Complete details with eligibility, important dates, application process and official links.';
+    else if (type === 'blog') desc = title + ' - Read the complete guide with detailed steps, tips and reference links.';
     else desc = title + ' - Complete online guide with steps, required documents and official links.';
     if (type === 'post' && lastDate && desc.indexOf('Last date') === -1) desc += ' Last date: ' + lastDate + '.';
-    if (desc.indexOf('Apply') === -1 && desc.indexOf('apply') === -1) desc += ' Apply now on official portal.';
+    if (desc.indexOf('Apply') === -1 && desc.indexOf('apply') === -1 && type !== 'blog') desc += ' Apply now on official portal.';
     if (desc.length > 158) desc = desc.substring(0, 155).trim() + '...';
     return desc;
 }
@@ -112,7 +116,10 @@ function buildHTML(opts) {
     var email = s.email || 'info@esewahub.in';
     var address = s.address || 'India';
     var type = opts.type;
-    var canonical = 'https://esewahub.in/' + (type === 'post' ? 'posts' : 'services') + '/' + opts.slug + '.html';
+
+    // ✅ Canonical URL — blogs ke liye alag
+    var folderName = type === 'post' ? 'posts' : (type === 'blog' ? 'blogs' : 'services');
+    var canonical = 'https://esewahub.in/' + folderName + '/' + opts.slug + '.html';
 
     var logoHtml = logo
         ? '<img src="' + escapeAttr(logo) + '" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:11px">'
@@ -137,7 +144,7 @@ function buildHTML(opts) {
     if (opts.image) h += '<meta property="og:image" content="' + escapeAttr(opts.image) + '">\n';
     h += '<meta property="og:title" content="' + escapeAttr(opts.title) + '">\n';
     h += '<meta property="og:description" content="' + escapeAttr(opts.description) + '">\n';
-    h += '<meta property="og:type" content="' + (type === 'post' ? 'article' : 'website') + '">\n';
+    h += '<meta property="og:type" content="' + (type === 'post' || type === 'blog' ? 'article' : 'website') + '">\n';
     h += '<meta property="og:url" content="' + canonical + '">\n';
     h += '<meta name="twitter:card" content="summary_large_image">\n';
     if (logo) h += '<link rel="icon" href="' + escapeAttr(logo) + '">\n';
@@ -224,12 +231,34 @@ function buildHTML(opts) {
     h += '.foot-bottom{text-align:center;border-top:1px solid var(--s700);margin-top:24px;padding-top:20px;font-size:.8rem;color:var(--s500)}';
     h += '.foot-bottom .links{margin-top:8px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap}';
     h += '.foot-bottom .links a{color:var(--s400);font-size:.78rem}';
+    // ✅ Blog content specific styles
+    h += '.blog-content{font-size:1rem;line-height:1.85;color:var(--s700)}';
+    h += '.blog-content h1,.blog-content h2,.blog-content h3{font-family:var(--serif);color:var(--s900);margin:28px 0 14px;font-weight:900;line-height:1.3}';
+    h += '.blog-content h1{font-size:1.6rem}.blog-content h2{font-size:1.35rem}.blog-content h3{font-size:1.15rem}';
+    h += '.blog-content p{margin-bottom:16px}';
+    h += '.blog-content ul,.blog-content ol{margin:16px 0 16px 28px}';
+    h += '.blog-content li{margin-bottom:8px}';
+    h += '.blog-content blockquote{border-left:4px solid #0ea5e9;background:#f0f9ff;padding:16px 20px;margin:20px 0;border-radius:10px;font-style:italic;color:#0369a1}';
+    h += '.blog-content code{background:var(--s100);padding:3px 8px;border-radius:4px;font-family:monospace;font-size:.9rem;color:#dc2626}';
+    h += '.blog-content pre{background:#0f172a;color:#e2e8f0;padding:18px;border-radius:10px;overflow-x:auto;margin:20px 0;font-family:monospace;font-size:.88rem;line-height:1.7}';
+    h += '.blog-content img{border-radius:10px;margin:20px 0}';
+    h += '.blog-content a{color:#0284c7;text-decoration:underline;font-weight:600}';
+    h += '.blog-content strong{color:var(--s900);font-weight:800}';
+    h += '.blog-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;padding-top:24px;border-top:1px solid var(--s200)}';
+    h += '.blog-tag{background:var(--p50);color:var(--p700);padding:6px 14px;border-radius:9999px;font-size:.75rem;font-weight:700;border:1px solid var(--p200)}';
+    h += '.blog-refs{margin-top:28px;padding:22px;background:#f0f9ff;border-radius:12px;border:1px solid #bae6fd}';
+    h += '.blog-refs h3{font-size:.95rem;font-weight:800;color:#0369a1;margin-bottom:14px;display:flex;align-items:center;gap:8px}';
+    h += '.blog-ref-link{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px dashed #7dd3fc;font-size:.88rem;color:#0369a1;font-weight:600;text-decoration:none}';
+    h += '.blog-ref-link:last-child{border-bottom:none}';
+    h += '.blog-ref-link i{color:#0284c7}';
+    h += '.blog-ref-link:hover{color:#0284c7;padding-left:6px}';
     h += '@media(max-width:1024px){.container{padding:0 16px}.layout{grid-template-columns:1fr;padding:0 16px}.foot-grid{grid-template-columns:1fr 1fr}}';
     h += '@media(max-width:768px){.container{padding:0 14px}.header .container{flex-direction:column;text-align:center}.layout{display:block;padding:0 14px}.article{padding:16px}.article-title{font-size:1.25rem}.foot-grid{grid-template-columns:1fr;text-align:center}.foot-bottom .links{justify-content:center}}';
     h += '</style></head><body>';
     h += '<div class="topbar"><div class="container"><div class="topbar-left"><i class="fas fa-map-marker-alt"></i><span>' + escapeHtml(address) + '</span></div><div class="topbar-right"><a href="https://wa.me/' + escapeAttr(whatsapp) + '" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp Help</a></div></div></div>';
     h += '<div class="header"><div class="container"><a href="/index.html" class="logo"><div class="logo-icon">' + logoHtml + '</div><div class="logo-text"><h1>' + escapeHtml(siteTitle) + '</h1><p>' + escapeHtml(tagline) + '</p></div></a></div></div>';
-    h += '<nav class="navbar"><div class="container"><ul class="nav-list"><li><a href="/index.html"><i class="fas fa-home"></i> Home</a></li><li><a href="/index.html#sarkari-kaam"><i class="fas fa-briefcase"></i> Sarkari Kaam</a></li><li><a href="/index.html"><i class="fas fa-newspaper"></i> Latest Jobs</a></li><li><a href="/index.html"><i class="fas fa-award"></i> Results</a></li></ul></div></nav>';
+    // ✅ Navbar mein Blogs link add
+    h += '<nav class="navbar"><div class="container"><ul class="nav-list"><li><a href="/index.html"><i class="fas fa-home"></i> Home</a></li><li><a href="/index.html#sarkari-kaam"><i class="fas fa-briefcase"></i> Sarkari Kaam</a></li><li><a href="/blogs.html"><i class="fas fa-book-open"></i> Blogs</a></li><li><a href="/index.html"><i class="fas fa-newspaper"></i> Latest Jobs</a></li><li><a href="/index.html"><i class="fas fa-award"></i> Results</a></li></ul></div></nav>';
     h += '<div class="layout"><main><div class="article">';
     h += '<div class="breadcrumb">' + breadcrumbHtml + '</div>';
     h += '<h1 class="article-title">' + escapeHtml(opts.title) + '</h1>';
@@ -246,7 +275,7 @@ function buildHTML(opts) {
     h += '<div class="ad-container" style="min-height:250px"><span class="ad-label">Advertisement</span><ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="3333333333" data-ad-format="auto" data-full-width-responsive="true"></ins></div>';
     h += '<div class="side-widget"><h3 class="side-title"><i class="fas fa-link"></i> Important Portals</h3><a href="https://digitalseva.csc.gov.in" target="_blank" rel="noopener" class="side-link"><i class="fas fa-laptop-house"></i> CSC Digital Seva</a><a href="https://pmkisan.gov.in" target="_blank" rel="noopener" class="side-link"><i class="fas fa-tractor"></i> PM Kisan Yojana</a><a href="https://uidai.gov.in" target="_blank" rel="noopener" class="side-link"><i class="fas fa-id-card"></i> Aadhar Portal</a><a href="https://www.india.gov.in" target="_blank" rel="noopener" class="side-link"><i class="fas fa-landmark"></i> National Portal</a></div></aside>';
     h += '</div>';
-    h += '<footer class="footer"><div class="container"><div class="foot-grid"><div class="foot-brand"><h3><i class="fas fa-shield-halved"></i> ' + escapeHtml(siteTitle) + '</h3><p>Your trusted Digital Seva Kendra for government jobs, schemes, and digital services.</p></div><div><h4>Quick Links</h4><div class="foot-links"><a href="/index.html">Home</a><a href="/index.html#sarkari-kaam">Sarkari Kaam</a><a href="/about.html">About Us</a><a href="/contact.html">Contact</a></div></div><div><h4>Information</h4><div class="foot-links"><a href="/privacy.html">Privacy Policy</a><a href="/disclaimer.html">Disclaimer</a><a href="/terms.html">Terms</a></div></div><div><h4>Support</h4><div class="foot-links"><a href="https://wa.me/' + escapeAttr(whatsapp) + '" target="_blank" rel="noopener">WhatsApp Help</a><a href="mailto:' + escapeAttr(email) + '">Email Support</a></div></div></div><div class="foot-disc"><strong>Disclaimer:</strong> This website is not an official government website. All information is provided for informational purposes only.</div><div class="foot-bottom"><div>&copy; ' + new Date().getFullYear() + ' ' + escapeHtml(siteTitle) + '. All Rights Reserved.</div><div class="links"><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="/disclaimer.html">Disclaimer</a><a href="/contact.html">Contact</a></div></div></div></footer>';
+    h += '<footer class="footer"><div class="container"><div class="foot-grid"><div class="foot-brand"><h3><i class="fas fa-shield-halved"></i> ' + escapeHtml(siteTitle) + '</h3><p>Your trusted Digital Seva Kendra for government jobs, schemes, and digital services.</p></div><div><h4>Quick Links</h4><div class="foot-links"><a href="/index.html">Home</a><a href="/index.html#sarkari-kaam">Sarkari Kaam</a><a href="/blogs.html">Blogs</a><a href="/about.html">About Us</a><a href="/contact.html">Contact</a></div></div><div><h4>Information</h4><div class="foot-links"><a href="/privacy.html">Privacy Policy</a><a href="/disclaimer.html">Disclaimer</a><a href="/terms.html">Terms</a></div></div><div><h4>Support</h4><div class="foot-links"><a href="https://wa.me/' + escapeAttr(whatsapp) + '" target="_blank" rel="noopener">WhatsApp Help</a><a href="mailto:' + escapeAttr(email) + '">Email Support</a></div></div></div><div class="foot-disc"><strong>Disclaimer:</strong> This website is not an official government website. All information is provided for informational purposes only.</div><div class="foot-bottom"><div>&copy; ' + new Date().getFullYear() + ' ' + escapeHtml(siteTitle) + '. All Rights Reserved.</div><div class="links"><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="/disclaimer.html">Disclaimer</a><a href="/contact.html">Contact</a></div></div></div></footer>';
     h += '<script>function subscribeNL(){var e=document.getElementById("nlEmail").value.trim();if(!e||!e.includes("@")){alert("Enter valid email");return;}alert("Subscribed!");}</script>';
     h += '<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
     h += '</body></html>';
@@ -333,30 +362,69 @@ function buildServiceContent(service) {
 }
 
 /* ==========================================
+   ✅ BLOG CONTENT BUILDER (NEW)
+   ========================================== */
+function buildBlogContent(blog) {
+    var out = '';
+    
+    // Blog content (HTML support)
+    if (blog.content && blog.content.trim()) {
+        out += '<div class="blog-content">' + blog.content + '</div>';
+    } else {
+        out += '<div class="blog-content"><p style="color:#94a3b8;font-style:italic">Content not available.</p></div>';
+    }
+    
+    // Reference links
+    if (blog.links && blog.links.length > 0) {
+        out += '<div class="blog-refs">';
+        out += '<h3><i class="fas fa-link"></i> Reference & Sources</h3>';
+        blog.links.forEach(function (l) {
+            var url = l.url || '#';
+            if (url !== '#' && url.indexOf('http') !== 0) url = 'https://' + url;
+            out += '<a href="' + escapeAttr(url) + '" target="_blank" rel="noopener nofollow" class="blog-ref-link"><i class="fas fa-external-link-alt"></i><span>' + escapeHtml(l.name) + '</span></a>';
+        });
+        out += '</div>';
+    }
+    
+    // Tags
+    if (blog.tags && blog.tags.length > 0) {
+        out += '<div class="blog-tags">';
+        blog.tags.forEach(function (t) {
+            out += '<span class="blog-tag">#' + escapeHtml(t) + '</span>';
+        });
+        out += '</div>';
+    }
+    
+    return out;
+}
+
+/* ==========================================
    MAIN GENERATION
    ========================================== */
 async function generate() {
     console.log('🚀 Starting full generation...');
 
-    // Fetch all data
+    // ✅ Blogs bhi fetch karein
     var results = await Promise.all([
         db.ref('posts').once('value'),
         db.ref('services').once('value'),
         db.ref('categories').once('value'),
-        db.ref('settings/general').once('value')
+        db.ref('settings/general').once('value'),
+        db.ref('blogs').once('value')
     ]);
 
-    var postsSnap = results[0], servicesSnap = results[1], catsSnap = results[2], settingsSnap = results[3];
+    var postsSnap = results[0], servicesSnap = results[1], catsSnap = results[2], settingsSnap = results[3], blogsSnap = results[4];
 
     var posts = postsSnap.exists() ? postsSnap.val() : {};
     var services = servicesSnap.exists() ? servicesSnap.val() : {};
     var categories = catsSnap.exists() ? catsSnap.val() : {};
     var siteSettings = settingsSnap.exists() ? settingsSnap.val() : {};
+    var blogs = blogsSnap.exists() ? blogsSnap.val() : {};
 
-    console.log('📊 Loaded:', Object.keys(posts).length, 'posts,', Object.keys(services).length, 'services');
+    console.log('📊 Loaded:', Object.keys(posts).length, 'posts,', Object.keys(services).length, 'services,', Object.keys(blogs).length, 'blogs');
 
-    // Create folders if not exist
-    ['posts', 'services'].forEach(function (dir) {
+    // ✅ Blogs folder bhi create karein
+    ['posts', 'services', 'blogs'].forEach(function (dir) {
         if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
     });
 
@@ -448,10 +516,61 @@ async function generate() {
 
     console.log('✅ Generated', serviceEntries.length, 'service pages');
 
+    // ========== ✅ GENERATE BLOGS (NEW) ==========
+    var blogEntries = Object.entries(blogs)
+        .filter(function(entry) {
+            // Sirf published blogs (draft skip karein)
+            return entry[1].status !== 'draft' && entry[1].title;
+        })
+        .sort(function (a, b) {
+            return new Date(b[1].timestamp || 0) - new Date(a[1].timestamp || 0);
+        });
+
+    blogEntries.forEach(function (entry) {
+        var id = entry[0];
+        var blog = entry[1];
+
+        var slug = slugify(blog.title);
+        var catName = blog.category || 'Blog';
+        var keywords = generateKeywords(blog, 'blog', catName);
+        var description = generateDescription(blog, 'blog', catName);
+        var content = buildBlogContent(blog);
+
+        var html = buildHTML({
+            title: blog.title,
+            description: description,
+            keywords: keywords,
+            image: blog.image || '',
+            content: content,
+            breadcrumb: [
+                { name: 'Home', url: '/index.html' },
+                { name: 'Blogs', url: '/blogs.html' },
+                { name: blog.title.substring(0, 50) }
+            ],
+            type: 'blog',
+            timestamp: blog.timestamp,
+            slug: slug,
+            siteSettings: siteSettings
+        });
+
+        fs.writeFileSync('blogs/' + slug + '.html', html);
+        generatedUrls.push({
+            url: 'https://esewahub.in/blogs/' + slug + '.html',
+            priority: '0.7',
+            freq: 'monthly',
+            lastmod: blog.timestamp ? blog.timestamp.split('T')[0] : today
+        });
+    });
+
+    console.log('✅ Generated', blogEntries.length, 'blog pages');
+
     // ========== GENERATE SITEMAP ==========
     var sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+    
+    // ✅ Static pages — blogs.html bhi add karein
     var staticPages = [
         { url: '/', priority: '1.0', freq: 'daily' },
+        { url: '/blogs.html', priority: '0.8', freq: 'daily' },
         { url: '/about.html', priority: '0.5', freq: 'monthly' },
         { url: '/contact.html', priority: '0.5', freq: 'monthly' },
         { url: '/privacy.html', priority: '0.3', freq: 'yearly' },
@@ -466,15 +585,15 @@ async function generate() {
     });
     sitemap += '</urlset>';
     fs.writeFileSync('sitemap.xml', sitemap);
-    console.log('✅ sitemap.xml updated (' + (generatedUrls.length + 6) + ' URLs)');
+    console.log('✅ sitemap.xml updated (' + (generatedUrls.length + staticPages.length) + ' URLs)');
 
     // ========== GENERATE ROBOTS.TXT ==========
     fs.writeFileSync('robots.txt', 'User-agent: *\nAllow: /\n\nSitemap: https://esewahub.in/sitemap.xml\n');
     console.log('✅ robots.txt updated');
 
     console.log('\n🎉 All done!');
-    console.log('Total pages: ' + (postEntries.length + serviceEntries.length));
-    console.log('Total URLs: ' + (generatedUrls.length + 6));
+    console.log('Total pages: ' + (postEntries.length + serviceEntries.length + blogEntries.length));
+    console.log('Total URLs: ' + (generatedUrls.length + staticPages.length));
 
     process.exit(0);
 }
