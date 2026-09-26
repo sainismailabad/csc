@@ -3,26 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog | esewahub.in</title>
-<meta name="description" id="metaDesc" content="">
+<meta name="theme-color" content="#0ea5e9">
+<title>Blogs & Guides | esewahub.in</title>
+<meta name="description" content="Expert guides on Sarkari Kaam, government schemes, documents, and digital services — all in simple language. Read the latest blogs.">
+<meta name="keywords" content="sarkari blog, government scheme guide, aadhar guide, pan card guide, sarkari kaam help">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="google-adsense-account" content="ca-pub-1336136297225442">
-<link rel="canonical" id="canonicalLink" href="">
-<meta property="og:type" content="article">
-<meta property="og:title" id="ogTitle" content="">
-<meta property="og:description" id="ogDesc" content="">
-<meta property="og:image" id="ogImage" content="">
 <link rel="icon" id="faviconLink" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://pagead2.googlesyndication.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!-- ✅ ADSENSE SCRIPT -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1336136297225442" crossorigin="anonymous"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database-compat.js"></script>
 <style>
 :root{
---p50:#eff6ff;--p100:#dbeafe;--p200:#bfdbfe;--p500:#3b82f6;--p600:#2563eb;--p700:#1d4ed8;--p800:#1e40af;
+--p50:#eff6ff;--p100:#dbeafe;--p200:#bfdbfe;--p400:#60a5fa;--p500:#3b82f6;--p600:#2563eb;--p700:#1d4ed8;--p800:#1e40af;--p900:#1e3a8a;
 --s50:#f8fafc;--s100:#f1f5f9;--s200:#e2e8f0;--s300:#cbd5e1;--s400:#94a3b8;--s500:#64748b;--s600:#475569;--s700:#334155;--s800:#1e293b;--s900:#0f172a;
 --g50:#f0fdf4;--g500:#22c55e;--g600:#16a34a;--g700:#15803d;
 --r50:#fef2f2;--r500:#ef4444;--r600:#dc2626;
@@ -30,116 +29,129 @@
 --font:'Inter',sans-serif;--serif:'Merriweather',serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:var(--font);background:var(--s100);color:var(--s800);line-height:1.7;-webkit-font-smoothing:antialiased}
-a{text-decoration:none;color:inherit;transition:all .2s}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font);background:var(--s100);color:var(--s800);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit;transition:all .2s;cursor:pointer}
 button{font-family:inherit;cursor:pointer;border:none}
 img{max-width:100%;height:auto;display:block}
 .container{max-width:1280px;margin:0 auto;padding:0 20px;width:100%}
 
+/* ===== TOPBAR ===== */
 .topbar{background:var(--s900);color:var(--s300);padding:10px 0;font-size:.82rem}
 .topbar .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-.topbar-left span{display:flex;align-items:center;gap:6px}
+.topbar-left{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.topbar-left span,.topbar-left a{display:flex;align-items:center;gap:6px;color:var(--s300)}
 .topbar-left i{color:var(--p400)}
 .topbar-right a{padding:6px 12px;border-radius:6px;font-size:.8rem;font-weight:600;color:var(--g500);display:inline-flex;align-items:center;gap:6px}
+.topbar-right a:hover{background:rgba(255,255,255,.1)}
 
+/* ===== HEADER ===== */
 .header{background:#fff;padding:18px 0;border-bottom:1px solid var(--s200);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.04)}
 .header .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
 .logo{display:flex;align-items:center;gap:12px}
 .logo-icon{width:50px;height:50px;background:linear-gradient(135deg,var(--p600),var(--p800));border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.4rem;overflow:hidden;padding:0}
+.logo-icon img{width:100%;height:100%;object-fit:cover;border-radius:12px}
 .logo-text h1{font-family:var(--serif);color:var(--p700);font-size:1.4rem;font-weight:900}
 .logo-text p{color:var(--s500);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
-.nav-links{display:flex;gap:6px}
-.nav-links a{padding:9px 16px;border-radius:8px;font-size:.84rem;font-weight:700;color:var(--s600);display:flex;align-items:center;gap:6px;text-transform:uppercase}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap}
+.nav-links a{padding:9px 16px;border-radius:8px;font-size:.84rem;font-weight:700;color:var(--s600);display:flex;align-items:center;gap:6px;transition:all .2s;text-transform:uppercase;letter-spacing:.03em}
 .nav-links a:hover{background:var(--p50);color:var(--p700)}
+.nav-links a.active{background:var(--p600);color:#fff}
 
-.layout{display:grid;grid-template-columns:1fr 340px;gap:32px;margin:32px auto;padding:0 20px;max-width:1280px}
+/* ===== HERO ===== */
+.blogs-hero{background:linear-gradient(135deg,#0ea5e9,#0369a1);color:#fff;padding:60px 0;text-align:center;position:relative;overflow:hidden}
+.blogs-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,rgba(255,255,255,.1),transparent 60%)}
+.blogs-hero .container{position:relative;z-index:1}
+.blogs-hero .icon-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.2);backdrop-filter:blur(10px);padding:8px 18px;border-radius:9999px;font-size:.78rem;font-weight:800;margin-bottom:16px;text-transform:uppercase;letter-spacing:.08em}
+.blogs-hero h1{font-family:var(--serif);font-size:2.4rem;font-weight:900;margin-bottom:14px;line-height:1.2}
+.blogs-hero p{font-size:1rem;opacity:.95;max-width:640px;margin:0 auto;line-height:1.7}
 
-.blog-article{background:#fff;border:1px solid var(--s200);border-radius:16px;padding:40px;box-shadow:0 4px 6px rgba(0,0,0,.04)}
-.blog-cat-badge{display:inline-flex;align-items:center;gap:6px;background:#e0f2fe;color:#0369a1;font-size:.75rem;font-weight:800;padding:6px 14px;border-radius:9999px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:16px}
-.blog-title{font-family:var(--serif);font-size:2rem;font-weight:900;color:var(--s900);margin-bottom:16px;line-height:1.3}
-.blog-meta-info{display:flex;gap:18px;flex-wrap:wrap;font-size:.85rem;color:var(--s500);font-weight:600;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid var(--s200)}
-.blog-meta-info span{display:flex;align-items:center;gap:6px}
-.blog-meta-info i{color:#0284c7}
-.blog-hero-image{margin-bottom:26px;border-radius:14px;overflow:hidden;border:1px solid var(--s200)}
-.blog-hero-image img{width:100%;height:auto;max-height:480px;object-fit:cover}
-.blog-content{font-size:1rem;line-height:1.85;color:var(--s700)}
-.blog-content h1,.blog-content h2,.blog-content h3{font-family:var(--serif);color:var(--s900);margin:28px 0 14px;font-weight:900;line-height:1.3}
-.blog-content h1{font-size:1.6rem}
-.blog-content h2{font-size:1.35rem}
-.blog-content h3{font-size:1.15rem}
-.blog-content p{margin-bottom:16px}
-.blog-content ul,.blog-content ol{margin:16px 0 16px 28px}
-.blog-content li{margin-bottom:8px}
-.blog-content blockquote{border-left:4px solid #0ea5e9;background:#f0f9ff;padding:16px 20px;margin:20px 0;border-radius:10px;font-style:italic;color:#0369a1}
-.blog-content code{background:var(--s100);padding:3px 8px;border-radius:4px;font-family:monospace;font-size:.9rem;color:#dc2626}
-.blog-content pre{background:#0f172a;color:#e2e8f0;padding:18px;border-radius:10px;overflow-x:auto;margin:20px 0;font-family:monospace;font-size:.88rem;line-height:1.7}
-.blog-content img{border-radius:10px;margin:20px 0}
-.blog-content a{color:#0284c7;text-decoration:underline;font-weight:600}
-.blog-content strong{color:var(--s900);font-weight:800}
+/* ===== AD CONTAINER ===== */
+.ad-container{background:var(--s50);border:1px dashed var(--s300);border-radius:10px;padding:16px 12px 12px;text-align:center;margin:24px auto;max-width:1100px;min-height:100px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.ad-container .ad-label{position:absolute;top:6px;left:12px;font-size:.6rem;text-transform:uppercase;letter-spacing:.15em;color:var(--s400);font-weight:800;background:#fff;padding:2px 8px;border-radius:3px;z-index:1}
 
-.blog-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;padding-top:24px;border-top:1px solid var(--s200)}
-.blog-tag{background:var(--p50);color:var(--p700);padding:6px 14px;border-radius:9999px;font-size:.75rem;font-weight:700;border:1px solid var(--p200)}
+/* ===== FILTERS ===== */
+.blogs-filters{background:#fff;padding:24px 0;border-bottom:1px solid var(--s200)}
+.search-bar{max-width:600px;margin:0 auto 20px;position:relative}
+.search-bar input{width:100%;padding:14px 52px 14px 20px;border:2px solid var(--s200);border-radius:9999px;font-size:.95rem;background:var(--s50);font-family:inherit;outline:none;transition:all .2s}
+.search-bar input:focus{border-color:#0ea5e9;background:#fff;box-shadow:0 0 0 4px rgba(14,165,233,.1)}
+.search-bar i{position:absolute;right:20px;top:50%;transform:translateY(-50%);color:var(--s400);font-size:1rem}
 
-.blog-refs{margin-top:28px;padding:22px;background:#f0f9ff;border-radius:12px;border:1px solid #bae6fd}
-.blog-refs h3{font-size:.95rem;font-weight:800;color:#0369a1;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.blog-ref-link{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px dashed #7dd3fc;font-size:.88rem;color:#0369a1;font-weight:600;text-decoration:none}
-.blog-ref-link:last-child{border-bottom:none}
-.blog-ref-link i{color:#0284c7}
-.blog-ref-link:hover{color:#0284c7;padding-left:6px}
+.cat-filter{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.cat-filter button{padding:9px 18px;border:2px solid var(--s200);background:#fff;border-radius:9999px;font-weight:700;font-size:.78rem;color:var(--s600);transition:all .2s;text-transform:uppercase;letter-spacing:.04em;font-family:inherit}
+.cat-filter button:hover{border-color:#0ea5e9;color:#0369a1}
+.cat-filter button.active{background:#0ea5e9;color:#fff;border-color:#0ea5e9;box-shadow:0 4px 12px rgba(14,165,233,.25)}
 
-.share-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
-.share-btn{padding:10px 18px;border-radius:10px;font-size:.82rem;font-weight:700;color:#fff;display:inline-flex;align-items:center;gap:8px;transition:all .2s;border:none;cursor:pointer}
-.share-btn.whatsapp{background:#25d366}
-.share-btn.facebook{background:#1877f2}
-.share-btn.twitter{background:#1da1f2}
-.share-btn.telegram{background:#0088cc}
-.share-btn.copy{background:var(--s600)}
-.share-btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.15)}
+/* ===== GRID ===== */
+.blogs-container{padding:40px 0 60px}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+.blog-card{background:#fff;border:1px solid var(--s200);border-radius:16px;overflow:hidden;transition:all .3s;display:flex;flex-direction:column;text-decoration:none;color:inherit;position:relative}
+.blog-card:hover{transform:translateY(-6px);box-shadow:0 20px 30px rgba(0,0,0,.1);border-color:#7dd3fc}
+.blog-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#0ea5e9,#0284c7);z-index:2}
+.blog-img{width:100%;height:200px;object-fit:cover;background:linear-gradient(135deg,#e0f2fe,#bae6fd)}
+.blog-body{padding:22px;flex-grow:1;display:flex;flex-direction:column}
+.blog-cat{display:inline-flex;align-items:center;gap:6px;background:#e0f2fe;color:#0369a1;font-size:.7rem;font-weight:800;padding:5px 12px;border-radius:9999px;text-transform:uppercase;letter-spacing:.06em;width:fit-content;margin-bottom:12px}
+.blog-title{font-family:var(--serif);font-size:1.08rem;font-weight:800;color:var(--s900);margin-bottom:10px;line-height:1.4;transition:color .2s}
+.blog-card:hover .blog-title{color:#0284c7}
+.blog-excerpt{font-size:.86rem;color:var(--s500);line-height:1.65;margin-bottom:16px;flex-grow:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.blog-meta{display:flex;align-items:center;gap:12px;font-size:.72rem;color:var(--s400);font-weight:600;border-top:1px solid var(--s200);padding-top:12px;margin-top:auto;flex-wrap:wrap}
+.blog-meta span{display:flex;align-items:center;gap:4px}
+.blog-meta i{color:#0284c7}
 
-.side-widget{background:#fff;border:1px solid var(--s200);border-radius:14px;padding:22px;margin-bottom:22px}
-.side-title{font-size:.9rem;font-weight:800;margin-bottom:16px;color:var(--s900);border-bottom:2px solid var(--s200);padding-bottom:10px;text-transform:uppercase;display:flex;align-items:center;gap:10px;letter-spacing:.04em}
-.side-title i{color:#0284c7}
-.side-link{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px dashed var(--s200);font-size:.86rem;font-weight:600;color:var(--s600)}
-.side-link:last-child{border-bottom:none}
-.side-link:hover{color:#0284c7;padding-left:6px}
-
-.ad-container{background:var(--s50);border:1px dashed var(--s300);border-radius:10px;padding:16px 12px 12px;text-align:center;margin:20px 0;min-height:100px;display:flex;align-items:center;justify-content:center;position:relative}
-.ad-label{position:absolute;top:6px;left:12px;font-size:.6rem;text-transform:uppercase;letter-spacing:.15em;color:var(--s400);font-weight:800;background:#fff;padding:2px 8px;border-radius:3px}
-
+/* ===== EMPTY / LOADING ===== */
+.empty{text-align:center;padding:60px 20px;color:var(--s400);grid-column:1/-1}
+.empty i{font-size:3rem;margin-bottom:14px;color:var(--s300);display:block}
+.empty h3{font-size:1.1rem;font-weight:800;color:var(--s600);margin-bottom:6px}
+.empty p{font-size:.88rem;line-height:1.6}
+.empty .btn-cta{display:inline-block;margin-top:18px;padding:12px 24px;background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff;border-radius:10px;font-weight:700;font-size:.88rem;transition:all .25s;box-shadow:0 6px 18px rgba(14,165,233,.3)}
+.empty .btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(14,165,233,.4)}
 .spinner{width:48px;height:48px;border:4px solid var(--s200);border-top-color:#0ea5e9;border-radius:50%;animation:spin .8s linear infinite;margin:40px auto}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-.footer{background:var(--s900);color:var(--s400);padding:40px 0 20px}
+/* ===== FOOTER ===== */
+.footer{background:var(--s900);color:var(--s400);padding:40px 0 20px;margin-top:40px}
 .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;padding-bottom:20px;border-bottom:1px solid var(--s700)}
-.foot-inner h3{color:#fff;font-size:1rem;font-weight:800;display:flex;align-items:center;gap:10px}
+.foot-inner h3{color:#fff;font-size:1rem;font-weight:800;display:flex;align-items:center;gap:10px;font-family:var(--serif)}
+.foot-inner h3 i{color:#0ea5e9}
 .foot-links{display:flex;gap:16px;flex-wrap:wrap}
 .foot-links a{font-size:.84rem;color:var(--s400)}
+.foot-links a:hover{color:#0ea5e9}
 .foot-bottom{text-align:center;padding-top:20px;font-size:.8rem;color:var(--s500)}
+.foot-bottom i{color:#ef4444}
 
-@media(max-width:1024px){
-.layout{grid-template-columns:1fr}
-}
+/* ===== RESPONSIVE ===== */
 @media(max-width:768px){
-.blog-article{padding:22px}
-.blog-title{font-size:1.4rem}
-.blog-content{font-size:.95rem}
-.blog-content h2{font-size:1.2rem}
-.blog-content h3{font-size:1.05rem}
+.blogs-hero{padding:40px 0}
+.blogs-hero h1{font-size:1.6rem}
+.blogs-hero p{font-size:.9rem}
+.blog-grid{grid-template-columns:1fr;gap:18px}
 .header .container{flex-direction:column}
-.nav-links{flex-wrap:wrap;justify-content:center}
+.nav-links{width:100%;justify-content:center}
+.nav-links a{padding:8px 12px;font-size:.76rem}
+}
+@media(max-width:480px){
+.blogs-hero h1{font-size:1.35rem}
+.cat-filter button{padding:7px 14px;font-size:.72rem}
+.blog-body{padding:18px}
+.blog-title{font-size:.98rem}
 }
 </style>
 </head>
 <body>
 
+<!-- ===== TOPBAR ===== -->
 <div class="topbar">
 <div class="container">
-<div class="topbar-left"><span><i class="fas fa-book-open"></i> <span id="topLabel">Blog Article</span></span></div>
-<div class="topbar-right"><a href="blogs.html"><i class="fas fa-arrow-left"></i> Back to Blogs</a></div>
+<div class="topbar-left">
+<span><i class="fas fa-book-open"></i> <span>Blogs & Guides</span></span>
+</div>
+<div class="topbar-right">
+<a href="index.html"><i class="fas fa-arrow-left"></i> Back to Home</a>
+</div>
 </div>
 </div>
 
+<!-- ===== HEADER ===== -->
 <div class="header">
 <div class="container">
 <a href="index.html" class="logo">
@@ -151,44 +163,63 @@ img{max-width:100%;height:auto;display:block}
 </a>
 <nav class="nav-links">
 <a href="index.html"><i class="fas fa-home"></i> Home</a>
-<a href="blogs.html" class="active"><i class="fas fa-book-open"></i> All Blogs</a>
+<a href="index.html#sarkari-kaam"><i class="fas fa-briefcase"></i> Sarkari Kaam</a>
+<a href="blogs.html" class="active"><i class="fas fa-book-open"></i> Blogs</a>
 </nav>
 </div>
 </div>
 
-<div class="layout">
-<main>
-<div class="blog-article" id="blogArticle">
+<!-- ===== HERO ===== -->
+<div class="blogs-hero">
+<div class="container">
+<div class="icon-badge"><i class="fas fa-star"></i> Expert Guides</div>
+<h1>📖 Blogs & Guides</h1>
+<p>Simple language mein samjhiye — Aadhar, PAN, Sarkari Yojna, Documents, aur bhi bahut kuch. Updated weekly.</p>
+</div>
+</div>
+
+<!-- ✅ AD SLOT #1: TOP -->
+<div class="container">
+<div class="ad-container">
+<span class="ad-label">Advertisement</span>
+<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="5555555555" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+</div>
+
+<!-- ===== FILTERS ===== -->
+<div class="blogs-filters">
+<div class="container">
+<div class="search-bar">
+<input type="text" id="blogSearch" placeholder="Search blogs by title, category, or keyword..." oninput="filterBlogs()">
+<i class="fas fa-search"></i>
+</div>
+<div class="cat-filter" id="catFilter">
+<button class="active" data-cat="all" onclick="filterByCategory('all', this)">All</button>
+</div>
+</div>
+</div>
+
+<!-- ===== BLOG GRID ===== -->
+<div class="blogs-container">
+<div class="container">
+<div class="blog-grid" id="blogGrid">
+<div class="empty">
 <div class="spinner"></div>
-<p style="text-align:center;color:var(--s500)">Loading blog...</p>
+<p style="margin-top:14px">Loading blogs...</p>
+</div>
+</div>
+</div>
 </div>
 
-<!-- TOP AD -->
+<!-- ✅ AD SLOT #2: BOTTOM -->
+<div class="container">
 <div class="ad-container">
 <span class="ad-label">Advertisement</span>
-<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="7777777777" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="6666666666" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
 </div>
 
-<!-- BOTTOM AD -->
-<div class="ad-container">
-<span class="ad-label">Advertisement</span>
-<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="8888888888" data-ad-format="auto" data-full-width-responsive="true"></ins>
-</div>
-</main>
-
-<aside>
-<div class="side-widget">
-<h3 class="side-title"><i class="fas fa-book"></i> More Blogs</h3>
-<div id="relatedBlogs"><div class="spinner" style="width:30px;height:30px;border-width:3px"></div></div>
-</div>
-
-<div class="ad-container" style="min-height:250px">
-<span class="ad-label">Advertisement</span>
-<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="9999999999" data-ad-format="auto" data-full-width-responsive="true"></ins>
-</div>
-</aside>
-</div>
-
+<!-- ===== FOOTER ===== -->
 <footer class="footer">
 <div class="container">
 <div class="foot-inner">
@@ -201,7 +232,7 @@ img{max-width:100%;height:auto;display:block}
 </div>
 </div>
 <div class="foot-bottom">
-&copy; 2026 esewahub.in. All Rights Reserved. Made with <i class="fas fa-heart" style="color:#ef4444"></i> for Digital India.
+&copy; 2026 esewahub.in. All Rights Reserved. Made with <i class="fas fa-heart"></i> for Digital India.
 </div>
 </div>
 </footer>
@@ -211,166 +242,195 @@ const firebaseConfig={apiKey:"AIzaSyDLnDVmkVcXxOFDxxfmXmqU1HflB2EpalQ",authDomai
 firebase.initializeApp(firebaseConfig);
 const db=firebase.database();
 
-let currentBlog=null;
 let allBlogs=[];
+let currentCategory='all';
+let currentSearch='';
 
 function escapeHtml(t){if(!t)return '';return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function fmtDate(iso){if(!iso)return 'N/A';const d=new Date(iso);const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return `${d.getDate()} ${m[d.getMonth()]} ${d.getFullYear()}`;}
 
-function getBlogId(){
-    const params = new URLSearchParams(window.location.search);
-    return params.get('id');
-}
-
-async function loadBlog(){
-    const id = getBlogId();
-    if(!id){
-        document.getElementById('blogArticle').innerHTML = '<div style="text-align:center;padding:40px"><i class="fas fa-exclamation-triangle" style="font-size:2.5rem;color:#f59e0b;margin-bottom:14px"></i><h2 style="font-family:Merriweather,serif;color:#0f172a">Blog Not Found</h2><p style="color:#64748b;margin-top:10px">No blog ID provided.</p><a href="blogs.html" style="display:inline-block;margin-top:18px;padding:12px 24px;background:#0ea5e9;color:#fff;border-radius:10px;font-weight:700">View All Blogs</a></div>';
-        return;
-    }
+async function loadBlogs(){
+    console.log('🔄 Loading blogs...');
     
     try {
-        const ssSnap = await db.ref('settings/general').once('value').catch(()=>null);
-        if(ssSnap && ssSnap.exists()){
-            const s = ssSnap.val();
-            if(s.title){document.getElementById('siteTitle').innerText=s.title;document.getElementById('footTitle').innerText=s.title;}
-            if(s.tagline) document.getElementById('siteTagline').innerText = s.tagline;
-            if(s.logo && s.logo.trim()){
-                const logoIcon = document.getElementById('logoIcon');
-                logoIcon.innerHTML = `<img src="${s.logo}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px">`;
-                logoIcon.style.background = 'transparent';
-                const favicon = document.getElementById('faviconLink');
-                if(favicon) favicon.href = s.logo;
+        // Load site settings
+        try {
+            const ssSnap = await db.ref('settings/general').once('value');
+            if(ssSnap && ssSnap.exists()){
+                const s = ssSnap.val();
+                if(s.title){
+                    document.getElementById('siteTitle').innerText = s.title;
+                    document.getElementById('footTitle').innerText = s.title;
+                }
+                if(s.tagline) document.getElementById('siteTagline').innerText = s.tagline;
+                if(s.logo && s.logo.trim()){
+                    const logoIcon = document.getElementById('logoIcon');
+                    logoIcon.innerHTML = `<img src="${s.logo}" alt="" onerror="this.parentElement.innerHTML='<i class=\\'fas fa-shield-halved\\'></i>'">`;
+                    logoIcon.style.background = 'transparent';
+                    const favicon = document.getElementById('faviconLink');
+                    if(favicon) favicon.href = s.logo;
+                }
             }
-        }
+        } catch(e) { console.warn('Settings load error:', e); }
         
-        const snap = await db.ref(`blogs/${id}`).once('value');
+        // ✅ Load blogs from Firebase
+        console.log('📡 Fetching blogs from Firebase...');
+        const snap = await db.ref('blogs').once('value');
+        
         if(!snap.exists()){
-            document.getElementById('blogArticle').innerHTML = '<div style="text-align:center;padding:40px"><i class="fas fa-search" style="font-size:2.5rem;color:#94a3b8;margin-bottom:14px"></i><h2 style="font-family:Merriweather,serif;color:#0f172a">Blog Not Found</h2><p style="color:#64748b;margin-top:10px">This blog may have been removed.</p><a href="blogs.html" style="display:inline-block;margin-top:18px;padding:12px 24px;background:#0ea5e9;color:#fff;border-radius:10px;font-weight:700">View All Blogs</a></div>';
+            console.warn('⚠️ No blogs found in Firebase');
+            renderEmpty('No blogs yet', 'Abhi tak koi blog publish nahi hua. Admin panel se pehla blog likhein!');
             return;
         }
         
-        currentBlog = {id, ...snap.val()};
-        renderBlog(currentBlog);
+        const data = snap.val();
+        console.log('📊 Blogs found:', Object.keys(data).length);
         
-        document.title = (currentBlog.seoTitle || currentBlog.title) + ' | esewahub.in';
-        const metaDesc = document.getElementById('metaDesc');
-        if(metaDesc) metaDesc.setAttribute('content', currentBlog.seoDesc || currentBlog.excerpt || '');
-        const ogTitle = document.getElementById('ogTitle');
-        if(ogTitle) ogTitle.setAttribute('content', currentBlog.seoTitle || currentBlog.title);
-        const ogDesc = document.getElementById('ogDesc');
-        if(ogDesc) ogDesc.setAttribute('content', currentBlog.seoDesc || currentBlog.excerpt || '');
-        const ogImage = document.getElementById('ogImage');
-        if(ogImage && currentBlog.image) ogImage.setAttribute('content', currentBlog.image);
-        const canonical = document.getElementById('canonicalLink');
-        if(canonical) canonical.setAttribute('href', 'https://esewahub.in/blog.html?id=' + id);
-        document.getElementById('topLabel').innerText = currentBlog.category || 'Blog';
+        // Convert object to array
+        allBlogs = Object.entries(data)
+            .map(([id, b]) => ({id, ...b}))
+            .filter(b => {
+                // Show only published blogs
+                const isPublished = b.status !== 'draft';
+                if(!isPublished) console.log('⏭️ Skipping draft:', b.title);
+                return isPublished;
+            })
+            .sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
         
-        loadRelated(id, currentBlog.category);
+        console.log('✅ Published blogs loaded:', allBlogs.length);
         
-        // AdSense push
+        if(allBlogs.length === 0){
+            renderEmpty('No published blogs', 'Saare blogs abhi draft mein hain. Admin panel se publish karein.');
+            return;
+        }
+        
+        // Render categories + blogs
+        renderCategories();
+        renderBlogs();
+        
+        // Push AdSense
         setTimeout(() => {
             try {
                 document.querySelectorAll('.adsbygoogle').forEach(() => {
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 });
-            } catch(e) {}
+            } catch(e) { console.warn('AdSense push error:', e); }
         }, 500);
         
     } catch(e) {
-        console.error('Load error:', e);
-        document.getElementById('blogArticle').innerHTML = '<div style="text-align:center;padding:40px"><i class="fas fa-exclamation-triangle" style="font-size:2.5rem;color:#ef4444;margin-bottom:14px"></i><h2>Error Loading Blog</h2><p>Please refresh the page.</p></div>';
+        console.error('❌ Load error:', e);
+        renderEmpty('Error Loading Blogs', 'Please refresh the page. If issue persists, check Firebase rules.');
     }
 }
 
-function renderBlog(b){
-    const article = document.getElementById('blogArticle');
-    
-    const heroImage = b.image 
-        ? `<div class="blog-hero-image"><img src="${b.image}" alt="${escapeHtml(b.title)}" onerror="this.parentElement.style.display='none'"></div>`
-        : '';
-    
-    const tagsHtml = b.tags && b.tags.length 
-        ? `<div class="blog-tags">${b.tags.map(t => `<span class="blog-tag">#${escapeHtml(t)}</span>`).join('')}</div>`
-        : '';
-    
-    const refsHtml = b.links && b.links.length
-        ? `<div class="blog-refs">
-            <h3><i class="fas fa-link"></i> Reference & Sources</h3>
-            ${b.links.map(l => `<a href="${escapeHtml(l.url)}" target="_blank" rel="noopener nofollow" class="blog-ref-link"><i class="fas fa-external-link-alt"></i> <span>${escapeHtml(l.name)}</span></a>`).join('')}
-           </div>`
-        : '';
-    
-    const currentUrl = encodeURIComponent(window.location.href);
-    const titleEnc = encodeURIComponent(b.title);
-    
-    const shareHtml = `<div class="share-btns">
-        <a href="https://wa.me/?text=${titleEnc}%20${currentUrl}" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=${currentUrl}" target="_blank" class="share-btn facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
-        <a href="https://twitter.com/intent/tweet?text=${titleEnc}&url=${currentUrl}" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
-        <a href="https://t.me/share/url?url=${currentUrl}&text=${titleEnc}" target="_blank" class="share-btn telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
-        <button onclick="copyLink()" class="share-btn copy"><i class="fas fa-copy"></i> Copy Link</button>
-    </div>`;
-    
-    article.innerHTML = `
-        <span class="blog-cat-badge"><i class="fas fa-tag"></i> ${escapeHtml(b.category || 'General')}</span>
-        <h1 class="blog-title">${escapeHtml(b.title)}</h1>
-        <div class="blog-meta-info">
-            <span><i class="fas fa-user"></i> ${escapeHtml(b.author || 'Team')}</span>
-            <span><i class="fas fa-calendar"></i> ${fmtDate(b.timestamp)}</span>
-            <span><i class="fas fa-clock"></i> ${escapeHtml(b.readingTime || '2 min read')}</span>
-            <span><i class="fas fa-file-word"></i> ${b.wordCount || 0} words</span>
-        </div>
-        ${heroImage}
-        <div class="blog-content">${b.content || '<p>Content not available.</p>'}</div>
-        ${refsHtml}
-        ${tagsHtml}
-        ${shareHtml}
-    `;
+function renderEmpty(title, message){
+    document.getElementById('blogGrid').innerHTML = `
+        <div class="empty">
+            <i class="fas fa-book-open"></i>
+            <h3>${escapeHtml(title)}</h3>
+            <p>${escapeHtml(message)}</p>
+            <a href="index.html" class="btn-cta">
+                <i class="fas fa-home"></i> Back to Home
+            </a>
+        </div>`;
 }
 
-function loadRelated(currentId, category){
-    const related = allBlogs.filter(b => b.id !== currentId && b.category === category).slice(0, 5);
-    const fallback = allBlogs.filter(b => b.id !== currentId).slice(0, 5);
-    const list = related.length > 0 ? related : fallback;
-    const box = document.getElementById('relatedBlogs');
+function renderCategories(){
+    const cats = new Set();
+    allBlogs.forEach(b => { if(b.category) cats.add(b.category); });
     
-    if(list.length === 0){
-        box.innerHTML = '<p style="color:#94a3b8;font-size:.85rem">No other blogs yet.</p>';
+    const filter = document.getElementById('catFilter');
+    let html = '<button class="active" data-cat="all" onclick="filterByCategory(\'all\', this)">All</button>';
+    Array.from(cats).sort().forEach(c => {
+        const safeCat = escapeHtml(c).replace(/'/g, "\\'");
+        html += `<button data-cat="${escapeHtml(c)}" onclick="filterByCategory('${safeCat}', this)">${escapeHtml(c)}</button>`;
+    });
+    filter.innerHTML = html;
+}
+
+function renderBlogs(){
+    const grid = document.getElementById('blogGrid');
+    let blogs = allBlogs;
+    
+    // Filter by category
+    if(currentCategory !== 'all'){
+        blogs = blogs.filter(b => b.category === currentCategory);
+    }
+    
+    // Filter by search
+    if(currentSearch){
+        const q = currentSearch.toLowerCase();
+        blogs = blogs.filter(b => 
+            (b.title||'').toLowerCase().includes(q) ||
+            (b.excerpt||'').toLowerCase().includes(q) ||
+            (b.category||'').toLowerCase().includes(q) ||
+            (b.tags||[]).some(t => (t||'').toLowerCase().includes(q))
+        );
+    }
+    
+    if(blogs.length === 0){
+        grid.innerHTML = `
+            <div class="empty">
+                <i class="fas fa-filter"></i>
+                <h3>No blogs found</h3>
+                <p>${currentSearch ? 'Try different keywords.' : 'No blogs in this category yet.'}</p>
+                <a href="#" onclick="event.preventDefault();resetFilters();" class="btn-cta">
+                    <i class="fas fa-redo"></i> Show All Blogs
+                </a>
+            </div>`;
         return;
     }
     
-    box.innerHTML = list.map(b => 
-        `<a href="blog.html?id=${b.id}" class="side-link"><i class="fas fa-book-open"></i> ${escapeHtml(b.title.substring(0, 60))}${b.title.length > 60 ? '...' : ''}</a>`
-    ).join('');
+    let html = '';
+    blogs.forEach(b => {
+        const title = b.title || 'Untitled Blog';
+        const excerpt = b.excerpt || (b.content || '').replace(/<[^>]*>/g, ' ').substring(0, 160) + '...';
+        
+        const image = b.image 
+            ? `<img src="${b.image}" alt="${escapeHtml(title)}" class="blog-img" loading="lazy" onerror="this.outerHTML='<div class=\\'blog-img\\' style=\\'display:flex;align-items:center;justify-content:center;font-size:3rem;color:#0284c7\\'><i class=\\'fas fa-book-open\\'></i></div>'">`
+            : `<div class="blog-img" style="display:flex;align-items:center;justify-content:center;font-size:3rem;color:#0284c7"><i class="fas fa-book-open"></i></div>`;
+        
+        html += `<a href="blog.html?id=${b.id}" class="blog-card">
+            ${image}
+            <div class="blog-body">
+                <span class="blog-cat"><i class="fas fa-tag"></i> ${escapeHtml(b.category || 'General')}</span>
+                <h2 class="blog-title">${escapeHtml(title)}</h2>
+                <p class="blog-excerpt">${escapeHtml(excerpt.substring(0, 160))}${excerpt.length > 160 ? '...' : ''}</p>
+                <div class="blog-meta">
+                    <span><i class="fas fa-user"></i> ${escapeHtml(b.author || 'Team')}</span>
+                    <span><i class="fas fa-clock"></i> ${escapeHtml(b.readingTime || '2 min read')}</span>
+                    <span><i class="fas fa-calendar"></i> ${fmtDate(b.timestamp)}</span>
+                </div>
+            </div>
+        </a>`;
+    });
+    
+    grid.innerHTML = html;
 }
 
-window.copyLink = function(){
-    const url = window.location.href;
-    navigator.clipboard.writeText(url).then(() => {
-        const btn = event.target.closest('.share-btn');
-        const original = btn.innerHTML;
-        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-        setTimeout(() => btn.innerHTML = original, 2000);
-    });
+window.filterByCategory = function(cat, el){
+    currentCategory = cat;
+    document.querySelectorAll('#catFilter button').forEach(b => b.classList.remove('active'));
+    if(el) el.classList.add('active');
+    renderBlogs();
 };
 
-async function init(){
-    try {
-        const snap = await db.ref('blogs').once('value');
-        if(snap.exists()){
-            const data = snap.val();
-            allBlogs = Object.entries(data)
-                .map(([id, b]) => ({id, ...b}))
-                .filter(b => b.status !== 'draft')
-                .sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
-        }
-    } catch(e) { console.warn(e); }
-    
-    await loadBlog();
-}
+window.filterBlogs = function(){
+    currentSearch = document.getElementById('blogSearch').value.trim();
+    renderBlogs();
+};
 
-init();
+window.resetFilters = function(){
+    currentCategory = 'all';
+    currentSearch = '';
+    document.getElementById('blogSearch').value = '';
+    document.querySelectorAll('#catFilter button').forEach(b => b.classList.remove('active'));
+    const allBtn = document.querySelector('#catFilter button[data-cat="all"]');
+    if(allBtn) allBtn.classList.add('active');
+    renderBlogs();
+};
+
+document.addEventListener('DOMContentLoaded', loadBlogs);
 </script>
 </body>
 </html>
