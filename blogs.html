@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | esewahub.in</title>
+<meta name="description" id="metaDesc" content="">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="google-adsense-account" content="ca-pub-1336136297225442">
+<link rel="canonical" id="canonicalLink" href="">
+<meta property="og:type" content="article">
+<meta property="og:title" id="ogTitle" content="">
+<meta property="og:description" id="ogDesc" content="">
+<meta property="og:image" id="ogImage" content="">
+<link rel="icon" id="faviconLink" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1336136297225442" crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database-compat.js"></script>
+<style>
+:root{
+--p50:#eff6ff;--p100:#dbeafe;--p200:#bfdbfe;--p500:#3b82f6;--p600:#2563eb;--p700:#1d4ed8;--p800:#1e40af;
+--s50:#f8fafc;--s100:#f1f5f9;--s200:#e2e8f0;--s300:#cbd5e1;--s400:#94a3b8;--s500:#64748b;--s600:#475569;--s700:#334155;--s800:#1e293b;--s900:#0f172a;
+--g50:#f0fdf4;--g500:#22c55e;--g600:#16a34a;--g700:#15803d;
+--r50:#fef2f2;--r500:#ef4444;--r600:#dc2626;
+--y50:#fffbeb;--y500:#f59e0b;--y600:#d97706;
+--font:'Inter',sans-serif;--serif:'Merriweather',serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--s100);color:var(--s800);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit;transition:all .2s}
+button{font-family:inherit;cursor:pointer;border:none}
+img{max-width:100%;height:auto;display:block}
+.container{max-width:1280px;margin:0 auto;padding:0 20px;width:100%}
+
+.topbar{background:var(--s900);color:var(--s300);padding:10px 0;font-size:.82rem}
+.topbar .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.topbar-left span{display:flex;align-items:center;gap:6px}
+.topbar-left i{color:var(--p400)}
+.topbar-right a{padding:6px 12px;border-radius:6px;font-size:.8rem;font-weight:600;color:var(--g500);display:inline-flex;align-items:center;gap:6px}
+
+.header{background:#fff;padding:18px 0;border-bottom:1px solid var(--s200);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.header .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:50px;height:50px;background:linear-gradient(135deg,var(--p600),var(--p800));border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.4rem;overflow:hidden;padding:0}
+.logo-text h1{font-family:var(--serif);color:var(--p700);font-size:1.4rem;font-weight:900}
+.logo-text p{color:var(--s500);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.nav-links{display:flex;gap:6px}
+.nav-links a{padding:9px 16px;border-radius:8px;font-size:.84rem;font-weight:700;color:var(--s600);display:flex;align-items:center;gap:6px;text-transform:uppercase}
+.nav-links a:hover{background:var(--p50);color:var(--p700)}
+
+.layout{display:grid;grid-template-columns:1fr 340px;gap:32px;margin:32px auto;padding:0 20px;max-width:1280px}
+
+.blog-article{background:#fff;border:1px solid var(--s200);border-radius:16px;padding:40px;box-shadow:0 4px 6px rgba(0,0,0,.04)}
+.blog-cat-badge{display:inline-flex;align-items:center;gap:6px;background:#e0f2fe;color:#0369a1;font-size:.75rem;font-weight:800;padding:6px 14px;border-radius:9999px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:16px}
+.blog-title{font-family:var(--serif);font-size:2rem;font-weight:900;color:var(--s900);margin-bottom:16px;line-height:1.3}
+.blog-meta-info{display:flex;gap:18px;flex-wrap:wrap;font-size:.85rem;color:var(--s500);font-weight:600;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid var(--s200)}
+.blog-meta-info span{display:flex;align-items:center;gap:6px}
+.blog-meta-info i{color:#0284c7}
+.blog-hero-image{margin-bottom:26px;border-radius:14px;overflow:hidden;border:1px solid var(--s200)}
+.blog-hero-image img{width:100%;height:auto;max-height:480px;object-fit:cover}
+.blog-content{font-size:1rem;line-height:1.85;color:var(--s700)}
+.blog-content h1,.blog-content h2,.blog-content h3{font-family:var(--serif);color:var(--s900);margin:28px 0 14px;font-weight:900;line-height:1.3}
+.blog-content h1{font-size:1.6rem}
+.blog-content h2{font-size:1.35rem}
+.blog-content h3{font-size:1.15rem}
+.blog-content p{margin-bottom:16px}
+.blog-content ul,.blog-content ol{margin:16px 0 16px 28px}
+.blog-content li{margin-bottom:8px}
+.blog-content blockquote{border-left:4px solid #0ea5e9;background:#f0f9ff;padding:16px 20px;margin:20px 0;border-radius:10px;font-style:italic;color:#0369a1}
+.blog-content code{background:var(--s100);padding:3px 8px;border-radius:4px;font-family:monospace;font-size:.9rem;color:#dc2626}
+.blog-content pre{background:#0f172a;color:#e2e8f0;padding:18px;border-radius:10px;overflow-x:auto;margin:20px 0;font-family:monospace;font-size:.88rem;line-height:1.7}
+.blog-content img{border-radius:10px;margin:20px 0}
+.blog-content a{color:#0284c7;text-decoration:underline;font-weight:600}
+.blog-content strong{color:var(--s900);font-weight:800}
+
+.blog-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;padding-top:24px;border-top:1px solid var(--s200)}
+.blog-tag{background:var(--p50);color:var(--p700);padding:6px 14px;border-radius:9999px;font-size:.75rem;font-weight:700;border:1px solid var(--p200)}
+
+.blog-refs{margin-top:28px;padding:22px;background:#f0f9ff;border-radius:12px;border:1px solid #bae6fd}
+.blog-refs h3{font-size:.95rem;font-weight:800;color:#0369a1;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.blog-ref-link{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px dashed #7dd3fc;font-size:.88rem;color:#0369a1;font-weight:600;text-decoration:none}
+.blog-ref-link:last-child{border-bottom:none}
+.blog-ref-link i{color:#0284c7}
+.blog-ref-link:hover{color:#0284c7;padding-left:6px}
+
+.share-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.share-btn{padding:10px 18px;border-radius:10px;font-size:.82rem;font-weight:700;color:#fff;display:inline-flex;align-items:center;gap:8px;transition:all .2s;border:none;cursor:pointer}
+.share-btn.whatsapp{background:#25d366}
+.share-btn.facebook{background:#1877f2}
+.share-btn.twitter{background:#1da1f2}
+.share-btn.telegram{background:#0088cc}
+.share-btn.copy{background:var(--s600)}
+.share-btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.15)}
+
+.side-widget{background:#fff;border:1px solid var(--s200);border-radius:14px;padding:22px;margin-bottom:22px}
+.side-title{font-size:.9rem;font-weight:800;margin-bottom:16px;color:var(--s900);border-bottom:2px solid var(--s200);padding-bottom:10px;text-transform:uppercase;display:flex;align-items:center;gap:10px;letter-spacing:.04em}
+.side-title i{color:#0284c7}
+.side-link{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px dashed var(--s200);font-size:.86rem;font-weight:600;color:var(--s600)}
+.side-link:last-child{border-bottom:none}
+.side-link:hover{color:#0284c7;padding-left:6px}
+
+.ad-container{background:var(--s50);border:1px dashed var(--s300);border-radius:10px;padding:16px 12px 12px;text-align:center;margin:20px 0;min-height:100px;display:flex;align-items:center;justify-content:center;position:relative}
+.ad-label{position:absolute;top:6px;left:12px;font-size:.6rem;text-transform:uppercase;letter-spacing:.15em;color:var(--s400);font-weight:800;background:#fff;padding:2px 8px;border-radius:3px}
+
+.spinner{width:48px;height:48px;border:4px solid var(--s200);border-top-color:#0ea5e9;border-radius:50%;animation:spin .8s linear infinite;margin:40px auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.footer{background:var(--s900);color:var(--s400);padding:40px 0 20px}
+.foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;padding-bottom:20px;border-bottom:1px solid var(--s700)}
+.foot-inner h3{color:#fff;font-size:1rem;font-weight:800;display:flex;align-items:center;gap:10px}
+.foot-links{display:flex;gap:16px;flex-wrap:wrap}
+.foot-links a{font-size:.84rem;color:var(--s400)}
+.foot-bottom{text-align:center;padding-top:20px;font-size:.8rem;color:var(--s500)}
+
+@media(max-width:1024px){
+.layout{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+.blog-article{padding:22px}
+.blog-title{font-size:1.4rem}
+.blog-content{font-size:.95rem}
+.blog-content h2{font-size:1.2rem}
+.blog-content h3{font-size:1.05rem}
+.header .container{flex-direction:column}
+.nav-links{flex-wrap:wrap;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+<div class="container">
+<div class="topbar-left"><span><i class="fas fa-book-open"></i> <span id="topLabel">Blog Article</span></span></div>
+<div class="topbar-right"><a href="blogs.html"><i class="fas fa-arrow-left"></i> Back to Blogs</a></div>
+</div>
+</div>
+
+<div class="header">
+<div class="container">
+<a href="index.html" class="logo">
+<div class="logo-icon" id="logoIcon"><i class="fas fa-shield-halved"></i></div>
+<div class="logo-text">
+<h1 id="siteTitle">esewahub.in</h1>
+<p id="siteTagline">Blogs & Guides</p>
+</div>
+</a>
+<nav class="nav-links">
+<a href="index.html"><i class="fas fa-home"></i> Home</a>
+<a href="blogs.html" class="active"><i class="fas fa-book-open"></i> All Blogs</a>
+</nav>
+</div>
+</div>
+
+<div class="layout">
+<main>
+<div class="blog-article" id="blogArticle">
+<div class="spinner"></div>
+<p style="text-align:center;color:var(--s500)">Loading blog...</p>
+</div>
+
+<!-- TOP AD -->
+<div class="ad-container">
+<span class="ad-label">Advertisement</span>
+<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="7777777777" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+
+<!-- BOTTOM AD -->
+<div class="ad-container">
+<span class="ad-label">Advertisement</span>
+<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="8888888888" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+</main>
+
+<aside>
+<div class="side-widget">
+<h3 class="side-title"><i class="fas fa-book"></i> More Blogs</h3>
+<div id="relatedBlogs"><div class="spinner" style="width:30px;height:30px;border-width:3px"></div></div>
+</div>
+
+<div class="ad-container" style="min-height:250px">
+<span class="ad-label">Advertisement</span>
+<ins class="adsbygoogle" style="display:block;width:100%" data-ad-client="ca-pub-1336136297225442" data-ad-slot="9999999999" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+</aside>
+</div>
+
+<footer class="footer">
+<div class="container">
+<div class="foot-inner">
+<h3><i class="fas fa-shield-halved"></i> <span id="footTitle">esewahub.in</span></h3>
+<div class="foot-links">
+<a href="index.html">Home</a>
+<a href="blogs.html">Blogs</a>
+<a href="privacy.html">Privacy</a>
+<a href="contact.html">Contact</a>
+</div>
+</div>
+<div class="foot-bottom">
+&copy; 2026 esewahub.in. All Rights Reserved. Made with <i class="fas fa-heart" style="color:#ef4444"></i> for Digital India.
+</div>
+</div>
+</footer>
+
+<script>
+const firebaseConfig={apiKey:"AIzaSyDLnDVmkVcXxOFDxxfmXmqU1HflB2EpalQ",authDomain:"ibad-csc.firebaseapp.com",databaseURL:"https://ibad-csc-default-rtdb.firebaseio.com",projectId:"ibad-csc",storageBucket:"ibad-csc.firebasestorage.app",messagingSenderId:"106244842489",appId:"1:106244842489:web:ac67a8cdf714b4231d1328"};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.database();
+
+let currentBlog=null;
+let allBlogs=[];
+
+function escapeHtml(t){if(!t)return '';return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+function fmtDate(iso){if(!iso)return 'N/A';const d=new Date(iso);const m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return `${d.getDate()} ${m[d.getMonth()]} ${d.getFullYear()}`;}
+
+function getBlogId(){
+    const params = new URLSearchParams(window.location.search);
+    return params.get('id');
+}
+
+async function loadBlog(){
+    const id = getBlogId();
+    if(!id){
+        document.getElementById('blogArticle').innerHTML = '<div style="text-align:center;padding:40px"><i class="fas fa-exclamation-triangle" style="font-size:2.5rem;color:#f59e0b;margin-bottom:14px"></i><h2 style="font-family:Merriweather,serif;color:#0f172a">Blog Not Found</h2><p style="color:#64748b;margin-top:10px">No blog ID provided.</p><a href="blogs.html" style="display:inline-block;margin-top:18px;padding:12px 24px;background:#0ea5e9;color:#fff;border-radius:10px;font-weight:700">View All Blogs</a></div>';
+        return;
+    }
+    
+    try {
+        const ssSnap = await db.ref('settings/general').once('value').catch(()=>null);
+        if(ssSnap && ssSnap.exists()){
+            const s = ssSnap.val();
+            if(s.title){document.getElementById('siteTitle').innerText=s.title;document.getElementById('footTitle').innerText=s.title;}
+            if(s.tagline) document.getElementById('siteTagline').innerText = s.tagline;
+            if(s.logo && s.logo.trim()){
+                const logoIcon = document.getElementById('logoIcon');
+                logoIcon.innerHTML = `<img src="${s.logo}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px">`;
+                logoIcon.style.background = 'transparent';
+                const favicon = document.getElementById('faviconLink');
+                if(favicon) favicon.href = s.logo;
+            }
+        }
+        
+        const snap = await db.ref(`blogs/${id}`).once('value');
+        if(!snap.exists()){
+            document.getElementById('blogArticle').innerHTML = '<div style="text-align:center;padding:40px"><i class="fas fa-search" style="font-size:2.5rem;color:#94a3b8;margin-bottom:14px"></i><h2 style="font-family:Merriweather,serif;color:#0f172a">Blog Not Found</h2><p style="color:#64748b;margin-top:10px">This blog may have been removed.</p><a href="blogs.html" style="display:inline-block;margin-top:18px;padding:12px 24px;background:#0ea5e9;color:#fff;border-radius:10px;font-weight:700">View All Blogs</a></div>';
+            return;
+        }
+        
+        currentBlog = {id, ...snap.val()};
+        renderBlog(currentBlog);
+        
+        document.title = (currentBlog.seoTitle || currentBlog.title) + ' | esewahub.in';
+        const metaDesc = document.getElementById('metaDesc');
+        if(metaDesc) metaDesc.setAttribute('content', currentBlog.seoDesc || currentBlog.excerpt || '');
+        const ogTitle = document.getElementById('ogTitle');
+        if(ogTitle) ogTitle.setAttribute('content', currentBlog.seoTitle || currentBlog.title);
+        const ogDesc = document.getElementById('ogDesc');
+        if(ogDesc) ogDesc.setAttribute('content', currentBlog.seoDesc || currentBlog.excerpt || '');
+        const ogImage = document.getElementById('ogImage');
+        if(ogImage && currentBlog.image) ogImage.setAttribute('content', currentBlog.image);
+        const canonical = document.getElementById('canonicalLink');
+        if(canonical) canonical.setAttribute('href', 'https://esewahub.in/blog.html?id=' + id);
+        document.getElementById('topLabel').innerText = currentBlog.category || 'Blog';
+        
+        loadRelated(id, currentBlog.category);
+        
+        // AdSense push
+        setTimeout(() => {
+            try {
+                document.querySelectorAll('.adsbygoogle').forEach(() => {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                });
+            } catch(e) {}
+        }, 500);
+        
+    } catch(e) {
+        console.error('Load error:', e);
+        document.getElementById('blogArticle').innerHTML = '<div style="text-align:center;padding:40px"><i class="fas fa-exclamation-triangle" style="font-size:2.5rem;color:#ef4444;margin-bottom:14px"></i><h2>Error Loading Blog</h2><p>Please refresh the page.</p></div>';
+    }
+}
+
+function renderBlog(b){
+    const article = document.getElementById('blogArticle');
+    
+    const heroImage = b.image 
+        ? `<div class="blog-hero-image"><img src="${b.image}" alt="${escapeHtml(b.title)}" onerror="this.parentElement.style.display='none'"></div>`
+        : '';
+    
+    const tagsHtml = b.tags && b.tags.length 
+        ? `<div class="blog-tags">${b.tags.map(t => `<span class="blog-tag">#${escapeHtml(t)}</span>`).join('')}</div>`
+        : '';
+    
+    const refsHtml = b.links && b.links.length
+        ? `<div class="blog-refs">
+            <h3><i class="fas fa-link"></i> Reference & Sources</h3>
+            ${b.links.map(l => `<a href="${escapeHtml(l.url)}" target="_blank" rel="noopener nofollow" class="blog-ref-link"><i class="fas fa-external-link-alt"></i> <span>${escapeHtml(l.name)}</span></a>`).join('')}
+           </div>`
+        : '';
+    
+    const currentUrl = encodeURIComponent(window.location.href);
+    const titleEnc = encodeURIComponent(b.title);
+    
+    const shareHtml = `<div class="share-btns">
+        <a href="https://wa.me/?text=${titleEnc}%20${currentUrl}" target="_blank" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=${currentUrl}" target="_blank" class="share-btn facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
+        <a href="https://twitter.com/intent/tweet?text=${titleEnc}&url=${currentUrl}" target="_blank" class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+        <a href="https://t.me/share/url?url=${currentUrl}&text=${titleEnc}" target="_blank" class="share-btn telegram"><i class="fab fa-telegram-plane"></i> Telegram</a>
+        <button onclick="copyLink()" class="share-btn copy"><i class="fas fa-copy"></i> Copy Link</button>
+    </div>`;
+    
+    article.innerHTML = `
+        <span class="blog-cat-badge"><i class="fas fa-tag"></i> ${escapeHtml(b.category || 'General')}</span>
+        <h1 class="blog-title">${escapeHtml(b.title)}</h1>
+        <div class="blog-meta-info">
+            <span><i class="fas fa-user"></i> ${escapeHtml(b.author || 'Team')}</span>
+            <span><i class="fas fa-calendar"></i> ${fmtDate(b.timestamp)}</span>
+            <span><i class="fas fa-clock"></i> ${escapeHtml(b.readingTime || '2 min read')}</span>
+            <span><i class="fas fa-file-word"></i> ${b.wordCount || 0} words</span>
+        </div>
+        ${heroImage}
+        <div class="blog-content">${b.content || '<p>Content not available.</p>'}</div>
+        ${refsHtml}
+        ${tagsHtml}
+        ${shareHtml}
+    `;
+}
+
+function loadRelated(currentId, category){
+    const related = allBlogs.filter(b => b.id !== currentId && b.category === category).slice(0, 5);
+    const fallback = allBlogs.filter(b => b.id !== currentId).slice(0, 5);
+    const list = related.length > 0 ? related : fallback;
+    const box = document.getElementById('relatedBlogs');
+    
+    if(list.length === 0){
+        box.innerHTML = '<p style="color:#94a3b8;font-size:.85rem">No other blogs yet.</p>';
+        return;
+    }
+    
+    box.innerHTML = list.map(b => 
+        `<a href="blog.html?id=${b.id}" class="side-link"><i class="fas fa-book-open"></i> ${escapeHtml(b.title.substring(0, 60))}${b.title.length > 60 ? '...' : ''}</a>`
+    ).join('');
+}
+
+window.copyLink = function(){
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(() => {
+        const btn = event.target.closest('.share-btn');
+        const original = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => btn.innerHTML = original, 2000);
+    });
+};
+
+async function init(){
+    try {
+        const snap = await db.ref('blogs').once('value');
+        if(snap.exists()){
+            const data = snap.val();
+            allBlogs = Object.entries(data)
+                .map(([id, b]) => ({id, ...b}))
+                .filter(b => b.status !== 'draft')
+                .sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
+        }
+    } catch(e) { console.warn(e); }
+    
+    await loadBlog();
+}
+
+init();
+</script>
+</body>
+</html>
