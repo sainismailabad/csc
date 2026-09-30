@@ -16,20 +16,12 @@
 <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/11.0.2/firebase-messaging-compat.js"></script>
 <style>
-:root{
---p50:#eff6ff;--p100:#dbeafe;--p200:#bfdbfe;--p400:#60a5fa;--p500:#3b82f6;--p600:#2563eb;--p700:#1d4ed8;--p800:#1e40af;
---s50:#f8fafc;--s100:#f1f5f9;--s200:#e2e8f0;--s300:#cbd5e1;--s400:#94a3b8;--s500:#64748b;--s600:#475569;--s700:#334155;--s800:#1e293b;--s900:#0f172a;
---g50:#f0fdf4;--g500:#22c55e;--g600:#16a34a;--g700:#15803d;
---r50:#fef2f2;--r500:#ef4444;--r600:#dc2626;
---y50:#fffbeb;--y500:#f59e0b;--y600:#d97706;
---font:'Inter',sans-serif;--serif:'Merriweather',serif;
-}
+:root{--p50:#eff6ff;--p100:#dbeafe;--p200:#bfdbfe;--p400:#60a5fa;--p500:#3b82f6;--p600:#2563eb;--p700:#1d4ed8;--p800:#1e40af;--s50:#f8fafc;--s100:#f1f5f9;--s200:#e2e8f0;--s300:#cbd5e1;--s400:#94a3b8;--s500:#64748b;--s600:#475569;--s700:#334155;--s800:#1e293b;--s900:#0f172a;--g50:#f0fdf4;--g500:#22c55e;--g600:#16a34a;--g700:#15803d;--r50:#fef2f2;--r500:#ef4444;--r600:#dc2626;--y50:#fffbeb;--y500:#f59e0b;--y600:#d97706;--font:'Inter',sans-serif;--serif:'Merriweather',serif}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--font);background:var(--s100);color:var(--s800);line-height:1.6}
 button{font-family:inherit;cursor:pointer;border:none}
 input,textarea,select{font-family:inherit}
 a{text-decoration:none;color:inherit}
-
 #toastBox{position:fixed;bottom:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:10px}
 .toast{background:#fff;padding:14px 22px;border-radius:10px;box-shadow:0 10px 25px rgba(0,0,0,.15);font-weight:600;font-size:.88rem;display:flex;align-items:center;gap:10px;min-width:280px;animation:toastIn .4s cubic-bezier(.16,1,.3,1)}
 .toast.success{border-left:4px solid var(--g500)}.toast.success i{color:var(--g500)}
@@ -37,11 +29,7 @@ a{text-decoration:none;color:inherit}
 .toast.warning{border-left:4px solid var(--y500)}.toast.warning i{color:var(--y500)}
 .toast.info{border-left:4px solid var(--p500)}.toast.info i{color:var(--p500)}
 @keyframes toastIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
-
-.view{display:none}
-.view.active{display:block}
-.view-flex.active{display:flex}
-
+.view{display:none}.view.active{display:block}.view-flex.active{display:flex}
 #loginView{min-height:100vh;background:linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#1e40af 100%);display:none;align-items:center;justify-content:center;padding:20px;position:relative;overflow:hidden}
 #loginView.active{display:flex}
 #loginView::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(59,130,246,.3),transparent 70%);top:-200px;right:-200px;border-radius:50%}
@@ -59,7 +47,6 @@ a{text-decoration:none;color:inherit}
 .login-btn:disabled{opacity:.7;cursor:not-allowed;transform:none}
 .back-site{text-align:center;font-size:.85rem;color:var(--s500);font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px;transition:color .2s}
 .back-site:hover{color:var(--p600)}
-
 #dashView{min-height:100vh;background:var(--s100)}
 .sidebar{width:270px;background:linear-gradient(180deg,#0f172a 0%,#1e293b 100%);height:100vh;position:fixed;padding:22px 0;display:flex;flex-direction:column;color:#fff;z-index:100;overflow-y:auto;border-right:1px solid #1e293b}
 .sidebar::-webkit-scrollbar{width:4px}
@@ -76,9 +63,7 @@ a{text-decoration:none;color:inherit}
 .nav-item.active i{color:var(--p400)}
 .sidebar-spacer{flex-grow:1}
 .nav-badge{margin-left:auto;background:var(--r500);color:#fff;font-size:.65rem;font-weight:800;padding:2px 7px;border-radius:9999px;min-width:20px;text-align:center}
-
 .main-content{margin-left:270px;padding:28px;width:calc(100% - 270px);min-height:100vh}
-
 .top-bar{background:#fff;padding:20px 26px;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);margin-bottom:26px;display:flex;justify-content:space-between;align-items:center;border:1px solid var(--s200);flex-wrap:wrap;gap:14px}
 .top-bar h2{font-family:var(--serif);font-size:1.35rem;font-weight:900;display:flex;align-items:center;gap:12px;color:var(--s900)}
 .top-bar h2 i{color:var(--p600)}
@@ -87,16 +72,13 @@ a{text-decoration:none;color:inherit}
 .user-details{text-align:right}
 .user-details .name{font-weight:800;font-size:.88rem;color:var(--s900)}
 .user-details .role{font-size:.72rem;color:var(--s500);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
-
 .section{display:none;animation:fade .3s ease}
 .section.active{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
 .card{background:#fff;padding:26px;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);margin-bottom:24px;border:1px solid var(--s200)}
 .card-head{font-size:1.08rem;font-weight:800;margin-bottom:22px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--s100);padding-bottom:16px;flex-wrap:wrap;gap:12px}
 .card-head span{display:flex;align-items:center;gap:10px}
 .card-head span i{color:var(--p600)}
-
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;margin-bottom:26px}
 .stat-card{background:#fff;padding:22px;border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.04);border:1px solid var(--s200);display:flex;align-items:center;gap:16px;transition:all .25s}
 .stat-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.08)}
@@ -110,45 +92,31 @@ a{text-decoration:none;color:inherit}
 .stat-icon.pink{background:linear-gradient(135deg,#ec4899,#be185d)}
 .stat-info h3{font-size:1.6rem;font-weight:900;color:var(--s900);font-family:var(--serif);line-height:1}
 .stat-info p{font-size:.78rem;color:var(--s500);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-top:5px}
-
 .table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--s200)}
 table{width:100%;border-collapse:collapse;min-width:640px}
 th{text-align:left;padding:14px 16px;background:var(--s50);color:var(--s500);font-weight:800;text-transform:uppercase;font-size:.72rem;letter-spacing:.06em;border-bottom:1px solid var(--s200)}
 td{padding:16px;border-bottom:1px solid var(--s200);font-size:.88rem;color:var(--s700);vertical-align:middle}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:var(--s50)}
-
 .thumb{width:70px;height:55px;border-radius:10px;object-fit:cover;border:2px solid var(--s200);background:var(--s100)}
 .thumb-icon{width:60px;height:50px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;background:linear-gradient(135deg,var(--p600),var(--p800))}
-
 .btn{padding:11px 20px;border-radius:9px;font-weight:700;display:inline-flex;align-items:center;gap:8px;color:#fff;font-size:.85rem;transition:all .15s;cursor:pointer;border:none}
 .btn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.12)}
 .btn-sm{padding:8px 12px;font-size:.78rem}
 .btn-p{background:linear-gradient(135deg,var(--p600),var(--p700))}
-.btn-p:hover{background:linear-gradient(135deg,var(--p700),var(--p800))}
 .btn-g{background:linear-gradient(135deg,var(--g600),var(--g700))}
 .btn-r{background:linear-gradient(135deg,var(--r600),var(--r500))}
 .btn-y{background:linear-gradient(135deg,var(--y500),var(--y600))}
 .btn-ghost{background:var(--s200);color:var(--s700)}
-.btn-ghost:hover{background:var(--s300);color:var(--s800)}
-
 .bulk-bar{display:none;background:linear-gradient(135deg,#fef2f2,#fee2e2);border:1px solid #fca5a5;border-radius:10px;padding:12px 18px;margin-bottom:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;animation:fade .2s ease}
 .bulk-bar.show{display:flex}
 .bulk-bar .bulk-info{font-weight:700;color:#991b1b;font-size:.88rem;display:flex;align-items:center;gap:8px}
-.bulk-bar .bulk-info i{font-size:1rem}
 .bulk-bar .bulk-actions{display:flex;gap:8px;flex-wrap:wrap}
 .bulk-bar .btn{padding:9px 16px;font-size:.8rem}
 .bulk-bar .btn-clear{background:#fff;color:#991b1b;border:1px solid #fca5a5}
-.bulk-bar .btn-clear:hover{background:#fef2f2}
-
-.row-checkbox, #selectAllPosts, #selectAllServices{
-    width:18px;height:18px;cursor:pointer;accent-color:#2563eb;
-    vertical-align:middle;
-}
-td.check-cell, th.check-cell{width:50px;text-align:center;padding:14px 8px}
-th.check-cell label, td.check-cell label{display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.row-checkbox{width:18px;height:18px;cursor:pointer;accent-color:#2563eb;vertical-align:middle}
+td.check-cell,th.check-cell{width:50px;text-align:center;padding:14px 8px}
 tr.selected-row td{background:#eff6ff !important}
-
 .form-group{margin-bottom:18px}
 .form-group label{display:block;font-weight:700;margin-bottom:8px;color:var(--s800);font-size:.84rem}
 .form-group label .req{color:var(--r500)}
@@ -157,12 +125,9 @@ tr.selected-row td{background:#eff6ff !important}
 .form-group textarea{min-height:100px;resize:vertical;line-height:1.6}
 .form-group .hint{font-size:.75rem;color:var(--s400);margin-top:6px;display:block;font-weight:500;line-height:1.5}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-
 .image-preview{display:none;margin-bottom:18px;position:relative;border-radius:12px;overflow:hidden;border:2px solid var(--s200);background:var(--s50)}
 .image-preview img{width:100%;max-height:240px;object-fit:cover;display:block}
 .image-preview .remove-img{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;background:rgba(220,38,38,.95);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;border:none}
-.image-preview .remove-img:hover{background:var(--r600)}
-
 .toggle-row{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--s50);border-radius:10px;margin-bottom:12px;border:1px solid var(--s200)}
 .toggle-row .label{display:flex;align-items:center;gap:12px;font-weight:700;font-size:.88rem;color:var(--s800)}
 .toggle-row .label i{width:24px;text-align:center;color:var(--p600);font-size:1rem}
@@ -171,22 +136,16 @@ tr.selected-row td{background:#eff6ff !important}
 .switch.on{background:var(--g500)}
 .switch::after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%;transition:all .25s;box-shadow:0 2px 4px rgba(0,0,0,.15)}
 .switch.on::after{left:27px}
-
 .info-box{background:var(--p50);border-left:4px solid var(--p600);padding:14px 18px;border-radius:10px;margin-bottom:20px;font-size:.85rem;color:var(--p800);line-height:1.7}
 .info-box strong{display:block;margin-bottom:4px;color:var(--p900);font-size:.88rem}
 .info-box code{background:var(--p100);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:.78rem}
-
 .warn-box{background:var(--y50);border-left:4px solid var(--y500);padding:14px 18px;border-radius:10px;margin-bottom:20px;font-size:.85rem;color:#92400e;line-height:1.7}
 .warn-box strong{display:block;margin-bottom:4px;color:#78350f}
-
 .empty{text-align:center;padding:48px 20px;color:var(--s400)}
 .empty i{font-size:2.6rem;margin-bottom:14px;color:var(--s300);display:block}
 .empty h4{font-size:1rem;font-weight:800;color:var(--s600);margin-bottom:6px}
-.empty p{font-size:.85rem;font-weight:500}
-
 .spinner{width:44px;height:44px;border:4px solid var(--s200);border-top-color:var(--p600);border-radius:50%;animation:spin .8s linear infinite;margin:40px auto}
 @keyframes spin{to{transform:rotate(360deg)}}
-
 .modal{display:none;position:fixed;inset:0;background:rgba(15,23,42,.75);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(6px);padding:20px;overflow-y:auto}
 .modal.show{display:flex}
 .modal-box{background:#fff;padding:30px;border-radius:18px;width:100%;max-width:780px;max-height:92vh;overflow-y:auto;box-shadow:0 30px 60px rgba(0,0,0,.3);animation:modalSlide .3s cubic-bezier(.16,1,.3,1)}
@@ -198,146 +157,87 @@ tr.selected-row td{background:#eff6ff !important}
 .modal-close{width:38px;height:38px;border-radius:10px;background:var(--s100);color:var(--s500);display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:1rem}
 .modal-close:hover{background:var(--r50);color:var(--r600);transform:rotate(90deg)}
 .modal-foot{display:flex;justify-content:flex-end;gap:12px;margin-top:26px;padding-top:20px;border-top:1px solid var(--s200)}
-
 .link-builder{margin-bottom:16px}
 .link-builder-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .link-builder-head label{font-weight:700;color:var(--s800);font-size:.84rem;margin:0}
 .link-builder-head .link-counter{font-size:.72rem;color:var(--s500);font-weight:600;background:var(--s100);padding:3px 10px;border-radius:9999px}
 .link-row{display:grid;grid-template-columns:1fr 1.4fr 42px;gap:8px;margin-bottom:8px;align-items:center;background:var(--s50);padding:10px;border-radius:10px;border:1px solid var(--s200)}
 .link-row input{padding:10px 12px;border:2px solid var(--s200);border-radius:8px;background:#fff;font-size:.85rem;width:100%}
-.link-row input:focus{outline:none;border-color:var(--p500);box-shadow:0 0 0 3px rgba(37,99,235,.08)}
-.link-row .remove-link-btn{width:42px;height:42px;border-radius:8px;background:var(--r50);color:var(--r500);display:flex;align-items:center;justify-content:center;font-size:.9rem;border:none;cursor:pointer;transition:all .2s;flex-shrink:0}
-.link-row .remove-link-btn:hover{background:var(--r500);color:#fff;transform:scale(1.05)}
-.add-link-btn{width:100%;padding:11px;background:var(--p50);color:var(--p700);border:2px dashed #93c5fd;border-radius:10px;font-weight:700;font-size:.84rem;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all .2s;margin-top:4px}
-.add-link-btn:hover{background:var(--p100);border-color:var(--p500);border-style:solid}
-
+.link-row .remove-link-btn{width:42px;height:42px;border-radius:8px;background:var(--r50);color:var(--r500);display:flex;align-items:center;justify-content:center;font-size:.9rem;border:none;cursor:pointer;flex-shrink:0}
+.add-link-btn{width:100%;padding:11px;background:var(--p50);color:var(--p700);border:2px dashed #93c5fd;border-radius:10px;font-weight:700;font-size:.84rem;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;margin-top:4px}
 .multiline-builder{margin-bottom:16px}
 .multiline-builder-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .multiline-builder-head label{font-weight:700;color:var(--s800);font-size:.84rem;margin:0}
-.multiline-builder-head .line-counter{font-size:.72rem;color:var(--s500);font-weight:600;background:var(--s100);padding:3px 10px;border-radius:9999px}
 .line-row{display:grid;grid-template-columns:44px 1fr 44px;gap:8px;margin-bottom:8px;align-items:center;background:var(--s50);padding:10px;border-radius:10px;border:1px solid var(--s200)}
 .line-row .line-num{width:32px;height:32px;background:linear-gradient(135deg,var(--p600),var(--p800));color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;flex-shrink:0}
 .line-row input{padding:10px 12px;border:2px solid var(--s200);border-radius:8px;background:#fff;font-size:.85rem;width:100%}
-.line-row input:focus{outline:none;border-color:var(--p500);box-shadow:0 0 0 3px rgba(37,99,235,.08)}
-.line-row .remove-line-btn{width:38px;height:38px;border-radius:8px;background:var(--r50);color:var(--r500);display:flex;align-items:center;justify-content:center;font-size:.85rem;border:none;cursor:pointer;transition:all .2s;flex-shrink:0}
-.line-row .remove-line-btn:hover{background:var(--r500);color:#fff;transform:scale(1.05)}
-.add-line-btn{width:100%;padding:11px;background:var(--g50);color:var(--g700);border:2px dashed #86efac;border-radius:10px;font-weight:700;font-size:.84rem;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:all .2s;margin-top:4px}
-.add-line-btn:hover{background:var(--g50);border-color:var(--g500);border-style:solid}
-
+.line-row .remove-line-btn{width:38px;height:38px;border-radius:8px;background:var(--r50);color:var(--r500);display:flex;align-items:center;justify-content:center;font-size:.85rem;border:none;cursor:pointer;flex-shrink:0}
+.add-line-btn{width:100%;padding:11px;background:var(--g50);color:var(--g700);border:2px dashed #86efac;border-radius:10px;font-weight:700;font-size:.84rem;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;margin-top:4px}
 .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;flex-shrink:0}
 .status-dot.active{background:var(--g500);box-shadow:0 0 0 3px rgba(34,197,94,.2)}
 .status-dot.inactive{background:var(--s400)}
 .user-avatar-cell{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--p600),var(--p800));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;flex-shrink:0}
 .user-cell{display:flex;align-items:center;gap:12px}
-.user-cell-info{min-width:0}
 .user-cell-info strong{display:block;font-weight:700;color:var(--s900);font-size:.88rem}
 .user-cell-info small{display:block;font-size:.74rem;color:var(--s500)}
-.role-select{padding:8px 12px;border:2px solid var(--s200);border-radius:8px;font-size:.82rem;font-weight:700;background:var(--s50);cursor:pointer;transition:all .2s}
-.role-select:focus{outline:none;border-color:var(--p500);background:#fff}
-
-.stat-mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-bottom:20px}
-.stat-mini{background:linear-gradient(135deg,var(--s50),#fff);border:1px solid var(--s200);border-radius:12px;padding:16px;text-align:center}
-.stat-mini .num{font-size:1.5rem;font-weight:900;color:var(--p700);font-family:var(--serif);line-height:1}
-.stat-mini .lbl{font-size:.7rem;color:var(--s500);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-top:6px}
-
-@keyframes blinkDot {0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.85)}}
-
-.ann-type-badge {display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:9999px;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
-.ann-type-live {background:linear-gradient(135deg,#fee2e2,#fecaca);color:#991b1b}
-.ann-type-job {background:linear-gradient(135deg,#dbeafe,#bfdbfe);color:#1e40af}
-.ann-type-yojna {background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#15803d}
-.ann-type-admit {background:linear-gradient(135deg,#f3e8ff,#e9d5ff);color:#6b21a8}
-.ann-type-important {background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e}
-.ann-type-info {background:linear-gradient(135deg,#f1f5f9,#e2e8f0);color:#475569}
-
-.live-pulse{display:inline-block;width:10px;height:10px;background:#22c55e;border-radius:50%;position:relative;margin-right:6px}
-.live-pulse::before{content:'';position:absolute;inset:-4px;background:rgba(34,197,94,.3);border-radius:50%;animation:pulse-ring 1.5s infinite}
-@keyframes pulse-ring{0%{transform:scale(1);opacity:1}100%{transform:scale(2);opacity:0}}
-
+.role-select{padding:8px 12px;border:2px solid var(--s200);border-radius:8px;font-size:.82rem;font-weight:700;background:var(--s50);cursor:pointer}
+.ann-type-badge{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:9999px;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.ann-type-live{background:linear-gradient(135deg,#fee2e2,#fecaca);color:#991b1b}
+.ann-type-job{background:linear-gradient(135deg,#dbeafe,#bfdbfe);color:#1e40af}
+.ann-type-yojna{background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#15803d}
+.ann-type-admit{background:linear-gradient(135deg,#f3e8ff,#e9d5ff);color:#6b21a8}
+.ann-type-important{background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e}
+.ann-type-info{background:linear-gradient(135deg,#f1f5f9,#e2e8f0);color:#475569}
 .trend-bar{background:#e2e8f0;height:8px;border-radius:4px;overflow:hidden;min-width:80px}
-.trend-bar > div{background:linear-gradient(90deg,#3b82f6,#2563eb);height:100%;transition:width .3s}
-
+.trend-bar>div{background:linear-gradient(90deg,#3b82f6,#2563eb);height:100%}
 .notif-card{background:linear-gradient(135deg,#fef3c7,#fef9c3);border:1px solid #fcd34d;border-radius:12px;padding:16px;margin-bottom:16px}
-.notif-card h4{color:#92400e;font-size:.92rem;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:8px}
-.notif-card p{color:#78350f;font-size:.82rem;line-height:1.6;margin-bottom:10px}
+.notif-card h4{color:#92400e;font-size:.92rem;font-weight:800;margin-bottom:6px}
+.notif-card p{color:#78350f;font-size:.82rem;line-height:1.6}
 .notif-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:12px}
 .notif-stat{background:rgba(255,255,255,.7);padding:10px;border-radius:8px;text-align:center}
 .notif-stat .num{font-size:1.3rem;font-weight:900;color:#92400e;line-height:1}
 .notif-stat .lbl{font-size:.68rem;color:#78350f;font-weight:700;text-transform:uppercase;margin-top:4px}
-
 .auto-update-hero{background:linear-gradient(135deg,#7c3aed,#6d28d9);border-radius:14px;padding:30px;color:#fff;margin-bottom:24px;position:relative;overflow:hidden}
-.auto-update-hero::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;background:radial-gradient(circle,rgba(255,255,255,.15),transparent 70%);border-radius:50%}
-.auto-update-hero h2{font-family:var(--serif);font-size:1.5rem;font-weight:900;margin-bottom:8px;position:relative;z-index:1;display:flex;align-items:center;gap:12px}
-.auto-update-hero p{font-size:.9rem;opacity:.95;line-height:1.7;margin-bottom:20px;position:relative;z-index:1}
-.auto-update-hero .actions{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1}
-.auto-update-hero .actions .btn{background:rgba(255,255,255,.2);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);color:#fff;padding:14px 24px;font-size:.9rem}
-.auto-update-hero .actions .btn:hover{background:rgba(255,255,255,.3)}
+.auto-update-hero h2{font-family:var(--serif);font-size:1.5rem;font-weight:900;margin-bottom:8px;display:flex;align-items:center;gap:12px}
+.auto-update-hero p{font-size:.9rem;opacity:.95;line-height:1.7;margin-bottom:20px}
+.auto-update-hero .actions{display:flex;gap:12px;flex-wrap:wrap}
+.auto-update-hero .actions .btn{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);color:#fff;padding:14px 24px;font-size:.9rem}
 .auto-update-hero .actions .btn.primary{background:#fff;color:#6d28d9;border-color:#fff}
-.auto-update-hero .actions .btn.primary:hover{background:#f3e8ff;box-shadow:0 10px 25px rgba(0,0,0,.2)}
-
 .status-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:20px}
 .status-item{background:#fff;border:1px solid var(--s200);border-radius:12px;padding:16px;text-align:center}
 .status-item .icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.3rem;color:#fff}
 .status-item .icon.green{background:linear-gradient(135deg,#22c55e,#15803d)}
 .status-item .icon.blue{background:linear-gradient(135deg,#3b82f6,#1d4ed8)}
 .status-item .icon.orange{background:linear-gradient(135deg,#f59e0b,#d97706)}
-.status-item .icon.red{background:linear-gradient(135deg,#ef4444,#b91c1c)}
 .status-item .icon.purple{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
 .status-item h4{font-size:.95rem;font-weight:800;color:var(--s900);margin-bottom:4px}
 .status-item p{font-size:.78rem;color:var(--s500);line-height:1.5}
-
 .log-box{background:#0f172a;color:#e2e8f0;border-radius:12px;padding:16px;font-family:monospace;font-size:.78rem;line-height:1.7;max-height:280px;overflow-y:auto}
 .log-box .log-line{padding:2px 0;display:flex;gap:10px}
 .log-box .log-time{color:#64748b;flex-shrink:0}
 .log-box .log-info{color:#60a5fa}
 .log-box .log-success{color:#22c55e}
 .log-box .log-error{color:#ef4444}
-.log-box .log-warn{color:#f59e0b}
-
 .workflow-list{background:#fff;border:1px solid var(--s200);border-radius:12px;overflow:hidden}
 .workflow-item{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--s200);gap:12px;flex-wrap:wrap}
-.workflow-item:last-child{border-bottom:none}
-.workflow-status{display:flex;align-items:center;gap:10px;font-size:.85rem;font-weight:700}
 .workflow-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
 .workflow-dot.success{background:#22c55e;box-shadow:0 0 0 3px rgba(34,197,94,.2)}
-.workflow-dot.running{background:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.2);animation:blinkDot 1s infinite}
+.workflow-dot.running{background:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,.2)}
 .workflow-dot.failed{background:#ef4444;box-shadow:0 0 0 3px rgba(239,68,68,.2)}
-
-/* ===== BLOG EDITOR STYLES ===== */
 .blog-editor-toolbar{display:flex;gap:6px;flex-wrap:wrap;padding:10px;background:var(--s50);border:2px solid var(--s200);border-bottom:none;border-radius:10px 10px 0 0}
-.blog-editor-toolbar button{padding:8px 12px;background:#fff;border:1px solid var(--s200);border-radius:6px;font-size:.75rem;font-weight:700;color:var(--s600);cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .15s;font-family:inherit}
-.blog-editor-toolbar button:hover{background:var(--p50);border-color:var(--p400);color:var(--p700)}
-.blog-editor-toolbar button i{font-size:.8rem}
-.blog-editor-wrap{position:relative}
-.blog-editor{width:100%;min-height:450px;padding:20px;border:2px solid var(--s200);border-radius:0 0 10px 10px;font-family:'Inter',sans-serif;font-size:.95rem;line-height:1.8;background:#fff;color:var(--s800);resize:vertical}
+.blog-editor-toolbar button{padding:8px 12px;background:#fff;border:1px solid var(--s200);border-radius:6px;font-size:.75rem;font-weight:700;color:var(--s600);cursor:pointer;display:flex;align-items:center;gap:5px;font-family:inherit}
+.blog-editor{width:100%;min-height:450px;padding:20px;border:2px solid var(--s200);border-radius:0 0 10px 10px;font-size:.95rem;line-height:1.8;background:#fff;color:var(--s800);resize:vertical}
 .blog-editor:focus{outline:none;border-color:var(--p500);box-shadow:0 0 0 4px rgba(37,99,235,.08)}
-.blog-editor-preview{margin-top:16px;padding:24px;background:#fff;border:2px solid var(--s200);border-radius:12px;font-family:'Inter',sans-serif;font-size:.95rem;line-height:1.8;color:var(--s800);display:none;max-height:500px;overflow-y:auto}
+.blog-editor-preview{margin-top:16px;padding:24px;background:#fff;border:2px solid var(--s200);border-radius:12px;font-size:.95rem;line-height:1.8;display:none;max-height:500px;overflow-y:auto}
 .blog-editor-preview.show{display:block}
-.blog-editor-preview h1,.blog-editor-preview h2,.blog-editor-preview h3{font-family:var(--serif);color:var(--s900);margin:20px 0 12px;font-weight:900;line-height:1.3}
-.blog-editor-preview h1{font-size:1.6rem}
-.blog-editor-preview h2{font-size:1.35rem}
-.blog-editor-preview h3{font-size:1.15rem}
-.blog-editor-preview p{margin-bottom:14px;color:var(--s700)}
-.blog-editor-preview ul,.blog-editor-preview ol{margin:14px 0 14px 24px;color:var(--s700)}
-.blog-editor-preview li{margin-bottom:8px}
-.blog-editor-preview blockquote{border-left:4px solid var(--p500);background:var(--p50);padding:14px 18px;margin:18px 0;border-radius:8px;font-style:italic;color:var(--p800)}
-.blog-editor-preview code{background:var(--s100);padding:2px 8px;border-radius:4px;font-family:monospace;font-size:.88rem;color:#dc2626}
-.blog-editor-preview pre{background:#0f172a;color:#e2e8f0;padding:16px;border-radius:10px;overflow-x:auto;margin:16px 0;font-family:monospace;font-size:.85rem}
-.blog-editor-preview img{max-width:100%;height:auto;border-radius:10px;margin:16px 0}
-.blog-editor-preview a{color:var(--p600);text-decoration:underline;font-weight:600}
-.blog-editor-preview strong{color:var(--s900);font-weight:800}
-.blog-editor-preview hr{border:none;border-top:2px solid var(--s200);margin:24px 0}
-
 .blog-tags-preview{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .blog-tag{background:var(--p50);color:var(--p700);padding:4px 12px;border-radius:9999px;font-size:.72rem;font-weight:700;border:1px solid var(--p200)}
-
 .blog-meta-info{display:flex;gap:14px;flex-wrap:wrap;font-size:.75rem;color:var(--s500);font-weight:600;padding:10px 14px;background:var(--s50);border-radius:8px;margin-bottom:14px}
 .blog-meta-info span{display:flex;align-items:center;gap:5px}
 .blog-meta-info i{color:var(--p600)}
-
-.blog-preview-link{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:#f0f9ff;color:#0369a1;border:1px solid #7dd3fc;border-radius:6px;font-size:.78rem;font-weight:700;text-decoration:none;transition:all .2s;margin-top:8px}
-.blog-preview-link:hover{background:#e0f2fe;transform:translateX(2px)}
-
+.author-info-box{background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border:1px solid #7dd3fc;border-radius:10px;padding:14px 18px;margin-bottom:16px}
+.author-info-box h4{color:#0369a1;font-size:.85rem;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.author-info-box p{color:#0369a1;font-size:.78rem;line-height:1.6;margin:0}
 @media(max-width:768px){
 .sidebar{width:64px;padding:16px 0}
 .sidebar-brand h2{font-size:0;justify-content:center}
@@ -351,7 +251,6 @@ tr.selected-row td{background:#eff6ff !important}
 .main-content{margin-left:64px;width:calc(100% - 64px);padding:16px}
 .form-row{grid-template-columns:1fr}
 .top-bar{flex-direction:column;align-items:flex-start;padding:16px}
-.top-bar h2{font-size:1.15rem}
 .modal-box{padding:20px}
 .modal-box.modal-wide{max-width:100%}
 .stats-grid{grid-template-columns:1fr}
@@ -359,8 +258,6 @@ tr.selected-row td{background:#eff6ff !important}
 .toggle-row{flex-direction:column;align-items:flex-start;gap:12px}
 .link-row{grid-template-columns:1fr 1fr 42px;gap:6px}
 .line-row{grid-template-columns:44px 1fr 38px;gap:6px}
-.blog-editor-toolbar{padding:8px}
-.blog-editor-toolbar button{padding:6px 9px;font-size:.7rem}
 }
 @media(max-width:480px){
 .link-row{grid-template-columns:1fr 42px;grid-template-areas:"name remove" "url url";gap:6px}
@@ -380,7 +277,6 @@ tr.selected-row td{background:#eff6ff !important}
 <div class="login-logo"><i class="fas fa-shield-halved"></i></div>
 <h1>Admin Panel</h1>
 <p class="subtitle">esewahub.in Management System</p>
-
 <form onsubmit="event.preventDefault();doLogin()" autocomplete="on">
 <label>Email Address</label>
 <input type="email" id="lEmail" placeholder="admin@example.com" required autocomplete="email">
@@ -390,10 +286,7 @@ tr.selected-row td{background:#eff6ff !important}
 <i class="fas fa-sign-in-alt"></i> Secure Login
 </button>
 </form>
-
-<a href="index.html" class="back-site">
-<i class="fas fa-arrow-left"></i> Back to Website
-</a>
+<a href="index.html" class="back-site"><i class="fas fa-arrow-left"></i> Back to Website</a>
 </div>
 </div>
 
@@ -506,34 +399,13 @@ tr.selected-row td{background:#eff6ff !important}
 <!-- DASHBOARD SECTION -->
 <div id="secDashboard" class="section active">
 <div class="stats-grid">
-<div class="stat-card">
-<div class="stat-icon blue"><i class="fas fa-file-alt"></i></div>
-<div class="stat-info"><h3 id="dashPosts">0</h3><p>Total Posts</p></div>
-</div>
-<div class="stat-card">
-<div class="stat-icon" style="background:linear-gradient(135deg,#0ea5e9,#0284c7)"><i class="fas fa-book-open"></i></div>
-<div class="stat-info"><h3 id="dashBlogs">0</h3><p>Total Blogs</p></div>
-</div>
-<div class="stat-card">
-<div class="stat-icon green"><i class="fas fa-briefcase"></i></div>
-<div class="stat-info"><h3 id="dashServicesCount">0</h3><p>Services</p></div>
-</div>
-<div class="stat-card">
-<div class="stat-icon orange"><i class="fas fa-bullhorn"></i></div>
-<div class="stat-info"><h3 id="dashAnnouncements">0</h3><p>Announcements</p></div>
-</div>
-<div class="stat-card">
-<div class="stat-icon purple"><i class="fas fa-image"></i></div>
-<div class="stat-info"><h3 id="dashPopups">0</h3><p>Image Popups</p></div>
-</div>
-<div class="stat-card">
-<div class="stat-icon cyan"><i class="fas fa-eye"></i></div>
-<div class="stat-info"><h3 id="dashTotalViews">0</h3><p>Total Views</p></div>
-</div>
-<div class="stat-card">
-<div class="stat-icon pink"><i class="fas fa-user-check"></i></div>
-<div class="stat-info"><h3 id="dashTotalVisitors">0</h3><p>Unique Visitors</p></div>
-</div>
+<div class="stat-card"><div class="stat-icon blue"><i class="fas fa-file-alt"></i></div><div class="stat-info"><h3 id="dashPosts">0</h3><p>Total Posts</p></div></div>
+<div class="stat-card"><div class="stat-icon" style="background:linear-gradient(135deg,#0ea5e9,#0284c7)"><i class="fas fa-book-open"></i></div><div class="stat-info"><h3 id="dashBlogs">0</h3><p>Total Blogs</p></div></div>
+<div class="stat-card"><div class="stat-icon green"><i class="fas fa-briefcase"></i></div><div class="stat-info"><h3 id="dashServicesCount">0</h3><p>Services</p></div></div>
+<div class="stat-card"><div class="stat-icon orange"><i class="fas fa-bullhorn"></i></div><div class="stat-info"><h3 id="dashAnnouncements">0</h3><p>Announcements</p></div></div>
+<div class="stat-card"><div class="stat-icon purple"><i class="fas fa-image"></i></div><div class="stat-info"><h3 id="dashPopups">0</h3><p>Image Popups</p></div></div>
+<div class="stat-card"><div class="stat-icon cyan"><i class="fas fa-eye"></i></div><div class="stat-info"><h3 id="dashTotalViews">0</h3><p>Total Views</p></div></div>
+<div class="stat-card"><div class="stat-icon pink"><i class="fas fa-user-check"></i></div><div class="stat-info"><h3 id="dashTotalVisitors">0</h3><p>Unique Visitors</p></div></div>
 </div>
 
 <div class="card" style="background:linear-gradient(135deg,#f3e8ff,#e9d5ff);border-color:#c4b5fd">
@@ -545,12 +417,8 @@ tr.selected-row td{background:#eff6ff !important}
 Jab bhi aap naya post, blog ya service publish karein, ye button dabakar GitHub par automatic generation trigger kar sakte hain. 2-3 minute mein saare HTML pages + sitemap update ho jayenge.
 </p>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-<button class="btn" onclick="triggerAutoUpdate()" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);justify-content:center;padding:14px">
-<i class="fas fa-play-circle"></i> Trigger Auto Update
-</button>
-<button class="btn" onclick="showSec('secAutoUpdate',document.querySelector('[onclick*=secAutoUpdate]'))" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);justify-content:center;padding:14px">
-<i class="fas fa-cog"></i> Configure
-</button>
+<button class="btn" onclick="triggerAutoUpdate()" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);justify-content:center;padding:14px"><i class="fas fa-play-circle"></i> Trigger Auto Update</button>
+<button class="btn" onclick="showSec('secAutoUpdate',document.querySelector('[onclick*=secAutoUpdate]'))" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);justify-content:center;padding:14px"><i class="fas fa-cog"></i> Configure</button>
 </div>
 </div>
 
@@ -559,7 +427,6 @@ Jab bhi aap naya post, blog ya service publish karein, ye button dabakar GitHub 
 <span><i class="fas fa-chart-line"></i> Live Traffic Analytics</span>
 <button class="btn btn-p btn-sm" onclick="refreshVisitorStats()"><i class="fas fa-sync-alt"></i> Refresh</button>
 </div>
-
 <div class="stats-grid" style="margin-bottom:20px">
 <div class="stat-card" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0);border-color:#22c55e">
 <div class="stat-icon" style="background:linear-gradient(135deg,#22c55e,#15803d);width:44px;height:44px;font-size:1.1rem"><i class="fas fa-circle" style="font-size:.7rem"></i></div>
@@ -578,69 +445,34 @@ Jab bhi aap naya post, blog ya service publish karein, ye button dabakar GitHub 
 <div class="stat-info"><h3 id="statWeekViews" style="font-size:1.5rem">0</h3><p>Views (7 Days)</p></div>
 </div>
 </div>
-
 <div class="table-wrap">
 <table>
-<thead>
-<tr><th>Date</th><th>Page Views</th><th>Unique Visitors</th><th>Trend</th></tr>
-</thead>
-<tbody id="visitorDailyTable">
-<tr><td colspan="4"><div class="spinner"></div></td></tr>
-</tbody>
+<thead><tr><th>Date</th><th>Page Views</th><th>Unique Visitors</th><th>Trend</th></tr></thead>
+<tbody id="visitorDailyTable"><tr><td colspan="4"><div class="spinner"></div></td></tr></tbody>
 </table>
 </div>
 </div>
 
 <div class="card">
-<div class="card-head">
-<span><i class="fas fa-heartbeat"></i> System Status</span>
-</div>
+<div class="card-head"><span><i class="fas fa-heartbeat"></i> System Status</span></div>
 <div class="stats-grid" style="margin-bottom:0">
-<div class="stat-card" style="padding:16px">
-<div class="stat-icon cyan" style="width:44px;height:44px;font-size:1.1rem"><i class="fab fa-google"></i></div>
-<div class="stat-info"><h3 id="statusAdsense" style="font-size:1rem">Not Configured</h3><p>AdSense</p></div>
-</div>
-<div class="stat-card" style="padding:16px">
-<div class="stat-icon blue" style="width:44px;height:44px;font-size:1.1rem"><i class="fas fa-search"></i></div>
-<div class="stat-info"><h3 id="statusSEO" style="font-size:1rem">Not Configured</h3><p>SEO</p></div>
-</div>
-<div class="stat-card" style="padding:16px">
-<div class="stat-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706);width:44px;height:44px;font-size:1.1rem"><i class="fas fa-bell"></i></div>
-<div class="stat-info"><h3 id="statusNotif" style="font-size:1rem">Not Configured</h3><p>Push Notifications</p></div>
-</div>
-<div class="stat-card" style="padding:16px">
-<div class="stat-icon" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9);width:44px;height:44px;font-size:1.1rem"><i class="fas fa-magic"></i></div>
-<div class="stat-info"><h3 id="statusAutoUpdate" style="font-size:1rem">Setup Required</h3><p>Auto Update</p></div>
-</div>
+<div class="stat-card" style="padding:16px"><div class="stat-icon cyan" style="width:44px;height:44px;font-size:1.1rem"><i class="fab fa-google"></i></div><div class="stat-info"><h3 id="statusAdsense" style="font-size:1rem">Not Configured</h3><p>AdSense</p></div></div>
+<div class="stat-card" style="padding:16px"><div class="stat-icon blue" style="width:44px;height:44px;font-size:1.1rem"><i class="fas fa-search"></i></div><div class="stat-info"><h3 id="statusSEO" style="font-size:1rem">Not Configured</h3><p>SEO</p></div></div>
+<div class="stat-card" style="padding:16px"><div class="stat-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706);width:44px;height:44px;font-size:1.1rem"><i class="fas fa-bell"></i></div><div class="stat-info"><h3 id="statusNotif" style="font-size:1rem">Not Configured</h3><p>Push Notifications</p></div></div>
+<div class="stat-card" style="padding:16px"><div class="stat-icon" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9);width:44px;height:44px;font-size:1.1rem"><i class="fas fa-magic"></i></div><div class="stat-info"><h3 id="statusAutoUpdate" style="font-size:1rem">Setup Required</h3><p>Auto Update</p></div></div>
 </div>
 </div>
 
 <div class="card">
-<div class="card-head">
-<span><i class="fas fa-bolt"></i> Quick Actions</span>
-</div>
+<div class="card-head"><span><i class="fas fa-bolt"></i> Quick Actions</span></div>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px">
-<button class="btn btn-p" onclick="openPostModal()" style="justify-content:center;padding:16px">
-<i class="fas fa-plus-circle"></i> Create Post
-</button>
-<button class="btn" onclick="openBlogModal()" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#0ea5e9,#0284c7)">
-<i class="fas fa-book-open"></i> Write Blog
-</button>
-<button class="btn" onclick="openAnnModal()" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#f59e0b,#d97706)">
-<i class="fas fa-bullhorn"></i> New Announcement
-</button>
-<button class="btn" onclick="openPopupModal()" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#8b5cf6,#6d28d9)">
-<i class="fas fa-image"></i> New Image Popup
-</button>
-<button class="btn" onclick="openNotifModal()" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#dc2626,#b91c1c)">
-<i class="fas fa-bell"></i> Send Notification
-</button>
-<button class="btn btn-g" onclick="openServiceModal()" style="justify-content:center;padding:16px">
-<i class="fas fa-plus-circle"></i> Add Service
-</button>
-<button class="btn" onclick="triggerAutoUpdate()" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#7c3aed,#6d28d9)">
-<i class="fas fa-magic"></i> Auto Update
-</button>
+<button class="btn btn-p" onclick="openPostModal()" style="justify-content:center;padding:16px"><i class="fas fa-plus-circle"></i> Create Post</button>
+<button class="btn" onclick="openBlogModal()" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#0ea5e9,#0284c7)"><i class="fas fa-book-open"></i> Write Blog</button>
+<button class="btn" onclick="openAnnModal()" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#f59e0b,#d97706)"><i class="fas fa-bullhorn"></i> New Announcement</button>
+<button class="btn" onclick="openPopupModal()" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#8b5cf6,#6d28d9)"><i class="fas fa-image"></i> New Image Popup</button>
+<button class="btn" onclick="openNotifModal()" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#dc2626,#b91c1c)"><i class="fas fa-bell"></i> Send Notification</button>
+<button class="btn btn-g" onclick="openServiceModal()" style="justify-content:center;padding:16px"><i class="fas fa-plus-circle"></i> Add Service</button>
+<button class="btn" onclick="triggerAutoUpdate()" style="justify-content:center;padding:16px;background:linear-gradient(135deg,#7c3aed,#6d28d9)"><i class="fas fa-magic"></i> Auto Update</button>
 </div>
 </div>
 
@@ -653,102 +485,48 @@ Jab bhi aap naya post, blog ya service publish karein, ye button dabakar GitHub 
 </div>
 </div>
 
-<!-- ==========================================
-     AUTO UPDATE SECTION
-     ========================================== -->
+<!-- AUTO UPDATE SECTION -->
 <div id="secAutoUpdate" class="section">
-
 <div class="auto-update-hero">
 <h2><i class="fas fa-magic"></i> Auto Update System</h2>
 <p>Ye system automatically aapke Firebase database se data uthakar HTML pages + sitemap generate karta hai aur GitHub par upload kar deta hai. Aapko manually kuch nahi karna!</p>
 <div class="actions">
-<button class="btn primary" onclick="triggerAutoUpdate()">
-<i class="fas fa-play-circle"></i> Trigger Now
-</button>
-<button class="btn" onclick="checkWorkflowStatus()">
-<i class="fas fa-sync-alt"></i> Check Status
-</button>
-<button class="btn" onclick="viewLiveSitemap()">
-<i class="fas fa-external-link-alt"></i> View Live Sitemap
-</button>
+<button class="btn primary" onclick="triggerAutoUpdate()"><i class="fas fa-play-circle"></i> Trigger Now</button>
+<button class="btn" onclick="checkWorkflowStatus()"><i class="fas fa-sync-alt"></i> Check Status</button>
+<button class="btn" onclick="viewLiveSitemap()"><i class="fas fa-external-link-alt"></i> View Live Sitemap</button>
 </div>
 </div>
 
 <div class="status-grid">
-<div class="status-item">
-<div class="icon blue"><i class="fab fa-github"></i></div>
-<h4>GitHub Actions</h4>
-<p id="ghStatus">Setup Required</p>
-</div>
-<div class="status-item">
-<div class="icon green"><i class="fas fa-fire"></i></div>
-<h4>Firebase Data</h4>
-<p id="fbStatus">Connected</p>
-</div>
-<div class="status-item">
-<div class="icon orange"><i class="fas fa-clock"></i></div>
-<h4>Last Run</h4>
-<p id="lastRunStatus">Never</p>
-</div>
-<div class="status-item">
-<div class="icon purple"><i class="fas fa-file-code"></i></div>
-<h4>Auto Schedule</h4>
-<p>Daily 2 AM IST</p>
-</div>
+<div class="status-item"><div class="icon blue"><i class="fab fa-github"></i></div><h4>GitHub Actions</h4><p id="ghStatus">Setup Required</p></div>
+<div class="status-item"><div class="icon green"><i class="fas fa-fire"></i></div><h4>Firebase Data</h4><p id="fbStatus">Connected</p></div>
+<div class="status-item"><div class="icon orange"><i class="fas fa-clock"></i></div><h4>Last Run</h4><p id="lastRunStatus">Never</p></div>
+<div class="status-item"><div class="icon purple"><i class="fas fa-file-code"></i></div><h4>Auto Schedule</h4><p>Daily 2 AM IST</p></div>
 </div>
 
 <div class="card">
-<div class="card-head">
-<span><i class="fas fa-cog"></i> GitHub Configuration</span>
-</div>
-
+<div class="card-head"><span><i class="fas fa-cog"></i> GitHub Configuration</span></div>
 <div class="info-box">
 <strong><i class="fas fa-info-circle"></i> Ek Baar Setup Karein</strong>
 GitHub Personal Access Token generate karein aur yahan paste karein. Ye token sirf workflow trigger karne ke liye use hoga. Token ko safely localStorage mein store kiya jayega.
 </div>
-
 <div class="form-row">
-<div class="form-group">
-<label>GitHub Username / Owner</label>
-<input type="text" id="gh_owner" placeholder="sainismailabad">
-<span class="hint">Aapka GitHub username</span>
+<div class="form-group"><label>GitHub Username / Owner</label><input type="text" id="gh_owner" placeholder="sainismailabad"><span class="hint">Aapka GitHub username</span></div>
+<div class="form-group"><label>Repository Name</label><input type="text" id="gh_repo" placeholder="csc"><span class="hint">Aapka repository ka naam</span></div>
 </div>
-<div class="form-group">
-<label>Repository Name</label>
-<input type="text" id="gh_repo" placeholder="csc">
-<span class="hint">Aapka repository ka naam</span>
-</div>
-</div>
-
 <div class="form-row">
-<div class="form-group">
-<label>Workflow File Name</label>
-<input type="text" id="gh_workflow" placeholder="auto-generate.yml">
+<div class="form-group"><label>Workflow File Name</label><input type="text" id="gh_workflow" placeholder="auto-generate.yml"></div>
+<div class="form-group"><label>Branch Name</label><input type="text" id="gh_branch" placeholder="main"></div>
 </div>
-<div class="form-group">
-<label>Branch Name</label>
-<input type="text" id="gh_branch" placeholder="main">
-</div>
-</div>
-
 <div class="form-group">
 <label>GitHub Personal Access Token <span class="req">*</span></label>
 <input type="password" id="gh_token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
-<span class="hint">
-Token banane ke liye: GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token → Scope: <code>workflow</code> tick karein
-</span>
+<span class="hint">Token banane ke liye: GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic) → Generate new token → Scope: <code>workflow</code> tick karein</span>
 </div>
-
 <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px">
-<button class="btn btn-g" onclick="saveGitHubConfig()" style="padding:14px 28px">
-<i class="fas fa-save"></i> Save Configuration
-</button>
-<button class="btn btn-ghost" onclick="clearGitHubConfig()" style="padding:14px 28px">
-<i class="fas fa-trash"></i> Clear Config
-</button>
-<button class="btn btn-p" onclick="testGitHubConnection()" style="padding:14px 28px">
-<i class="fas fa-plug"></i> Test Connection
-</button>
+<button class="btn btn-g" onclick="saveGitHubConfig()" style="padding:14px 28px"><i class="fas fa-save"></i> Save Configuration</button>
+<button class="btn btn-ghost" onclick="clearGitHubConfig()" style="padding:14px 28px"><i class="fas fa-trash"></i> Clear Config</button>
+<button class="btn btn-p" onclick="testGitHubConnection()" style="padding:14px 28px"><i class="fas fa-plug"></i> Test Connection</button>
 </div>
 </div>
 
@@ -774,7 +552,6 @@ Token banane ke liye: GitHub → Settings → Developer settings → Personal ac
 <div class="log-line"><span class="log-time">--:--:--</span><span class="log-info">Auto Update system ready. Configure GitHub to start.</span></div>
 </div>
 </div>
-
 </div>
 
 <!-- POSTS SECTION -->
@@ -784,7 +561,6 @@ Token banane ke liye: GitHub → Settings → Developer settings → Personal ac
 <span><i class="fas fa-file-alt"></i> Manage Posts</span>
 <button class="btn btn-p" onclick="openPostModal()"><i class="fas fa-plus"></i> Create New Post</button>
 </div>
-
 <div class="bulk-bar" id="bulkBarPosts">
 <div class="bulk-info"><i class="fas fa-check-square"></i> <span id="bulkCountPosts">0</span> post(s) selected</div>
 <div class="bulk-actions">
@@ -792,36 +568,29 @@ Token banane ke liye: GitHub → Settings → Developer settings → Personal ac
 <button class="btn btn-clear" onclick="clearPostSelection()"><i class="fas fa-times"></i> Clear Selection</button>
 </div>
 </div>
-
 <div class="table-wrap">
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th class="check-cell"><input type="checkbox" id="selectAllPosts" onchange="toggleSelectAllPosts(this)"></th>
-<th style="width:80px">Image</th><th>Title</th><th>Category</th><th>Last Date</th><th style="width:180px">Actions</th>
-</tr>
-</thead>
-<tbody id="postsTable"><tr><td colspan="6"><div class="spinner"></div></td></tr></tbody>
+<th style="width:80px">Image</th><th>Title</th><th>Category</th><th>Author</th><th>Last Date</th><th style="width:180px">Actions</th>
+</tr></thead>
+<tbody id="postsTable"><tr><td colspan="7"><div class="spinner"></div></td></tr></tbody>
 </table>
 </div>
 </div>
 </div>
 
-<!-- ==========================================
-     BLOGS SECTION (NEW)
-     ========================================== -->
+<!-- BLOGS SECTION -->
 <div id="secBlogs" class="section">
 <div class="card">
 <div class="card-head">
 <span><i class="fas fa-book-open"></i> Blog Management</span>
 <button class="btn" onclick="openBlogModal()" style="background:linear-gradient(135deg,#0ea5e9,#0284c7)"><i class="fas fa-plus"></i> Write New Blog</button>
 </div>
-
 <div class="info-box">
 <strong><i class="fas fa-info-circle"></i> Professional Blog System</strong>
 Blog likhein — title, content, featured image, multiple URLs, author, tags, reading time, SEO meta — sab kuch ek jagah.
 </div>
-
 <div class="bulk-bar" id="bulkBarBlogs">
 <div class="bulk-info"><i class="fas fa-check-square"></i> <span id="bulkCountBlogs">0</span> blog(s) selected</div>
 <div class="bulk-actions">
@@ -829,11 +598,9 @@ Blog likhein — title, content, featured image, multiple URLs, author, tags, re
 <button class="btn btn-clear" onclick="clearBlogSelection()"><i class="fas fa-times"></i> Clear Selection</button>
 </div>
 </div>
-
 <div class="table-wrap">
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th class="check-cell"><input type="checkbox" id="selectAllBlogs" onchange="toggleSelectAllBlogs(this)"></th>
 <th style="width:80px">Image</th>
 <th>Title</th>
@@ -842,8 +609,7 @@ Blog likhein — title, content, featured image, multiple URLs, author, tags, re
 <th>Status</th>
 <th>Date</th>
 <th style="width:180px">Actions</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody id="blogsTable"><tr><td colspan="8"><div class="spinner"></div></td></tr></tbody>
 </table>
 </div>
@@ -857,16 +623,13 @@ Blog likhein — title, content, featured image, multiple URLs, author, tags, re
 <span><i class="fas fa-bullhorn"></i> Announcements Manager</span>
 <button class="btn" onclick="openAnnModal()" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><i class="fas fa-plus"></i> New Announcement</button>
 </div>
-
 <div class="info-box">
 <strong><i class="fas fa-info-circle"></i> Live Announcement Bar (Multi-line)</strong>
 Yahan se aap website ke top par scrolling announcement bar show kar sakte hain. Ek announcement mein multiple lines add kar sakte hain.
 </div>
-
 <div class="table-wrap">
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th style="width:60px">Active</th>
 <th>Title</th>
 <th>Lines</th>
@@ -874,8 +637,7 @@ Yahan se aap website ke top par scrolling announcement bar show kar sakte hain. 
 <th>Priority</th>
 <th>Schedule</th>
 <th style="width:180px">Actions</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody id="annTable"><tr><td colspan="7"><div class="spinner"></div></td></tr></tbody>
 </table>
 </div>
@@ -889,16 +651,13 @@ Yahan se aap website ke top par scrolling announcement bar show kar sakte hain. 
 <span><i class="fas fa-image"></i> Image Popup Manager</span>
 <button class="btn" onclick="openPopupModal()" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)"><i class="fas fa-plus"></i> New Popup</button>
 </div>
-
 <div class="info-box">
 <strong><i class="fas fa-info-circle"></i> Image Popup / Banner</strong>
 Yeh feature website load hone par ek full-image popup modal show karta hai.
 </div>
-
 <div class="table-wrap">
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th style="width:100px">Preview</th>
 <th>Title</th>
 <th>Type</th>
@@ -906,8 +665,7 @@ Yeh feature website load hone par ek full-image popup modal show karta hai.
 <th>Schedule</th>
 <th>Show Once</th>
 <th style="width:200px">Actions</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody id="popupTable"><tr><td colspan="7"><div class="spinner"></div></td></tr></tbody>
 </table>
 </div>
@@ -922,9 +680,8 @@ Yeh feature website load hone par ek full-image popup modal show karta hai.
 <button class="btn btn-g" onclick="openServiceModal()"><i class="fas fa-plus"></i> Add New Service</button>
 </div>
 <p style="font-size:.86rem;color:var(--s500);margin-bottom:18px;line-height:1.7">
-Yahan se aap website ke <b>Sarkari Kaam section</b> ke sabhi services add/edit/delete kar sakte hain. Ye services automatically website par show hongi.
+Yahan se aap website ke <b>Sarkari Kaam section</b> ke sabhi services add/edit/delete kar sakte hain.
 </p>
-
 <div class="bulk-bar" id="bulkBarServices">
 <div class="bulk-info"><i class="fas fa-check-square"></i> <span id="bulkCountServices">0</span> service(s) selected</div>
 <div class="bulk-actions">
@@ -932,16 +689,13 @@ Yahan se aap website ke <b>Sarkari Kaam section</b> ke sabhi services add/edit/d
 <button class="btn btn-clear" onclick="clearServiceSelection()"><i class="fas fa-times"></i> Clear Selection</button>
 </div>
 </div>
-
 <div class="table-wrap">
 <table>
-<thead>
-<tr>
+<thead><tr>
 <th class="check-cell"><input type="checkbox" id="selectAllServices" onchange="toggleSelectAllServices(this)"></th>
-<th style="width:70px">Image</th><th>Service Name</th><th>Subtitle</th><th>Links</th><th style="width:180px">Actions</th>
-</tr>
-</thead>
-<tbody id="servicesTable"><tr><td colspan="6"><div class="spinner"></div></td></tr></tbody>
+<th style="width:70px">Image</th><th>Service Name</th><th>Subtitle</th><th>Author</th><th>Links</th><th style="width:180px">Actions</th>
+</tr></thead>
+<tbody id="servicesTable"><tr><td colspan="7"><div class="spinner"></div></td></tr></tbody>
 </table>
 </div>
 </div>
@@ -956,9 +710,7 @@ Yahan se aap website ke <b>Sarkari Kaam section</b> ke sabhi services add/edit/d
 </div>
 <div class="table-wrap">
 <table>
-<thead>
-<tr><th>Name</th><th>Slug</th><th style="width:120px">Actions</th></tr>
-</thead>
+<thead><tr><th>Name</th><th>Slug</th><th style="width:120px">Actions</th></tr></thead>
 <tbody id="catsTable"><tr><td colspan="3"><div class="spinner"></div></td></tr></tbody>
 </table>
 </div>
@@ -969,36 +721,21 @@ Yahan se aap website ke <b>Sarkari Kaam section</b> ke sabhi services add/edit/d
 <div id="secNotifications" class="section">
 <div class="notif-card">
 <h4><i class="fas fa-bell"></i> Push Notifications System</h4>
-<p>Website par visitor ko real-time browser notification bhejein. User ne ek baar permission diya to sab notifications milenge — bina login, bina app download!</p>
+<p>Website par visitor ko real-time browser notification bhejein.</p>
 <div class="notif-stats">
 <div class="notif-stat"><div class="num" id="notifSubscribedCount">0</div><div class="lbl">Subscribed Users</div></div>
 <div class="notif-stat"><div class="num" id="notifSentCount">0</div><div class="lbl">Notifications Sent</div></div>
 <div class="notif-stat"><div class="num" id="notifActiveCount">0</div><div class="lbl">Active (30 days)</div></div>
 </div>
 </div>
-
 <div class="card">
 <div class="card-head">
 <span><i class="fas fa-paper-plane"></i> Send Notification</span>
 <button class="btn" onclick="openNotifModal()" style="background:linear-gradient(135deg,#dc2626,#b91c1c)"><i class="fas fa-plus"></i> Compose New</button>
 </div>
-
-<div class="info-box">
-<strong><i class="fas fa-info-circle"></i> How it works</strong>
-Jab user aapki website par pehli baar aayega, use "Allow Notifications" ka option milega. Jab wo allow karega to uski browser ID database mein save ho jayegi. Aap yahan se notification bhejenge to wo turant sab users ko mil jayegi — chahe website open ho ya na ho.
-</div>
-
 <div class="table-wrap">
 <table>
-<thead>
-<tr>
-<th>Title</th>
-<th>Message</th>
-<th>Sent At</th>
-<th>Recipients</th>
-<th style="width:180px">Actions</th>
-</tr>
-</thead>
+<thead><tr><th>Title</th><th>Message</th><th>Sent At</th><th>Recipients</th><th style="width:180px">Actions</th></tr></thead>
 <tbody id="notifTable"><tr><td colspan="5"><div class="spinner"></div></td></tr></tbody>
 </table>
 </div>
@@ -1012,12 +749,9 @@ Jab user aapki website par pehli baar aayega, use "Allow Notifications" ka optio
 <span><i class="fas fa-users-cog"></i> User Management</span>
 <button class="btn" onclick="openUserModal()" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)"><i class="fas fa-user-plus"></i> Add New User</button>
 </div>
-
 <div class="table-wrap">
 <table>
-<thead>
-<tr><th style="width:220px">User</th><th>Email</th><th>Role</th><th>Status</th><th>Created</th><th style="width:200px">Actions</th></tr>
-</thead>
+<thead><tr><th style="width:220px">User</th><th>Email</th><th>Role</th><th>Status</th><th>Created</th><th style="width:200px">Actions</th></tr></thead>
 <tbody id="usersTable"><tr><td colspan="6"><div class="spinner"></div></td></tr></tbody>
 </table>
 </div>
@@ -1031,38 +765,19 @@ Jab user aapki website par pehli baar aayega, use "Allow Notifications" ka optio
 <span><i class="fas fa-chart-bar"></i> Complete Visitor Analytics</span>
 <button class="btn btn-p btn-sm" onclick="refreshVisitorStats()"><i class="fas fa-sync-alt"></i> Refresh</button>
 </div>
-
 <div class="stats-grid">
-<div class="stat-card" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);border-color:#2563eb">
-<div class="stat-icon blue"><i class="fas fa-eye"></i></div>
-<div class="stat-info"><h3 id="analyticsTotalViews">0</h3><p>Total Page Views</p></div>
+<div class="stat-card" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe);border-color:#2563eb"><div class="stat-icon blue"><i class="fas fa-eye"></i></div><div class="stat-info"><h3 id="analyticsTotalViews">0</h3><p>Total Page Views</p></div></div>
+<div class="stat-card" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0);border-color:#22c55e"><div class="stat-icon green"><i class="fas fa-user-check"></i></div><div class="stat-info"><h3 id="analyticsTotalVisitors">0</h3><p>Unique Visitors</p></div></div>
+<div class="stat-card" style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-color:#f59e0b"><div class="stat-icon orange"><i class="fas fa-circle" style="font-size:.7rem"></i></div><div class="stat-info"><h3 id="analyticsOnlineNow">0</h3><p>Online Now</p></div></div>
+<div class="stat-card" style="background:linear-gradient(135deg,#f3e8ff,#e9d5ff);border-color:#8b5cf6"><div class="stat-icon purple"><i class="fas fa-calendar-day"></i></div><div class="stat-info"><h3 id="analyticsTodayViews">0</h3><p>Views Today</p></div></div>
 </div>
-<div class="stat-card" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0);border-color:#22c55e">
-<div class="stat-icon green"><i class="fas fa-user-check"></i></div>
-<div class="stat-info"><h3 id="analyticsTotalVisitors">0</h3><p>Unique Visitors</p></div>
-</div>
-<div class="stat-card" style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-color:#f59e0b">
-<div class="stat-icon orange"><i class="fas fa-circle" style="font-size:.7rem"></i></div>
-<div class="stat-info"><h3 id="analyticsOnlineNow">0</h3><p>Online Now</p></div>
-</div>
-<div class="stat-card" style="background:linear-gradient(135deg,#f3e8ff,#e9d5ff);border-color:#8b5cf6">
-<div class="stat-icon purple"><i class="fas fa-calendar-day"></i></div>
-<div class="stat-info"><h3 id="analyticsTodayViews">0</h3><p>Views Today</p></div>
-</div>
-</div>
-
 <h3 style="font-size:1rem;font-weight:800;color:var(--s900);margin:24px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--s200)">
 <i class="fas fa-history" style="color:var(--p600)"></i> Last 30 Days History
 </h3>
-
 <div class="table-wrap">
 <table>
-<thead>
-<tr><th>Date</th><th>Day</th><th>Page Views</th><th>Unique Visitors</th><th>Trend</th></tr>
-</thead>
-<tbody id="visitorFullTable">
-<tr><td colspan="5"><div class="spinner"></div></td></tr>
-</tbody>
+<thead><tr><th>Date</th><th>Day</th><th>Page Views</th><th>Unique Visitors</th><th>Trend</th></tr></thead>
+<tbody id="visitorFullTable"><tr><td colspan="5"><div class="spinner"></div></td></tr></tbody>
 </table>
 </div>
 </div>
@@ -1071,25 +786,16 @@ Jab user aapki website par pehli baar aayega, use "Allow Notifications" ka optio
 <!-- ADSENSE SECTION -->
 <div id="secAdsense" class="section">
 <div class="card">
-<div class="card-head">
-<span><i class="fab fa-google" style="color:#ea4335"></i> Google AdSense Configuration</span>
-</div>
-
+<div class="card-head"><span><i class="fab fa-google" style="color:#ea4335"></i> Google AdSense Configuration</span></div>
 <div class="info-box">
 <strong><i class="fas fa-info-circle"></i> AdSense Setup Guide</strong>
 Apna Publisher ID aur Ad Slot IDs yahan enter karein.
 </div>
-
-<div class="form-group">
-<label>AdSense Publisher ID <span class="req">*</span></label>
-<input type="text" id="ads_client" placeholder="ca-pub-1336136297225442">
-</div>
-
+<div class="form-group"><label>AdSense Publisher ID <span class="req">*</span></label><input type="text" id="ads_client" placeholder="ca-pub-1336136297225442"></div>
 <div class="form-row">
 <div class="form-group"><label>Auto Ads Enabled?</label><select id="ads_auto"><option value="no">No</option><option value="yes">Yes (Recommended)</option></select></div>
 <div class="form-group"><label>Ad Frequency</label><select id="ads_freq"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></div>
 </div>
-
 <div class="form-row">
 <div class="form-group"><label>Top Banner Ad Slot</label><input type="text" id="ads_slot_top" placeholder="1234567890"></div>
 <div class="form-group"><label>Mid Content Ad Slot</label><input type="text" id="ads_slot_mid" placeholder="1234567890"></div>
@@ -1098,40 +804,30 @@ Apna Publisher ID aur Ad Slot IDs yahan enter karein.
 <div class="form-group"><label>Sidebar Ad Slot</label><input type="text" id="ads_slot_side" placeholder="1234567890"></div>
 <div class="form-group"><label>Bottom Ad Slot</label><input type="text" id="ads_slot_bottom" placeholder="1234567890"></div>
 </div>
-
-<button class="btn btn-g" onclick="saveAdsense()" style="padding:14px 28px;margin-top:14px">
-<i class="fas fa-save"></i> Save AdSense Configuration
-</button>
+<button class="btn btn-g" onclick="saveAdsense()" style="padding:14px 28px;margin-top:14px"><i class="fas fa-save"></i> Save AdSense Configuration</button>
 </div>
 </div>
 
 <!-- SEO SECTION -->
 <div id="secSEO" class="section">
 <div class="card">
-<div class="card-head">
-<span><i class="fas fa-search"></i> SEO Settings</span>
-</div>
-
+<div class="card-head"><span><i class="fas fa-search"></i> SEO Settings</span></div>
 <div class="form-group"><label>Meta Title <span class="req">*</span></label><input type="text" id="seo_home_title" placeholder="esewahub.in - Sarkari Job, Result, Yojna 2026"></div>
 <div class="form-group"><label>Meta Description <span class="req">*</span></label><textarea id="seo_home_desc" style="min-height:80px"></textarea></div>
 <div class="form-group"><label>Meta Keywords</label><textarea id="seo_home_keywords" style="min-height:60px"></textarea></div>
-
 <div class="form-row">
 <div class="form-group"><label>Site URL</label><input type="text" id="seo_site_url" placeholder="https://esewahub.in"></div>
 <div class="form-group"><label>Site Language</label><select id="seo_lang"><option value="en">English</option><option value="hi">Hindi</option><option value="en-IN" selected>English (India)</option></select></div>
 </div>
-
 <div class="form-row">
 <div class="form-group"><label>Author Name</label><input type="text" id="seo_author" placeholder="esewahub.in"></div>
 <div class="form-group"><label>Robots</label><select id="seo_robots"><option value="index, follow" selected>Index, Follow</option><option value="noindex, nofollow">No Index, No Follow</option></select></div>
 </div>
-
 <div class="form-group"><label>OG Title</label><input type="text" id="seo_og_title"></div>
 <div class="form-group"><label>OG Description</label><textarea id="seo_og_desc" style="min-height:70px"></textarea></div>
 <div class="form-group"><label>OG Image URL</label><input type="text" id="seo_og_image" placeholder="https://example.com/image.jpg"></div>
 <div class="form-group"><label>Google Search Console Verification Code</label><input type="text" id="seo_gsc"></div>
 <div class="form-group"><label>Bing Webmaster Verification</label><input type="text" id="seo_bing"></div>
-
 <button class="btn btn-g" onclick="saveSEO()" style="padding:14px 28px"><i class="fas fa-save"></i> Save SEO Settings</button>
 </div>
 </div>
@@ -1139,15 +835,11 @@ Apna Publisher ID aur Ad Slot IDs yahan enter karein.
 <!-- SITE SETTINGS SECTION -->
 <div id="secSettings" class="section">
 <div class="card">
-<div class="card-head">
-<span><i class="fas fa-cog"></i> Site Settings</span>
-</div>
-
+<div class="card-head"><span><i class="fas fa-cog"></i> Site Settings</span></div>
 <div class="form-row">
 <div class="form-group"><label>Portal Title</label><input type="text" id="set_title" placeholder="esewahub.in"></div>
 <div class="form-group"><label>Tagline</label><input type="text" id="set_tagline" placeholder="Sarkari Kaam & Digital Seva"></div>
 </div>
-
 <div class="form-group">
 <label><i class="fas fa-image" style="color:var(--p600)"></i> Website Logo / Favicon URL</label>
 <input type="url" id="set_logo" placeholder="https://i.ibb.co/XXXXX/logo.png">
@@ -1157,25 +849,20 @@ Apna Publisher ID aur Ad Slot IDs yahan enter karein.
 <button type="button" class="remove-img" onclick="removeLogoImage()"><i class="fas fa-times"></i></button>
 <img id="set_logoPreviewImg" alt="Logo Preview" style="max-height:120px;object-fit:contain;background:#f1f5f9;padding:10px">
 </div>
-
 <div class="form-row">
 <div class="form-group"><label>WhatsApp Number</label><input type="text" id="set_wa" placeholder="917056836166"></div>
 <div class="form-group"><label>Email Address</label><input type="text" id="set_email" placeholder="info@esewahub.in"></div>
 </div>
-
 <div class="form-row">
 <div class="form-group"><label>Address</label><input type="text" id="set_address" placeholder="City, State, India"></div>
 <div class="form-group"><label>Copyright Text</label><input type="text" id="set_copyright" placeholder="&copy; 2026 esewahub.in"></div>
 </div>
-
 <div class="form-row">
 <div class="form-group"><label>Hero Title</label><input type="text" id="set_hero_title"></div>
 <div class="form-group"><label>Hero Subtitle</label><input type="text" id="set_hero_sub"></div>
 </div>
-
 <div class="form-group"><label>About Us</label><textarea id="set_about"></textarea></div>
 <div class="form-group"><label>Footer Disclaimer</label><textarea id="set_disclaimer"></textarea></div>
-
 <button class="btn btn-g" onclick="saveSettings()" style="padding:14px 28px"><i class="fas fa-save"></i> Save Site Settings</button>
 </div>
 </div>
@@ -1183,10 +870,7 @@ Apna Publisher ID aur Ad Slot IDs yahan enter karein.
 <!-- SOCIAL LINKS SECTION -->
 <div id="secSocial" class="section">
 <div class="card">
-<div class="card-head">
-<span><i class="fas fa-share-alt"></i> Social Media Links</span>
-</div>
-
+<div class="card-head"><span><i class="fas fa-share-alt"></i> Social Media Links</span></div>
 <div class="form-row">
 <div class="form-group"><label><i class="fab fa-facebook" style="color:#1877F2"></i> Facebook Page URL</label><input type="text" id="soc_facebook"></div>
 <div class="form-group"><label><i class="fab fa-twitter" style="color:#1DA1F2"></i> Twitter / X URL</label><input type="text" id="soc_twitter"></div>
@@ -1199,7 +883,6 @@ Apna Publisher ID aur Ad Slot IDs yahan enter karein.
 <div class="form-group"><label><i class="fab fa-telegram-plane" style="color:#0088cc"></i> Telegram Channel URL</label><input type="text" id="soc_telegram"></div>
 <div class="form-group"><label><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp Channel URL</label><input type="text" id="soc_whatsapp_ch"></div>
 </div>
-
 <button class="btn btn-g" onclick="saveSocial()" style="padding:14px 28px"><i class="fas fa-save"></i> Save Social Links</button>
 </div>
 </div>
@@ -1207,18 +890,13 @@ Apna Publisher ID aur Ad Slot IDs yahan enter karein.
 <!-- CUSTOM CODE SECTION -->
 <div id="secCustom" class="section">
 <div class="card">
-<div class="card-head">
-<span><i class="fas fa-code"></i> Custom Code Injection</span>
-</div>
-
+<div class="card-head"><span><i class="fas fa-code"></i> Custom Code Injection</span></div>
 <div class="warn-box">
 <strong><i class="fas fa-exclamation-triangle"></i> Warning!</strong>
 Sirf tab use karein jab aapko HTML/CSS/JS ka knowledge ho.
 </div>
-
 <div class="form-group"><label>Custom Code in &lt;head&gt; Section</label><textarea id="custom_head" style="min-height:140px;font-family:monospace;font-size:.82rem"></textarea></div>
 <div class="form-group"><label>Custom Code Before &lt;/body&gt;</label><textarea id="custom_body" style="min-height:140px;font-family:monospace;font-size:.82rem"></textarea></div>
-
 <button class="btn btn-g" onclick="saveCustom()" style="padding:14px 28px"><i class="fas fa-save"></i> Save Custom Code</button>
 </div>
 </div>
@@ -1226,44 +904,29 @@ Sirf tab use karein jab aapko HTML/CSS/JS ka knowledge ho.
 </div>
 </div>
 
-<!-- ==========================================
-     BLOG MODAL (NEW)
-     ========================================== -->
+<!-- BLOG MODAL -->
 <div id="blogModal" class="modal">
 <div class="modal-box modal-wide">
 <div class="modal-head">
 <h2><i class="fas fa-book-open"></i> <span id="blogModalTitle">Write New Blog</span></h2>
 <button class="modal-close" onclick="closeModal('blogModal')"><i class="fas fa-times"></i></button>
 </div>
-
 <input type="hidden" id="bl_id">
-
 <div class="form-group">
 <label>Blog Title <span class="req">*</span></label>
 <input type="text" id="bl_title" placeholder="e.g. How to Apply for Aadhar Card Online in 2026" oninput="updateBlogSlugPreview()">
 <span class="hint" id="bl_slugPreview">Slug: -</span>
 </div>
-
 <div class="form-row">
-<div class="form-group">
-<label>Author Name <span class="req">*</span></label>
-<input type="text" id="bl_author" placeholder="Your Name" value="Esewahub Team">
-</div>
+<div class="form-group"><label>Author Name <span class="req">*</span></label><input type="text" id="bl_author" placeholder="Your Name" value="Esewahub Team"></div>
 <div class="form-group">
 <label>Category <span class="req">*</span></label>
 <input type="text" id="bl_category" placeholder="e.g. Sarkari Guide" list="blogCatList">
 <datalist id="blogCatList">
-<option value="Sarkari Guide">
-<option value="Job Tips">
-<option value="Scheme Guide">
-<option value="Document Help">
-<option value="Career Advice">
-<option value="Technology">
-<option value="News">
+<option value="Sarkari Guide"><option value="Job Tips"><option value="Scheme Guide"><option value="Document Help"><option value="Career Advice"><option value="Technology"><option value="News">
 </datalist>
 </div>
 </div>
-
 <div class="form-row">
 <div class="form-group">
 <label>Tags (comma separated)</label>
@@ -1279,7 +942,6 @@ Sirf tab use karein jab aapko HTML/CSS/JS ka knowledge ho.
 </select>
 </div>
 </div>
-
 <div class="form-group">
 <label>📷 Featured Image URL</label>
 <input type="url" id="bl_image" placeholder="https://example.com/blog-image.jpg">
@@ -1289,13 +951,11 @@ Sirf tab use karein jab aapko HTML/CSS/JS ka knowledge ho.
 <button type="button" class="remove-img" onclick="removeBlogImage()"><i class="fas fa-times"></i></button>
 <img id="bl_imagePreviewImg" alt="Preview">
 </div>
-
 <div class="form-group">
 <label>Blog Excerpt / Short Summary <span class="req">*</span></label>
 <textarea id="bl_excerpt" placeholder="Blog ka short summary (2-3 lines) — search results aur social share ke liye" style="min-height:80px"></textarea>
 <span class="hint">Max 250 characters. Blog listing page par ye dikhega.</span>
 </div>
-
 <div class="form-group">
 <label>Full Blog Content <span class="req">*</span></label>
 <div class="blog-meta-info" id="bl_metaInfo">
@@ -1317,37 +977,17 @@ Sirf tab use karein jab aapko HTML/CSS/JS ka knowledge ho.
 <button type="button" onclick="insertBlogTag('hr', '', true)" title="Divider"><i class="fas fa-minus"></i></button>
 <button type="button" onclick="toggleBlogPreview()" title="Preview" style="margin-left:auto;background:var(--p50);color:var(--p700);border-color:var(--p400)"><i class="fas fa-eye"></i> <span id="bl_previewBtnText">Preview</span></button>
 </div>
-<textarea id="bl_content" class="blog-editor" placeholder="Apna professional blog yahan likhein...
-
-Tools use karein:
-- H2/H3 → Headings
-- P → New Paragraph
-- UL/OL → Lists
-- Link → URL add karein
-- Image → Image embed karein
-- Quote → Blockquote
-
-Ya seedha HTML likhein:
-<h2>Section Title</h2>
-<p>Your paragraph text here.</p>
-<ul>
-  <li>Point 1</li>
-  <li>Point 2</li>
-</ul>"></textarea>
+<textarea id="bl_content" class="blog-editor" placeholder="Apna professional blog yahan likhein..."></textarea>
 <div class="blog-editor-preview" id="bl_preview"></div>
 </div>
-
 <div class="link-builder">
 <div class="link-builder-head">
 <label><i class="fas fa-link" style="color:var(--p600)"></i> Reference / Source URLs</label>
 <span class="link-counter" id="bl_linkCounter">0 links</span>
 </div>
 <div id="bl_linksContainer"></div>
-<button type="button" class="add-link-btn" onclick="addBlogLinkRow()">
-<i class="fas fa-plus-circle"></i> Add Another URL
-</button>
+<button type="button" class="add-link-btn" onclick="addBlogLinkRow()"><i class="fas fa-plus-circle"></i> Add Another URL</button>
 </div>
-
 <div class="card" style="background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border-color:#7dd3fc;margin-bottom:0">
 <div class="card-head" style="border-bottom-color:#bae6fd;margin-bottom:16px;padding-bottom:12px">
 <span style="color:#0369a1;font-size:.92rem"><i class="fas fa-search"></i> SEO Meta (Optional)</span>
@@ -1363,7 +1003,6 @@ Ya seedha HTML likhein:
 <span class="hint" id="bl_seoCount">0 / 160 characters</span>
 </div>
 </div>
-
 <div class="modal-foot">
 <button class="btn btn-ghost" onclick="closeModal('blogModal')">Cancel</button>
 <button class="btn" onclick="saveBlog()" style="background:linear-gradient(135deg,#0ea5e9,#0284c7)"><i class="fas fa-paper-plane"></i> Save Blog</button>
@@ -1378,25 +1017,19 @@ Ya seedha HTML likhein:
 <h2><i class="fas fa-bullhorn"></i> <span id="annModalTitle">New Announcement</span></h2>
 <button class="modal-close" onclick="closeModal('annModal')"><i class="fas fa-times"></i></button>
 </div>
-
 <input type="hidden" id="an_id">
-
 <div class="form-group">
 <label>Announcement Title <span class="req">*</span></label>
 <input type="text" id="an_title" placeholder="e.g. 🔥 SSC CGL Result 2026 LIVE!">
 </div>
-
 <div class="multiline-builder">
 <div class="multiline-builder-head">
 <label><i class="fas fa-list" style="color:var(--p600)"></i> Announcement Lines (Multi-line)</label>
 <span class="line-counter" id="an_lineCounter">1 line</span>
 </div>
 <div id="an_linesContainer"></div>
-<button type="button" class="add-line-btn" onclick="addAnnLineRow()">
-<i class="fas fa-plus-circle"></i> Add Another Line
-</button>
+<button type="button" class="add-line-btn" onclick="addAnnLineRow()"><i class="fas fa-plus-circle"></i> Add Another Line</button>
 </div>
-
 <div class="form-row">
 <div class="form-group">
 <label>Type / Category <span class="req">*</span></label>
@@ -1419,22 +1052,18 @@ Ya seedha HTML likhein:
 </select>
 </div>
 </div>
-
 <div class="form-group">
 <label>🔗 Main Link URL (Optional)</label>
 <input type="url" id="an_link" placeholder="https://example.com/result-page">
 </div>
-
 <div class="form-row">
 <div class="form-group"><label>Start Date</label><input type="datetime-local" id="an_start"></div>
 <div class="form-group"><label>End Date</label><input type="datetime-local" id="an_end"></div>
 </div>
-
 <div class="toggle-row">
 <div class="label"><i class="fas fa-power-off"></i><div>Active Status<span class="desc">ON = website par dikhega</span></div></div>
 <div class="switch on" onclick="toggleAnnActive(this)" id="an_activeSwitch"></div>
 </div>
-
 <div class="modal-foot">
 <button class="btn btn-ghost" onclick="closeModal('annModal')">Cancel</button>
 <button class="btn" onclick="saveAnnouncement()" style="background:linear-gradient(135deg,#f59e0b,#d97706)"><i class="fas fa-paper-plane"></i> Save Announcement</button>
@@ -1449,33 +1078,18 @@ Ya seedha HTML likhein:
 <h2><i class="fas fa-image"></i> <span id="popupModalTitle">New Image Popup</span></h2>
 <button class="modal-close" onclick="closeModal('popupModal')"><i class="fas fa-times"></i></button>
 </div>
-
 <input type="hidden" id="pop_id">
-
-<div class="form-group">
-<label>Popup Title <span class="req">*</span></label>
-<input type="text" id="pop_title" placeholder="e.g. 🎉 New Result Released!">
-</div>
-
-<div class="form-group">
-<label>Popup Message</label>
-<textarea id="pop_msg" placeholder="Short description..." style="min-height:70px"></textarea>
-</div>
-
-<div class="form-group">
-<label>🖼️ Image URL <span class="req">*</span></label>
-<input type="url" id="pop_image" placeholder="https://i.ibb.co/yourimage.jpg">
-</div>
+<div class="form-group"><label>Popup Title <span class="req">*</span></label><input type="text" id="pop_title" placeholder="e.g. 🎉 New Result Released!"></div>
+<div class="form-group"><label>Popup Message</label><textarea id="pop_msg" placeholder="Short description..." style="min-height:70px"></textarea></div>
+<div class="form-group"><label>🖼️ Image URL <span class="req">*</span></label><input type="url" id="pop_image" placeholder="https://i.ibb.co/yourimage.jpg"></div>
 <div class="image-preview" id="pop_imagePreview">
 <button type="button" class="remove-img" onclick="removePopupImage()"><i class="fas fa-times"></i></button>
 <img id="pop_imagePreviewImg" alt="Preview" onerror="this.style.display='none'">
 </div>
-
 <div class="form-row">
 <div class="form-group"><label>Button Text</label><input type="text" id="pop_btnText" value="View More"></div>
 <div class="form-group"><label>Button Link</label><input type="url" id="pop_btnLink"></div>
 </div>
-
 <div class="form-row">
 <div class="form-group">
 <label>Type / Theme</label>
@@ -1497,22 +1111,18 @@ Ya seedha HTML likhein:
 </select>
 </div>
 </div>
-
 <div class="form-row">
 <div class="form-group"><label>Start Date</label><input type="datetime-local" id="pop_start"></div>
 <div class="form-group"><label>End Date</label><input type="datetime-local" id="pop_end"></div>
 </div>
-
 <div class="toggle-row">
 <div class="label"><i class="fas fa-eye-slash"></i><div>Show Once Per User<span class="desc">ON = user ek baar close kare to 24 hrs tak nahi dikhega</span></div></div>
 <div class="switch on" onclick="toggleSwitch(this)" id="pop_showOnce"></div>
 </div>
-
 <div class="toggle-row">
 <div class="label"><i class="fas fa-power-off"></i><div>Active Status<span class="desc">ON = website par dikhega</span></div></div>
 <div class="switch on" onclick="togglePopupActive(this)" id="pop_activeSwitch"></div>
 </div>
-
 <div class="modal-foot">
 <button class="btn btn-ghost" onclick="closeModal('popupModal')">Cancel</button>
 <button class="btn" onclick="savePopup()" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)"><i class="fas fa-paper-plane"></i> Save Popup</button>
@@ -1527,36 +1137,19 @@ Ya seedha HTML likhein:
 <h2><i class="fas fa-bell"></i> <span id="notifModalTitle">Send Push Notification</span></h2>
 <button class="modal-close" onclick="closeModal('notifModal')"><i class="fas fa-times"></i></button>
 </div>
-
 <input type="hidden" id="notif_id">
-
-<div class="form-group">
-<label>Notification Title <span class="req">*</span></label>
-<input type="text" id="notif_title" placeholder="e.g. 🎉 New Sarkari Job Alert!">
-</div>
-
-<div class="form-group">
-<label>Notification Message <span class="req">*</span></label>
-<textarea id="notif_msg" placeholder="e.g. SSC CGL 2026 ki 5000+ vacancy aayi hai. Apply karein!" style="min-height:90px"></textarea>
-</div>
-
+<div class="form-group"><label>Notification Title <span class="req">*</span></label><input type="text" id="notif_title" placeholder="e.g. 🎉 New Sarkari Job Alert!"></div>
+<div class="form-group"><label>Notification Message <span class="req">*</span></label><textarea id="notif_msg" placeholder="e.g. SSC CGL 2026 ki 5000+ vacancy aayi hai. Apply karein!" style="min-height:90px"></textarea></div>
 <div class="form-group">
 <label>🔗 Link (Click par khulega)</label>
 <input type="url" id="notif_link" placeholder="https://esewahub.in/post.html?id=XXXXX">
 <span class="hint">Khaali chhodein to user notification par click karne se website home page khulega</span>
 </div>
-
 <div class="form-group">
 <label>Icon / Image URL (Optional)</label>
 <input type="url" id="notif_icon" placeholder="https://i.ibb.co/XXXXX/icon.png">
 <span class="hint">Notification mein chhota image dikhega. Recommended: 192x192 px</span>
 </div>
-
-<div class="info-box">
-<strong><i class="fas fa-info-circle"></i> Important</strong>
-Notifications sirf un users ko jayengi jinhone aapki website par "Allow Notifications" par click kiya hai. Jo users ne block kiya hai unhe notification nahi jayegi.
-</div>
-
 <div class="modal-foot">
 <button class="btn btn-ghost" onclick="closeModal('notifModal')">Cancel</button>
 <button class="btn" onclick="sendNotification()" style="background:linear-gradient(135deg,#dc2626,#b91c1c)"><i class="fas fa-paper-plane"></i> Send Notification Now</button>
@@ -1571,51 +1164,38 @@ Notifications sirf un users ko jayengi jinhone aapki website par "Allow Notifica
 <h2><i class="fas fa-edit"></i> Content Editor</h2>
 <button class="modal-close" onclick="closeModal('postModal')"><i class="fas fa-times"></i></button>
 </div>
-
 <input type="hidden" id="ep_id">
-
-<div class="form-group">
-<label>Post Title <span class="req">*</span></label>
-<input type="text" id="ep_title" placeholder="Enter title...">
-</div>
-
+<div class="form-group"><label>Post Title <span class="req">*</span></label><input type="text" id="ep_title" placeholder="Enter title..."></div>
 <div class="form-row">
 <div class="form-group"><label>Category</label><select id="ep_cat"></select></div>
 <div class="form-group"><label>Last Date</label><input type="text" id="ep_date" placeholder="e.g. 25 Nov 2026"></div>
 </div>
-
-<div class="form-group">
-<label>📷 Featured Image URL</label>
-<input type="url" id="ep_image" placeholder="https://example.com/image.jpg">
+<div class="form-row">
+<div class="form-group"><label>Author Name</label><input type="text" id="ep_author" placeholder="e.g. Rahul Kumar" value="Esewahub Team"></div>
+<div class="form-group"><label>Author Experience</label><input type="text" id="ep_authorExp" placeholder="e.g. 7+ years CSC operator" value="Government Services Expert"></div>
 </div>
+<div class="form-group"><label>📷 Featured Image URL</label><input type="url" id="ep_image" placeholder="https://example.com/image.jpg"></div>
 <div class="image-preview" id="ep_imagePreview">
 <button type="button" class="remove-img" onclick="removePostImage()"><i class="fas fa-times"></i></button>
 <img id="ep_imagePreviewImg" alt="Preview">
 </div>
-
 <div class="form-group"><label>Short Summary</label><textarea id="ep_sum" style="min-height:70px"></textarea></div>
-
 <div class="link-builder">
 <div class="link-builder-head">
 <label><i class="fas fa-link" style="color:var(--p600)"></i> Official Links</label>
 <span class="link-counter" id="ep_linkCounter">0 links</span>
 </div>
 <div id="ep_linksContainer"></div>
-<button type="button" class="add-link-btn" onclick="addPostLinkRow()">
-<i class="fas fa-plus-circle"></i> Add Another Link
-</button>
+<button type="button" class="add-link-btn" onclick="addPostLinkRow()"><i class="fas fa-plus-circle"></i> Add Another Link</button>
 </div>
-
 <div class="form-group"><label>Eligibility Details</label><textarea id="ep_edu"></textarea></div>
 <div class="form-group"><label>How to Apply</label><textarea id="ep_steps"></textarea></div>
 <div class="form-group"><label>Required Documents</label><textarea id="ep_docs"></textarea></div>
 <div class="form-group"><label>FAQ (Optional)</label><textarea id="ep_faq" placeholder="Format: Question|Answer"></textarea></div>
-
 <div class="toggle-row">
 <div class="label"><i class="fas fa-bell"></i><div>Send Push Notification<span class="desc">ON = publish hote hi sab users ko notification jayegi</span></div></div>
 <div class="switch" onclick="toggleSwitch(this)" id="ep_sendNotif"></div>
 </div>
-
 <div class="modal-foot">
 <button class="btn btn-ghost" onclick="closeModal('postModal')">Cancel</button>
 <button class="btn btn-p" onclick="savePost()"><i class="fas fa-paper-plane"></i> Publish Post</button>
@@ -1630,14 +1210,11 @@ Notifications sirf un users ko jayengi jinhone aapki website par "Allow Notifica
 <h2><i class="fas fa-briefcase"></i> Service Editor</h2>
 <button class="modal-close" onclick="closeModal('serviceModal')"><i class="fas fa-times"></i></button>
 </div>
-
 <input type="hidden" id="es_id">
-
 <div class="form-row">
 <div class="form-group"><label>Service Name <span class="req">*</span></label><input type="text" id="es_name" placeholder="e.g. Aadhar Card"></div>
 <div class="form-group"><label>Subtitle</label><input type="text" id="es_sub" placeholder="e.g. Update & Download"></div>
 </div>
-
 <div class="form-row">
 <div class="form-group"><label>Font Awesome Icon</label><input type="text" id="es_icon" placeholder="fa-id-card" value="fa-id-card"></div>
 <div class="form-group">
@@ -1665,25 +1242,22 @@ Notifications sirf un users ko jayengi jinhone aapki website par "Allow Notifica
 </select>
 </div>
 </div>
-
-<div class="form-group">
-<label>📷 Service Image URL (Optional)</label>
-<input type="url" id="es_image" placeholder="https://example.com/service-image.jpg">
+<div class="form-row">
+<div class="form-group"><label>Author Name</label><input type="text" id="es_author" placeholder="e.g. Rahul Kumar" value="Esewahub Team"></div>
+<div class="form-group"><label>Author Experience</label><input type="text" id="es_authorExp" placeholder="e.g. 7+ years CSC operator" value="Government Services Expert"></div>
 </div>
+<div class="form-group"><label>📷 Service Image URL (Optional)</label><input type="url" id="es_image" placeholder="https://example.com/service-image.jpg"></div>
 <div class="image-preview" id="es_imagePreview">
 <button type="button" class="remove-img" onclick="removeServiceImage()"><i class="fas fa-times"></i></button>
 <img id="es_imagePreviewImg" alt="Preview">
 </div>
-
 <div class="form-group"><label>Description / About</label><textarea id="es_about" style="min-height:70px"></textarea></div>
 <div class="form-group"><label>How to Apply (Steps)</label><textarea id="es_steps" placeholder="One step per line..."></textarea></div>
 <div class="form-group"><label>Required Documents</label><textarea id="es_docs" placeholder="One document per line..."></textarea></div>
-
 <div class="form-group">
 <label>Official Links <span class="req">*</span></label>
 <textarea id="es_links" placeholder="Format: Link Name|URL" style="min-height:140px"></textarea>
 </div>
-
 <div class="modal-foot">
 <button class="btn btn-ghost" onclick="closeModal('serviceModal')">Cancel</button>
 <button class="btn btn-g" onclick="saveService()"><i class="fas fa-paper-plane"></i> Save Service</button>
@@ -1698,24 +1272,19 @@ Notifications sirf un users ko jayengi jinhone aapki website par "Allow Notifica
 <h2><i class="fas fa-user-plus"></i> <span id="userModalTitle">Add New User</span></h2>
 <button class="modal-close" onclick="closeModal('userModal')"><i class="fas fa-times"></i></button>
 </div>
-
 <input type="hidden" id="eu_id">
-
 <div class="form-row">
 <div class="form-group"><label>Full Name <span class="req">*</span></label><input type="text" id="eu_name"></div>
 <div class="form-group"><label>Email Address <span class="req">*</span></label><input type="email" id="eu_email"></div>
 </div>
-
 <div class="form-row">
 <div class="form-group"><label>Phone (Optional)</label><input type="text" id="eu_phone"></div>
 <div class="form-group"><label>Status</label><select id="eu_status"><option value="active" selected>Active</option><option value="inactive">Inactive</option></select></div>
 </div>
-
 <div class="form-group" id="eu_passwordGroup">
 <label>Password <span class="req">*</span></label>
 <input type="text" id="eu_password" placeholder="Min 6 characters">
 </div>
-
 <div class="form-group">
 <label>User Role <span class="req">*</span></label>
 <select id="eu_role">
@@ -1724,14 +1293,12 @@ Notifications sirf un users ko jayengi jinhone aapki website par "Allow Notifica
 <option value="admin">Admin</option>
 </select>
 </div>
-
 <div class="modal-foot">
 <button class="btn btn-ghost" onclick="closeModal('userModal')">Cancel</button>
 <button class="btn" onclick="saveUser()" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)"><i class="fas fa-paper-plane"></i> Save User</button>
 </div>
 </div>
 </div>
-
 <script>
 const firebaseConfig = {
     apiKey: "AIzaSyDLnDVmkVcXxOFDxxfmXmqU1HflB2EpalQ",
@@ -1951,7 +1518,6 @@ window.removeBlogImage = function(){ document.getElementById('bl_image').value='
 
 function escapeAttr(str) { return str ? String(str).replace(/"/g, '&quot;').replace(/'/g, '&#39;') : ''; }
 
-/* ====== POST LINK BUILDER ====== */
 function createLinkRow(name = '', url = '', showRemove = true) {
     const row = document.createElement('div');
     row.className = 'link-row';
@@ -2002,7 +1568,6 @@ function collectPostLinks() {
     return links;
 }
 
-/* ====== BLOG LINK BUILDER ====== */
 function createBlogLinkRow(name = '', url = '', showRemove = true) {
     const row = document.createElement('div');
     row.className = 'link-row';
@@ -2049,13 +1614,13 @@ function collectBlogLinks() {
         let url = row.querySelector('.link-url').value.trim();
         if (name && url) {
             if (!url.startsWith('http')) url = 'https://' + url;
-            links.push({ name, url });
+            try { new URL(url); links.push({ name, url }); } 
+            catch (e) { console.warn('Invalid URL skipped:', url); }
         }
     });
     return links;
 }
 
-/* ====== ANNOUNCEMENT LINES ====== */
 function createAnnLineRow(text = '', showRemove = true) {
     const row = document.createElement('div');
     row.className = 'line-row';
@@ -2177,20 +1742,21 @@ window.saveBlog = async function() {
     const excerpt = document.getElementById('bl_excerpt').value.trim();
     const content = document.getElementById('bl_content').value.trim();
     
-    if (!title) { toast('Blog title required', 'warning'); return; }
-    if (!excerpt) { toast('Blog excerpt required', 'warning'); return; }
-    if (!content) { toast('Blog content required', 'warning'); return; }
+    if (!title) { toast('❌ Blog title required', 'warning'); document.getElementById('bl_title').focus(); return; }
+    if (title.length < 10) { toast('⚠️ Title at least 10 characters', 'warning'); return; }
+    if (!excerpt) { toast('❌ Blog excerpt required', 'warning'); document.getElementById('bl_excerpt').focus(); return; }
+    if (excerpt.length < 30) { toast('⚠️ Excerpt at least 30 characters', 'warning'); return; }
+    if (!content) { toast('❌ Blog content required', 'warning'); document.getElementById('bl_content').focus(); return; }
+    
+    const plainText = content.replace(/<[^>]*>/g, ' ').trim();
+    if (plainText.length < 200) { toast('⚠️ Content too short — min 200 chars', 'warning'); return; }
     
     let image = document.getElementById('bl_image').value.trim();
     if (image && !image.startsWith('http')) image = 'https://' + image;
     
-    const tags = document.getElementById('bl_tags').value
-        .split(',')
-        .map(t => t.trim())
-        .filter(t => t);
-    
+    const tags = document.getElementById('bl_tags').value.split(',').map(t => t.trim()).filter(t => t);
     const links = collectBlogLinks();
-    const words = content.replace(/<[^>]*>/g, ' ').split(/\s+/).filter(w => w).length;
+    const words = plainText.split(/\s+/).filter(w => w).length;
     const readingTime = Math.max(1, Math.ceil(words / 200));
     
     const data = {
@@ -2215,17 +1781,17 @@ window.saveBlog = async function() {
     try {
         if (id) {
             await db.ref(`blogs/${id}`).update(data);
-            toast('Blog updated! ✓', 'success');
+            toast('✅ Blog updated successfully!', 'success');
         } else {
             data.createdAt = new Date().toISOString();
             await db.ref('blogs').push(data);
-            toast('Blog published! 🎉', 'success');
+            toast('🎉 Blog published successfully!', 'success');
         }
         closeModal('blogModal');
         await loadAllData();
         await loadDashboard();
     } catch (e) {
-        toast('Error: ' + e.message, 'error');
+        toast('❌ Error: ' + e.message, 'error');
     }
 };
 
@@ -2240,9 +1806,7 @@ window.deleteBlog = async function(id) {
 };
 
 function slugifyBlog(text) {
-    return String(text || '')
-        .toLowerCase()
-        .trim()
+    return String(text || '').toLowerCase().trim()
         .replace(/[^\w\s-]/g, '')
         .replace(/\s+/g, '-')
         .replace(/-+/g, '-')
@@ -2255,47 +1819,16 @@ window.updateBlogSlugPreview = function() {
     document.getElementById('bl_slugPreview').innerText = 'Slug: ' + slug;
 };
 
-window.updateBlogWordCount = function() {
-    const content = document.getElementById('bl_content').value;
-    const words = content.replace(/<[^>]*>/g, ' ').split(/\s+/).filter(w => w).length;
-    const min = Math.max(1, Math.ceil(words / 200));
-    document.getElementById('bl_wordCountInfo').innerText = `${words} words`;
-    document.getElementById('bl_readTimeInfo').innerText = `${min} min read`;
-};
-
-window.updateBlogTagsPreview = function() {
-    const tags = document.getElementById('bl_tags').value
-        .split(',')
-        .map(t => t.trim())
-        .filter(t => t);
-    const preview = document.getElementById('bl_tagsPreview');
-    if (!tags.length) { preview.innerHTML = ''; return; }
-    preview.innerHTML = tags.map(t => `<span class="blog-tag">${t}</span>`).join('');
-};
-
-window.updateBlogSeoCount = function() {
-    const len = document.getElementById('bl_seoDesc').value.length;
-    document.getElementById('bl_seoCount').innerText = `${len} / 160 characters`;
-    document.getElementById('bl_seoCount').style.color = len > 160 ? 'var(--r500)' : 'var(--s400)';
-};
-
-/* ===== Blog Editor Toolbar Functions ===== */
 window.insertBlogTag = function(tag, placeholder = '', selfClosing = false) {
     const ta = document.getElementById('bl_content');
+    if (!ta) return;
     const start = ta.selectionStart;
     const end = ta.selectionEnd;
     const text = ta.value;
     const selected = text.substring(start, end) || placeholder;
-    
     let before, after;
-    if (selfClosing) {
-        before = `<${tag}>\n`;
-        after = '';
-    } else {
-        before = `<${tag}>`;
-        after = `</${tag}>`;
-    }
-    
+    if (selfClosing) { before = `<${tag}>\n`; after = ''; }
+    else { before = `<${tag}>`; after = `</${tag}>`; }
     const insert = before + selected + after;
     ta.value = text.substring(0, start) + insert + text.substring(end);
     ta.focus();
@@ -2306,12 +1839,11 @@ window.insertBlogTag = function(tag, placeholder = '', selfClosing = false) {
 
 window.insertBlogList = function(type) {
     const ta = document.getElementById('bl_content');
+    if (!ta) return;
     const start = ta.selectionStart;
-    const end = ta.selectionEnd;
     const text = ta.value;
-    
     const listHtml = `<${type}>\n  <li>Point 1</li>\n  <li>Point 2</li>\n  <li>Point 3</li>\n</${type}>\n`;
-    ta.value = text.substring(0, start) + listHtml + text.substring(end);
+    ta.value = text.substring(0, start) + listHtml + text.substring(ta.selectionEnd);
     ta.focus();
     const newPos = start + listHtml.length;
     ta.setSelectionRange(newPos, newPos);
@@ -2320,9 +1852,11 @@ window.insertBlogList = function(type) {
 
 window.insertBlogLink = function() {
     const url = prompt('Enter URL:', 'https://');
-    if (!url) return;
+    if (!url || !url.trim()) return;
+    if (!url.startsWith('http')) { toast('URL must start with http:// or https://', 'warning'); return; }
     const label = prompt('Link text:', 'Click here') || url;
     const ta = document.getElementById('bl_content');
+    if (!ta) return;
     const start = ta.selectionStart;
     const html = `<a href="${url}" target="_blank" rel="noopener">${label}</a>`;
     ta.value = ta.value.substring(0, start) + html + ta.value.substring(ta.selectionEnd);
@@ -2332,9 +1866,10 @@ window.insertBlogLink = function() {
 
 window.insertBlogImage = function() {
     const url = prompt('Image URL:', 'https://');
-    if (!url) return;
+    if (!url || !url.trim()) return;
     const alt = prompt('Alt text (for SEO):', 'Image') || 'Image';
     const ta = document.getElementById('bl_content');
+    if (!ta) return;
     const start = ta.selectionStart;
     const html = `<img src="${url}" alt="${alt}" loading="lazy">\n`;
     ta.value = ta.value.substring(0, start) + html + ta.value.substring(ta.selectionEnd);
@@ -2346,18 +1881,61 @@ window.toggleBlogPreview = function() {
     const preview = document.getElementById('bl_preview');
     const btnText = document.getElementById('bl_previewBtnText');
     const content = document.getElementById('bl_content').value;
-    
+    if (!preview) return;
     if (preview.classList.contains('show')) {
         preview.classList.remove('show');
-        btnText.innerText = 'Preview';
+        if (btnText) btnText.innerText = 'Preview';
     } else {
-        preview.innerHTML = content || '<p style="color:#94a3b8;font-style:italic">Kuch content likhein preview dekhne ke liye...</p>';
+        preview.innerHTML = content 
+            ? `<div style="font-family:'Inter',sans-serif;line-height:1.8;color:#334155">${content}</div>` 
+            : '<p style="color:#94a3b8;font-style:italic;text-align:center;padding:20px">Kuch content likhein preview dekhne ke liye...</p>';
         preview.classList.add('show');
-        btnText.innerText = 'Hide Preview';
+        if (btnText) btnText.innerText = 'Hide Preview';
     }
 };
 
-/* ===== Render Blogs Table ===== */
+window.updateBlogWordCount = function() {
+    const content = document.getElementById('bl_content');
+    if (!content) return;
+    const text = content.value;
+    const plainText = text.replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ');
+    const words = plainText.split(/\s+/).filter(w => w.trim()).length;
+    const min = Math.max(1, Math.ceil(words / 200));
+    const wordEl = document.getElementById('bl_wordCountInfo');
+    const readEl = document.getElementById('bl_readTimeInfo');
+    if (wordEl) wordEl.innerText = `${words} words`;
+    if (readEl) readEl.innerText = `${min} min read`;
+    if (wordEl) {
+        if (words < 300) wordEl.style.color = '#f59e0b';
+        else if (words < 500) wordEl.style.color = '#22c55e';
+        else wordEl.style.color = '#2563eb';
+    }
+};
+
+window.updateBlogTagsPreview = function() {
+    const tagsInput = document.getElementById('bl_tags');
+    const preview = document.getElementById('bl_tagsPreview');
+    if (!tagsInput || !preview) return;
+    const tags = tagsInput.value.split(',').map(t => t.trim()).filter(t => t);
+    if (!tags.length) {
+        preview.innerHTML = '<span style="font-size:.72rem;color:#94a3b8;font-style:italic">No tags added yet</span>';
+        return;
+    }
+    preview.innerHTML = tags.map(t => `<span class="blog-tag">#${t}</span>`).join('');
+};
+
+window.updateBlogSeoCount = function() {
+    const seoDesc = document.getElementById('bl_seoDesc');
+    const counter = document.getElementById('bl_seoCount');
+    if (!seoDesc || !counter) return;
+    const len = seoDesc.value.length;
+    counter.innerText = `${len} / 160 characters`;
+    if (len === 0) counter.style.color = '#94a3b8';
+    else if (len < 120) counter.style.color = '#f59e0b';
+    else if (len <= 160) counter.style.color = '#22c55e';
+    else counter.style.color = '#ef4444';
+};
+
 function renderBlogs() {
     const bt = document.getElementById('blogsTable');
     if (!bt) return;
@@ -2365,20 +1943,14 @@ function renderBlogs() {
     const arr = Object.entries(allBlogs);
     const badge = document.getElementById('blogCountBadge');
     if (badge) badge.innerText = arr.length;
-    
     const currentIds = new Set(arr.map(([k]) => k));
-    for (const id of selectedBlogs) {
-        if (!currentIds.has(id)) selectedBlogs.delete(id);
-    }
-    
+    for (const id of selectedBlogs) { if (!currentIds.has(id)) selectedBlogs.delete(id); }
     if (arr.length === 0) {
         bt.innerHTML = '<tr><td colspan="8" class="empty"><i class="fas fa-book-open"></i><h4>No blogs yet</h4><p>Click "Write New Blog" to create your first blog</p></td></tr>';
         updateBlogBulkBar();
         return;
     }
-    
     arr.sort((a, b) => new Date(b[1].timestamp || 0) - new Date(a[1].timestamp || 0));
-    
     arr.forEach(([id, b]) => {
         const title = (b.title || '').length > 40 ? b.title.substring(0, 40) + '...' : (b.title || 'Untitled');
         const thumb = b.image 
@@ -2389,7 +1961,6 @@ function renderBlogs() {
             : '<span style="background:#dcfce7;color:#15803d;padding:4px 10px;border-radius:9999px;font-size:.72rem;font-weight:800">✅ PUBLISHED</span>';
         const checked = selectedBlogs.has(id) ? 'checked' : '';
         const rowClass = selectedBlogs.has(id) ? 'selected-row' : '';
-        
         bt.innerHTML += `<tr class="${rowClass}" data-blog-id="${id}">
             <td class="check-cell"><input type="checkbox" class="blog-checkbox" data-id="${id}" ${checked} onchange="toggleBlogSelection('${id}', this.checked)"></td>
             <td>${thumb}</td>
@@ -2404,37 +1975,26 @@ function renderBlogs() {
             </td>
         </tr>`;
     });
-    
     updateBlogBulkBar();
     updateSelectAllBlogsState();
 }
 
 window.toggleBlogSelection = function(id, checked) {
-    if (checked) selectedBlogs.add(id);
-    else selectedBlogs.delete(id);
+    if (checked) selectedBlogs.add(id); else selectedBlogs.delete(id);
     const row = document.querySelector(`tr[data-blog-id="${id}"]`);
-    if (row) {
-        if (checked) row.classList.add('selected-row');
-        else row.classList.remove('selected-row');
-    }
+    if (row) { if (checked) row.classList.add('selected-row'); else row.classList.remove('selected-row'); }
     updateBlogBulkBar();
     updateSelectAllBlogsState();
 };
 
 window.toggleSelectAllBlogs = function(el) {
     const checked = el.checked;
-    Object.keys(allBlogs).forEach(id => {
-        if (checked) selectedBlogs.add(id);
-        else selectedBlogs.delete(id);
-    });
+    Object.keys(allBlogs).forEach(id => { if (checked) selectedBlogs.add(id); else selectedBlogs.delete(id); });
     document.querySelectorAll('.blog-checkbox').forEach(cb => {
         cb.checked = checked;
         const id = cb.getAttribute('data-id');
         const row = document.querySelector(`tr[data-blog-id="${id}"]`);
-        if (row) {
-            if (checked) row.classList.add('selected-row');
-            else row.classList.remove('selected-row');
-        }
+        if (row) { if (checked) row.classList.add('selected-row'); else row.classList.remove('selected-row'); }
     });
     updateBlogBulkBar();
 };
@@ -2475,9 +2035,7 @@ window.bulkDeleteBlogs = async function() {
     try {
         await db.ref().update(updates);
         toast(`✅ Deleted ${count} blog(s)`, 'success');
-    } catch (e) {
-        toast('Error: ' + e.message, 'error');
-    }
+    } catch (e) { toast('Error: ' + e.message, 'error'); }
     clearBlogSelection();
     await loadAllData();
     await loadDashboard();
@@ -2490,9 +2048,6 @@ async function loadBlogs() {
         renderBlogs();
     } catch (e) { console.error('Load blogs error:', e); }
 }
-/* ==========================================
-   BLOGS — END
-   ========================================== */
 
 /* ==========================================
    ANNOUNCEMENTS
@@ -2513,10 +2068,7 @@ window.openAnnModal = function() {
     document.body.style.overflow = 'hidden';
 };
 
-window.toggleAnnActive = function(el) {
-    el.classList.toggle('on');
-    annActiveToggle = el.classList.contains('on');
-};
+window.toggleAnnActive = function(el) { el.classList.toggle('on'); annActiveToggle = el.classList.contains('on'); };
 
 window.editAnnouncement = function(id) {
     const a = allAnnouncements[id];
@@ -2645,10 +2197,7 @@ window.openPopupModal = function() {
     document.body.style.overflow = 'hidden';
 };
 
-window.togglePopupActive = function(el) {
-    el.classList.toggle('on');
-    popupActiveToggle = el.classList.contains('on');
-};
+window.togglePopupActive = function(el) { el.classList.toggle('on'); popupActiveToggle = el.classList.contains('on'); };
 
 window.editPopup = function(id) {
     const p = allPopups[id];
@@ -2792,17 +2341,14 @@ window.sendNotification = async function() {
     const message = document.getElementById('notif_msg').value.trim();
     let link = document.getElementById('notif_link').value.trim();
     let icon = document.getElementById('notif_icon').value.trim();
-    
     if (!title) { toast('Title required', 'warning'); return; }
     if (!message) { toast('Message required', 'warning'); return; }
     if (link && !link.startsWith('http')) link = 'https://' + link;
     if (icon && !icon.startsWith('http')) icon = 'https://' + icon;
-    
     try {
         const subsSnap = await db.ref('pushSubscribers').once('value');
         const subs = subsSnap.exists() ? subsSnap.val() : {};
         const subCount = Object.keys(subs).length;
-        
         const notifData = {
             title, message,
             link: link || 'https://esewahub.in',
@@ -2812,13 +2358,10 @@ window.sendNotification = async function() {
             status: 'sent'
         };
         await db.ref('notifications').push(notifData);
-        
         toast(`Notification sent to ${subCount} subscribers! 🎉`, 'success');
         closeModal('notifModal');
         await loadNotifications();
-    } catch (e) {
-        toast('Error: ' + e.message, 'error');
-    }
+    } catch (e) { toast('Error: ' + e.message, 'error'); }
 };
 
 async function loadNotifications() {
@@ -2826,30 +2369,20 @@ async function loadNotifications() {
         const subsSnap = await db.ref('pushSubscribers').once('value');
         const subs = subsSnap.exists() ? subsSnap.val() : {};
         const subCount = Object.keys(subs).length;
-        
         const now = Date.now();
         const thirtyDaysAgo = now - (30 * 24 * 60 * 60 * 1000);
         const activeCount = Object.values(subs).filter(s => s.subscribedAt && new Date(s.subscribedAt).getTime() > thirtyDaysAgo).length;
-        
         const notifSnap = await db.ref('notifications').once('value');
         allNotifications = notifSnap.exists() ? notifSnap.val() : {};
         const sentCount = Object.keys(allNotifications).length;
-        
         document.getElementById('notifSubscribedCount').innerText = subCount;
         document.getElementById('notifSentCount').innerText = sentCount;
         document.getElementById('notifActiveCount').innerText = activeCount;
         document.getElementById('notifCountBadge').innerText = subCount;
-        
         const statusEl = document.getElementById('statusNotif');
-        if (statusEl) {
-            statusEl.innerText = subCount > 0 ? 'Active ✓' : 'No Subscribers';
-            statusEl.style.color = subCount > 0 ? 'var(--g600)' : 'var(--r500)';
-        }
-        
+        if (statusEl) { statusEl.innerText = subCount > 0 ? 'Active ✓' : 'No Subscribers'; statusEl.style.color = subCount > 0 ? 'var(--g600)' : 'var(--r500)'; }
         renderNotifications();
-    } catch (e) {
-        console.error('Load notifications error:', e);
-    }
+    } catch (e) { console.error('Load notifications error:', e); }
 }
 
 function renderNotifications() {
@@ -2870,20 +2403,15 @@ function renderNotifications() {
             <td style="color:var(--s500);font-size:.85rem">${msg}</td>
             <td style="font-size:.8rem">${formatDate(n.sentAt)}</td>
             <td><span style="background:var(--g50);color:var(--g700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${n.recipients || 0} users</span></td>
-            <td>
-                <button class="btn btn-r btn-sm" onclick="deleteNotification('${id}')"><i class="fas fa-trash"></i></button>
-            </td>
+            <td><button class="btn btn-r btn-sm" onclick="deleteNotification('${id}')"><i class="fas fa-trash"></i></button></td>
         </tr>`;
     });
 }
 
 window.deleteNotification = async function(id) {
     if (!confirm('Delete this notification record?')) return;
-    try {
-        await db.ref(`notifications/${id}`).remove();
-        toast('Deleted', 'info');
-        await loadNotifications();
-    } catch (e) { toast('Error', 'error'); }
+    try { await db.ref(`notifications/${id}`).remove(); toast('Deleted', 'info'); await loadNotifications(); }
+    catch (e) { toast('Error', 'error'); }
 };
 
 /* ==========================================
@@ -2892,17 +2420,13 @@ window.deleteNotification = async function(id) {
 function loadGitHubConfig() {
     try {
         const saved = localStorage.getItem(GITHUB_CONFIG_KEY);
-        if (saved) {
-            githubConfig = JSON.parse(saved);
-        } else {
-            githubConfig = { owner:'sainismailabad', repo:'csc', workflow:'auto-generate.yml', branch:'main', token:'' };
-        }
+        if (saved) { githubConfig = JSON.parse(saved); }
+        else { githubConfig = { owner:'sainismailabad', repo:'csc', workflow:'auto-generate.yml', branch:'main', token:'' }; }
         document.getElementById('gh_owner').value = githubConfig.owner || '';
         document.getElementById('gh_repo').value = githubConfig.repo || '';
         document.getElementById('gh_workflow').value = githubConfig.workflow || 'auto-generate.yml';
         document.getElementById('gh_branch').value = githubConfig.branch || 'main';
         document.getElementById('gh_token').value = githubConfig.token || '';
-        
         updateGitHubStatus();
     } catch(e) { console.error('Load GitHub config error:', e); }
 }
@@ -2925,20 +2449,16 @@ window.saveGitHubConfig = function() {
     const workflow = document.getElementById('gh_workflow').value.trim() || 'auto-generate.yml';
     const branch = document.getElementById('gh_branch').value.trim() || 'main';
     const token = document.getElementById('gh_token').value.trim();
-    
     if (!owner) { toast('GitHub username required', 'warning'); return; }
     if (!repo) { toast('Repository name required', 'warning'); return; }
     if (!token) { toast('GitHub token required', 'warning'); return; }
-    
     githubConfig = { owner, repo, workflow, branch, token };
     try {
         localStorage.setItem(GITHUB_CONFIG_KEY, JSON.stringify(githubConfig));
         toast('GitHub configuration saved! ✓', 'success');
         updateGitHubStatus();
         addLog('success', 'GitHub configuration saved: ' + owner + '/' + repo);
-    } catch(e) {
-        toast('Failed to save: ' + e.message, 'error');
-    }
+    } catch(e) { toast('Failed to save: ' + e.message, 'error'); }
 };
 
 window.clearGitHubConfig = function() {
@@ -2956,97 +2476,56 @@ window.clearGitHubConfig = function() {
 
 window.testGitHubConnection = async function() {
     if (!githubConfig.token || !githubConfig.owner || !githubConfig.repo) {
-        toast('Pehle configuration save karein', 'warning');
-        return;
+        toast('Pehle configuration save karein', 'warning'); return;
     }
     toast('Testing connection...', 'info');
     addLog('info', 'Testing GitHub connection...');
-    
     try {
         const response = await fetch(`https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}`, {
-            headers: {
-                'Authorization': `Bearer ${githubConfig.token}`,
-                'Accept': 'application/vnd.github.v3+json'
-            }
+            headers: { 'Authorization': `Bearer ${githubConfig.token}`, 'Accept': 'application/vnd.github.v3+json' }
         });
-        
         if (response.ok) {
             const data = await response.json();
             toast('✓ Connection successful!', 'success');
             addLog('success', 'Connected to: ' + data.full_name);
             updateGitHubStatus();
-        } else if (response.status === 401) {
-            toast('✗ Token invalid or expired', 'error');
-            addLog('error', 'Token authentication failed.');
-        } else if (response.status === 404) {
-            toast('✗ Repository not found', 'error');
-            addLog('error', 'Repo not found.');
-        } else {
-            toast('✗ Connection failed: HTTP ' + response.status, 'error');
-            addLog('error', 'HTTP ' + response.status);
-        }
-    } catch(e) {
-        toast('✗ Network error', 'error');
-        addLog('error', 'Network error: ' + e.message);
-    }
+        } else if (response.status === 401) { toast('✗ Token invalid', 'error'); addLog('error', 'Token authentication failed.'); }
+        else if (response.status === 404) { toast('✗ Repo not found', 'error'); addLog('error', 'Repo not found.'); }
+        else { toast('✗ HTTP ' + response.status, 'error'); addLog('error', 'HTTP ' + response.status); }
+    } catch(e) { toast('✗ Network error', 'error'); addLog('error', 'Network error: ' + e.message); }
 };
 
 window.triggerAutoUpdate = async function() {
     if (!githubConfig.token || !githubConfig.owner || !githubConfig.repo) {
         toast('Pehle GitHub configuration save karein', 'warning');
-        setTimeout(() => {
-            showSec('secAutoUpdate', document.querySelector('[onclick*=secAutoUpdate]'));
-        }, 500);
+        setTimeout(() => { showSec('secAutoUpdate', document.querySelector('[onclick*=secAutoUpdate]')); }, 500);
         return;
     }
-    
     if (!confirm('GitHub par auto-generation trigger karein?\n\n2-3 minute mein saare HTML pages + sitemap update ho jayenge.')) return;
-    
     addLog('info', 'Triggering GitHub workflow...');
     toast('Triggering GitHub workflow...', 'info');
-    
     try {
         const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/actions/workflows/${githubConfig.workflow}/dispatches`;
-        
         const response = await fetch(url, {
             method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${githubConfig.token}`,
-                'Accept': 'application/vnd.github.v3+json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                ref: githubConfig.branch,
-                inputs: {
-                    reason: 'Manual trigger from admin panel at ' + new Date().toISOString()
-                }
-            })
+            headers: { 'Authorization': `Bearer ${githubConfig.token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ref: githubConfig.branch, inputs: { reason: 'Manual trigger from admin panel at ' + new Date().toISOString() } })
         });
-        
         if (response.status === 204 || response.ok) {
             toast('✅ Auto-update triggered! Check GitHub in 2-3 minutes.', 'success');
             addLog('success', '✓ Workflow triggered successfully');
             localStorage.setItem('esewahub_last_run', new Date().toISOString());
             updateLastRunStatus();
             setTimeout(() => { checkWorkflowStatus(); }, 5000);
-        } else if (response.status === 401) {
-            toast('✗ GitHub token invalid', 'error');
-            addLog('error', 'Token authentication failed. Generate new token.');
-        } else if (response.status === 404) {
-            toast('✗ Workflow file not found', 'error');
-            addLog('error', 'Workflow file not found.');
-        } else if (response.status === 403) {
-            toast('✗ Permission denied', 'error');
-            addLog('error', 'Token needs "workflow" scope.');
-        } else {
+        } else if (response.status === 401) { toast('✗ GitHub token invalid', 'error'); addLog('error', 'Token authentication failed.'); }
+        else if (response.status === 404) { toast('✗ Workflow not found', 'error'); addLog('error', 'Workflow file not found.'); }
+        else if (response.status === 403) { toast('✗ Permission denied', 'error'); addLog('error', 'Token needs "workflow" scope.'); }
+        else {
             const errData = await response.json().catch(() => ({}));
             toast('✗ Failed: ' + (errData.message || 'HTTP ' + response.status), 'error');
             addLog('error', 'Error: ' + (errData.message || response.statusText));
         }
-    } catch(e) {
-        toast('✗ Error: ' + e.message, 'error');
-        addLog('error', 'Network error: ' + e.message);
-    }
+    } catch(e) { toast('✗ Error: ' + e.message, 'error'); addLog('error', 'Network error: ' + e.message); }
 };
 
 window.checkWorkflowStatus = async function() {
@@ -3054,34 +2533,22 @@ window.checkWorkflowStatus = async function() {
     addLog('info', 'Fetching recent workflow runs...');
     try {
         const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/actions/workflows/${githubConfig.workflow}/runs?per_page=5`;
-        const response = await fetch(url, {
-            headers: {
-                'Authorization': `Bearer ${githubConfig.token}`,
-                'Accept': 'application/vnd.github.v3+json'
-            }
-        });
-        if (!response.ok) { addLog('error', 'Failed to fetch runs: HTTP ' + response.status); return; }
+        const response = await fetch(url, { headers: { 'Authorization': `Bearer ${githubConfig.token}`, 'Accept': 'application/vnd.github.v3+json' } });
+        if (!response.ok) { addLog('error', 'Failed: HTTP ' + response.status); return; }
         const data = await response.json();
         const runs = data.workflow_runs || [];
-        if (runs.length === 0) { renderWorkflowList([]); addLog('warn', 'No workflow runs found yet'); return; }
+        if (runs.length === 0) { renderWorkflowList([]); addLog('warn', 'No runs found'); return; }
         renderWorkflowList(runs);
         const latest = runs[0];
-        addLog('success', 'Latest run: ' + latest.status + ' (' + latest.conclusion + ')');
+        addLog('success', 'Latest: ' + latest.status + ' (' + latest.conclusion + ')');
         const lastRunEl = document.getElementById('lastRunStatus');
         if (lastRunEl) lastRunEl.innerText = formatRelativeTime(latest.created_at);
         localStorage.setItem('esewahub_last_run', latest.created_at);
         const ghStatusEl = document.getElementById('ghStatus');
         if (ghStatusEl) {
-            if (latest.status === 'in_progress' || latest.status === 'queued') {
-                ghStatusEl.innerText = 'Running...';
-                ghStatusEl.style.color = 'var(--y600)';
-            } else if (latest.conclusion === 'success') {
-                ghStatusEl.innerText = 'Last: Success ✓';
-                ghStatusEl.style.color = 'var(--g600)';
-            } else if (latest.conclusion === 'failure') {
-                ghStatusEl.innerText = 'Last: Failed ✗';
-                ghStatusEl.style.color = 'var(--r500)';
-            }
+            if (latest.status === 'in_progress' || latest.status === 'queued') { ghStatusEl.innerText = 'Running...'; ghStatusEl.style.color = 'var(--y600)'; }
+            else if (latest.conclusion === 'success') { ghStatusEl.innerText = 'Last: Success ✓'; ghStatusEl.style.color = 'var(--g600)'; }
+            else if (latest.conclusion === 'failure') { ghStatusEl.innerText = 'Last: Failed ✗'; ghStatusEl.style.color = 'var(--r500)'; }
         }
     } catch(e) { addLog('error', 'Error: ' + e.message); }
 };
@@ -3095,8 +2562,7 @@ function renderWorkflowList(runs) {
     }
     let html = '';
     runs.forEach(run => {
-        let dotClass = 'success';
-        let statusText = 'Success';
+        let dotClass = 'success', statusText = 'Success';
         if (run.status === 'in_progress' || run.status === 'queued') { dotClass = 'running'; statusText = 'Running...'; }
         else if (run.conclusion === 'failure') { dotClass = 'failed'; statusText = 'Failed'; }
         const commit = (run.head_commit && run.head_commit.message) || 'No message';
@@ -3128,9 +2594,7 @@ function formatRelativeTime(isoString) {
     return new Date(isoString).toLocaleDateString('en-IN');
 }
 
-window.viewLiveSitemap = function() {
-    window.open('https://www.esewahub.in/sitemap.xml', '_blank');
-};
+window.viewLiveSitemap = function() { window.open('https://www.esewahub.in/sitemap.xml', '_blank'); };
 
 function addLog(type, message) {
     const logBox = document.getElementById('autoUpdateLog');
@@ -3206,11 +2670,7 @@ window.saveUser = async function() {
             const secondaryAuth = secondaryApp.auth();
             const newUser = await secondaryAuth.createUserWithEmailAndPassword(email, password);
             const uid = newUser.user.uid;
-            await db.ref(`users/${uid}`).set({
-                name, email, phone, role, status,
-                createdAt: new Date().toISOString(),
-                createdBy: auth.currentUser?.uid || 'system'
-            });
+            await db.ref(`users/${uid}`).set({ name, email, phone, role, status, createdAt: new Date().toISOString(), createdBy: auth.currentUser?.uid || 'system' });
             await secondaryAuth.signOut();
             toast('User created! 🎉', 'success');
         }
@@ -3224,29 +2684,19 @@ window.toggleUserStatus = async function(uid) {
     const u = allUsers[uid];
     if (!u) return;
     const newStatus = u.status === 'active' ? 'inactive' : 'active';
-    try {
-        await db.ref(`users/${uid}`).update({ status: newStatus });
-        toast(`User ${newStatus}`, 'info');
-        await loadAllData();
-    } catch (e) { toast('Error', 'error'); }
+    try { await db.ref(`users/${uid}`).update({ status: newStatus }); toast(`User ${newStatus}`, 'info'); await loadAllData(); }
+    catch (e) { toast('Error', 'error'); }
 };
 
 window.changeUserRole = async function(uid, newRole) {
-    try {
-        await db.ref(`users/${uid}`).update({ role: newRole });
-        toast(`Role: ${newRole}`, 'success');
-        await loadAllData();
-    } catch (e) { toast('Error', 'error'); }
+    try { await db.ref(`users/${uid}`).update({ role: newRole }); toast(`Role: ${newRole}`, 'success'); await loadAllData(); }
+    catch (e) { toast('Error', 'error'); }
 };
 
 window.deleteUser = async function(uid) {
     if (!confirm('Delete user?')) return;
-    try {
-        await db.ref(`users/${uid}`).remove();
-        toast('User removed', 'info');
-        await loadAllData();
-        await loadDashboard();
-    } catch (e) { toast('Error', 'error'); }
+    try { await db.ref(`users/${uid}`).remove(); toast('User removed', 'info'); await loadAllData(); await loadDashboard(); }
+    catch (e) { toast('Error', 'error'); }
 };
 
 /* ==========================================
@@ -3268,18 +2718,13 @@ async function loadAllData() {
             db.ref('popups').once('value').catch(()=>null),
             db.ref('notifications').once('value').catch(()=>null)
         ]);
-
         if (ss && ss.exists()) {
             const s = ss.val();
             document.getElementById('set_title').value = s.title || '';
             document.getElementById('set_tagline').value = s.tagline || '';
             document.getElementById('set_logo').value = s.logo || '';
-            if(s.logo){
-                document.getElementById('set_logoPreviewImg').src = s.logo;
-                document.getElementById('set_logoPreview').style.display = 'block';
-            } else {
-                document.getElementById('set_logoPreview').style.display = 'none';
-            }
+            if(s.logo){ document.getElementById('set_logoPreviewImg').src = s.logo; document.getElementById('set_logoPreview').style.display = 'block'; }
+            else { document.getElementById('set_logoPreview').style.display = 'none'; }
             document.getElementById('set_wa').value = s.whatsapp || '';
             document.getElementById('set_email').value = s.email || '';
             document.getElementById('set_address').value = s.address || '';
@@ -3331,32 +2776,22 @@ async function loadAllData() {
             document.getElementById('custom_head').value = cc.val().head || '';
             document.getElementById('custom_body').value = cc.val().body || '';
         }
-
         allCats = (cs && cs.exists()) ? cs.val() : {};
         renderCats();
-
         allPosts = (ps && ps.exists()) ? Object.keys(ps.val()).map(k => ({id:k,...ps.val()[k]})) : [];
         allPosts.sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
         renderPosts();
-
         allServices = (svs && svs.exists()) ? svs.val() : {};
         renderServices();
-
         allUsers = (us && us.exists()) ? us.val() : {};
         renderUsers();
-
         allAnnouncements = (ann && ann.exists()) ? ann.val() : {};
         renderAnnouncements();
-
         allPopups = (pop && pop.exists()) ? pop.val() : {};
         renderPopups();
-
         allNotifications = (notif && notif.exists()) ? notif.val() : {};
-        
         await loadBlogs();
-    } catch (e) {
-        console.error('Load data error:', e);
-    }
+    } catch (e) { console.error('Load data error:', e); }
 }
 
 async function loadDashboard() {
@@ -3366,7 +2801,6 @@ async function loadDashboard() {
         document.getElementById('dashServicesCount').innerText = Object.keys(allServices).length || 18;
         document.getElementById('dashAnnouncements').innerText = Object.keys(allAnnouncements).length;
         document.getElementById('dashPopups').innerText = Object.keys(allPopups).length;
-        
         const recentBox = document.getElementById('recentPosts');
         const recent = allPosts.slice(0, 5);
         if (recent.length === 0) {
@@ -3379,7 +2813,6 @@ async function loadDashboard() {
             html += '</tbody></table></div>';
             recentBox.innerHTML = html;
         }
-        
         await loadVisitorStats();
         await loadNotifications();
         updateLastRunStatus();
@@ -3390,47 +2823,24 @@ async function loadVisitorStats(){
     try {
         const totalViewsSnap = await db.ref('analytics/totalViews').once('value');
         const totalViews = totalViewsSnap.val() || 0;
-        ['dashTotalViews','analyticsTotalViews'].forEach(id => {
-            const el = document.getElementById(id);
-            if(el) el.innerText = formatNumber(totalViews);
-        });
-        
+        ['dashTotalViews','analyticsTotalViews'].forEach(id => { const el = document.getElementById(id); if(el) el.innerText = formatNumber(totalViews); });
         const totalVisitorsSnap = await db.ref('analytics/totalVisitors').once('value');
         const totalVisitors = totalVisitorsSnap.val() || 0;
-        ['dashTotalVisitors','analyticsTotalVisitors'].forEach(id => {
-            const el = document.getElementById(id);
-            if(el) el.innerText = formatNumber(totalVisitors);
-        });
-        
+        ['dashTotalVisitors','analyticsTotalVisitors'].forEach(id => { const el = document.getElementById(id); if(el) el.innerText = formatNumber(totalVisitors); });
         const onlineSnap = await db.ref('analytics/online').once('value');
         let onlineCount = 0;
-        if(onlineSnap.exists()){
-            const now = Date.now();
-            onlineCount = Object.values(onlineSnap.val()).filter(u => (now - u.timestamp) < 5 * 60 * 1000).length;
-        }
-        ['statOnlineNow','analyticsOnlineNow'].forEach(id => {
-            const el = document.getElementById(id);
-            if(el) el.innerText = onlineCount;
-        });
-        
+        if(onlineSnap.exists()){ const now = Date.now(); onlineCount = Object.values(onlineSnap.val()).filter(u => (now - u.timestamp) < 5 * 60 * 1000).length; }
+        ['statOnlineNow','analyticsOnlineNow'].forEach(id => { const el = document.getElementById(id); if(el) el.innerText = onlineCount; });
         const today = new Date().toISOString().split('T')[0];
         const todaySnap = await db.ref(`analytics/daily/${today}`).once('value');
         const todayData = todaySnap.val() || {views:0, visitors:0};
-        
-        const el4 = document.getElementById('statTodayViews');
-        if(el4) el4.innerText = formatNumber(todayData.views || 0);
-        const el4b = document.getElementById('analyticsTodayViews');
-        if(el4b) el4b.innerText = formatNumber(todayData.views || 0);
-        
-        const el5 = document.getElementById('statTodayVisitors');
-        if(el5) el5.innerText = formatNumber(todayData.visitors || 0);
-        
+        const el4 = document.getElementById('statTodayViews'); if(el4) el4.innerText = formatNumber(todayData.views || 0);
+        const el4b = document.getElementById('analyticsTodayViews'); if(el4b) el4b.innerText = formatNumber(todayData.views || 0);
+        const el5 = document.getElementById('statTodayVisitors'); if(el5) el5.innerText = formatNumber(todayData.visitors || 0);
         const dailySnap = await db.ref('analytics/daily').once('value');
         const dailyData = dailySnap.exists() ? dailySnap.val() : {};
-        
         let weekViews = 0;
-        const last7Days = [];
-        const last30Days = [];
+        const last7Days = [], last30Days = [];
         for(let i = 0; i < 30; i++){
             const d = new Date();
             d.setDate(d.getDate() - i);
@@ -3441,13 +2851,9 @@ async function loadVisitorStats(){
             if(i < 7) last7Days.push(item);
             last30Days.push(item);
         }
-        
-        const el6 = document.getElementById('statWeekViews');
-        if(el6) el6.innerText = formatNumber(weekViews);
-        
+        const el6 = document.getElementById('statWeekViews'); if(el6) el6.innerText = formatNumber(weekViews);
         renderVisitorTable(last7Days);
         renderVisitorFullTable(last30Days);
-        
     } catch(e) { console.error('Visitor stats error:', e); }
 }
 
@@ -3500,11 +2906,7 @@ function formatNumber(n){
     return n.toString();
 }
 
-window.refreshVisitorStats = async function(){
-    toast('Refreshing stats...', 'info');
-    await loadVisitorStats();
-    toast('Stats updated!', 'success');
-};
+window.refreshVisitorStats = async function(){ toast('Refreshing stats...', 'info'); await loadVisitorStats(); toast('Stats updated!', 'success'); };
 
 function renderCats() {
     const ct = document.getElementById('catsTable');
@@ -3528,7 +2930,7 @@ function renderPosts() {
     const currentIds = new Set(allPosts.map(p => p.id));
     for (const id of selectedPosts) { if (!currentIds.has(id)) selectedPosts.delete(id); }
     if (allPosts.length === 0) {
-        pt.innerHTML = `<tr><td colspan="6" class="empty"><i class="fas fa-inbox"></i><h4>No posts yet</h4></td></tr>`;
+        pt.innerHTML = `<tr><td colspan="7" class="empty"><i class="fas fa-inbox"></i><h4>No posts yet</h4></td></tr>`;
         updatePostBulkBar();
         return;
     }
@@ -3542,6 +2944,7 @@ function renderPosts() {
             <td>${thumbHtml}</td>
             <td style="font-weight:700;color:var(--p600)">${title}</td>
             <td><span style="background:var(--p50);color:var(--p700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${allCats[p.category]?.name || 'Unknown'}</span></td>
+            <td style="font-size:.82rem;color:var(--s600)">${escapeHtml(p.author || 'Esewahub Team')}</td>
             <td>${p.lastDate || 'N/A'}</td>
             <td>
                 <button class="btn btn-p btn-sm" onclick="editPost('${p.id}')" style="margin-right:6px"><i class="fas fa-edit"></i></button>
@@ -3562,7 +2965,7 @@ function renderServices() {
     const currentKeys = new Set(entries.map(([k]) => k));
     for (const key of selectedServices) { if (!currentKeys.has(key)) selectedServices.delete(key); }
     if (entries.length === 0) {
-        st.innerHTML = `<tr><td colspan="6" class="empty"><i class="fas fa-briefcase"></i><h4>No custom services</h4><p>Default 18 services dikhayi ja rahi hain.</p></td></tr>`;
+        st.innerHTML = `<tr><td colspan="7" class="empty"><i class="fas fa-briefcase"></i><h4>No custom services</h4><p>Default 18 services dikhayi ja rahi hain.</p></td></tr>`;
         updateServiceBulkBar();
         return;
     }
@@ -3575,6 +2978,7 @@ function renderServices() {
             <td>${thumbHtml}</td>
             <td style="font-weight:700">${s.name}</td>
             <td style="color:var(--s500)">${s.sub || '-'}</td>
+            <td style="font-size:.82rem;color:var(--s600)">${escapeHtml(s.author || 'Esewahub Team')}</td>
             <td><span style="background:var(--g50);color:var(--g700);padding:4px 10px;border-radius:9999px;font-size:.78rem;font-weight:700">${(s.links || []).length} links</span></td>
             <td>
                 <button class="btn btn-p btn-sm" onclick="editService('${k}')" style="margin-right:6px"><i class="fas fa-edit"></i></button>
@@ -3589,13 +2993,11 @@ function renderServices() {
 window.togglePostSelection = function(id, checked) {
     if (checked) selectedPosts.add(id); else selectedPosts.delete(id);
     const row = document.querySelector(`tr[data-post-id="${id}"]`);
-    if (row) {
-        if (checked) row.classList.add('selected-row');
-        else row.classList.remove('selected-row');
-    }
+    if (row) { if (checked) row.classList.add('selected-row'); else row.classList.remove('selected-row'); }
     updatePostBulkBar();
     updateSelectAllPostsState();
 };
+
 window.toggleSelectAllPosts = function(el) {
     const checked = el.checked;
     allPosts.forEach(p => { if (checked) selectedPosts.add(p.id); else selectedPosts.delete(p.id); });
@@ -3607,6 +3009,7 @@ window.toggleSelectAllPosts = function(el) {
     });
     updatePostBulkBar();
 };
+
 function updateSelectAllPostsState() {
     const selectAll = document.getElementById('selectAllPosts');
     if (!selectAll) return;
@@ -3616,14 +3019,15 @@ function updateSelectAllPostsState() {
     selectAll.checked = selectedCount === total;
     selectAll.indeterminate = selectedCount > 0 && selectedCount < total;
 }
+
 function updatePostBulkBar() {
     const bar = document.getElementById('bulkBarPosts');
     const countEl = document.getElementById('bulkCountPosts');
     if (!bar || !countEl) return;
     countEl.textContent = selectedPosts.size;
-    if (selectedPosts.size > 0) bar.classList.add('show');
-    else bar.classList.remove('show');
+    bar.classList.toggle('show', selectedPosts.size > 0);
 }
+
 window.clearPostSelection = function() {
     selectedPosts.clear();
     document.querySelectorAll('.post-checkbox').forEach(cb => cb.checked = false);
@@ -3631,10 +3035,11 @@ window.clearPostSelection = function() {
     updatePostBulkBar();
     updateSelectAllPostsState();
 };
+
 window.bulkDeletePosts = async function() {
     const count = selectedPosts.size;
     if (count === 0) { toast('No posts selected', 'warning'); return; }
-    if (!confirm(`Delete ${count} post(s)? This cannot be undone.`)) return;
+    if (!confirm(`Delete ${count} post(s)?`)) return;
     const ids = Array.from(selectedPosts);
     try {
         const updates = {};
@@ -3656,6 +3061,7 @@ window.toggleServiceSelection = function(key, checked) {
     updateServiceBulkBar();
     updateSelectAllServicesState();
 };
+
 window.toggleSelectAllServices = function(el) {
     const checked = el.checked;
     Object.keys(allServices).forEach(k => { if (checked) selectedServices.add(k); else selectedServices.delete(k); });
@@ -3667,6 +3073,7 @@ window.toggleSelectAllServices = function(el) {
     });
     updateServiceBulkBar();
 };
+
 function updateSelectAllServicesState() {
     const selectAll = document.getElementById('selectAllServices');
     if (!selectAll) return;
@@ -3676,14 +3083,15 @@ function updateSelectAllServicesState() {
     selectAll.checked = selectedCount === total;
     selectAll.indeterminate = selectedCount > 0 && selectedCount < total;
 }
+
 function updateServiceBulkBar() {
     const bar = document.getElementById('bulkBarServices');
     const countEl = document.getElementById('bulkCountServices');
     if (!bar || !countEl) return;
     countEl.textContent = selectedServices.size;
-    if (selectedServices.size > 0) bar.classList.add('show');
-    else bar.classList.remove('show');
+    bar.classList.toggle('show', selectedServices.size > 0);
 }
+
 window.clearServiceSelection = function() {
     selectedServices.clear();
     document.querySelectorAll('.service-checkbox').forEach(cb => cb.checked = false);
@@ -3691,10 +3099,11 @@ window.clearServiceSelection = function() {
     updateServiceBulkBar();
     updateSelectAllServicesState();
 };
+
 window.bulkDeleteServices = async function() {
     const count = selectedServices.size;
     if (count === 0) { toast('No services selected', 'warning'); return; }
-    if (!confirm(`Delete ${count} service(s)? This cannot be undone.`)) return;
+    if (!confirm(`Delete ${count} service(s)?`)) return;
     const keys = Array.from(selectedServices);
     try {
         const updates = {};
@@ -3851,6 +3260,8 @@ window.openPostModal = function() {
         const el = document.getElementById(id);
         if (el) el.value = '';
     });
+    document.getElementById('ep_author').value = 'Esewahub Team';
+    document.getElementById('ep_authorExp').value = 'Government Services Expert';
     document.getElementById('ep_imagePreview').style.display = 'none';
     document.getElementById('ep_sendNotif').classList.remove('on');
     postSendNotifToggle = false;
@@ -3871,6 +3282,8 @@ window.editPost = function(id) {
     document.getElementById('ep_steps').value = p.steps || '';
     document.getElementById('ep_docs').value = p.documents || '';
     document.getElementById('ep_image').value = p.image || '';
+    document.getElementById('ep_author').value = p.author || 'Esewahub Team';
+    document.getElementById('ep_authorExp').value = p.authorExp || 'Government Services Expert';
     const preview = document.getElementById('ep_imagePreview');
     if (p.image) { document.getElementById('ep_imagePreviewImg').src = p.image; preview.style.display = 'block'; }
     else preview.style.display = 'none';
@@ -3911,6 +3324,8 @@ window.savePost = async function() {
         steps: document.getElementById('ep_steps').value.trim(),
         documents: document.getElementById('ep_docs').value.trim(),
         faq,
+        author: document.getElementById('ep_author').value.trim() || 'Esewahub Team',
+        authorExp: document.getElementById('ep_authorExp').value.trim() || 'Government Services Expert',
         timestamp: new Date().toISOString()
     };
     try {
@@ -3918,7 +3333,6 @@ window.savePost = async function() {
         else { 
             const ref = await db.ref('posts').push(data); 
             toast('Post published!', 'success');
-            
             if(postSendNotifToggle){
                 const notifData = {
                     title: '📢 New Post: ' + title.substring(0, 50),
@@ -3930,7 +3344,7 @@ window.savePost = async function() {
                     status: 'sent'
                 };
                 await db.ref('notifications').push(notifData);
-                toast('Notification sent to all users! 🔔', 'success');
+                toast('Notification sent! 🔔', 'success');
             }
         }
         closeModal('postModal');
@@ -3947,6 +3361,8 @@ window.openServiceModal = function() {
     });
     document.getElementById('es_icon').value = 'fa-id-card';
     document.getElementById('es_color').value = 'ic-aadhar';
+    document.getElementById('es_author').value = 'Esewahub Team';
+    document.getElementById('es_authorExp').value = 'Government Services Expert';
     document.getElementById('es_imagePreview').style.display = 'none';
     document.getElementById('serviceModal').classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -3960,6 +3376,8 @@ window.editService = function(key) {
     document.getElementById('es_sub').value = s.sub || '';
     document.getElementById('es_icon').value = s.icon || 'fa-id-card';
     document.getElementById('es_color').value = s.color || 'ic-aadhar';
+    document.getElementById('es_author').value = s.author || 'Esewahub Team';
+    document.getElementById('es_authorExp').value = s.authorExp || 'Government Services Expert';
     document.getElementById('es_about').value = s.about || '';
     document.getElementById('es_steps').value = (s.steps || []).join('\n');
     document.getElementById('es_docs').value = (s.docs || []).join('\n');
@@ -4001,11 +3419,13 @@ window.saveService = async function() {
         color: document.getElementById('es_color').value,
         image, about: document.getElementById('es_about').value.trim(),
         steps, docs, links,
+        author: document.getElementById('es_author').value.trim() || 'Esewahub Team',
+        authorExp: document.getElementById('es_authorExp').value.trim() || 'Government Services Expert',
         timestamp: new Date().toISOString()
     };
     try {
         if (id) { await db.ref(`services/${id}`).update(data); toast('Service updated!', 'success'); }
-        else { await db.ref(`services/${slug}`).set(data); toast('Service added! Website par turant dikhegi.', 'success'); }
+        else { await db.ref(`services/${slug}`).set(data); toast('Service added!', 'success'); }
         closeModal('serviceModal');
         await loadAllData();
     } catch (e) { toast('Error', 'error'); }
@@ -4013,11 +3433,8 @@ window.saveService = async function() {
 
 window.delItem = async function(col, key) {
     if (!confirm('Delete this item?')) return;
-    try {
-        await db.ref(`${col}/${key}`).remove();
-        toast('Deleted', 'info');
-        await loadAllData();
-    } catch (e) { toast('Error', 'error'); }
+    try { await db.ref(`${col}/${key}`).remove(); toast('Deleted', 'info'); await loadAllData(); }
+    catch (e) { toast('Error', 'error'); }
 };
 
 function escapeHtml(t) {
@@ -4047,14 +3464,22 @@ document.addEventListener('DOMContentLoaded', () => {
     resetPostLinks([]);
     resetBlogLinks([]);
     loadGitHubConfig();
-    
-    // Blog live updates
     const contentEl = document.getElementById('bl_content');
     if (contentEl) contentEl.addEventListener('input', updateBlogWordCount);
     const tagsEl = document.getElementById('bl_tags');
     if (tagsEl) tagsEl.addEventListener('input', updateBlogTagsPreview);
     const seoDescEl = document.getElementById('bl_seoDesc');
     if (seoDescEl) seoDescEl.addEventListener('input', updateBlogSeoCount);
+    const excerptEl = document.getElementById('bl_excerpt');
+    if (excerptEl) {
+        excerptEl.addEventListener('input', () => {
+            const seoEl = document.getElementById('bl_seoDesc');
+            if (seoEl && !seoEl.value) {
+                seoEl.value = excerptEl.value.substring(0, 160);
+                updateBlogSeoCount();
+            }
+        });
+    }
 });
 </script>
 </body>
